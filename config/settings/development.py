@@ -59,7 +59,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='.env.sample')
+load_dotenv()
 
 # Import all code from base.py
 from .base import *
