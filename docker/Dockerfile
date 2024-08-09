@@ -15,7 +15,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project files
-COPY src /app/src
+COPY . /app/src/
 
 # Run the Django development server
 CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
