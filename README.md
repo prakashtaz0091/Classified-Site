@@ -19,3 +19,10 @@ This is a Django project with Docker integration.
 3. Access the application:
 
     Open a browser and go to `http://localhost:8000`.
+
+
+4. Migrate commands
+ 
+ ```bash
+    docker-compose run web python manage.py migrate
+  ```

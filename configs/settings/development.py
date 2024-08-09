@@ -1,6 +1,6 @@
 # development.py
 
-from .common import *
+from ...common.common import *
 
 # Debug mode
 DEBUG = True
