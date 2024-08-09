@@ -1,0 +1,185 @@
+.contactbanner {
+	position: $__relative;
+	background: url("../img/banner/contactbanner.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: $__center;
+	padding: 170px 0 90px;
+	position: $__relative;
+	overflow: hidden;
+	z-index: 1;	
+	@include respond-below(custom991) {
+		padding: 140px 0 60px;
+	}
+	&.innerbanner {
+		&::after {
+			content: "";
+			background: linear-gradient(0deg, $__black__dark 16.31%, rgba(0, 0, 0, 0) 100%);
+			position: $__absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+	}
+}
+.contactus-img {
+	position: $__relative;
+	@include respond-above(custom992) {
+		padding-right: 0;
+	}
+}
+.contactright-map {
+	@include respond-above(custom992) {
+		padding-left: 0;
+	}
+}
+.contactleft-info {
+	@include respond-below(custom991) {
+		text-align: $__center;
+	}
+}
+.contactinfo-content {
+	position: $__absolute;
+	top: 50%;
+	background: $__primarycolor;
+	padding: 50px;
+	right: -80px;
+	border-radius: 10px;
+	text-align: $__center;
+	color: $__white;
+	z-index: 1;
+	transform: translateY(-50%);
+	@include respond-below(custom991) {
+		top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    right: inherit;
+	}
+	@include respond-below(custom767) {
+        right: 110px;
+		padding: 20px;
+    }
+	@include respond-below(custom575) {
+		top: 100px;
+        right: 0;
+		padding: 20px;
+		position: $__relative;
+    }
+	h6 {
+		color: $__white;
+		font-size: 24px;
+		font-weight: 800;
+	}
+}
+.google-maps {
+	height: 100%;
+	iframe {
+		position: $__relative;
+		height: 100%;
+		width: 100%;
+	}
+}
+.contact-hours {
+	margin: 0 0 20px;
+	&:last-child {
+		margin: 0;
+	}
+	li {
+		font-size: $__font__size__16;
+		line-height: 27px;
+	}
+}
+.contactusform-section {
+	padding: 0 0 70px;
+	.submit-section {
+		text-align: $__right;
+		@include respond-below(custom767) {
+			text-align: left;
+		}
+	}
+}
+.contact-info {
+	text-align: $__center;
+	@include margin-padding(0 0 50px, null);
+	@include respond-below(custom991) {        
+		@include margin-padding(0 0 30px, null);
+    }
+	@include respond-below(custom767) {        
+		@include margin-padding(0 0 20px, null);
+    }
+	h2 {
+		font-weight: $__bold;
+		color: $__primarycolor;
+		font-size: $__font__size__36;
+		margin: 0 0 20px;
+		@include respond-below(custom767) {
+			font-size: $__font__size__28;
+			margin: 0 0 15px;
+		}
+		span {
+			color: $__secondarycolor;
+		}
+	}
+	p {
+		font-size: $__font__size__18;
+	}	
+}
+.contactform-img {
+	@include respond-below(custom767) {        
+		@include margin-padding(0 0 30px, 20px);
+    }
+}
+.contactus-form {
+	textarea, input {
+		background: $__light__blue;
+		border: 1px solid $__gray89;
+		border-radius: 8px;
+		&:focus {
+			background: $__light__blue;
+			border: 1px solid $__black__dark;
+			border-radius: 8px;
+		}
+	}
+}
+
+.contactus-form {
+	.form-group {
+		margin-bottom: 20px;
+	}
+	input {
+		color: $__secondarycolor;
+		font-size: $__font__size__15;
+		min-height: 52px;
+		&::placeholder {
+			color: $__secondarycolor;
+		}
+	}
+	textarea {
+		&.form-control {
+			padding: 15px;
+			color: $__secondarycolor;
+			font-size: $__font__size__15;
+			min-height: 153px;
+		}
+		&::placeholder {
+			color: $__secondarycolor;
+		}
+	}
+}
+
+.contactus-info {
+    padding: 70px 0;
+}
+
+@include respond-below(custom991) { 
+	.login-content, .bloglisting, .contactus-info {
+		padding: 70px 0;
+	}
+	.google-maps {
+	    height: 300px;
+	    margin: 20px 0 0;
+	}
+}

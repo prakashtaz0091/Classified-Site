@@ -1,0 +1,309 @@
+.login-content {
+	@include margin-padding(null, 70px 0);
+	.login-wrap {
+		box-shadow: 0px 4.4px 12px -1px rgb(19 16 34 / 6%), 0px 2px 6.4px -1px rgb(19 16 34 / 3%);
+		@include margin-padding(0 auto, 25px);
+		border: 1px solid $__white__smoke;
+		border-radius: 10px;
+		color: $__smoke__light;
+		background: $__white;
+		max-width: 425px;
+		p {
+			color: $__smoke__light;
+			background: $__white;
+			max-width: 425px;
+			margin: 0 auto;
+		}
+		.custom_check {
+			input {
+				position: $__absolute;
+				opacity: 0;
+				cursor: $__pointer;
+				&:checked {
+					~ {
+						.checkmark {
+							background-color: $__primarycolor;
+							border: 1px solid $__primarycolor;
+							&:after {
+								display: $__block;
+							}
+						}
+					}
+				}
+			}
+			.checkmark {
+				position: $__absolute;
+				top: 3px;
+				left: 0;
+				height: 18px;
+				width: 18px;
+				border: 1px solid $__ash;
+				background-color: $__white;
+				border-radius: 3px;
+				@extend %animation-effect;
+				&::after {
+					content: "\f00c";
+					font-family: "Font Awesome 5 Free";
+					font-weight: 900;
+					position: $__absolute;
+					display: none;
+					left: 3px;
+					top: 0px;
+					color: $__white;
+					font-size: $__font__size__11;
+				}
+			}
+			color: $__dark__eclipse;
+			position: $__relative;
+			@include margin-padding(null, 0 0 0 30px);
+		}
+		.login-btn {
+			@include margin-padding(20px 0 0, 13px 25px);
+		}
+		.form-group {
+			@include margin-padding(0 0 20px, null);
+		}
+	}
+}
+.group-img {
+	position: $__relative;
+	input {
+		@include margin-padding(null, 6px 15px 6px 38px);
+		min-height: 52px;
+		border: 1px solid $__pantone;
+		border-radius: 8px;
+		&::placeholder {
+			color: $__cylindrical;
+		}
+	}
+	i {
+		position: $__absolute;
+		top: 18px;
+		left: 14px;
+		color: $__primarycolor;
+	}
+}
+.password-form {
+	text-align: $__center;
+	form {
+		@include margin-padding(0 0 20px, null);
+	}
+}
+.login-header {
+	text-align: $__center;
+	@include margin-padding(0 0 20px, null);	
+	h3 {
+		font-size: $__font__size__30;
+		@include margin-padding(0 0 15px, null);
+		color: $__dark__eclipse;
+	}
+}
+.toggle-password {
+	position: $__absolute;
+	right: 17px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: $__platinum__gray ;
+	cursor: $__pointer;
+}
+.messages-form {
+	.custom_check {
+		input {
+			position: $__absolute;
+			opacity: 0;
+			cursor: $__pointer;
+			&:checked {
+				~ {
+					.checkmark {
+						background-color: $__primarycolor;
+						border: 1px solid $__primarycolor;
+						&:after {
+							display: $__block;
+						}
+					}
+				}
+			}
+		}
+		position: $__relative;
+		@include margin-padding(0 0 15px, 0 0 0 30px);	
+		cursor: $__pointer;
+		.checkmark {
+			position: $__absolute;
+			top: 3px;
+			left: 0;
+			height: 18px;
+			width: 18px;
+			border: 1px solid $__ash;
+			background-color: $__white;
+			border-radius: 3px;
+			@extend %animation-effect;
+			&::after {
+				content: "\f00c";
+				font-family: "Font Awesome 5 Free";;
+				font-weight: 900;
+				position: $__absolute;
+				display: none;
+				left: 3px;
+				top: 0px;
+				color: $__white;
+				font-size: $__font__size__11;
+			}
+		}
+	}
+}
+.login-or {
+	text-align: $__center;
+	border-top: 1px solid $__shade__gray__light;
+	@include margin-padding(null, 30px 0 0);
+	color: $__smoke__light;
+}
+.register-link {
+	@include margin-padding(30px 0, null);
+	.forgot-link {
+		margin-left: 20px;
+	}
+}
+.btn-google {
+	background: $__white;
+	border-radius: 4px;
+	color: $__sonic__silver;
+	@include margin-padding(null, 14px 10px);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.084), 0px 1px 1px rgba(0, 0, 0, 0.168);
+	&:hover {
+		color: $__primarycolor;
+		border: 1px solid $__primarycolor;
+	}
+}
+.btn-check {
+	&:checked {
+		+ {
+			.btn {
+				color: inherit;
+				background-color: inherit;
+				border-color: inherit;
+			}
+		}
+	}
+}
+.btn-apple {
+	background: $__black__dark;
+	color: $__white;
+	@include margin-padding(30px 0 20px, 13px 10px);
+	@extend %flex-align-center;
+	@extend %justify-content-center;
+	&:hover {
+		background: $__black__dark;
+		color: $__white;
+		@include margin-padding(30px 0 20px, 13px 10px);
+		@extend %flex-align-center;
+		background: $__primarycolor;
+		color: $__white;
+	}
+	&:focus {
+		background: $__black__dark;
+		color: $__white;
+		@include margin-padding(30px 0 20px, 13px 10px);
+		@extend %justify-content-center;
+	}
+}
+.btn-facebook {
+	background: $__info__dark__info;
+	color: $__white;
+	@include margin-padding(20px 0, 12px 10px);
+	font-weight: 500;
+	&:hover {
+		background: $__info__dark__info;
+		color: $__white;
+		@include margin-padding(20px 0, 12px 10px);
+		font-weight: 500;
+		background: $__primarycolor;
+		color: $__white;
+	}
+	&:focus {
+		background: $__info__dark__info;
+		color: $__white;
+		@include margin-padding(20px 0, 12px 10px);
+		font-weight: 500;
+	}
+}
+.forgot-link {
+	color: $__primarycolor;
+	&:hover {
+		color: $__secondarycolor;
+	}
+}
+.back-home {
+	&:hover {
+		color: $__primarycolor;
+	}
+}
+.register-form {
+	.login-btn {
+		margin-top: 0px;
+		font-weight: $__light;
+	}
+	.login-header {
+		p {
+			span {
+				color: $__primarycolor;
+				font-weight: $__bold;
+			}
+		}
+	}
+}
+.terms-content {
+	.page-title {
+		h5 {
+			color: $__dark__eclipse;
+			font-weight: $__bold;
+			font-size: $__font__size__24;
+			@include margin-padding(0 0 30px, null);
+			@include respond-below(custom767) {
+				font-size: $__font__size__22;
+				@include margin-padding(0 0 20px, null);
+			}
+		}
+	}
+	p {
+		color: $__smoke__light;
+		@include margin-padding(0 0 30px, null);
+		line-height: 27px;
+		@include respond-below(custom767) {
+			font-size: $__font__size__15;
+			@include margin-padding(0 0 24px, null);
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+.error-logo {
+	text-align: $__center;
+}
+.error-wrap {
+	text-align: $__center;
+	@include margin-padding(0 0 85px, null);
+	h2 {
+		font-weight: $__bold;
+		@include margin-padding(30px 0 0, null);
+		color: $__dark__eclipse;
+		font-size: $__font__size__45;
+		@include respond-below(custom991) {
+			font-size: $__font__size__38;
+		}
+		@include respond-below(custom767) {
+			font-size: $__font__size__28;
+		}
+	}
+	.btn-primary {
+		@include margin-padding(null, 10px 31px);
+	}
+	.error-img {
+		@include margin-padding(0 0 40px, null);
+	}
+}
+.unexpecterror {
+	h2 {
+		@include margin-padding(30px 0, null);
+	}
+}

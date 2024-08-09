@@ -1,0 +1,1313 @@
+.banner-section-two {
+    background: $__white;
+    padding: 0;
+    img {
+    	@include respond-below(custom767) {
+    		height: 260px;
+		    width: 100%;
+		    object-fit: cover;
+    	}
+    }
+	.home-banner-two {
+		position: $__absolute;
+		top: 0;
+		left: 0;
+		width: $__full__width;
+		.banner-content {
+			text-align: $__center;
+			@include margin-padding(95px 0 0 , null);
+			@include respond-below(custom1199) {
+				@include margin-padding(50px 0 0 , null);
+			}
+			@include respond-below(custom991) {
+				@include margin-padding(60px 0 0 , null);
+			}
+			@include respond-below(custom767) {
+				@include margin-padding(35px 0 0 , null);
+			}
+			@include respond-below(custom575) {
+				@include margin-padding(10px 0 0 , null);
+			}
+			h1 {
+				color: $__white;
+				font-weight: $__bold;
+				@include margin-padding(0 0 15px, null);
+				@include respond-below(custom1199) {
+					font-size: $__font__size__42;
+				}
+				@include respond-below(custom991) {
+					font-size: $__font__size__32;
+				}
+				@include respond-below(custom767) {
+					font-size: $__font__size__28;
+				}
+				@include respond-below(custom575) {
+					font-size: $__font__size__20;
+				}
+			}
+			p {
+				color: $__white;
+				font-weight: $__semibold;
+				font-size: $__font__size__18;
+				margin-bottom: 0;
+				@include respond-below(custom991) {
+					font-size: $__font__size__16;
+				}
+				@include respond-below(custom767) {
+					font-size: $__font__size__14;
+				}
+				@include respond-below(custom575) {
+					font-size: $__font__size__12;
+				}
+			}
+		}		
+	}
+	.search-box {
+		background: $__white;
+		box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+		@include rounded(15px);
+		@include margin-padding(20px 0 0, 20px);
+		form {
+			@include respond-below(custom1199) {
+				display: $__block !important;
+				width: 100%;
+			}
+		}
+		label {
+			font-size: $__font__size__14;
+			color: $__gray60;
+			font-size: $__font__size__14;
+			margin-bottom: 0;
+		}
+		.select2-container--default {
+			.select2-selection--single {
+				height: 25px;
+				font-weight: $__regular;
+				border: 0;
+				min-width: 180px;
+				.select2-selection__rendered {
+					color: $__secondarycolor;
+					line-height: 25px;
+					padding-left: 0;
+					min-width: 180px;
+				}
+				.select2-selection__arrow {
+					height: 25px;
+					top: -1px;
+					right: 0;
+					b {
+						border-color: $__secondarycolor;
+						@include margin-padding(-3px 0 0 -10px, 3px);
+					}
+				}
+			}
+		}
+		.search-input {
+			@extend %display-flex-center;
+			width: 33.33%;
+			border-right: 1px solid $__gray85;
+			padding-right: 15px;
+			&:last-child {
+				border: 0;
+			}
+			@include respond-below(custom1199) {
+				width: 100%;
+				margin-bottom: 10px;
+				border: 0;
+			}
+		}
+		.form-group {
+			min-width: 180px;
+			width: $__full__width;
+		}
+	}
+	.search-icon {
+		width: 48px;
+		height: 48px;
+		background: $__gray95;
+		border-radius: 50%;
+		@extend %display-flex-center;
+		@extend %justify-content-center;
+		flex-shrink: 0;
+		margin-right: 15px;
+		@include respond-below(custom1199) {
+			width: 38px;
+			height: 38px;
+		}
+	}
+	.search-btn {
+		.btn {
+			@include margin-padding(null, 11px 28px);
+			min-width: 230px;
+			@include respond-below(custom1199) {
+				width: 100%;
+				font-size: $__font__size__16;
+			}
+		}
+	}
+	.searchbox-list {
+		@extend %display-flex-center;
+		width: calc(100% - 230px);
+		@include respond-below(custom1199) {
+			display: $__block;
+			width: 100%;
+		}
+	}
+	.section-heading-two {
+		@include margin-padding(0 0 50px, null);
+		p {
+			color: $__secondarycolor;
+			font-weight: $__regular;
+		}
+		h2 {
+			font-weight: $__bold;
+			font-size: $__font__size__36;
+		}
+	}
+}
+.popular-section {
+	background: url(../img/bg/popular-bg.png) no-repeat;
+	background-position: right center;
+	background-size: contain;
+	@include margin-padding(null, 70px 0);
+	@include respond-below(custom1199) {
+		@include margin-padding(null, 60px 0);
+    }
+	@include respond-below(custom991) {
+		background-size: 120px;
+		@include margin-padding(null, 40px 0);
+    }
+	.popular-wrap {
+		background: $__white;
+		border: 1px solid $__lavender__light;
+		@include rounded(15px);
+		position: $__relative;
+		@include margin-padding(38px 0 50px, 15px);
+		img {
+			@include rounded(15px);
+		}
+		a {
+			position: $__absolute;
+			bottom: 20px;
+			left: 15px;
+			right: 15px;
+			border: 1px solid rgba(255, 255, 255, 0.9);
+			background: rgba(255, 255, 255, 0.9);
+			@include rounded(10px);
+			color: $__primarycolor;
+			font-weight: $__medium;
+			@include margin-padding(null, 12px 10px);
+			display: $__block;
+			box-shadow: inset 0 0 0 $__primarycolor;
+			@include transition(0.7s);
+			&:hover {
+				border: 1px solid $__primarycolor;
+				background: $__primarycolor;
+				color: $__white;
+				box-shadow: inset 0 70px 0 0 $__primarycolor;
+				@include transition(0.7s);
+			}
+		}
+		&:before {
+			content: "";
+			background: url(../img/bg/search-bg.png) no-repeat;
+			position: $__absolute;
+			top: -38px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 131px;
+			height: 90px;
+			z-index: -1;
+		}
+		.popular-img {
+			position: $__relative;
+		}
+	}
+}
+.owl-dots {
+	text-align: $__center;
+	.owl-dot {
+		margin-right: 6px;
+		&.active {
+			span {
+				background: $__primarycolor;
+			}
+		}
+		span {
+			width: 9px;
+			height: 9px;
+			line-height: 9px;
+			margin: 0;
+			background: $__black__dark;
+			border-radius: 50%;
+			display: $__block;
+			@include transition(0.4s);
+		}
+	}
+}
+.celebrate-section {
+	background: url(../img/bg/celebrate-bg.png) no-repeat;
+	background-position: right bottom;
+	background-size: cover;
+	@include margin-padding(null, 0 0 70px);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 0 0 40px);
+    }
+	.celebrate-wrap {
+		background: $__white;
+		border: 1px solid $__lavender__light;
+		@include rounded(15px);
+		@include margin-padding(0 0 50px, 15px);
+		position: $__relative;
+		&:before {
+			content: "";
+			background: url(../img/bg/celebrate-img.png) no-repeat;
+			position: $__absolute;
+			bottom: -109px;
+			right: -94px;
+			width: 330px;
+			height: 317px;
+			z-index: 9;
+			@include respond-below(custom767) {
+				display: $__display__none;
+			}
+		}
+		.celebrate-img {
+			position: $__relative;
+			img {
+				@include rounded(15px);
+			}
+			.play-btn {
+				position: $__absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: $__primarycolor;
+				@include rounded(50px);				
+				.play-icon {
+					position: $__absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					background: $__primarycolor;
+					@include rounded(50px);
+					width: 70px;
+					height: 70px;
+					color: $__white;
+					@extend %display-flex-center;
+					@extend %justify-content-center;
+					@include respond-below(custom767) {
+						width: 30px;
+						height: 30px;
+					}
+				}
+				.animate-circle {
+					-webkit-animation: heartbit 1s ease-out;
+					animation: heartbit 3s ease-out;
+					-webkit-animation-iteration-count: infinite;
+					animation-iteration-count: infinite;
+					border: 20px solid $__primarycolor;
+					border-radius: 50%;					
+					width: 100px;
+					height: 100px;
+					position: $__absolute;
+					left: -50px;
+					top: -50px;
+					z-index: -1;
+					@include respond-below(custom767) {
+						width: 50px;
+						height: 50px;
+						left: -25px;
+						top: -25px;
+					}
+					@keyframes heartbit {
+						0% {
+						  transform: scale(0);
+						  opacity: 0;
+						}
+						25% {
+						  transform: scale(0.1);
+						  opacity: 0.1;
+						}
+						50% {
+						  transform: scale(0.5);
+						  opacity: 0.3;
+						}
+						75% {
+						  transform: scale(0.8);
+						  opacity: 0.7;
+						}
+						100% {
+						  transform: scale(1);
+						  opacity: 0;
+						}
+					  }
+				}
+			}
+		}
+	}
+}
+.wedding-section {
+	background: url(../img/bg/wedding-bg.png) no-repeat;
+	background-position: left center;
+	background-size: contain;
+	@include margin-padding(null, 70px 0 56px);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0 26px);
+		background-size: auto;
+    }
+	.wedding-wrap-img {
+		@include respond-below(custom991) {
+			display: $__display__none;
+		}
+	}
+	@include respond-below(custom991) {
+		.wedding-wrap.wedding-align {
+			flex-direction: row-reverse;
+			.wedding-content {				
+				@include respond-below(custom575) {
+					@include margin-padding(0 0 20px, null)
+				}
+			}
+		}
+	}
+	.wedding-wrap {
+		@extend %display-flex;
+		@include margin-padding(0 0 24px, null);
+		@include respond-below(custom575) {
+			display: $__block;
+		}
+		.wedding-img {
+			flex: 0 0 197px;
+			margin-right: 24px;			
+			@include respond-below(custom575) {
+				@include margin-padding(0 0 20px, null)
+			}
+			&.align-right {
+				margin-right: 0;
+				margin-left: 24px;
+				@include respond-below(custom991) {
+					@include margin-padding(0 24px 0 0, null);
+				}
+			}
+			img {
+				@include rounded(15px);
+				flex-shrink: 0;
+				@include respond-below(custom575) {
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-align: center;
+					-ms-flex-align: center;
+					align-items: center;
+					margin: auto;
+				}
+			}
+		}
+		.wedding-content {
+			@include respond-below(custom575) {
+				text-align: center;
+			}
+			h6 {
+				font-size: $__font__size__18;
+				a {
+					color: $__dark__eclipse;
+					&:hover {
+						color: $__primarycolor;
+					}
+				}
+			}
+			p {
+				font-size: $__font__size__14;
+				color: $__smoke__light;
+			}
+			a {
+				font-size: $__font__size__16;
+				font-weight: $__medium;
+				color: $__primarycolor;
+				@extend %inline-flex;
+				@extend %align-items-center;
+				i {
+					margin-left: 3px;
+				}
+				&:hover {
+					letter-spacing: 0.5px;
+				}
+			}
+		}
+	}
+}
+.appointment-sec {
+	background: url(../img/bg/appointment-bg-01.png) no-repeat;
+	background-size: contain;
+	background-position: bottom;
+}
+.wedding-form {
+	max-width: 634px;
+	width: $__full__width;
+	background: url(../img/bg/appointment-bg.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+	@include margin-padding(0 auto, 170px 100px 36px);
+	@include respond-below(custom767) {
+        @include margin-padding(0 auto, 100px 50px 36px);
+		max-width: $__full__width;
+    }
+	.select2-container--default {
+		.select2-selection--single {
+			@include rounded(10px);
+			.select2-selection__rendered {
+				font-size: $__font__size__15;
+			}
+		}
+	}
+	.form-group {
+		@include margin-padding(0 0 20px, null);
+	}
+	.form-control {
+		border: 1px solid $__gray85;
+		@include rounded(10px);
+		background: $__white;
+		&::placeholder {
+			color: $__black__dark;
+		}
+	}
+	textarea {
+		&.form-control {
+			@include margin-padding(null, 10px 15px);
+		}
+	}
+	.submit-section {
+		@include margin-padding(30px 0 0 , null);
+		@include respond-below(custom767) {
+			@include margin-padding(10px 0 0 , null);
+		}
+	}
+	.btn {
+		font-weight: $__regular;
+		@include margin-padding(null, 11px 34px);
+		width: $__full__width;
+		@include respond-below(custom991) {
+			@include margin-padding(null, 9px 32px);
+			font-size: $__font__size__14;
+		}
+	}
+}
+.offer-section {
+	@include margin-padding(null, 35px 0 70px);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 15px 0 40px);
+	}
+	.offer-sec {
+		background: url(../img/bg/celebration-bg.png) $__light__grayish__light;
+		background-repeat: no-repeat;
+		background-position: right bottom;
+		background-size: cover;
+		@include rounded(15px);
+		@include margin-padding(null, 50px);
+		position: $__relative;
+		text-align: $__center;
+		@include respond-below(custom767) {
+			background-position: center;
+		}
+		img {
+			@include margin-padding(0 0 5px, null);
+		}
+		h3 {
+			font-size: $__font__size__36;
+			font-weight: $__bold;
+			color: $__white;
+			@include margin-padding(0 0 20px, null);
+			@include respond-below(custom991) {
+				font-size: $__font__size__24;
+			}
+		}
+		p {
+			font-size: $__font__size__14;
+			color: $__white;
+		}
+		.btn {
+			@include margin-padding(null, 10px 32px);
+			@include respond-below(custom991) {
+				@include margin-padding(null, 8px 30px);
+				font-size: $__font__size__14;
+			}
+		}
+		.offer-img-left {
+			img {
+				position: $__absolute;
+				left: 20px;
+				bottom: 0;
+				@include respond-below(custom1399) {
+					width: 330px;
+				}
+				@include respond-below(custom991) {
+					width: 240px;
+				}
+				@include respond-below(custom767) {
+					display: $__none;
+				}
+			}
+		}
+		.offer-img-right {
+			img {
+				position: $__absolute;
+				right: 20px;
+				top: 20px;
+			}
+			@include respond-below(custom991) {
+				display: $__display__none;
+			}
+		}
+	}
+}
+.btn-grey {
+	background: $__secondarycolor;
+	border: 1px solid $__secondarycolor;
+	box-shadow: inset 0 0 0 $__white;
+	@include rounded(10px);
+	color: $__white;
+	font-weight: $__medium;
+	@include transition(0.5s);
+	&:hover {
+		background: $__white;
+		border: 1px solid $__white;
+		@include rounded(10px);
+		color: $__secondarycolor;
+		box-shadow: inset 0 70px 0 0 $__white;
+		@include transition(0.5s);
+	}
+}
+.package-section {
+	@include margin-padding(null, 70px 0);
+    background: url(../img/bg/package-bg-01.png), url(../img/bg/package-bg-02.png);
+    background-repeat: no-repeat;
+    background-position: left top, right bottom;
+    background-size: 400px;
+    position: $__relative;
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0 16px);
+		background-size: 200px;
+	}
+	&::before {
+		position: $__absolute;
+		content: "";
+		width: $__full__width;
+		height: 100%;
+		background: linear-gradient(180deg, $__primarycolor 0%, #a30834 100%);
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}	
+	.white-text {
+		p {
+			color: $__white;
+		}
+		h2 {
+			color: $__white;
+		}
+	}
+	.package-wrap {
+		background: url(../img/bg/package-bg.png) no-repeat;
+		background-size: 100% 100%;
+		@include margin-padding(100px 0 0 , 80px 70px);
+		position: $__relative;
+		@include respond-below(custom1399) {
+			padding: 67px 60px;
+		}
+		@include respond-below(custom991) {
+			@include margin-padding(null, 80px 50px);
+		}
+		.section-heading-two {
+			margin-bottom: 30px;
+			img {
+				width: 240px;
+			}
+		}		
+		.couple-img {
+			position: $__absolute;
+			top: -100px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: -1;
+		}
+		.btn {
+			width: $__full__width;
+			font-weight: $__semibold;
+			@include margin-padding(null, 11px 34px);			
+			@include respond-below(custom991) {
+				font-size: $__font__size__14;
+				@include margin-padding(null, 8px 30px);
+			}
+		}
+		ul {
+			margin-bottom: 30px;
+			li {
+				font-weight: $__medium;
+				text-align: $__center;
+				@include margin-padding(0 0 25px, null);
+				@include respond-below(custom1399) {
+					font-size: 15px;
+					margin-bottom: 15px;
+				}
+				@include respond-below(custom991) {
+					@include margin-padding(0 0 15px, null);
+				}
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}		
+		.section-heading-two {
+			h2 {
+				font-size: $__font__size__28;
+				font-weight: $__semibold;
+				color: $__dark__eclipse;
+				@include respond-below(custom991) {
+					font-size: $__font__size__24;
+				}
+				@include respond-below(custom767) {
+					font-size: $__font__size__20;
+				}
+			}
+		}
+	}
+}
+.success-section {
+    background: url(../img/bg/wedding-bg.png), url(../img/bg/venue-bg.png);
+    background-position: left center, right center;
+    background-size: contain;
+    background-repeat: no-repeat;
+	@include margin-padding(null, 70px 0);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0);
+		background-size: 220px;
+	}
+	@include respond-below(custom767) {
+		background: $__white;
+	}
+	.success-img {
+		img {
+			@include respond-below(custom767) {
+				display: $__display__none;
+			}
+		}
+	}
+	.success-sec {
+		background: $__white;
+		box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+		@include rounded(15px);
+		@include margin-padding(null, 24px);
+		@include respond-below(custom991) {
+			@include margin-padding(null, 24px 24px 0);
+		}
+		.success-item {
+			@include respond-below(custom991) {
+				@include margin-padding(0 0 24px, null);
+			}
+			img {
+				@include margin-padding(0 0 15px, null);
+			}
+			h6 {
+				font-weight: $__semibold;
+				font-size: $__font__size__18;
+			}
+			p {
+				color: $__smoke__light;
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+.venue-section {
+    background: url(../img/bg/venue-bg.png) no-repeat;
+    background-position: right center;
+    background-size: contain;
+	@include margin-padding(null, 0 0 70px);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 0 0 40px);
+		background-size: 220px;
+	}
+	.venue-item {
+		background: $__white;
+		border: 1px solid $__lavender__light;
+		@include rounded(15px);
+		@include margin-padding(0 0 50px, 15px);
+		.venue-image {
+			overflow: hidden;
+			border-radius: 15px 15px 0px 0px;
+			@include margin-padding(0 0 15px, null);
+		}
+		.venue-content {
+			h3 {
+				font-weight: $__semibold;
+				font-size: $__font__size__18;
+				@include margin-padding(0 0 10px, null);
+				a {
+					color: $__dark__eclipse;
+					&:hover {
+						color: $__primarycolor;
+					}
+				}
+			}
+			p {
+				font-weight: $__medium;
+				color: $__gray60;
+				@include margin-padding(0 0 10px, null);
+			}
+			ul {
+				li {
+					p {
+						font-size: $__font__size__14;
+					    color: $__dark__eclipse;
+					    margin-bottom: 0;
+					}
+				}
+			}
+		}
+		.price-review {
+			@extend %display-flex-center-between;
+			p {
+				font-weight: $__semibold;
+				font-size: $__font__size__18;
+				color: $__primarycolor;
+				@include margin-padding(0 0 20px, null);
+			}
+			h6 {
+				font-size: $__font__size__14;
+				color: $__smoke__light;
+				font-weight: $__regular;
+				@include margin-padding(0 0 20px, null);
+				span {
+					background: $__primarycolor;
+					@include rounded(100px);
+					font-size: $__font__size__14;
+					color: $__white;
+					@include margin-padding(0 10px 0 0, 10px 13px);
+					display: $__inline__block;
+				}
+			}
+		}
+		.venue-content {
+			ul {
+				border: 1px solid $__lavender__light;
+				@extend %display-flex-between;
+				li {
+					text-align: $__center;
+					display: $__inline__block;
+					width: 32.5%;
+					border-right: 1px solid $__lavender__light;
+					padding: 10px;
+					&:last-child {
+						border: 0;
+					}
+					span {
+						background: $__azalea__light;
+						@include rounded(50px);
+						width: 40px;
+						height: 40px;
+						color: $__white;
+						@extend %flex-align-center;
+						@include margin-padding(0 auto 10px, null);
+					}
+				}
+			}
+		}		
+	}
+}
+.section-heading-two {
+    @include margin-padding(0 0 50px, null);
+	@include respond-below(custom991) {
+		@include margin-padding(0 0 30px, null);
+	}
+	p {
+		color: $__secondarycolor;
+		font-weight: $__medium;
+	}
+	h2 {
+		font-weight: $__bold;
+		font-size: $__font__size__36;
+		@include respond-below(custom1199) {
+			font-size: $__font__size__30;
+		}
+		@include respond-below(custom991) {
+			font-size: $__font__size__28;
+		}
+		@include respond-below(custom767) {
+			font-size: $__font__size__24;
+		}
+	}
+}
+
+.categories-section {
+    background: url(../img/bg/venue.png) no-repeat;
+    background-position: right bottom;
+    background-size: 400px;
+	@include margin-padding(null, 0 0 46px);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 0 0 16px);
+		background: $__white;
+	}
+	.category-item {
+		background: $__white;
+		border: 1px solid $__lavender__light;
+		@include rounded(15px);
+		@include margin-padding(0 0 24px, 15px);
+		position: $__relative;
+		@include respond-below(custom991) {
+			@include margin-padding(0 0 12px, 10px);
+		}
+		.category-img {
+			position: $__relative;
+			img {
+				@include rounded(15px);
+				width: $__full__width;
+			}
+			a {
+				position: $__absolute;
+				bottom: 20px;
+				left: 15px;
+				right: 15px;
+				border: 1px solid $__light__saturated__yellow;
+				background: $__light__saturated__yellow;
+				@include rounded(10px);
+				color: $__primarycolor;
+				font-weight: $__medium;
+				@include margin-padding(null, 12px 15px);
+				display: $__block;
+				box-shadow: inset 0 0 0 $__primarycolor;
+				@include transition(0.5s);
+				@include respond-below(custom1399) {
+					font-size: 15px;
+				}
+				@include respond-below(custom991) {
+					@include margin-padding(null, 8px 13px);
+					font-size: $__font__size__14;
+				}
+			}
+		}
+		&:hover {
+			a {
+				border: 1px solid $__primarycolor;
+			    background: $__primarycolor;
+			    color: #fff;
+			    box-shadow: inset 0 70px 0 0 $__primarycolor;
+			    @extend %animation-effect;
+			}
+		}
+	}
+}
+.portfolio-section {
+    background: url(../img/bg/portfolio-bg.jpg) no-repeat;
+    background-size: cover;
+	@include margin-padding(null, 70px 0);
+	@include respond-below(custom1199) {
+		@include margin-padding(null, 60px 0);
+	}
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0);
+	}
+	@include respond-below(custom767) {       
+		background: $__white__lilac;
+    }
+	.portfolio-wrap {
+		@include margin-padding(0 0 50px, null);
+		@include respond-below(custom991) {
+			@include margin-padding(0 0 40px, null);
+		}
+		.port-wrap {
+			@include margin-padding(null, 8px 8px 0);
+			.portfolio-item {
+				@include margin-padding(null, 0 0 8px);
+				background: $__white;
+				position: $__relative;
+				&:hover {
+					.portfolio-overlay-item {
+						opacity: 1;
+						@include transition(0.7s);
+					}
+				}
+			}
+			.portfolio-img {
+				img {
+					width: $__full__width;
+				}
+			}
+			.portfolio-overlay-item {
+				position: $__absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow: hidden;
+				width: $__full__width;
+				height: 100%;
+				opacity: 0;
+				@include transition(0.7s);
+			}
+			.portfolio-overlay {
+				background: $__light__saturated__light;
+				text-align: $__center;
+				width: calc(100% - 10px);
+				height: calc(100% - 18px);
+				@extend %flex-align-center;
+				flex-direction: column;
+				@include margin-padding(5px 5px 0, null);
+				h6 {
+					font-weight: $__semibold;
+					font-size: $__font__size__18;
+				}
+				p {
+					color: $__smoke__light;
+				}
+			}
+		}
+	}
+}
+
+.timeline-section {
+	@include margin-padding(null, 70px 0);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0);
+	}
+	.timeline-sec {
+		@include margin-padding(null, 50px 0);
+		background: linear-gradient( 270deg, rgba(255, 215, 222, 0) 0%, rgba(249, 117, 155, 0.15) 45.77%, rgba(255, 215, 222, 0) 97.65% );
+		.timeline-wrap {	
+			@include respond-below(custom767) {
+				text-align: center;
+			}		
+			li {
+				position: $__relative;
+				&::before {
+					position: $__absolute;
+					content: "";
+					background: url(../img/bg/line-bg.png) no-repeat;
+					width: 76px;
+					height: 15px;
+					background-position: top center, left center;
+					background-size: cover;
+					top: 50%;
+					left: 120px;
+					@include respond-below(custom991) {
+						left: 80px;
+					}
+					@include respond-below(custom767) {
+						display: $__display__none;
+					}
+				}				
+				&:last-child:before {
+					display: none;
+				}
+			}
+			.time-box {
+				width: 14.8%;
+				position: $__relative;
+				min-height: 310px;
+				float: left;
+				
+				@include respond-below(custom767) {
+					width: 120px;
+					display: inline-block;
+					float: unset;
+					min-height: 272px;
+				}
+				&:last-child {
+					width: 11%;
+					@include respond-below(custom767) {
+						width: 120px;
+					}
+				}
+				.date {
+					position: $__absolute;
+					top: 50%;
+					left: 0px;
+					transform: translateY(-50%);
+					width: 120px;
+					height: 120px;
+					border-radius: 100%;
+					background: $__white;
+					border: 1px solid $__primarycolor;
+					@extend %flex-align-center;
+					@include respond-below(custom991) {
+						width: 80px;
+						height: 80px;
+					}
+				}
+				.box-content {
+					top: 80%;
+					position: $__absolute;
+					left: 60px;
+					transform: translateX(-50%);
+					@include respond-below(custom991) {
+						left: 40px;
+					}
+					p {
+						@include margin-padding(20px 0 0, null);
+						font-weight: $__semibold;
+    					text-align: $__center;
+						@include respond-below(custom991) {
+							font-size: $__font__size__14;
+							@include margin-padding(0, null);
+						}
+						@include respond-below(custom767) {
+							@include margin-padding(20px 0 0, null);
+						}
+						span {
+							display: $__block;
+							white-space: nowrap;
+						}
+					}
+					&::before {
+						position: $__absolute;						
+						top: -33px;
+						content: " ";
+						left: 50%;
+						transform: translateX(-50%);
+						height: 33px;
+						border-left: 1px solid #ff823b;
+						@include respond-below(custom991) {
+							top: -52px;
+						}
+						@include respond-below(custom767) {
+							top: -40px;
+						}
+					}
+					&::after {
+						position: $__absolute;						
+						content: " ";
+						top: 0;
+						left: 50%;
+						transform: translateX(-50%);
+						width: 9px;
+						height: 9px;
+						background: $__primarycolor;
+						border-radius: 50%;
+						@include respond-below(custom991) {
+							top: -20px;
+						}
+						@include respond-below(custom767) {
+							top: -10px;
+						}
+					}
+				}
+				&.box-top{
+					.box-content {						
+						top: 0 ;
+						@include respond-below(custom991) {
+							top: 20px;
+						}
+						p {
+							@include margin-padding(0 0 20px, null);
+							@include respond-below(custom767) {
+								@include margin-padding(-20px 0 0 , null);
+							}
+						}
+						&:before {
+							top: 61px;
+							@include respond-below(custom767) {
+								top: 43px;
+							}
+						}
+						&:after {
+							top: 53px;
+							@include respond-below(custom767) {
+								top: 35px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.feedback-section {
+    background: url(../img/bg/wedding-bg.png) no-repeat;
+    background-position: left center;
+    background-size: contain;
+	.feedback-slider {
+		background: url(../img/bg/map.png) no-repeat;
+		background-position: center;
+		.testimonial-item {
+			@include margin-padding(0 0 50px, null);
+			.testimonial-content {
+				@include margin-padding(25px 0 35px, 30px 50px);
+				position: $__relative;
+				text-align: $__center;
+				&::before {
+					content: "";
+					position: $__absolute;
+					background: $__white;
+					border: 1px dashed $__azalea__light;
+					@include rounded(10px);
+					box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+					top: 1%;
+					bottom: -12%;
+					left: 8%;
+					right: 7%;
+					z-index: -1;
+					-webkit-transform: perspective(22em) rotateX(-30deg);
+					transform: perspective(22em) rotateX(-30deg);
+				}
+				&::after {
+					content: "";
+					position: $__absolute;
+					border-left: 32px solid transparent;
+					border-bottom: 25px solid $__white;
+					width: 32px;
+					height: 25px;
+					left: 60px;
+					bottom: -23px;
+					transform: rotateX(160deg);
+				}
+				p {
+					font-size: $__font__size__14;
+					color: $__black__dark;
+					margin-bottom: 0;
+				}
+				.testi-icon {
+					width: 48px;
+					height: 48px;
+					background: $__primarycolor;
+					border-radius: 100px;
+					@extend %flex-align-center;
+					color: $__white;
+					font-size: $__font__size__20;
+					position: $__absolute;
+					top: -25px;
+					left: 30px;
+				}
+			}
+			.testimonial-user-info {
+				@extend %flex-align-center;
+				img {
+					width: 50px !important;
+					height: 50px;
+					border-radius: 50%;
+					margin-right: 15px;
+				}
+				.testimonial-user {
+					h6 {
+						font-weight: $__medium;
+						font-size: $__font__size__16;
+						@include margin-padding(0 0 2px, null);
+					}
+					p {
+						font-size: $__font__size__14;
+						color: $__gray60;
+						@include margin-padding(0 0 2px, null);
+					}
+				}
+			}
+		}
+	}
+}
+.blog-image,
+.blog-img,
+.venue-image,
+.recommended-widget,
+.blog-widget {
+	img {
+		@extend %animation-effect-img;
+		width: $__full__width;
+		&:hover {
+			@extend %animation-effect-img-hover;
+		}
+	}
+}
+.blog-section-two {
+	@include margin-padding(null, 70px 0);
+    background: url(../img/bg/venue-bg.png) no-repeat;
+    background-position: right center;
+    background-size: contain;
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0);
+	}
+	.grid-blog { 
+		&.blog-two {
+			background: $__white;
+			border: 1px solid $__lavender__light;
+			@include rounded(15px);
+			@include margin-padding(null, 15px);
+			@include margin-padding(0 0 50px, null);
+			.blog-image {
+				border-radius: 15px 15px 0px 0px;
+				@include margin-padding(0 0 10px, null);
+			}
+			.blog-content {
+				padding: 0;
+				.viewlink {
+					a {
+						font-weight: $__medium;
+	    				color: $__primarycolor;
+						i {
+							margin-left: 7px;
+						}
+					}
+				}
+				.blog-description {
+					height: unset;
+					margin-bottom: 12px;
+				}
+			}
+			.blog-title {
+				a {
+					font-size: $__font__size__18;
+					@include respond-below(custom991) {
+						font-size: $__font__size__16;
+					}
+				}
+			}
+			.entry-meta {
+				margin-bottom: 0px;
+				.date-icon {
+					font-size: $__font__size__16;
+	    			color: $__gray60;
+				}
+				.blog-cat {
+					font-size: $__font__size__14;
+					color: $__primarycolor;
+				}
+			}
+		}
+	}
+}
+.vendor-section {
+	@include margin-padding(null, 70px 0);
+	@include respond-below(custom991) {
+		@include margin-padding(null, 40px 0);
+	}
+	.vendor-sec {
+		background: $__primarycolor;
+		background-image: url(../img/bg/vector-bg-01.png), url(../img/bg/vector-bg-02.png);
+		background-repeat: no-repeat;
+		background-position: left 20px top 10px, right 20px top 10px;
+		@include rounded(15px);
+		@include margin-padding(null, 45px);
+		.vendor-info {
+			max-width: 500px;
+			width: $__full__width;
+			@include margin-padding(0 auto, null);
+			text-align: $__center;
+			h3 {
+				font-size: $__font__size__28;
+				color: $__white;
+				@include margin-padding(0 0 20px, null);
+				@include respond-below(custom991) {
+					font-size: $__font__size__24;
+				}
+				@include respond-below(custom767) {
+					font-size: $__font__size__20;
+				}
+			}
+			.btn {
+				background: $__secondarycolor;
+				@include rounded(10px);
+				color: $__white;
+				@include margin-padding(null, 11px 27px);
+				@include respond-below(custom991) {
+					@include margin-padding(null, 9px 25px);
+					font-size: $__font__size__14;
+				}
+			}
+		}
+	}
+}

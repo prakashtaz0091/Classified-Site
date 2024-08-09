@@ -1,0 +1,62 @@
+.gallerypage-info {
+	.gallery-widget {
+		position: $__relative;
+		margin: 0 0 25px;
+		@include transition(0.7s);
+		a {
+			display: $__inline__block;
+			border-radius: 10px;
+			@include transition(0.7s);
+			z-index: 1;
+			position: $__relative;
+			border-radius: 10px;
+			&:before {
+				content: " ";
+				background: $__secondarycolor;
+				opacity: 0.9;
+				position: $__absolute;
+				top: 0;
+				color: $__white;
+				border-radius: 10px;
+				width: 100%;
+				height: 100%;
+				z-index: 2;
+				opacity: 0;
+				@include transition(0.5s);
+			}
+			&:after {
+				content: "";
+				position: $__absolute;
+				background: url(../img/eye-icon.png);
+				top: 45%;
+				left: 45%;
+				color: $__white;
+				width: 25px;
+				height: 25px;
+				z-index: 2;
+				opacity: 0;
+				@include transition(0.5s);
+			}
+			img {
+				border-radius: 10px;
+			}
+		}
+	}
+}
+.innerpagebg {
+	background: $__light__blue;
+}
+.gallerypage-info {
+	.gallery-widget {
+		a {
+			&:hover {
+				&::after, &::before {
+					opacity: 1;
+					display: block;
+					@include transition(0.5s);
+					z-index: 2;
+				}
+			}
+		}
+	}
+}

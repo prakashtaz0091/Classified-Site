@@ -1,0 +1,77 @@
+.faq-section {
+	h2 {
+		font-size: $__font__size__36;
+		font-weight: $__bold;
+        @include margin-padding(50px 0 50px, null);
+		color: $__dark__eclipse;
+		@include respond-below(custom1199) {
+			@include margin-padding(40px 0 40px, null);
+			font-size: $__font__size__32;
+		}
+		@include respond-below(custom991) {
+			@include margin-padding(30px 0 30px, null);
+			font-size: $__font__size__30;
+		}
+		@include respond-below(custom767) {
+			@include margin-padding(20px 0 20px, null);
+			font-size: $__font__size__28;
+		}
+		@include respond-below(custom575) {
+			@include margin-padding(15px 0 15px, null);
+			font-size: $__font__size__26;
+		}
+	}
+	.faq-card {
+		background: $__white;
+		border-radius: 10px;
+        @include margin-padding(0 0 24px, 24px);
+		box-shadow: 0px 4.4px 12px -1px rgba(19, 16, 34, 0.06), 0px 2px 6.4px -1px rgba(19, 16, 34, 0.03);
+		.card-collapse {
+			p {
+				font-size: $__font__size__15;
+                @include margin-padding(20px 0 0, 20px 0 0);
+				border-top: 1px solid $__light__grayish;
+				line-height: 27px;
+				@include respond-below(custom575) {
+					font-size: $__font__size__14;
+					@include margin-padding(15px 0 0, 15px 0 0);
+				}
+			}
+		}
+	}
+	h4 {
+		font-size: $__font__size__20;
+		color: $__dark__eclipse;
+		margin: 0;
+		@include respond-below(custom991) {
+			font-size: $__font__size__18;
+		}
+		@include respond-below(custom575) {
+			font-size: $__font__size__16;
+		}
+	}
+}
+.faq-title {
+	& > a {
+		display: $__block;
+		position: $__relative;
+		padding-right: 60px;
+		color: $__dark__eclipse;
+		&:not(.collapsed):after {
+			content: "\f068";
+		}
+		&:hover {
+			color: $__primarycolor;
+		}
+		&:after {
+			font-family: "Fontawesome";
+			font-weight: 900;
+			content: "\f067";
+			position: $__absolute;
+			top: 4px;
+			right: 0;
+			color: $__primarycolor;
+			font-size: 16px;
+		}
+	}
+}

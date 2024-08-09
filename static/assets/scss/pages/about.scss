@@ -1,0 +1,303 @@
+.innerbanner {
+	&::after {
+		content: "";
+		background: linear-gradient(0deg, $__black__dark 16.31%, rgba(0, 0, 0, 0) 100%);
+		position: $__absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+	.blogbanner-img {
+		img {
+			min-height: 250px;
+		}
+	}
+	.breadcrumb-title {
+		font-weight: $__semibold;
+		color: $__white;
+	}
+	.breadcrumb {
+		@extend %justify-content-center;
+		margin: 0;
+		li {
+			a {
+				color: $__white;
+			}
+		}
+		.breadcrumb-item  {
+			&::before {
+				color: $__white;
+			}
+		}
+		.breadcrumb-item.active {
+			color: $__white;
+		}
+	}
+}
+.aboutbanner {
+	position: $__relative;
+	background: url("../img/banner/aboutbanner.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: $__center;
+	@include margin-padding(null, 170px 0 90px);
+	overflow: $__hidden;
+	z-index: 1;
+	@include respond-below(custom991) {
+		@include margin-padding(null, 140px 0 60px);
+	}
+	@include respond-below(custom767) {
+		@include margin-padding(null, 120px 0 60px);
+	}
+}
+.about-content {
+	@include margin-padding(null, 70px 0px);
+	background: $__light__blue;
+	@include respond-below(custom991) {
+		@include margin-padding(null, 60px 0px);
+	}
+}
+.about-listee {
+	position: $__relative;
+	@extend %display-flex;
+	@include respond-below(custom1199) { 
+		flex-direction: column;
+	}
+}
+.about-img {
+	width: 100%;
+	@include respond-below(custom1199) { 
+		width: auto;
+    	text-align: $__center;
+	}
+	img {
+		border-radius: 20px;
+	}
+}
+.about-info {
+	width: 50%;
+	position: $__absolute;
+	right: 78px;
+	background: $__white;
+	@include margin-padding(null, 30px 30px);
+	border-radius: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	@include respond-below(custom1199) {
+		@include margin-padding(25px 0 0, 20px);
+		position: $__static;
+		width: auto;
+		transform: none;
+    }
+	p {
+		color: $__smoke__light;
+		line-height: 27px;
+		@include margin-padding(0 0 30px, null);
+		&:last-child {
+			margin: 0;
+		}
+	}
+	h4 {
+		color: $__dark__eclipse;
+		font-size: $__font__size__36;
+		font-weight: $__bold;
+		@include margin-padding(0 0 30px, null);
+		@include respond-below(custom1199) {
+			@include margin-padding(0 0 20px, null);
+			font-size: $__font__size__32;
+		}
+		@include respond-below(custom767) {
+			@include margin-padding(0 0 15px, null);
+			font-size: $__font__size__28;
+		}
+		span {
+			color: $__primarycolor;
+		}
+	}
+}
+.howitworks {
+	background: $__light__blue;
+	text-align: $__center;
+	h3 {
+		color: $__primarycolor;
+		font-size: $__font__size__36;
+		font-weight: $__bold;
+		@include margin-padding(0 0 40px, null);
+		@include respond-below(custom991) {
+			@include margin-padding(0 0 30px, null);
+			font-size: $__font__size__32;
+		}
+		@include respond-below(custom767) {
+			@include margin-padding(0 0 15px, null);
+			font-size: $__font__size__28;
+		}
+	}
+	p {
+		color: $__smoke__light;
+		line-height: 27px;
+		@include margin-padding(0 0 20px, null);
+	}
+	.howitwork-info {
+		p {
+			margin: 0;
+		}
+	}
+}
+.howitwork-info {
+	text-align: $__left;
+	border: 1px solid $__pantone;
+	border-radius: 10px;
+	@include margin-padding(30px 0 0, 20px);
+	@include transition(0.7s);
+	h5 {
+		font-size: 60px;
+		font-weight: $__extra__bold;
+		color: $__secondarycolor;
+		@include transition(0.7s);
+		position: $__relative;
+		@extend %display-flex-center;
+		@include margin-padding(0 0 25px 0, null);
+		@include respond-below(custom991) {
+			font-size: $__font__size__50;
+			@include margin-padding(0 0 20px 0, null);
+		}
+		@include respond-below(custom767) {
+			font-size: $__font__size__40;
+		}
+		&:after {
+			content: "";
+			border-top: 4px solid $__secondarycolor;
+			display: $__inline__block;
+			width: calc(100% - 110px);
+			position: $__absolute;
+			top: 35px;
+			left: 79px;
+			@include respond-below(custom991) {
+				top: 30px;
+			}
+			@include respond-below(custom767) {
+				top: 25px;
+			}
+		}
+		&:before {
+			content: "";
+			border: 5px solid $__secondarycolor;
+			display: $__inline__block;
+			width: 20px;
+			position: $__absolute;
+			right: 12px;
+			height: 20px;
+			background: transparent;
+			color: $__white;
+			border-radius: 50px;
+			top: auto;
+		}
+	}
+	h6 {
+		font-size: $__font__size__24;
+		font-weight: $__extra__bold;
+		@include margin-padding(0 0 25px, null);
+		@include respond-below(custom991) {
+			font-size: $__font__size__20;
+			@include margin-padding(0 0 20px, null);
+		}
+	}
+	&:hover {
+		h5 {
+			&:after {
+				border-top: 4px solid $__primarycolor;
+			}
+			&:before {
+				border: 5px solid $__primarycolor;
+			}
+			color: $__primarycolor;
+		}
+		background: $__white;
+		box-shadow: 3px 5px 13px rgba(222, 226, 231, 0.44);
+		h6 {
+			color: $__primarycolor;
+		}
+	}
+}
+.aboutpopular-locations {	
+	background: $__light__blue;
+	@include margin-padding(null, 70px 0 46px);
+	.section-heading {
+		h2 {
+			font-size: $__font__size__28;
+		}
+	}
+}
+.about-locations {
+	p {
+		color: $__smoke__light;
+	}
+}
+.aboutlocation-details {
+	position: $__relative;
+	overflow: $__hidden;
+	border-radius: 10px;
+	height: 240px;
+	@include transition(0.5s);
+	@include margin-padding(0 0 24px, null);
+	a {
+		height: 100%;
+		border-radius: 10px;
+		position: $__absolute;
+		overflow: $__hidden;
+		z-index: 1;
+		left: 0px;
+		bottom: 0px;
+		width: 100%;
+		color: $__white;
+		@include transition(0.5s);
+		display: $__block;
+	}
+	&:after {
+		content: "";
+		background: linear-gradient(0deg, $__black__dark 16.31%, rgba(0, 0, 0, 0) 100%);
+		position: $__absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+	}
+	.aboutloc-img {
+		img {
+			@include transition(0.5s);
+			@include respond-below(custom767) {
+				width: $__full__width;
+			}
+		}
+	}
+	h3 {
+		font-size: $__font__size__20;
+		color: $__white;
+		font-weight: $__bold;
+		@include transition(0.5s);
+		@include respond-below(custom991) {
+			font-size: $__font__size__18;
+		}
+		&:hover {
+			color: $__primarycolor;
+		}
+	}
+	span {
+		font-size: $__font__size__14;
+	}
+}
+.aboutlocations-info {
+	position: $__absolute;
+	bottom: 30px;
+	left: 30px;
+	color: $__white;
+}
+.australi-loc {
+	img {
+		min-height: 130px;
+	}
+}

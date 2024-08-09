@@ -1,0 +1,134 @@
+.pagination {
+    @include respond-below(custom991) {
+        justify-content: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+    }
+    @include respond-below(custom767) {
+        margin-top: 16px;
+    }
+    @include respond-below(custom575) {
+        margin-top: 6px;        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .pagination-center {
+        @extend %flex-align-center;
+        width: 79%;
+        @include respond-below(custom991) {
+            width: 50%;
+        }
+        @include respond-below(custom575) {
+            width: 88%;
+        }
+    }
+}
+.pagelink {
+    &:focus {
+		box-shadow: none;
+	}
+	ul {
+		@extend %flex-align-center;
+        @include margin-padding(0 0 0 10px, null);
+		li {
+			a {
+				border: 1px solid $__shade__gray__light;
+				background: $__white;
+				border-radius: 10px;
+				color: $__dark__eclipse;
+                @include margin-padding(0 12px 0 0, 10px 19px);
+				width: 46px;
+				height: 46px;
+				@extend %flex-align-center;
+                @include respond-below(custom767) {
+                    width: 38px;
+				    height: 38px;
+                    font-size: 14px;
+                }
+				&:hover {
+					background: $__secondarycolor;
+					border-color: $__secondarycolor;
+					color: $__white;
+				}
+			}
+		}
+	}
+	.active {
+		& > .page-link {
+			background: $__secondarycolor;
+			color: $__white;
+			border: 1px solid $__secondarycolor;
+		}
+	}
+}
+.page-item {
+    .page-link {
+        border-radius: 10px;
+    }
+    &:first-child {
+        .page-link {
+            border-radius: 10px;
+        }
+    }
+    &:last-child {
+        .page-link {
+            border-radius: 10px;
+        }
+    }
+
+}
+.previtem, .nextlink {
+	a {
+        color: $__secondarycolor;
+        min-width: 150px;
+        padding: 10px 38px;
+        @include transition(0.5s);
+        @include respond-below(custom767) {
+            min-width: 110px;
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+		&:focus {
+			background: $__white;
+			color: $__secondarycolor;
+			box-shadow: none;
+		}
+        &:hover {
+            background: $__secondarycolor;
+            border-color: $__secondarycolor;
+            color: $__white;
+            i {
+                color: $__white;
+                @include transition(0.5s);
+            }
+        }        
+        i {
+            color: $__primarycolor;
+            @include transition(0.5s);
+		}
+	}
+}
+.previtem { 
+    @include respond-below(custom575) {
+        margin-bottom: 10px
+    }   
+    i{
+        margin-right: 5px;
+    }
+}
+.nextlink {
+    .page-link {
+        i {
+            margin-left: 5px;
+        }    
+    }
+    @include respond-below(custom575) {
+        margin-top: 10px
+    }
+}

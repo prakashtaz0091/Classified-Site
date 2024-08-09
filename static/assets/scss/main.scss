@@ -1,0 +1,43 @@
+/****** UTILS ******/
+@import "utils/variables";
+@import "utils/mixins";
+
+/******* BASE *******/
+@import "base/typography";
+@import "base/colors"; 
+@import "base/base";
+@import "base/grid";
+
+/******* COMPONENTS ******/
+@import "components/button";
+
+
+/****** LAYOUT ******/
+@import "layout/footer";
+@import "layout/header";
+@import "layout/breadcrumb";
+@import "layout/select";
+
+/****** PAGES ******/
+@import "pages/home";
+@import "pages/home-two";
+@import "pages/home-three";
+@import "pages/home-four";
+@import "pages/home-five";
+@import "pages/home-six";
+@import "pages/home-seven";
+@import "pages/home-eight";
+@import "pages/home-nine";
+@import "pages/listing";
+@import "pages/common";
+@import "pages/about";
+@import "pages/add-listing";
+@import "pages/faq";
+@import "pages/gallery";
+@import "pages/service-details";
+@import "pages/categories";
+@import "pages/howitworks";
+@import "pages/blog";
+@import "pages/contact";
+@import "pages/authendication";
+@import "pages/pagination";

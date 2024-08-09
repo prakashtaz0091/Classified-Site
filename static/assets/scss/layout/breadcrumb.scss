@@ -1,0 +1,71 @@
+.breadcrumb-bar {
+    background: $__secondarycolor__light;
+    @include margin-padding(null, 170px 0 90px);
+    padding: 170px 0 90px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    @include respond-below(custom1199) {
+        @include margin-padding(null, 140px 0 60px);
+    }
+    @include respond-below(custom991) {
+        @include margin-padding(null, 120px 0 60px);
+    }
+    &::before {
+        content: "";
+        background: url(../img/breadcrumbleft-bg.png) no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 175px;
+        height: 149px;
+        background-size: cover;
+        @include respond-below(custom767) {
+            display: $__display__none;
+        }
+    }
+    &:after {
+        content: "";
+        background: url(../img/breadcrumbright-bg.png) no-repeat;
+        position: absolute;
+        right: 0;
+        width: 175px;
+        height: 149px;
+        background-size: cover;
+        bottom: 0;
+        @include respond-below(custom767) {
+            display: $__display__none;
+        }
+    }
+    .breadcrumb-title {
+        font-size: $__font__size__36;
+        font-weight: $__bold;
+        color: $__white;
+        @include respond-below(custom991) {
+            font-size: $__font__size__32;
+        }
+        @include respond-below(custom767) {
+            font-size: $__font__size__28;
+        }
+    }
+    .breadcrumb {
+        justify-content: center;
+        margin: 0;
+        &::before {
+            color: $__white;
+        }
+        li {
+            a {
+                color: $__white;
+            }
+        }
+    }
+    .breadcrumb-item.active {
+        color: $__white;
+    }
+    .breadcrumb-item {
+        &::before {
+            color: $__white;
+        }
+    }
+}

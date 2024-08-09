@@ -1,0 +1,13 @@
+.innerpagebg {
+    background: $__light__blue;
+}
+.section-blk {
+    position: $__relative;
+    @include margin-padding(null, 80px 0);
+    @include respond-below(custom1199) {        
+        @include margin-padding(null, 60px 0);
+    }
+    @include respond-below(custom991) {        
+        @include margin-padding(null, 40px 0);
+    }
+}

@@ -1,0 +1,107 @@
+.pricingplan-section {
+	&.how-work {
+		background: url(../img/priceplanbg.png);
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}
+.work-section {
+	position: $__relative;
+    @include margin-padding(null, 80px 0);
+    @include respond-below(custom1199) {        
+        @include margin-padding(null, 60px 0);
+    }
+    @include respond-below(custom991) {        
+        @include margin-padding(null, 40px 0);
+    }
+	@include respond-below(custom767) {        
+        @include margin-padding(null, 40px 16px);
+    }
+	h4 {
+		color: $__dark__eclipse;
+		font-weight: $__bold;
+		text-align: $__center;
+		font-size: $__font__size__36;
+		@include margin-padding(0 0 30px, null);
+		@include respond-below(custom1199) {
+			font-size: $__font__size__32;
+			@include margin-padding(0 0 25px, null);
+		}
+		@include respond-below(custom991) {
+			font-size: $__font__size__28;
+			@include margin-padding(0 0 20px, null);
+		}
+		@include respond-below(custom767) {
+			font-size: $__font__size__26;
+			@include margin-padding(0 0 15px, null);
+		}
+	}
+	.description {
+		text-align: $__center;
+	}
+	.work-info {
+		border: 1px solid $__light__blue;
+		padding: 25px;
+		background: $__white;
+		border-radius: 10px;
+		margin: 0;
+		box-shadow: 3px 5px 13px rgb(222 226 231 / 44%);
+		@include respond-below(custom767) {
+			margin-bottom: 24px;
+		}
+		h5 {
+			color: $__primarycolor;
+			font-size: 60px;
+			@include margin-padding(30px 0, null);
+			font-weight: $__extra__bold;
+			position: $__relative;
+			@extend %display-flex-center;
+			@include respond-below(custom991) {
+				font-size: $__font__size__40;
+				@include margin-padding(25px 0, null);
+			}
+			&:before {
+				content: "";
+				border: 5px solid $__primarycolor;
+				display: $__inline__block;
+				width: 20px;
+				position: $__absolute;
+				right: 12px;
+				height: 20px;
+				background: $__transparent;
+				color: $__white;
+				border-radius: 50px;
+				top: $__auto;
+			}
+			&:after {
+				content: "";
+				border-top: 2px solid $__primarycolor;
+				display: $__inline__block;
+				width: calc(100% - 110px);
+				position: $__relative;
+				top: $__auto;
+				left: 10px;
+				@include respond-below(custom991) {
+					width: calc(100% - 87px);
+				}
+			}
+		}
+		h6 {
+			font-size: $__font__size__24;
+			color: $__dark__eclipse;
+			font-weight: $__extra__bold;
+			margin-bottom: 30px;
+			@include respond-below(custom991) {
+				font-size: $__font__size__22;
+				margin-bottom: 25px;
+			}
+		}
+		p {
+			line-height: 27px;
+			color: $__smoke__light;
+		}
+	}
+}
+.work-heading {
+	margin: 0px 0 50px;
+}
