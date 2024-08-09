@@ -1,21 +1,87 @@
-# Python
+# Python bytecode files
 *.py[cod]
 __pycache__/
 *.so
 *.egg
 *.egg-info
 *.pyd
-*.sqlite3
-*.log
 
-# Django
-*.db
-*.sqlite3
-media/
-staticfiles/
+# Django migrations
+**/migrations/*
 
-# Virtual environments
+# Ignore all local environments
+.env
+.venv
+env/
 venv/
 ENV/
-.venv/
-.env
+env.bak/
+venv.bak/
+
+# macOS files
+.DS_Store
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Django settings (local development)
+# Uncomment if you use local settings that shouldn't be committed
+# settings_local.py
+
+# Database
+*.sqlite3
+*.db
+
+# Static and media files (optional if generated during deployment)
+staticfiles/
+media/
+
+# Django static files cache
+static/
+static_root/
+media_root/
+
+# Logs
+*.log
+*.pot
+*.pyc
+*.swp
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+
+# pytest cache
+.pytest_cache/
+.cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pycharm files
+*.iml
+.idea/
+.idea_modules/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/.idea
+.idea/
+*.iws
+*.ipr
+.idea/assetWizard.xml
+.idea/dictionaries/
+.idea/libraries/
+.idea/scratches/
+.idea/workspace.xml
+
+# Ignore virtual environment
+venv/
+__pycache__/
