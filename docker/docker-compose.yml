@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..  # Set the context to the project root
+      dockerfile: docker/Dockerfile  # Specify the Dockerfile inside the docker directory
+    command: python src/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ../:/app  # Mount the entire project root to /app in the container
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
