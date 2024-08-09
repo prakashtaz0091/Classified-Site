@@ -76,13 +76,6 @@ DATABASES = {
 
 
 
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-# print(ALLOWED_HOSTS,'allow host')
-
-ALLOWED_HOSTS=['localhost','127.0.0.1']
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
-CORS_ALLOW_ALL_ORIGINS = os.environ.get(
-    "CORS_ALLOW_ALL_ORIGINS", "True") == "True"
 
 USE_X_FORWARDED_HOST = True
 CSRF_COOKIE_SECURE = False  # Set to False for development
