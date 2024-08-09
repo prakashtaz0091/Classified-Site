@@ -36,13 +36,13 @@ venv.bak/
 *.db
 
 # Static and media files (optional if generated during deployment)
-staticfiles/
-media/
+# staticfiles/
+# media/
 
-# Django static files cache
-static/
-static_root/
-media_root/
+# # Django static files cache
+# static/
+# static_root/
+# media_root/
 
 # Logs
 *.log
