@@ -1,6 +1,6 @@
 # production.py for now demo settings not actual
 
-from ...common.common import *
+from common.common import *
 
 # Debug mode
 DEBUG = False
