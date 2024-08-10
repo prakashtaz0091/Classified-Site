@@ -74,10 +74,3 @@ def facebook_login(request):
             print(error)
             return JsonResponse({'message':f"unexpected error {error}",'status':False},status=400)
 
-def sso_login(request):
-    email=request.POST.get('email')
-    account_instance=Account.objects.filter(email=email).first()
-    print(request.user)
-    auth.login(request,account_instance)
-    print(request.user)
-    return redirect('/')

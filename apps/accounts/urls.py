@@ -16,5 +16,4 @@ urlpatterns = [
 
     path('login/google/',ssoview.google_login,name="google_login"),
     path('login/facebook/',ssoview.facebook_login,name="facebook_login"),
-    path('login/sso/',ssoview.sso_login,name="sso_login_view"),
 ]
