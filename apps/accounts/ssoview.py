@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.accounts.models import Account
 # Create your views here.
+
 @csrf_exempt
 def google_login(request):
         try:
@@ -23,14 +24,15 @@ def google_login(request):
             first_name=idinfo['given_name']
             last_name=idinfo['family_name']
             full_name=f"{first_name} {last_name}"
+
             account_instance=Account.objects.filter(email=email).first()
-            if account_instance is not None:
-                auth.login(request, account_instance)
-            else:
-                account_instance=Account(full_name=full_name,email=email)
+
+            if account_instance is None:
+                account_instance=Account(full_name=full_name,email=email,is_active=True)
                 account_instance.set_unusable_password() #since password is not needed
                 account_instance.save()
-                auth.login(request,account_instance)
+
+            auth.login(request,account_instance)
             
             print(request.user)
             return JsonResponse({
@@ -49,16 +51,16 @@ def google_login(request):
 def facebook_login(request):
         try:
             data=json.loads(request.body)
-            print(request.user)
             full_name= data.get('name')
             email=data.get('email')
-            print(full_name,email)
-            account_instance=Account.objects.filter(email=email).first()
-            if account_instance is  None:
-            
-                account=Account(full_name=full_name,email=email)
+            account=Account.objects.filter(email=email).first()
+
+            if account is  None:
+                account=Account(full_name=full_name,email=email,is_active=True)
                 account.set_unusable_password() #since password is not needed
                 account.save()
+
+            auth.login(request,account)
             print(request.user)
             return JsonResponse({
                 'status':'success',

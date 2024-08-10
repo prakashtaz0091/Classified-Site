@@ -5,9 +5,9 @@
 
     fetch('/account/login/google/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  headers: {
+                          'Content-Type': 'application/json',
+                      },
       credentials: 'include',
       body: JSON.stringify({
         id_token: response.credential
@@ -17,7 +17,7 @@
     .then(data => {
       console.log('Server response:', data);
       if (data.status=="success") {
-        window.location.href = '/';
+        location.href="/"
       } else {
         alert(data.error || 'Login failed.');
       }
@@ -66,8 +66,7 @@
                   .then(data => {
                       console.log('Server response:', data);
                       if (data.status=="success") {
-                    document.getElementById('user-email').value = data.email;
-                    document.getElementById('login-form').submit();
+                        location.href="/"
                       } else {
                           alert(data.error || 'Login failed.');
                       }
@@ -82,6 +81,21 @@
           }
       }, {scope: 'public_profile,email'});
   };
+   function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
  
   const googleBtn = document.getElementById('custom-google-btn');
 

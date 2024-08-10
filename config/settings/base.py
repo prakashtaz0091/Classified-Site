@@ -18,6 +18,11 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 AUTH_USER_MODEL='accounts.Account'
 
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+# Set session cookie age to 1 week (default is 1209600 seconds)
+
+
 
 LANGUAGE_CODE = 'en-us'
 
