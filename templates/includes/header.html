@@ -176,18 +176,34 @@
                 <li class="login-link">
                     <a href="{% url 'register' %}">Sign Up</a>
                 </li>
+               
+                {% if user.is_authenticated %}
+                <li class="login-link">
+                    <a href="{% url 'logout' %}">Log Out</a>
+                </li>
+                {% else %}
                 <li class="login-link">
                     <a href="{% url 'login' %}">Sign In</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         <ul class="nav header-navbar-rht">
+
+            
             <li class="nav-item">
                 <a class="nav-link header-reg" href="{% url 'register' %}">Sign Up</a>
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link header-login" href="{% url 'logout' %}"> Log Out</a>
+            </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link header-login" href="{% url 'login' %}"> Sign In</a>
             </li>
+            {% endif %}
+            
             <li class="nav-item">
                 <a class="nav-link add-listing" href="add-listing.html"><i class="fa-solid fa-plus"></i>Add Listing</a>
             </li>
