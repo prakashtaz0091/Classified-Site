@@ -41,25 +41,27 @@
 								<h3>Create an Account</h3>
 								<p>Lets start with <span>Listee</span></p>								
 							</div>
+							{% include 'includes/alert.html' %}
 							
 							<!-- Login Form -->
-							<form action="login.html">
+							<form action="{% url 'register' %}" method='POST'>
+								{% csrf_token %}
 								<div class="form-group group-img">
 									<div class="group-img">
 										<i class="feather-user"></i>
-										<input type="text" class="form-control" placeholder="Full Name">
+										<input type="text" class="form-control" placeholder="Full Name" name='full_name'>
 									</div>
 								</div>
 								<div class="form-group group-img">
 									<div class="group-img">
 										<i class="feather-mail"></i>
-										<input type="text" class="form-control" placeholder="Email Address">
+										<input type="text" class="form-control" placeholder="Email Address" name='email'>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="pass-group group-img">
 										<i class="feather-lock"></i>
-										<input type="password" class="form-control pass-input" placeholder="Password">
+										<input type="password" class="form-control pass-input" placeholder="Password" name='password'>
 										<span class="toggle-password feather-eye"></span>
 									</div>
 								</div>
