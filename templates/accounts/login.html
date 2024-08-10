@@ -84,28 +84,57 @@
 								<div class="social-login">
 									<a href="#" class="btn btn-apple w-100"><img src="{% static 'assets/img/apple.svg' %}" class="me-1" alt="img">Sign in with Apple</a>
 								</div>
-								<div class="social-login">
-									<a href="#" class="btn btn-google w-100"><img src="{% static 'assets/img/google.svg' %}" class="me-1" alt="img">Sign in with Google</a>
+								<style>
+    #g_id_onload,
+    .g_id_signin {
+        display: none;
+    }
+</style>
+
+	<div id="g_id_onload"
+         data-client_id="230604273167-guv4saijfahagueh5kc6ggq01mug2ilv.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse"
+         ></div>
+								 <div
+			 id="g_id_signin"
+                           class="g_id_signin"
+                           data-type="standard"
+						   data-client_id="230604273167-guv4saijfahagueh5kc6ggq01mug2ilv.apps.googleusercontent.com"
+                           data-size="large"
+                           data-theme="outline"
+                           data-text="sign_in_with"
+                           data-shape="rectangular"
+                           data-logo_alignment="left"
+                           ></div>
+
+
+								<div id="custom-google-btn" class="social-login">
+								    <a href="#" id="google-login-button" class="btn btn-google w-100">
+						<img src="{% static 'assets/img/google.svg' %}" class="me-1" alt="img">Sign in with Google</a>
 								</div>
-								<div class="social-login">
+								<div id="facebook-login-button" class="social-login">
 									<a href="#" class="btn btn-facebook w-100 mb-0"><img src="{% static 'assets/img/facebook.svg' %}" class="me-2" alt="img">Continue with Facebook</a>
 								</div>								
 							</form>
 							<!-- /Login Form -->
-												
+
+					
 						</div>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+		<form id="login-form" method="POST" action="{% url 'sso_login_view' %}">
+			{% csrf_token %}
+    <input type="hidden" id="user-email" name="email">
+</form>
 		
 		<!-- /Login Section -->
 		
 			
 	    {% include 'includes/footer.html' %}
-	
-		
+		{% include 'includes/sso.html' %}
 	</div>
 	
 	

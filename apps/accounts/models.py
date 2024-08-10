@@ -18,8 +18,11 @@ class myaccountmanager(BaseUserManager):
             
         )
 
-        user.set_password(password)
-        user.save(using=self._db)
+        if password:
+            user.set_password(password)
+        else:
+            user.set_unusable_password()
+
         return user
 
 
@@ -47,13 +50,6 @@ class myaccountmanager(BaseUserManager):
 class Account(AbstractBaseUser):
     full_name= models.CharField(max_length=50)
     email=models.EmailField(max_length=100,unique=True)
-   
-   
-
-
-
-    #required filed mendotory 
-
     date_joined=models.DateTimeField(auto_now_add=True)
     last_login=models.DateTimeField(auto_now_add=True)
     is_admin=models.BooleanField(default=False)

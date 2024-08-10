@@ -18,6 +18,7 @@ def Login(request):
         password = request.POST['password']
 
         user = auth.authenticate(email=email, password=password)
+        print(user)
 
         if user is not None:
             auth.login(request, user)
@@ -36,14 +37,11 @@ def Register(request):
             if Account.objects.filter(email=email).exists():
                 messages.error(request, 'Email address is already registered.')
                 return render(request, 'accounts/signup.html')
-            
             full_name = form.cleaned_data['full_name']
             password = form.cleaned_data['password']
-            
             user = Account.objects.create_user(full_name=full_name, email=email, password=password)
             user.save()
 
-            
             # Send activation email
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'

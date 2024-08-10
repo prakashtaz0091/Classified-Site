@@ -1,0 +1,93 @@
+  <script>
+   // Handle Google Sign-In response
+  function handleCredentialResponse(response) {
+    console.log('Encoded JWT ID token: ' + response.credential);
+
+    fetch('/account/login/google/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        id_token: response.credential
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Server response:', data);
+      if (data.status=="success") {
+        window.location.href = '/';
+      } else {
+        alert(data.error || 'Login failed.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred.');
+    });
+  }
+
+
+        // Load the Facebook SDK asynchronously
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '356967017345989',
+                xfbml: true,
+                version: 'v13.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+         document.getElementById('facebook-login-button').onclick = function() {
+      FB.login(function(response) {
+          if (response.authResponse) {
+              // Fetch user profile information
+              FB.api('/me?fields=name,email', function(profile) {
+                  fetch('/account/login/facebook/', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                      credentials: 'include',
+                      body: JSON.stringify({
+                          name: profile.name,
+                          email: profile.email
+                      })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log('Server response:', data);
+                      if (data.status=="success") {
+                    document.getElementById('user-email').value = data.email;
+                    document.getElementById('login-form').submit();
+                      } else {
+                          alert(data.error || 'Login failed.');
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      alert('An error occurred.');
+                  });
+              });
+          } else {
+              console.error('User cancelled login or failed.');
+          }
+      }, {scope: 'public_profile,email'});
+  };
+ 
+  const googleBtn = document.getElementById('custom-google-btn');
+
+googleBtn.addEventListener('click', () => {
+    document.querySelector('.g_id_signin div[role=button]').click();
+});
+
+           </script>
+
