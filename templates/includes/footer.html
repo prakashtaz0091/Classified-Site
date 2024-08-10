@@ -1,8 +1,11 @@
+
+
+{% load static %}
 <footer class="footer">
     <div class="container">
-           <div class="stay-tuned">
+        <div class="stay-tuned">
             <h3>Stay Tuned With Us</h3>
-            <p>Subcribe to our newletter and never miss our latest news and promotions. Our newsletter is sent once a week, every thursday.</p>
+            <p>Subscribe to our newsletter and never miss our latest news and promotions. Our newsletter is sent once a week, every Thursday.</p>
             <form>
                 <div class="form-group">
                     <div class="group-img">
@@ -23,10 +26,10 @@
                     <!-- Footer Widget -->
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="#"><img src="assets/img/footerlogo.svg" alt="logo"></a>
+                            <a href="#"><img src="{% static 'assets/img/footerlogo.svg' %}" alt="logo"></a>
                         </div>
                         <div class="footer-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt et magna aliqua.  </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt et magna aliqua.</p>
                         </div>
                         <div class="social-icon">
                             <ul>
@@ -101,7 +104,7 @@
                         <h2 class="footer-title">Top Cities</h2>
                         <ul>
                             <li>
-                                <a href="javascript:void(0)">Manhatten</a>
+                                <a href="javascript:void(0)">Manhattan</a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">Los Angeles</a>
@@ -124,14 +127,14 @@
                     <div class="footer-widget">
                         <h2 class="footer-title">Communication</h2>
                         <div class="footer-contact-info">
-                                <div class="footer-address">
-                                    <img src="assets/img/call-calling.svg" alt="Callus">
-                                    <p><span>Call Us</span> <br> +017 123 456 78	 </p>
-                                </div>
-                                <div class="footer-address">
-                                    <img src="assets/img/sms-tracking.svg" alt="Callus">
-                                    <p><span>Send Message</span> <br> listee@example.com	 </p>
-                                </div>							
+                            <div class="footer-address">
+                                <img src="{% static 'assets/img/call-calling.svg' %}" alt="Call us">
+                                <p><span>Call Us</span> <br> +017 123 456 78	 </p>
+                            </div>
+                            <div class="footer-address">
+                                <img src="{% static 'assets/img/sms-tracking.svg' %}" alt="Call us">
+                                <p><span>Send Message</span> <br> listee@example.com	 </p>
+                            </div>							
                         </div>																
                     </div>
                     <!-- /Footer Widget -->							
@@ -140,42 +143,41 @@
             
             <!-- Footer Counter Section-->
             <div class="footercount">
-                    <div class="row">
-                             <div class="col-lg-3 col-md-3">
-                                <div class="vistors-details">
-                                    <p>Our Unique Visitor</p>
-                                    <p class="visitors-value">25,329,532</p>										
-                                </div>									 
-                             </div>
-                              <div class="col-lg-3 col-md-3">
-                                  <div class="vistors-details">
-                                    <p>Our Unique Visitor</p>
-                                    <p class="visitors-value">25,329,53264546</p>										
-                                </div>									 
-                             </div> 
-                             <div class="col-lg-3 col-md-3">
-                                 <div class="vistors-details">
-                                    <p>Our Unique Visitor</p>
-                                    <p class="visitors-value">25,329,53264546</p>										
-                                </div>									 
-                             </div>
-                              <div class="col-lg-3 col-md-3">
-                                <div class="vistors-details">
-                                    <p>We Accept</p>
-                                    <ul class="d-flex">
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/amex-pay.svg" alt="amex"></a></li>
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/apple-pay.svg" alt="pay"></a></li>
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/gpay.svg" alt="gpay"></a></li>
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/master.svg" alt="paycard"></a></li>
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/phone.svg" alt="spay"></a></li>
-                                        <li><a href="javascript:void(0)"><img class="img-fluid" src="assets/img/visa.svg" alt="visa"></a></li>
-                                    </ul>										   								
-                                </div>									 
-                             </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="vistors-details">
+                            <p>Our Unique Visitor</p>
+                            <p class="visitors-value">25,329,532</p>										
+                        </div>									 
                     </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="vistors-details">
+                            <p>Our Unique Visitor</p>
+                            <p class="visitors-value">25,329,53264546</p>										
+                        </div>									 
+                    </div> 
+                    <div class="col-lg-3 col-md-3">
+                        <div class="vistors-details">
+                            <p>Our Unique Visitor</p>
+                            <p class="visitors-value">25,329,53264546</p>										
+                        </div>									 
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="vistors-details">
+                            <p>We Accept</p>
+                            <ul class="d-flex">
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/amex-pay.svg' %}" alt="amex"></a></li>
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/apple-pay.svg' %}" alt="pay"></a></li>
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/gpay.svg' %}" alt="gpay"></a></li>
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/master.svg' %}" alt="paycard"></a></li>
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/phone.svg' %}" alt="spay"></a></li>
+                                <li><a href="javascript:void(0)"><img class="img-fluid" src="{% static 'assets/img/visa.svg' %}" alt="visa"></a></li>
+                            </ul>										   								
+                        </div>									 
+                    </div>
+                </div>
             </div>			
-            <!-- /Footer  Counter Section-->	
-            
+            <!-- /Footer Counter Section-->	
         </div>
     </div>
     <!-- /Footer Top -->
@@ -214,5 +216,4 @@
         </div>
     </div>
     <!-- /Footer Bottom -->
-    
 </footer>

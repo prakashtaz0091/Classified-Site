@@ -4,3 +4,11 @@ from django.shortcuts import render,HttpResponse
 
 def account(request):
     return HttpResponse('hello buddy')
+
+
+
+def Login(request):
+    return render(request,'accounts/login.html')
+
+def Register(request):
+    return render(request,'accounts/signup.html')
