@@ -84,13 +84,27 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # Disable in development
 SECURE_HSTS_PRELOAD = False  # Disable in development
 
 # Email settings
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
-EMAIL_USE_SSL = os.environ.get("EMAIL_USE_SSL", "False") == "True"
-EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
-EMAIL_PORT = os.environ.get("EMAIL_PORT", "")
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "")
+# EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
+# EMAIL_USE_SSL = os.environ.get("EMAIL_USE_SSL", "False") == "True"
+# EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+# EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+# EMAIL_PORT = os.environ.get("EMAIL_PORT", "")
+# DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "")
+
+
+
+
+#smtp configuration
+# email verifcation in django
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_POR')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+
+
+EMAIL_HOST_USER='heritagehive872@gmail.com'
+EMAIL_HOST_PASSWORD='qozv drew svkw ufgx'
 
 # Static and Media files
 STATIC_URL = 'static/'
