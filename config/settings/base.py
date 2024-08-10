@@ -9,18 +9,15 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "")
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-print(ALLOWED_HOSTS)
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS","").split(",")
-print(CORS_ALLOWED_ORIGINS)
 
-# AUTH_USER_MODEL = 'accounts.User'
+# CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS","").split(",")
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = "mobile_number"
+
+AUTH_USER_MODEL='accounts.Account'
+
 
 LANGUAGE_CODE = 'en-us'
 
