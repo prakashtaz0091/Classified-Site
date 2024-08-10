@@ -43,19 +43,20 @@ def Register(request):
             user = Account.objects.create_user(full_name=full_name, email=email, password=password)
             user.save()
 
-            # Send verification email (if required)
-            # current_site = get_current_site(request)
-            # mail_subject = 'Please activate your account'
-            # message = render_to_string('accounts/account_verification_email.html', {
-            #     'user': user,
-            #     'domain': current_site,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            #     'token': default_token_generator.make_token(user),
-            # })
-            # to_email = email
-            # send_email = EmailMessage(mail_subject, message, to=[to_email])
-            # send_email.send()
             
+            # Send activation email
+            current_site = get_current_site(request)
+            mail_subject = 'Please activate your account'
+            message = render_to_string('accounts/account_verfication_email.html', {
+                    'user': user,
+                    'domain': current_site,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+            to_email = email
+            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email.content_subtype = 'html'
+            send_email.send()
             messages.success(request, f'Thank you for registering with us. We have sent you a verification email to your email address {email}. Please verify it.')
             return redirect('register')
         else:
@@ -96,13 +97,13 @@ def activate(request, uidb64, token):
 
 
 
-def forgot_password(request):
+def forget_password(request):
     if request.method == 'POST':
         email = request.POST['email']
         if Account.objects.filter(email=email).exists():
             user = Account.objects.get(email__exact=email)
 
-            # Reset password email
+           # Reset password email
             current_site = get_current_site(request)
             mail_subject = 'Reset Your Password'
             message = render_to_string('accounts/reset_password_email.html', {
@@ -113,14 +114,17 @@ def forgot_password(request):
             })
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email.content_subtype = 'html'
             send_email.send()
 
             messages.success(request, 'Password reset email has been sent to your email address.')
             return redirect('login')
+
+           
         else:
             messages.error(request, 'Account does not exist!')
             return redirect('forgotPassword')
-    return render(request, 'accounts/forgotPassword.html')
+    return render(request, 'accounts/forgot-password.html')
 
 
 def resetpassword_validate(request, uidb64, token):
@@ -155,4 +159,7 @@ def resetPassword(request):
             messages.error(request, 'Password do not match!')
             return redirect('resetPassword')
     else:
-        return render(request, 'accounts/resetPassword.html')
+        return render(request, 'accounts/reset.html')
+
+
+
