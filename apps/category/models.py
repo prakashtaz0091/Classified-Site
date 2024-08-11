@@ -10,6 +10,7 @@ class Category(models.Model):
     category_name=models.CharField(max_length=50,unique=True);
     slug=models.SlugField(max_length=100,unique=True)
     descriptions=models.TextField(max_length=255,blank=True);
+    category_image=models.FileField(upload_to="category/")
 
     class Meta:
         verbose_name_plural = "categories"

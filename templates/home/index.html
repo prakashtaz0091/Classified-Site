@@ -27,18 +27,16 @@
 								<h1>Let us help you <br>
 								<span>Find, Buy</span> & Own Dreams</h1>
 								<p>Country's most loved and trusted classified ad listing website. Browse thousands of items near you.</p>
+
 								<div class="search-box">
 									<form action="listing-grid-sidebar.html" class="d-flex"> 
 										<div class="search-input line">											
 											<div class="form-group">																							
 												<select class="form-control select category-select">													
 													<option value="">Choose Category</option>
-													<option>Computer</option>
-													<option>Automobile</option>
-													<option>Car Wash</option>
-													<option>Cleaning</option>
-													<option>Electrical</option>
-													<option>Construction</option>
+													{% for category in categories %}
+													<option value="{{category.id}}">{{category.category_name}}</option>
+													{% endfor %}
 												</select>
 											</div>
 										</div>
@@ -86,91 +84,17 @@
 					</div>			     
 				</div>	
 				<div class="row">
+					{% for category in categories %}
 					<div class="col-lg-2 col-md-3 col-sm-6">
 						<a href="categories.html" class="category-links">
-							<h5>Automotive</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-1.svg' %}" alt="icons">
+							<h5>{{category.category_name}}</h5>
+							<span>{{category.product_category.count}} Ads</span>
+							<img src="{{category.category_image.url}}" alt="icons">
 						</a> 
 					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Electronics</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-2.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Fashion Style</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-3.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Health Care</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-4.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Job Board</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-5.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Education</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-6.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Real Estate</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-7.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Travel</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-8.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Sports & Game</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-9.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Magazines</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-10.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>Pet & Animal</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-11.svg' %}" alt="icons">
-						</a> 
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="categories.html" class="category-links">
-							<h5>House Hold</h5>
-							<span>09 Ads</span>
-							<img src="{% static 'assets/img/icons/category-12.svg' %}" alt="icons">
-						</a> 
-					</div>
-				</div>			   
+
+					{% endfor %}
+								</div>			   
 			</div>		
 		</section>
 		
@@ -485,12 +409,13 @@
 		
 		<!-- Popular Location Section -->
 		<section class="latestad-section grid-view featured-slider">	
+			{% for latest_product  in latest_products %}
 			<div class="container">		
 				<div class="section-heading">
 					<div class="row align-items-center">
 						<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
-							<h2>Lat<span class="title-right">est</span> Ads</h2>
-							<p>checkout these latest cool ads from our members</p>
+							<h4><span style="border-bottom:2px solid red;padding-bottom:4px">Latest Ads In</span> {{latest_product.category.category_name}}</h4>
+							<p>checkout these latest cool ads of {{latest_product.category.category_name}} from our members</p>
 						</div>
 						<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
 							<a href="{% url 'service_details' %}" class="btn btn-view">View All</a>
@@ -499,12 +424,13 @@
 				</div>
 				<div class="lateestads-content">
 					<div class="row">
+						{% for product in latest_product.products %}
 						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
 							<div class="card aos flex-fill" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
 										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
+											<img src="{{product.images.url}}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
@@ -520,19 +446,20 @@
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
 												</div>														
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Education</span></a>
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
+													{% comment %}
+													changes: 4000 view count to be updaed later
+													image of user is to be added
+													{% endcomment %}
 													<span> <i class="feather-eye"></i> 4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">2017 Gulfsteam Ameri-lite</a></h6>																	 
+											<h6><a href="{% url 'service_details' %}">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
-												   <i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 06 Oct, 2022
+													<i class="fa-solid fa-calendar-days"></i> {{product.created_dat}}
 												</div>
 											</div>
 											<div class="amount-details">
@@ -549,6 +476,8 @@
 								</div> 
 							</div>
 						</div>
+
+						{% endfor %}
 						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
 							<div class="card aos flex-fill" data-aos="fade-up">
 								<div class="blog-widget">
@@ -902,6 +831,7 @@
 					</div>						
 				</div>						
 			</div>
+			{% endfor %}
 		</section>	
 		<!-- /Popular Locations Section -->
 		
