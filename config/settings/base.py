@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     'apps.accounts.apps.AccountsConfig',
     'apps.home.apps.HomeConfig',
+    'apps.store.apps.StoreConfig',
+    'apps.category.apps.CategoryConfig'
 
 ]
 
