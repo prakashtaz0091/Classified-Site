@@ -6,3 +6,7 @@ from django.shortcuts import render
 def home(request):
     if request.method=='GET':
         return render(request,'home/index.html')
+    
+    
+def service_details(request):
+    return render(request,'home/service-details.html')    
