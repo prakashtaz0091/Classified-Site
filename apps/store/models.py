@@ -6,7 +6,7 @@ class Product(models.Model):
     product_name=models.CharField(max_length=500)
     slug=models.SlugField(max_length=200,unique=True)
     description=models.TextField(blank=True)
-    images=models.ImageField(upload_to='photos/products')
+    cover_image=models.FileField(upload_to='photos/product_cover')
     price=models.IntegerField()
     is_available=models.BooleanField(default=True)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name="product_category")
@@ -19,3 +19,8 @@ class Product(models.Model):
     
     def __str__(self):
         return self.product_name
+
+class ProductImages(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    image=models.FileField(upload_to="photos/products")
+
