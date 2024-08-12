@@ -7,7 +7,7 @@ from apps.store.models import Product
 
 
 def home(request):
-    if request.method=='GET':
+    if request.method == 'GET':
         try:
             all_categories = Category.objects.select_related().all().order_by('-id')
             latest_products = []
@@ -21,9 +21,10 @@ def home(request):
                 'latest_products': latest_products,
                 'categories':all_categories
             }
-            print(context)
+           
             return render(request,'home/index.html',context)
         except Exception as e:
+            print('error')
             print(e)
             #later redirect to some 404 page with custom error message
             return  "error"
