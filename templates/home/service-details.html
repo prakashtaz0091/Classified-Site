@@ -56,11 +56,12 @@
 						<img style="height:300px;" class="img-fluid" alt="Image" src="{{image.image.url}}">
 					</a>
 				</div>	
-				{% endfor %}
 				<div class="showphotos">
-					<a href="{% static 'assets/img/gallery/gallery1/gallery-3.jpg' %}" data-fancybox="gallery1">... Show Photos</a>
+					<a href="{{image.image.url}}" data-fancybox="gallery1">... Show Photos</a>
 				</div>								
+				{% endfor %}
 			</div>			
+
 		</div>
 			
 		<!--/Galler Slider Section-->
@@ -71,23 +72,18 @@
 				<div class="about-details">
 					<div class="about-headings">
 						<div class="author-img">
-							<img src="{% static 'assets/img/profiles/avatar-10.jpg' %}" alt="authorimg">
+							<img src="{{product.cover_image.url}}" alt="authorimg">
 						</div>
 						<div class="authordetails">
-							<h5>Sleep In a Room in Apartment</h5>
-							<p>Luxury hotel in the heart of Blommsbury</p>
-							<div class="rating">
-								<i class="fas fa-star filled"></i>
-								<i class="fas fa-star filled"></i>
-								<i class="fas fa-star filled"></i>
-								<i class="fas fa-star filled"></i>
-								<i class="fa-regular fa-star rating-color"></i>
-								<span class="d-inline-block average-rating"> 4.5 </span>
-							</div>
+							<h5>{{product.product_name}}</h5>
+							<p>Listed On: {{product.created_date}}</p>
 						</div>
 					</div>
 					<div class="rate-details">
-						<h2>$350</h2>
+						<h2>AED {{product.price}} </h2>
+						{% comment %}
+						type like fixed and negotiable will be fixed later
+						{% endcomment %}
 						<p>Fixed</p>
 					</div>				  
 				</div>
