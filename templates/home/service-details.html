@@ -49,27 +49,14 @@
 		
 		<!--Galler Slider Section-->
 		<div class="bannergallery-section">
-			<div class="gallery-slider d-flex">
+			<div style="margin-top:85px;" class="gallery-slider d-flex">
+				{% for image in product_images %}
 				<div class="gallery-widget">
-					<a href="{% static 'assets/img/gallery/gallery1/gallery-1.jpg' %}" data-fancybox="gallery1">
-						<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/gallery1/gallery-1.jpg' %}">
+					<a href="{{ image.image.url }}" data-fancybox="gallery1">
+						<img style="height:300px;" class="img-fluid" alt="Image" src="{{image.image.url}}">
 					</a>
 				</div>	
-				<div class="gallery-widget">
-					<a href="{% static 'assets/img/gallery/gallery1/gallery-2.jpg' %}" data-fancybox="gallery1">
-						<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/gallery1/gallery-2.jpg' %}">
-					</a>
-				</div>								
-				<div class="gallery-widget">
-					<a href="{% static 'assets/img/gallery/gallery1/gallery-3.jpg' %}" data-fancybox="gallery1">
-						<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/gallery1/gallery-3.jpg' %}">
-					</a>
-				</div>	
-				<div class="gallery-widget">
-					<a href="{% static 'assets/img/gallery/gallery1/gallery-4.jpg' %}" data-fancybox="gallery1">
-						<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/gallery1/gallery-4.jpg' %}">
-					</a>
-				</div>			
+				{% endfor %}
 				<div class="showphotos">
 					<a href="{% static 'assets/img/gallery/gallery1/gallery-3.jpg' %}" data-fancybox="gallery1">... Show Photos</a>
 				</div>								

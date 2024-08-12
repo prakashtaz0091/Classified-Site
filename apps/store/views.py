@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from apps.store.models import Product
+from apps.store.models import Product, ProductImages
 
 # Create your views here.
     
@@ -10,7 +10,12 @@ def service_details(request,product_slug):
         product_instance=Product.objects.filter(slug=product_slug).first()
         if product_instance is None:
             raise Exception("Product with the provided slug is not found")
-        return render(request,'home/service-details.html')    
+        product_images=ProductImages.objects.filter(product=product_instance)
+        context={
+            'product':product_instance,
+            'product_images':product_images
+        }
+        return render(request,'home/service-details.html',context)    
     except Exception as e:
         print(e)
         # will later redirect to 404 pages
