@@ -143,11 +143,12 @@
                         <div class="sortbyset">
                             <span class="sortbytitle">Sort by</span>
                             <div class="sorting-select">
-                                <select class="form-control select">
-                                    <option>Default</option>
-                                    <option>Price Low to High</option>
-                                    <option>Price High to Low</option>
+                                <select id="sortSelect" class="form-control select" onchange="handleSortChange(this)">
+                                    <option value="default">Default</option>
+                                    <option value="low-high">Price Low to High</option>
+                                    <option value="high-low">Price High to Low</option>
                                 </select>
+                                
                             </div>
                         </div>
                         <div class="grid-listview">
@@ -166,10 +167,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog-listview">
+                <div class="blog-listview" id='productContainer'>
 
 					{% for product in products %}
-                    <div class="card">
+                    <div class="card" data-index="{{ forloop.counter }}">
                         <div class="blog-widget">
                             <div class="blog-img">
                                 <a href="service-details.html">
@@ -195,7 +196,7 @@
                                           <a href="javascript:void(0);">John Doe</a>
                                         </div>
                                     </div>  {% endcomment %}
-                                    <h6><a href="service-details.html">{{product.price}}</a></h6>																	 
+                                    <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
                                     <div class="blog-location-details">
                                         <div class="location-info">
                                            <i class="feather-map-pin"></i> Los Angeles
@@ -204,7 +205,7 @@
                                            <i class="feather-phone-call"></i> +44 6633 6526
                                         </div>
                                         <div class="location-info">
-                                           <i class="feather-eye"></i>{{product.price}}
+                                           <i class="feather-eye"></i>0
                                         </div>
                                     </div>
                                     <p class="ratings">
@@ -212,7 +213,7 @@
                                     </p>
                                     <div class="amount-details">
                                         <div class="amount">
-                                            <span class="validrate">$350</span>
+                                            <span class="validrate">${{product.price}}</span>
                                             <span>$450</span>
                                         </div>
                                         <a href="service-details.html">View details</a>
@@ -288,7 +289,36 @@
 		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
 		</svg>
 	</div>
+
+
+
 	<!-- scrollToTop end -->
-	
+   <script>
+    function handleSortChange(selectElement) {
+        const productContainer = document.getElementById("productContainer");
+        let products = Array.from(productContainer.getElementsByClassName("card"));
+        let selectedValue = selectElement.value;
+    
+    
+        products.sort((a, b) => {
+            let priceA = parseFloat(a.querySelector("h6 a").textContent.replace("$", ""));
+            let priceB = parseFloat(b.querySelector("h6 a").textContent.replace("$", ""));
+    
+    
+            if (selectedValue === "low-high") {
+                return priceA - priceB;  
+            } else if (selectedValue === "high-low") {
+                return priceB - priceA; 
+            } else {
+                return a.dataset.index - b.dataset.index; 
+            }
+        });
+    
+        products.forEach(product => {
+            productContainer.appendChild(product);
+        });
+    }
+    
+   </script>
 	
 	{% endblock %}

@@ -29,7 +29,7 @@ def listing_view(request,slug):
     # for pagination 
     
     
-    paginator = Paginator(products, 2)  
+    paginator = Paginator(products, 3)  
     page_number = request.GET.get('page')  
     page_obj = paginator.get_page(page_number)  
 

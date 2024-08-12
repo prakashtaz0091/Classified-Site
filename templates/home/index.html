@@ -83,10 +83,10 @@
 						</div>		
 					</div>			     
 				</div>	
-				<div class="row">
-					{% for category in categories %}
+
+				{% comment %} {% for category in categories %}
 					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="{% url 'listing' category.slug %}" class="category-links">
+						<a href="" class="category-links">
 							<h5>{{category.category_name}}</h5>
 							<span>{{category.product_category.count}} Ads</span>
 							<img src="{{category.category_image.url}}" alt="icons">
@@ -94,7 +94,25 @@
 					</div>
 
 					{% endfor %}
-								</div>			   
+					</div>	 {% endcomment %}
+
+					
+				<div class="row">
+
+					{% for category in categories %}
+					<div class="col-lg-2 col-md-3 col-sm-6">
+					   <a href="{% url 'listing' category.slug %}" class="category-links">
+					      <h5>{{category.category_name}}</h5>
+						  <span>{{category.product_category.count}} Ads</span>
+						  <img src="{{category.category_image.url}}" alt="icons">
+					   </a> 
+					</div>
+					
+
+					{% endfor %}
+				
+				</div>
+							   
 			</div>		
 		</section>
 		
