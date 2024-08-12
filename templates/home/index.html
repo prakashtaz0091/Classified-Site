@@ -429,7 +429,7 @@
 							<div class="card aos flex-fill" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="{% url 'service_detail' product.slug %}">
 											<img src="{{product.images.url}}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
@@ -457,7 +457,7 @@
 													<span> <i class="feather-eye"></i> 4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">{{product.product_name}}</a></h6>																	 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="fa-solid fa-calendar-days"></i> {{product.created_date}}

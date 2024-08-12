@@ -28,7 +28,4 @@ def home(request):
             print(e)
             #later redirect to some 404 page with custom error message
             return  "error"
-    
-    
-def service_details(request):
-    return render(request,'home/service-details.html')    
+
