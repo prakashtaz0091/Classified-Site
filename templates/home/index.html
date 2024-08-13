@@ -1,25 +1,22 @@
 ﻿{% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-	
 	<div class="main-wrapper">
 	
 		<!-- Header -->
 		<header class="header">
 			{% include 'includes/header.html' %}
-			
 		</header>
 		<!-- /Header -->
 		
 		<!-- Banner Section -->
-		<section class="banner-section">	
+		<section class="banner-section">    
 			<div class="banner-circle">
 				<img src="{% static 'assets/img/bannerbg.png' %}" class="img-fluid" alt="bannercircle">
-			</div>		
+			</div>      
 			<div class="container">
-				<div class="home-banner">		
-					<div class="row align-items-center">					    
+				<div class="home-banner">       
+					<div class="row align-items-center">                       
 						<div class="col-lg-7">
 							<div class="section-search aos" data-aos="fade-up">
 								<p class="explore-text"> <span>Explore top-rated attractions</span></p>
@@ -27,21 +24,23 @@
 								<h1>Let us help you <br>
 								<span>Find, Buy</span> & Own Dreams</h1>
 								<p>Country's most loved and trusted classified ad listing website. Browse thousands of items near you.</p>
-
 								<div class="search-box">
 									<form action="listing-grid-sidebar.html" class="d-flex"> 
-										<div class="search-input line">											
-											<div class="form-group">																							
-												<select class="form-control select category-select">													
+										<div class="search-input line">                                            
+											<div class="form-group">                                                                                        
+												<select class="form-control select category-select">                                                    
 													<option value="">Choose Category</option>
-													{% for category in categories %}
-													<option value="{{category.id}}">{{category.category_name}}</option>
-													{% endfor %}
+													<option>Computer</option>
+													<option>Automobile</option>
+													<option>Car Wash</option>
+													<option>Cleaning</option>
+													<option>Electrical</option>
+													<option>Construction</option>
 												</select>
 											</div>
 										</div>
-										<div class="search-input">											
-											<div class="form-group">												
+										<div class="search-input">                                            
+											<div class="form-group">                                                
 												<div class="group-img">
 													<input type="text" class="form-control" placeholder="Choose Location">
 													<i class="feather-map-pin"></i>
@@ -57,11 +56,11 @@
 						</div>
 						<div class="col-lg-5">
 							<div class="banner-imgs">
-								<img src="{% static 'assets/img/Right-img.png' %}" class="img-fluid" alt="bannerimage">							
+								<img src="{% static 'assets/img/Right-img.png' %}" class="img-fluid" alt="bannerimage">                            
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>  
 			</div>
 			<img src="{% static 'assets/img/bannerellipse.png' %}" class="img-fluid banner-elipse" alt="arrow">
 			<img src="{% static 'assets/img/banner-arrow.png' %}" class="img-fluid bannerleftarrow" alt="arrow">
@@ -76,44 +75,26 @@
 					<div class="row align-items-center">
 						<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
 							<h2>Our  <span class="title-left">Cat</span>egory</h2>
-							<p>Buy and Sell Everything from Our Top Category</p>
+							<p>Buy and Sell Everything from Used Our Top Category</p>
 						</div>
 						<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
 							<a href="categories.html" class="btn btn-view">View All</a>
-						</div>		
-					</div>			     
-				</div>	
-
-				{% comment %} {% for category in categories %}
+						</div>      
+					</div>                 
+				</div>  
+				<div class="row">
+					{% for category in categories %}
 					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="" class="category-links">
-							<h5>{{category.category_name}}</h5>
-							<span>{{category.product_category.count}} Ads</span>
+						<a href="{% url 'listing' category.slug %}" class="category-links">
+							<h5>{{ category.category_name|slice:":16" }}</h5>
+							<span>09 Ads</span>
 							<img src="{{category.category_image.url}}" alt="icons">
 						</a> 
 					</div>
-
-					{% endfor %}
-					</div>	 {% endcomment %}
-
-					
-				<div class="row">
-
-					{% for category in categories %}
-					<div class="col-lg-2 col-md-3 col-sm-6">
-					   <a href="{% url 'listing' category.slug %}" class="category-links">
-					      <h5>{{category.category_name}}</h5>
-						  <span>{{category.product_category.count}} Ads</span>
-						  <img src="{{category.category_image.url}}" alt="icons">
-					   </a> 
-					</div>
-					
-
 					{% endfor %}
 				
-				</div>
-							   
-			</div>		
+				</div>               
+			</div>      
 		</section>
 		
 		<!-- /Category Section -->
@@ -126,27 +107,27 @@
 						<div class="section-heading">
 							<h2>Featu<span class="title-right">red</span> Ads</h2>
 							<p>Checkout these latest cool ads from our members</p>
-						</div>						
+						</div>                        
 					</div>
 					<div class="col-md-6 text-md-end aos" data-aos="fade-up">
 						<div class="owl-nav mynav2"></div>
-					</div>					
+					</div>                    
 				</div>
 				<div class="row">
-					<div class="col-md-12">						
-						<div class="owl-carousel featured-slider grid-view">								
+					<div class="col-md-12">                        
+						<div class="owl-carousel featured-slider grid-view">                                
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
@@ -156,12 +137,12 @@
 												</div>
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Education</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span>  <i class="feather-eye"></i>4000 </span>
+													<span><i class="feather-eye"></i>4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">2017 Gulfsteam Ameri-lite</a></h6>																	 
+											<h6><a href="service-details.html">2017 Gulfsteam Ameri-lite</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -177,39 +158,39 @@
 												</div>
 												<div class="ratings">
 													<span>4.7</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                
+											</div>    
+										</div>    
+									</div>             
 								</div> 
 							</div>
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-2.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
 													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="author">
-												</div>											    	
+												</div>                                                
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span>   <i class="feather-eye"></i>4000  </span>
+													<span><i class="feather-eye"></i>4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">Fashion luxury Men date</a></h6>																	 
+											<h6><a href="service-details.html">Fashion luxury Men date</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -225,24 +206,24 @@
 												</div>
 												<div class="ratings">
 													<span>4.6</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                
+											</div>    
+										</div>    
+									</div>             
 								</div> 
-							</div>										
+							</div>                                        
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-3.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
@@ -252,12 +233,12 @@
 												</div>
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span>   <i class="feather-eye"></i>4000  </span>
+													<span><i class="feather-eye"></i>4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">Apple Iphone 6 16GB 4G LTE</a></h6>																	 
+											<h6><a href="service-details.html">Apple Iphone 6 16GB 4G LTE</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -273,39 +254,39 @@
 												</div>
 												<div class="ratings">
 													<span>4.7</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                
+											</div>    
+										</div>    
+									</div>             
 								</div> 
-							</div>																			
+							</div>                                                                            
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-4.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
 													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="author">
-												</div>	
+												</div>    
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Gadgets</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span> <i class="feather-eye"></i>4000  </span>
+													<span><i class="feather-eye"></i>4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">Customized Apple Imac </a></h6>																	 
+											<h6><a href="service-details.html">Customized Apple Imac</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -315,43 +296,45 @@
 												</div>
 											</div>
 											<div class="amount-details">
-												<div class="validrate">$450</div>
-												<span>$300</span>
+												<div class="amount">
+													<span class="validrate">$450</span>
+													<span>$300</span>
+												</div>
 												<div class="ratings">
 													<span>4.5</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                
+											</div>    
+										</div>    
+									</div>             
 								</div> 
-							</div>	
+							</div>    
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-												</div>											    	
+												</div>                                                
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Education</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span> <i class="feather-eye"></i>4000  </span>
+													<span><i class="feather-eye"></i>4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">2017 Gulfsteam Ameri-lite</a></h6>																	 
+											<h6><a href="service-details.html">2017 Gulfsteam Ameri-lite</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -361,43 +344,45 @@
 												</div>
 											</div>
 											<div class="amount-details">
-												<div class="validrate">$350</div>
-												<span>$450</span>
+												<div class="amount">
+													<span class="validrate">$350</span>
+													<span>$450</span>
+												</div>
 												<div class="ratings">
 													<span>4.7</span> (50)
 												</div>
-											</div>	
-										</div>	
-									</div>			 
+											</div>    
+										</div>    
+									</div>             
 								</div> 
 							</div>
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
+										<a href="service-details.html">
 											<img src="{% static 'assets/img/featured/feature-5.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
 													<img src="{% static 'assets/img/profiles/avatar-06.jpg' %}" alt="author">
-												</div>											   
+												</div>                                               
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Construction</span></a>
-												</div>																	  
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													<span><i class="feather-eye"></i> 4000  </span>
+													<span><i class="feather-eye"></i> 4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">Villa 457 sq.m. In Benidorm Fully</a></h6>																	 
+											<h6><a href="service-details.html">Villa 457 sq.m. In Benidorm Fully</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
 													<i class="feather-map-pin"></i> Los Angeles
@@ -407,142 +392,578 @@
 												</div>
 											</div>
 											<div class="amount-details">
-												<div class="validrate">$650</div>
-												<span>$600</span>
+												<div class="amount">
+													<span class="validrate">$650</span>
+													<span>$600</span>
+												</div>
 												<div class="ratings">
 													<span>4.5</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                
+											</div>    
+										</div>    
+									</div>             
 								</div> 
-							</div>										
-						</div>							
+							</div>                                        
+						</div>                            
 					</div>
 				</div>
 			</div>
 		</section>
-		
+			
 		<!-- /Featured ADS Section -->
 		
 		<!-- Popular Location Section -->
-		<section class="latestad-section grid-view featured-slider">	
-			{% for latest_product  in latest_products %}
-			<div class="container">		
+		<section class="popular-locations">    
+			<div class="popular-circleimg">
+				<img class="img-fluid" src="{% static 'assets/img/popular-img.png' %}" alt="Popular-sections">
+			</div>
+			<div class="container">        
+				<div class="section-heading">
+					<h2>Popular <span>Loc</span>ations</h2>
+					<p>Start by selecting your favourite location and explore the goods</p>
+				</div>
+				<div class="location-details d-flex">    
+					<div class="row">                
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/usa.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">USA</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>
+						</div>    
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/canada.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">Canada</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>
+						</div>    
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/china.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">China</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>
+						</div>                
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/uk.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">United Kingdom</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>
+						</div>               
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/australia.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">Australia</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>
+						</div>
+						<div class="location-info col-lg-4 col-md-6">
+							<div class="location-info-details d-flex align-items-center">
+								<div class="location-img">
+									<a href="listing-grid-sidebar.html"><img class="img-fluid" src="{% static 'assets/img/locations/france.jpg' %}" alt="locations"></a>
+								</div>
+								<div class="location-content">
+									<a href="listing-grid-sidebar.html">France</a>
+									<p>20+ Ads Posted</p>
+									<a href="listing-grid-sidebar.html" class="view-detailsbtn">View Details</a>
+								</div>
+							</div>                             
+						</div>                 
+					</div>                 
+				</div>
+				<div class="align-items-center"><a href="listing-grid-sidebar.html" class="browse-btn">Browse Ads</a></div>
+			</div>
+		</section>
+		
+		<!-- /Popular Locations Section -->
+		
+		<!-- Latest Ads Section -->
+		<section class="latestad-section grid-view featured-slider">    
+			<div class="container">        
 				<div class="section-heading">
 					<div class="row align-items-center">
 						<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
-							<h4><span style="border-bottom:2px solid red;padding-bottom:4px">Latest Ads In</span> {{latest_product.category.category_name}}</h4>
-							<p>checkout these latest cool ads of {{latest_product.category.category_name}} from our members</p>
+							<h2>Lat<span class="title-right">est</span> Ads</h2>
+							<p>Checkout these latest cool ads from our members</p>
 						</div>
 						<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-							<a href="{% url 'service_details' %}" class="btn btn-view">View All</a>
-						</div>		
+							<a href="service-details.html" class="btn btn-view">View All</a>
+						</div>        
 					</div>
 				</div>
 				<div class="lateestads-content">
 					<div class="row">
-						{% for product in latest_product.products %}
 						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
 							<div class="card aos flex-fill" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="{% url 'service_detail' product.slug %}">
-											<img src="{{product.images.url}}" class="img-fluid" alt="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
 												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+											</a>                                        
+										</div>    
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-												</div>														
+												</div>                                                        
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{product.category.category_name|truncatechars:20}}</span></a>
-												</div>																	  
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Education</span></a>
+												</div>                                                                      
 												<div class="blog-author text-end"> 
-													{% comment %}
-													changes: 4000 view count to be updaed later
-													image of user is to be added
-													ratings to be implemented later
-													{% endcomment %}
-													<span> <i class="feather-eye"></i> 4000 </span>
+													<span><i class="feather-eye"></i> 4000 </span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<h6><a href="service-details.html">2017 Gulfsteam Ameri-lite</a></h6>                                                                     
 											<div class="blog-location-details">
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> {{product.created_date}}
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 06 Oct, 2022
 												</div>
 											</div>
 											<div class="amount-details">
 												<div class="amount">
-													<span class="validrate">AED {{product.price}}</span>
+													<span class="validrate">$350</span>
+													<span>$450</span>
 												</div>
 												<div class="ratings">
 													<span>4.7</span> (50)
-												</div>														
-											</div>	
-										</div>	
-									</div>			 
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
 								</div> 
 							</div>
 						</div>
-
-						{% endfor %}
-					</div>						
-				</div>						
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-2.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">Fashion luxury Men date</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 08 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$250</span>
+													<span>$350</span>
+												</div>
+												<div class="ratings">
+													<span>4.6</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>            
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-3.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-04.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">Apple Iphone 6 16GB 4G LTE</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 09 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$550</span>
+													<span>$400</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>            
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-4.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="author">
+												</div>
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Gadgets</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">Customized Apple Imac</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 10 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$450</span>
+													<span>$300</span>
+												</div>
+												<div class="ratings">
+													<span>4.5</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>    
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-5.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-06.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Construction</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">Villa 457 sq.m. In Benidorm Fully</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 11 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$650</span>
+													<span>$600</span>
+												</div>
+												<div class="ratings">
+													<span>4.5</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>    
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-6.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Jobs</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">CDL A OTR Company Driver Job-N</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 12 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$550</span>
+													<span>$450</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>            
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-7.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-06.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">HP Gaming 15.6 Touchscreen 12G</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 02 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$450</span>
+													<span>$350</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>                       
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{% static 'assets/img/featured/feature-8.jpg' %}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>                                        
+										</div>    
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-07.jpg' %}" alt="author">
+												</div>                                                        
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span><i class="fa-regular fa-circle-stop"></i> Vehicle</span></a>
+												</div>                                                                      
+												<div class="blog-author text-end"> 
+													<span><i class="feather-eye"></i> 4000 </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">2012 Audi R8 GT Spider Convertible</a></h6>                                                                     
+											<div class="blog-location-details">
+												<div class="location-info">
+													<i class="feather-map-pin"></i> Los Angeles
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i> 02 Oct, 2022
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">$450</span>
+													<span>$350</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>                                                        
+											</div>    
+										</div>    
+									</div>             
+								</div> 
+							</div>            
+						</div>
+					</div>                        
+				</div>                        
 			</div>
-			{% endfor %}
-		</section>	
-		<!-- /Popular Locations Section -->
-		
-		<!-- Latest Ads Section -->
+		</section>
 		
 		<!-- /Latest Ads Section -->
 		
 		<!-- CTA Section -->
 		<section class="cta-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <div class="cta-content">
-                    <h3>Earn Cash by <span>Selling</span> <br>
-                    or Find Anything you desire</h3>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humo or randomised words which don't look even slightlys</p>
-                    <div class="cta-btn">
-                        <a href="add-listing.html" class="btn-primary postad-btn">Post Your Ads</a>
-                        <a href="listing-grid-sidebar.html" class="browse-btn">Browse Ads</a>							  
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="cta-img">
-                    <img src="{% static 'assets/img/cta-img.png' %}" class="img-fluid" alt="CTA">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-	
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-7">
+						<div class="cta-content">
+							<h3>Earn Cash by <span>Selling</span> <br>
+								or Find Anything you desire                             
+							</h3>
+							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humor or randomised words which don't look even slightly.</p>
+							<div class="cta-btn">
+								<a href="add-listing.html" class="btn-primary postad-btn">Post Your Ads</a>
+								<a href="listing-grid-sidebar.html" class="browse-btn">Browse Ads</a>                              
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5">
+						<div class="cta-img">
+							<img src="{% static 'assets/img/cta-img.png' %}" class="img-fluid" alt="CTA">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
 		<!-- /CTA Section -->
 		
 		<!-- Client Testimonilas Section -->
 		<section class="testimonials-section">    
 			<div class="row">
-				<div class="col-lg-5">			
+				<div class="col-lg-5">            
 					<div class="testimonial-heading d-flex">
 						<h4> Client <br> Testimonials</h4>
 						<img src="{% static 'assets/img/quotes.png' %}" alt="quotes">
 					</div>
 				</div>
-				<div class="col-lg-7">			
+				<div class="col-lg-7">            
 					<div class="rightimg"></div>
 				</div>
 			</div>
@@ -567,13 +988,13 @@
 							</div>
 							<div class="testimonial-info">
 								<div class="testimonialslider-heading d-flex">
-									<div class="testi-img">										    
+									<div class="testi-img">                                           
 										<img src="{% static 'assets/img/testimonial-2.jpg' %}" class="img-fluid" alt="testi-img">
 									</div>
 									<div class="testi-author">
 										<h6>Esther Hills</h6>
 										<p>Lead Intranet Technician</p>
-									</div>											
+									</div>                                            
 								</div>
 								<div class="testimonialslider-content">
 									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
@@ -587,7 +1008,7 @@
 									<div class="testi-author">
 										<h6>Dev</h6>
 										<p>Lead Intranet Technician</p>
-									</div>											
+									</div>                                            
 								</div>
 								<div class="testimonialslider-content">
 									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
@@ -596,12 +1017,12 @@
 							<div class="testimonial-info">
 								<div class="testimonialslider-heading d-flex">
 									<div class="testi-img">
-										<img src="{% static 'assets/img/testimonial-2.jpg' %}" class="img-fluid" alt="testi-img">
+										<img src="{% static 'assets/img/testimonial-2.jpg' %}"  class="img-fluid" alt="testi-img">
 									</div>
 									<div class="testi-author">
 										<h6>Esther Hills</h6>
 										<p>Lead Intranet Technician</p>
-									</div>											
+									</div>                                            
 								</div>
 								<div class="testimonialslider-content">
 									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
@@ -610,14 +1031,15 @@
 						</div>
 					</div>
 				</div>
-			</div>		   
-		</section>	
+			</div>           
+		</section>
+		
 		<!-- /Client Testimonilas Section -->
 		
 		<!-- Partners Section -->
 		<div class="partners-section">
 			<div class="container">
-				<p class="partners-heading">Over 5,26,000+ Sponsers being contact with us</p>	
+				<p class="partners-heading">Over 5,26,000+ Sponsors being in contact with us</p>    
 				<ul class="owl-carousel partnerslist d-flex">
 					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-1.svg' %}" alt="partners"></a></li>
 					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-2.svg' %}" alt="partners"></a></li>
@@ -638,219 +1060,218 @@
 		<!-- /Partners  Section -->
 		
 		<!-- Pricing Plan Section -->
+		<section class="pricingplan-section">
+			<div class="section-heading">
+				<div class="container">                
+					<div class="row text-center">
+						<h2>Our Pricing <span>Pla</span>n</h2>
+						<p>Checkout these latest cool ads from our members</p>
+					</div>                                     
+				</div>     
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 d-flex col-md-6">
+						<div class="price-card flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Intro</h6>
+								</div>
+								<h4>$10 <span>/ month</span></h4>                                
+							</div>    
+							<div class="price-body">
+								<p>For most business that want to optimize web queries</p>
+								<ul>
+									<li class="active">Basic listing submission</li>
+									<li class="active">One Listing</li>
+									<li class="active">30 days Availability</li>
+									<li class="inactive">Limited Support</li>
+									<li class="inactive">Edit your listing</li>
+								</ul>
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">View details</a>
+								</div>                            
+							</div>                            
+						</div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+						<div class="price-card flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Basic</h6>
+								</div>
+								<h4>$25 <span>/ month</span></h4>                                
+							</div>    
+							<div class="price-body">
+								<p>For most business that want to optimize web queries</p>
+								<ul>
+									<li class="active">Basic listing submission</li>
+									<li class="active">One Listing</li>
+									<li class="active">30 days Availability</li>
+									<li class="inactive">Limited Support</li>
+									<li class="inactive">Edit your listing</li>
+								</ul>
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">View details</a>
+								</div>                            
+							</div>                            
+						</div>    
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+						<div class="price-card flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Popular</h6>
+								</div>
+								<h4>$50 <span>/ month</span></h4>                                    
+							</div>    
+							<div class="price-body">
+								<p>For most business that want to optimize web queries</p>
+								<ul>
+									<li class="active">Basic listing submission</li>
+									<li class="active">One Listing</li>
+									<li class="active">30 days Availability</li>
+									<li class="inactive">Limited Support</li>
+									<li class="inactive">Edit your listing</li>
+								</ul>
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">View details</a>
+								</div>                            
+							</div>                            
+						</div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+						<div class="price-card flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Enterprise</h6>
+								</div>
+								<h4>$100 <span>/ month</span></h4>                                    
+							</div>    
+							<div class="price-body">
+								<p>For most business that want to optimize web queries</p>
+								<ul>
+									<li class="active">Basic listing submission</li>
+									<li class="active">One Listing</li>
+									<li class="active">30 days Availability</li>
+									<li class="inactive">Limited Support</li>
+									<li class="inactive">Edit your listing</li>
+								</ul>
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">View details</a>
+								</div>                            
+							</div>                            
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 		
-<section class="pricingplan-section">
-    <div class="section-heading">
-        <div class="container">				
-            <div class="row text-center">
-                <h2>Our Pricing <span>Pla</span>n</h2>
-                <p>checkout these latest cool ads from our members</p>
-            </div>									 
-        </div>	 
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 d-flex col-md-6">
-                <div class="price-card flex-fill">
-                    <div class="price-head">
-                        <div class="price-level">
-                            <h6>Intro</h6>
-                        </div>
-                        <h4>$10 <span>/ month</span></h4>								
-                    </div>	
-                    <div class="price-body">
-                        <p>For most business that want to optimize web queries</p>
-                        <ul>
-                            <li class="active">Basic listing submission</li>
-                            <li class="active">One Listing</li>
-                            <li class="active">30 days Availability</li>
-                            <li class="inactive">Limited Support</li>
-                            <li class="inactive">Edit your listing</li>
-                        </ul>
-                        <div>
-                            <a href="login.html" class="btn viewdetails-btn">View details</a>
-                        </div>							
-                    </div>							
-                </div>
-            </div>
-            <div class="col-lg-3 d-flex col-md-6">
-                <div class="price-card flex-fill">
-                    <div class="price-head">
-                        <div class="price-level">
-                            <h6>Basic</h6>
-                        </div>
-                        <h4>$25 <span>/ month</span></h4>								
-                    </div>	
-                    <div class="price-body">
-                        <p>For most business that want to optimize web queries</p>
-                        <ul>
-                            <li class="active">Basic listing submission</li>
-                            <li class="active">One Listing</li>
-                            <li class="active">30 days Availability</li>
-                            <li class="inactive">Limited Support</li>
-                            <li class="inactive">Edit your listing</li>
-                        </ul>
-                        <div>
-                            <a href="login.html" class="btn viewdetails-btn">View details</a>
-                        </div>							
-                    </div>							
-                </div>	
-            </div>
-            <div class="col-lg-3 d-flex col-md-6">
-                <div class="price-card flex-fill">
-                    <div class="price-head">
-                        <div class="price-level">
-                            <h6>Popular</h6>
-                        </div>
-                        <h4>$50 <span>/ month</span></h4>									
-                    </div>	
-                    <div class="price-body">
-                        <p>For most business that want to optimize web queries</p>
-                        <ul>
-                            <li class="active">Basic listing submission</li>
-                            <li class="active">One Listing</li>
-                            <li class="active">30 days Availability</li>
-                            <li class="inactive">Limited Support</li>
-                            <li class="inactive">Edit your listing</li>
-                        </ul>
-                        <div>
-                            <a href="login.html" class="btn viewdetails-btn">View details</a>
-                        </div>							
-                    </div>							
-                </div>
-            </div>
-            <div class="col-lg-3 d-flex col-md-6">
-                <div class="price-card flex-fill">
-                    <div class="price-head">
-                        <div class="price-level">
-                            <h6>Enterprise</h6>
-                        </div>
-                        <h4>$100 <span>/ month</span></h4>									
-                    </div>	
-                    <div class="price-body">
-                        <p>For most business that want to optimize web queries</p>
-                        <ul>
-                            <li class="active">Basic listing submission</li>
-                            <li class="active">One Listing</li>
-                            <li class="active">30 days Availability</li>
-                            <li class="inactive">Limited Support</li>
-                            <li class="inactive">Edit your listing</li>
-                        </ul>
-                        <div>
-                            <a href="login.html" class="btn viewdetails-btn">View details</a>
-                        </div>							
-                    </div>							
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 		<!-- /Pricing Plan Section -->
 		
-		<!-- Blog Section -->
-<section class="blog-section">
-    <div class="section-heading">
-        <div class="container">				
-            <div class="row align-items-center">
-                <div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
-                    <h2>Lat<span class="title-right">est</span> Blog</h2>
-                    <p>people are giving these goods for free so check them out</p>
-                </div>
-                <div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-                    <a href="blog-grid.html" class="btn  btn-view">View All</a>
-                </div>		
-            </div>	
-        </div>	
-    </div>
-    <div class="container">	 									
-        <div class="row">
-            <div class="col-lg-4 col-md-4 d-flex">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-1.jpg' %}" alt="Post Image"></a>
-                    </div>
-                    <div class="blog-content">
-                        <p class="blog-category">
-                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
-                        </p>
-                        <ul class="entry-meta meta-item">
-                            <li>
-                                <div class="post-author">
-                                    <div class="post-author-img">
-                                        <img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="Post Author">
-                                    </div>
-                                    <a href="javascript:void(0);" class="mb-0"> <span> Amara </span></a>
-                                </div>
-                            </li>
-                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 4, 2023</li>
-                        </ul>
-                        <h3 class="blog-title"><a href="blog-details.html">The Best Spa Saloons for your relaxations?</a></h3>
-                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
-                        <p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 d-flex">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-2.jpg' %}" alt="Post Image"></a>
-                    </div>
-                    <div class="blog-content">
-                        <p class="blog-category">
-                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
-                        </p>
-                        <ul class="entry-meta meta-item">
-                            <li>
-                                <div class="post-author">
-                                    <div class="post-author-img">
-                                        <img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="Post Author">
-                                    </div>
-                                    <a href="javascript:void(0);" class="mb-0"><span> Darryl </span></a>
-                                </div>
-                            </li>
-                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 6, 2023</li>
-                        </ul>
-                        <h3 class="blog-title"><a href="blog-details.html">Three Powerful Tricks For Online Advertising</a></h3>
-                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
-                        <p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 d-flex">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-3.jpg' %}" alt="Post Image"></a>
-                    </div>
-                    <div class="blog-content">
-                        <p class="blog-category">
-                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
-                        </p>
-                        <ul class="entry-meta meta-item">
-                            <li>
-                                <div class="post-author">
-                                    <div class="post-author-img">
-                                        <img src="{% static 'assets/img/profiles/avatar-13.jpg' %}" alt="Post Author">
-                                    </div>
-                                    <a href="javascript:void(0);" class="mb-0"> <span> Mary </span></a>
-                                </div>
-                            </li>
-                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 10, 2023</li>
-                        </ul>
-                        <h3 class="blog-title"><a href="blog-details.html">Competitive Analysis for Enterprerneurs in 20222</a></h3>
-                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
-                        <p class="viewlink"><a href="blog-details.html">View Details  <i class="feather-arrow-right"></i></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>									
-    </div>	 
-</section>
+		<!-- Blog  Section -->
+		<section class="blog-section">
+			<div class="section-heading">
+				<div class="container">                
+					<div class="row align-items-center">
+						<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+							<h2>Lat<span class="title-right">est</span> Blog</h2>
+							<p>People are giving these goods for free so check them out</p>
+						</div>
+						<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+							<a href="blog-grid.html" class="btn btn-view">View All</a>
+						</div>        
+					</div>    
+				</div>    
+			</div>
+			<div class="container">                                     
+				<div class="row">
+					<div class="col-lg-4 col-md-4 d-flex">
+						<div class="blog grid-blog">
+							<div class="blog-image">
+								<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-1.jpg' %}" alt="Post Image"></a>
+							</div>
+							<div class="blog-content">
+								<p class="blog-category">
+									<a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+								</p>
+								<ul class="entry-meta meta-item">
+									<li>
+										<div class="post-author">
+											<div class="post-author-img">
+												<img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="Post Author">
+											</div>
+											<a href="javascript:void(0);" class="mb-0"><span> Amara </span></a>
+										</div>
+									</li>
+									<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 4, 2023</li>
+								</ul>
+								<h3 class="blog-title"><a href="blog-details.html">The Best Spa Salons for your relaxation?</a></h3>
+								<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+								<p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 d-flex">
+						<div class="blog grid-blog">
+							<div class="blog-image">
+								<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-2.jpg' %}" alt="Post Image"></a>
+							</div>
+							<div class="blog-content">
+								<p class="blog-category">
+									<a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+								</p>
+								<ul class="entry-meta meta-item">
+									<li>
+										<div class="post-author">
+											<div class="post-author-img">
+												<img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="Post Author">
+											</div>
+											<a href="javascript:void(0);" class="mb-0"><span> Darryl </span></a>
+										</div>
+									</li>
+									<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 6, 2023</li>
+								</ul>
+								<h3 class="blog-title"><a href="blog-details.html">Three Powerful Tricks For Online Advertising</a></h3>
+								<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+								<p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 d-flex">
+						<div class="blog grid-blog">
+							<div class="blog-image">
+								<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-3.jpg' %}" alt="Post Image"></a>
+							</div>
+							<div class="blog-content">
+								<p class="blog-category">
+									<a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+								</p>
+								<ul class="entry-meta meta-item">
+									<li>
+										<div class="post-author">
+											<div class="post-author-img">
+												<img src="{% static 'assets/img/profiles/avatar-13.jpg' %}" alt="Post Author">
+											</div>
+											<a href="javascript:void(0);" class="mb-0"><span> Mary </span></a>
+										</div>
+									</li>
+									<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 10, 2023</li>
+								</ul>
+								<h3 class="blog-title"><a href="blog-details.html">Competitive Analysis for Entrepreneurs in 2022</a></h3>
+								<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+								<p class="viewlink"><a href="blog-details.html">View Details  <i class="feather-arrow-right"></i></a></p>
+							</div>
+						</div>
+					</div>
+				</div>                                    
+			</div>     
+		</section>
+		
 		<!-- /Blog  Section -->
 		
-		<!-- Footer include here-->
-
+		<!-- Footer -->
 		{% include 'includes/footer.html' %}
-		
 		<!-- /Footer -->
 		
 	</div>
@@ -862,6 +1283,5 @@
 		</svg>
 	</div>
 	<!-- scrollToTop end -->
-	
 	
 	{% endblock %}
