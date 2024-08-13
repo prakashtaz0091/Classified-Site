@@ -29,3 +29,29 @@ def home(request):
             #later redirect to some 404 page with custom error message
             return  "error"
 
+
+
+
+
+def privacy(request):
+    # return render(request,'company/')
+    pass
+
+
+
+def freq_question(requset):
+    return render(requset,'company/faq.html')
+
+
+def terms(request):
+    return render(request,'company/terms-condition.html')
+
+
+
+def contact(request):
+    return render(request,'company/contact.html')
+
+
+
+def how_it_works(request):
+    return render(request,'company/howitworks.html')

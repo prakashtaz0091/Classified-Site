@@ -26,7 +26,7 @@
                     <!-- Footer Widget -->
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="#"><img src="{% static 'assets/img/footerlogo.svg' %}" alt="logo"></a>
+                            <a href="#"><img src="{% static 'assets/img/icons/logo.png' %}" alt="logo"></a>
                         </div>
                         <div class="footer-content">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt et magna aliqua.</p>
@@ -133,7 +133,7 @@
                             </div>
                             <div class="footer-address">
                                 <img src="{% static 'assets/img/sms-tracking.svg' %}" alt="Call us">
-                                <p><span>Send Message</span> <br> listee@example.com	 </p>
+                                <p><span>Send Message</span> <br> adjeem@example.com	 </p>
                             </div>							
                         </div>																
                     </div>
@@ -190,7 +190,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="copyright-text">
-                            <p class="mb-0">All Copyrights Reserved &copy; 2023 - Listee.</p>
+                            <p class="mb-0">All Copyrights Reserved &copy; 2023 - ADJEEM.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -198,13 +198,16 @@
                         <div class="copyright-menu">
                             <ul class="policy-menu">
                                 <li>
-                                    <a href="privacy-policy.html">Privacy </a>
+                                    <a href="{% url 'contact' %}">Contact </a>
                                 </li>
                                 <li>
-                                    <a href="faq.html">Faq </a>
+                                    <a href="{% url 'freq_question' %}">Faq </a>
                                 </li>
                                 <li>
-                                    <a href="terms-condition.html">Terms</a>
+                                    <a href="{% url 'terms' %}">Terms</a>
+                                </li>										
+                                <li>
+                                    <a href="{% url 'how_it_works' %}">How It Works</a>
                                 </li>										
                             </ul>
                         </div>

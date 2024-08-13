@@ -35,7 +35,8 @@
 												<select class="form-control select category-select">													
 													<option value="">Choose Category</option>
 													{% for category in categories %}
-													<option value="{{category.id}}">{{category.category_name}}</option>
+													<option value="{{category.id}}">{{ category.category_name|slice:":16" }}
+													</option>
 													{% endfor %}
 												</select>
 											</div>
@@ -87,7 +88,8 @@
 					{% for category in categories %}
 					<div class="col-lg-2 col-md-3 col-sm-6">
 						<a href="{% url 'listing' category.slug %}" class="category-links">
-							<h5>{{category.category_name}}</h5>
+							<h5>{{ category.category_name|slice:":16" }}
+							</h5>
 							<span>{{category.product_category.count}} Ads</span>
 							<img src="{{category.category_image.url}}" alt="icons">
 						</a> 
@@ -432,7 +434,7 @@
 								<div class="blog-widget">
 									<div class="blog-img">
 										<a href="{% url 'service_detail' product.slug %}">
-											<img src="{{product.images.url}}" class="img-fluid" alt="blog-img">
+											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
 											<span class="featured-text">Featured</span>
