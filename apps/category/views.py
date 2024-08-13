@@ -38,7 +38,35 @@ def listing_view(request,slug):
         'count': paginator.count,
         'category': category,  
         'page_obj': page_obj, 
+        'count':count
     }
    
     return render(request,'listing/listing-sidebar.html',context)
 
+
+
+
+
+def search(request):
+    query = request.GET.get('searchQuery', '')
+    category = request.GET.get('categorySelect', '')
+    location = request.GET.get('locationInput', '')
+    region = request.GET.get('regionSelect', '')
+    min_price = request.GET.get('minPrice', None)
+    max_price = request.GET.get('maxPrice', None)
+ 
+    products = Product.objects.all()
+
+    if query:
+        products = products.filter(product_name__icontains=query) 
+    if category:
+        products = products.filter(category__icontains=category)
+    if min_price:
+        products = products.filter(price__gte=min_price)
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    # Prepare data to be sent as JSON
+    product_list = list(products.values('id', 'product_name', 'price', 'description', 'cover_image'))
+    
+    return JsonResponse(product_list, safe=False)
