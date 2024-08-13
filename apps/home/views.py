@@ -55,3 +55,32 @@ def contact(request):
 
 def how_it_works(request):
     return render(request,'company/howitworks.html')
+
+
+
+def dashboard(request):
+    return render(request,'others/dashboard.html')
+
+
+
+
+def profile(request):
+    return render(request,'others/profile.html')
+
+
+
+def my_listing(request):
+    return render(request,'others/my-listing.html')
+
+
+
+def book_marks(request):
+    return render(request,'others/booksmarks.html')
+
+
+def messages(request):
+    return render(request,'others/messages.html')
+
+
+def reviews(request):
+    return render( request,'others/reviews.html')
