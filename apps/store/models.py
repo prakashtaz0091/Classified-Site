@@ -24,3 +24,13 @@ class ProductImages(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     image=models.FileField(upload_to="photos/products")
 
+
+class BookMark(models.Model):
+   
+
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='bookmark')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='bookmark')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.email} - {self.user.full_name} on {self.product.product_name}"
