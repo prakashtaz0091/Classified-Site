@@ -1,5 +1,5 @@
 from django import forms
-from .models import Account
+from .models import Account,UserProfile
 
 
 class RegistrationForm(forms.ModelForm):
@@ -13,6 +13,10 @@ class RegistrationForm(forms.ModelForm):
 
     
 
-
+class UserProfileForm(forms.ModelForm):
+    
+    class Meta:
+        model=UserProfile
+        fields='__all__'
 
    

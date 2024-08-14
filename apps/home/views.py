@@ -68,22 +68,23 @@ def dashboard(request):
 
 
 
-def profile(request):
-    return render(request,'others/profile.html')
+
 
 
 
 def my_listing(request):
-    book_marks=BookMark.objects.filter(user=request.user)
-    context={
-        'book_marks':book_marks
-    }
-    return render(request,'others/my-listing.html',context)
+    
+    return render(request,'others/my-listing.html')
 
 
 
 def book_marks(request):
-    return render(request,'others/bookmarks.html')
+    book_marks=BookMark.objects.filter(user=request.user)
+   
+    context={
+        'book_marks':book_marks
+    }
+    return render(request,'others/bookmarks.html',context)
 
 
 def messages(request):

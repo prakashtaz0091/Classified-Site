@@ -1,31 +1,31 @@
 <div class="">                    
     <ul class="dashborad-menus">
-        <li class="active">
+        <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
             <a href="{% url 'dashboard' %}">
                 <i class="feather-grid"></i> <span>Dashboard</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/profile/' %}active{% endif %}">
             <a href="{% url 'profile' %}">
                 <i class="fa-solid fa-user"></i> <span>Profile</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/my_listing/' %}active{% endif %}">
             <a href="{% url 'my_listing' %}">
                 <i class="feather-list"></i> <span>My Listing</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/book_marks/' %}active{% endif %}">
             <a href="{% url 'book_marks' %}">
                 <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/messages/' %}active{% endif %}">
             <a href="{% url 'messages' %}">
                 <i class="fa-solid fa-comment-dots"></i> <span>Messages</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/reviews/' %}active{% endif %}">
             <a href="{% url 'reviews' %}">
                 <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
             </a>

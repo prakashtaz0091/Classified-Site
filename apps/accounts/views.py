@@ -1,6 +1,6 @@
-from django.shortcuts import render,HttpResponse,redirect
-from .forms import RegistrationForm
-from .models import Account
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
+from .forms import RegistrationForm,UserProfileForm
+from .models import Account,UserProfile
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import  urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -9,6 +9,8 @@ from django.contrib import messages,auth
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+
 
 
 
@@ -39,6 +41,13 @@ def Register(request):
             password = form.cleaned_data['password']
             user = Account.objects.create_user(full_name=full_name, email=email, password=password)
             user.save()
+            
+            profile=UserProfile()
+            profile.user = user
+            profile.full_name=form.cleaned_data['full_name']
+            profile.email_address=form.cleaned_data['email']
+            profile.profile_photo = 'userprofile/profilepic.webp'
+            profile.save()
 
             # Send activation email
             current_site = get_current_site(request)
@@ -156,6 +165,71 @@ def resetPassword(request):
             return redirect('resetPassword')
     else:
         return render(request, 'accounts/reset.html')
+
+
+
+
+def update_profile(request):
+    if request.method=='GET':
+        profile=UserProfile.objects.get(user=request.user)  
+        print(profile.full_name,'profle')
+        context={
+            'profile':profile
+        }
+        return render(request,'others/profile.html',context)
+   
+    else:
+        profile = get_object_or_404(UserProfile, user=request.user)
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        
+        
+        else:
+            context={
+                'profile':profile
+            }
+            return render(request,'others/profile.html',context)
+        
+        
+
+
+
+def change_password(request):
+    if request.method=='POST':
+        current_password=request.POST['current_password']
+        new_password=request.POST['new_password']
+        confirm_password=request.POST['confrim_password']
+        
+        user = request.user
+        
+        
+        if not user.check_password(current_password):
+            messages.error(request, 'The current password is incorrect.')
+            return redirect('profile')
+        
+        
+        if new_password != confirm_password:
+            messages.error(request, 'The new password and confirm password do not match.')
+            return redirect('profile')
+        
+        
+        user.set_password(new_password)
+        user.save()
+
+        # Keep the user logged in after password change
+        update_session_auth_hash(request, user)
+        
+        
+        messages.success(request, 'Your password has been successfully changed.')
+        return redirect('profile')
+    
+    
+    else:
+        return render(request,'others/profile.html')
+
+
 
 
 

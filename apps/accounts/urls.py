@@ -16,4 +16,6 @@ urlpatterns = [
 
     path('login/google/',ssoview.google_login,name="google_login"),
     path('login/facebook/',ssoview.facebook_login,name="facebook_login"),
+    path('profile/',views.update_profile,name='profile'),
+    path('change_password/',views.change_password,name='change_password'),
 ]
