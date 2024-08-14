@@ -63,7 +63,13 @@ def how_it_works(request):
 
 
 def dashboard(request):
-    return render(request,'others/dashboard.html')
+    book_marks=BookMark.objects.filter(user=request.user)
+    count=book_marks.count()
+    context={
+        'book_marks':book_marks,
+        'count':count
+    }
+    return render(request,'others/dashboard.html',context)
 
 
 
@@ -80,6 +86,7 @@ def my_listing(request):
 
 def book_marks(request):
     book_marks=BookMark.objects.filter(user=request.user)
+    print(book_marks,'bookmarks')
    
     context={
         'book_marks':book_marks
