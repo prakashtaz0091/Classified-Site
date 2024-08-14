@@ -57,7 +57,7 @@
 					</a>
 				</div>	
 				<div class="showphotos">
-					<a href="{{image.image.url}}" data-fancybox="gallery1">... Show Photos</a>
+					<a href="{{image.image.url}}" data-fancybox="gallery1"> Show Photos</a>
 				</div>								
 				{% endfor %}
 			</div>			
@@ -72,7 +72,6 @@
 				<div class="about-details">
 					<div class="about-headings">
 						<div class="author-img">
-							<img src="{{product.cover_image.url}}" alt="authorimg">
 						</div>
 						<div class="authordetails">
 							<h5>{{product.product_name}}</h5>
@@ -80,7 +79,7 @@
 						</div>
 					</div>
 					<div class="rate-details">
-						<h2>AED {{product.price}} </h2>
+						<h3>Price: AED {{product.price}} </h3>
 						{% comment %}
 						type like fixed and negotiable will be fixed later
 						{% endcomment %}
@@ -95,11 +94,6 @@
 								<li><a href="javascript:void(0);"><i class="feather-flag"></i> report</a></li>
 								<li><a href="javascript:void(0);"><i class="feather-heart"></i> Add To Favourites</a></li>
 							</ul>
-						</div>
-						<div class="col-lg-3">
-							<div class="callnow">
-								<a href="contact.html"> <i class="feather-phone-call"></i>  Call Now</a>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -124,12 +118,9 @@
 							</div>
 							<div class="card-body">
 								<p>
-									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
-<p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-
+									{{product.description}}
 								</p>
+
 								
 							</div>
 						</div>					
@@ -247,19 +238,10 @@
 					</div>
 					<div class="col-lg-3 theiaStickySidebar">
 						<div class="rightsidebar">
-							<div class="card">
-								<h4><img src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Details</h4>
+							<div   class="card">
+								<img src={% static 'images/profile.png' %} style="height:100px;width:100px;margin-left:auto;margin-right:auto;" />
+								<p style="margin-left:auto;margin-right:auto;">{{request.user.full_name}}</p>
 								<ul>
-									<li>Contract <span>For Rent</span></li>
-									<li>Location <span>New York, USA</span></li>
-									<li>Year Built <span>1988</span></li>
-									<li>Rooms <span>3</span></li>
-									<li>Beds <span>4</span></li>
-									<li>Baths<span>8</span></li>
-									<li>Gadgets <span>6</span></li>
-									<li>Home Area <span>30sqft</span></li>
-									<li>Lot Dimensions <span>30*30*20 ft</span></li>
-									<li class="p-0">Lot Area <span>50 ft</span></li>
 								</ul>
 							</div>
 							<div class="card">
