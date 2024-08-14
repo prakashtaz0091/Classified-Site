@@ -5,6 +5,8 @@
                 <h5 class="modal-title" id="contactModalLabel">Leave a message and someone will be in touch</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <p style="text-align:center;font-weight:500;font-size:1.5rem">This will send an SMS and an Email to the Seller</p>
             <div class="modal-body">
                 <form method="post" action="">
                     {% csrf_token %}
@@ -35,7 +37,7 @@
                     <div class="mb-3">
                         <textarea class="form-control" style="font-weight:600;" id="message" name="message" rows="3">I'm interested in your villa for rent advert on https://adjeem.com/abu-dhabi/properties/property-for-rent/villa-for-rent-abu-dhabi-uae</textarea>
                     </div>
-                    <button type="submit" class="btn btn-danger">Send Message</button>
+                    <button type="submit" style="background-color:#8b0000"class="btn btn-danger">Send Message</button>
                 </form>
             </div>
         </div>
