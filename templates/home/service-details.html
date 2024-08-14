@@ -90,7 +90,8 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<ul>
-								<li><a href="javascript:void(0);"><i class="feather-share-2"></i> share</a></li>
+						<li><a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+
 								<li><a href="javascript:void(0);"><i class="feather-flag"></i> report</a></li>
 								<li><a href="javascript:void(0);"><i class="feather-heart"></i> Add To Favourites</a></li>
 							</ul>
@@ -106,7 +107,7 @@
 		<div class="details-main-wrapper listing-section">	
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-9">                             					
+					<div class="col-lg-8">                             					
 						<div class="card">
 							<div class="card-header">
 								<span class="bar-icon">
@@ -236,11 +237,31 @@
 						<!--/Review Section-->	
 								
 					</div>
-					<div class="col-lg-3 theiaStickySidebar">
+					 <style>
+        .btn-custom {
+            border: 1px solid #8b0000;
+            background-color: white;
+            color: #8b0000;
+        }
+        .btn-custom:hover {
+            background-color: #8b0000;
+            color: white;
+        }
+    </style>
+					<div class="col-lg-4 theiaStickySidebar">
 						<div class="rightsidebar">
 							<div   class="card">
-								<img src={% static 'images/profile.png' %} style="height:100px;width:100px;margin-left:auto;margin-right:auto;" />
-								<p style="margin-left:auto;margin-right:auto;">{{request.user.full_name}}</p>
+								<a style="margin-left:auto;margin-right:auto;"><img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
+								<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="#">{{request.user.full_name}}</a>
+
+                <div style="margin-top:10px;padding:0;text-align:center;" class="alert alert-light" role="alert">
+                    <a href="#"  style="margin-top:20px;"class="alert-link">21 Ads Available</a>
+                </div>
+                <button class="btn btn-custom mb-3">
+                    <i class="fa fa-phone"></i> Show Phone Number
+                </button>
+                <button style="background-color:#8b0000" class="btn btn-danger btn-block">SEND MESSAGE</button>
+
 								<ul>
 								</ul>
 							</div>
@@ -249,30 +270,16 @@
 								<ul class="statistics-list">
 									<li><div class="statistic-details"><span class="icons"><i class="fa-regular fa-eye"></i></span>
 									   Views </div><span class="text-end"> 453563</span></li>
-									<li><div class="statistic-details"><span class="icons"><i class="feather-star"></i></span>
-									   Ratings </div><span class="text-end"> 153</span></li>
 									<li><div class="statistic-details"><span class="icons"><i class="feather-heart"></i></span>
 										 Favuorites </div><span class="text-end"> 123</span></li>
-									<li class="mb-0"><div class="statistic-details"><span class="icons"><i class="feather-share-2"></i></span>
-										 Shares </div><span class="text-end"> 50</span></li>
 								</ul>
 							</div>
-							<div class="card mb-0">
-								<h4><i class="feather-phone-call"></i> Contact Business</h4>
-									<form class="contactbusinessform">
-										<div class="form-group">
-										   <input type="text" class="form-control" placeholder="Name">
-										</div>
-										<div class="form-group">
-										   <input type="email" class="form-control" placeholder="Email Address">
-										</div>
-										<div class="form-group">
-											<textarea rows="6" class="form-control"  placeholder="Message"></textarea>
-										</div>
-										<div class="submit-section">
-											<button class="btn btn-primary submit-btn" type="submit">Send Message</button>
-										</div>
-									</form>
+								<div class="card">
+										<h5>Safety Tips For Buyer</h5>
+									<span>&#10003;</span>	<span>Meet seller at a public place</span>
+
+    Check the item before you buy
+    Pay only after collecting the item
 							</div>
 						</div>
 					</div>
