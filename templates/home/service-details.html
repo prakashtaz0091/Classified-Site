@@ -38,9 +38,8 @@
 <body>
 
 
-
 	<div class="main-wrapper innerpagebg">
-	    
+
 		<!-- Header -->
 		<header class="header">
           {% include 'includes/header.html' %}
@@ -278,7 +277,9 @@
 							show_phone_number.style.display='block'
 						})
 					</script>
-                <button style="background-color:#8b0000" class="btn btn-danger btn-block">SEND MESSAGE</button>
+
+	{% include 'includes/send_message_modal.html' %}
+                <button style="background-color:#8b0000" data-bs-toggle="modal" data-bs-target="#contactModal" class="btn btn-danger btn-block">SEND MESSAGE</button>
 								<ul>
 								</ul>
 							</div>

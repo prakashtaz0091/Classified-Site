@@ -1,0 +1,79 @@
+<div style="margin-top:6rem;" class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Leave a message and someone will be in touch</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <!-- Name Field -->
+                    <div style="padding-right:10px;padding-left:10px;"class="mb-3 row align-items-center form-group">
+                        <label for="name" style="text-align:center;padding-top:10px;" class="col-sm-2 col-form-label custom-label">Name</label>
+                        <div style="padding:0;" class="col-sm-10">
+                            <input type="text" style="border-radius:0;"  class="form-control custom-input" id="name" name="name" value="{{request.user.full_name}}" required>
+                        </div>
+                    </div>
+                    <!-- Email Field -->
+
+                    <div style="padding-right:10px;padding-left:10px;"class="mb-3 row align-items-center form-group">
+                        <label for="email" style="text-align:center;padding-top:10px;" class="col-sm-2 col-form-label custom-label">Email</label>
+                        <div style="padding:0;"class="col-sm-10">
+                            <input type="email" style="border-radius:0;"class="form-control  custom-input" id="email" name="email" value="{{request.user.email}}" required>
+                        </div>
+                    </div>
+                    <!-- Phone Field -->
+
+                    <div style="padding-right:10px;padding-left:10px;"class="mb-3 row align-items-center form-group">
+                        <label for="phone" style="text-align:center;padding-top:10px;" class="col-sm-2 col-form-label custom-label">Phone</label>
+                        <div style="padding:0;" class="col-sm-10">
+                            <input type="text" style="border-radius:0;" class="form-control custom-input" id="phone" value="{{request.user.phone_number}}" name="phone">
+                        </div>
+                    </div>
+                    <!-- Message Field -->
+                    <div class="mb-3">
+                        <textarea class="form-control" style="font-weight:600;" id="message" name="message" rows="3">I'm interested in your villa for rent advert on https://adjeem.com/abu-dhabi/properties/property-for-rent/villa-for-rent-abu-dhabi-uae</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        display: flex;
+        align-items: stretch; /* Ensures label and input are connected */
+    }
+
+    .custom-label {
+        background-color: #f1f1f1; /* Light gray background for label */
+        color: #000; /* Black text color */
+        padding: 0.375rem 0.75rem; /* Same padding as inputs */
+        border: 1px solid #ced4da; /* Border to match input */
+        font-weight: bold; /* Bold text */
+    }
+
+    .custom-input {
+        background-color: #d6d8db; /* Dark gray background */
+        color: #000; /* Black text color */
+        border: 1px solid #ced4da; /* Border to match label */
+        font-weight: bold; /* Bold text */
+    }
+
+    /* Adjust border-radius to make the label and input look connected */
+    .custom-label:first-child {
+    }
+
+    .custom-input:last-child {
+    }
+
+    /* Remove margin for a connected look */
+    .form-group .col-form-label,
+    .form-group .form-control {
+        margin-bottom: 0;
+    }
+</style>
+
