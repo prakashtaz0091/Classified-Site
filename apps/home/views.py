@@ -74,12 +74,16 @@ def profile(request):
 
 
 def my_listing(request):
-    return render(request,'others/my-listing.html')
+    book_marks=BookMark.objects.filter(user=request.user)
+    context={
+        'book_marks':book_marks
+    }
+    return render(request,'others/my-listing.html',context)
 
 
 
 def book_marks(request):
-    return render(request,'others/booksmarks.html')
+    return render(request,'others/bookmarks.html')
 
 
 def messages(request):
