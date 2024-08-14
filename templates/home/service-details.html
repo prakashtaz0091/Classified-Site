@@ -82,8 +82,9 @@
 						<h3>Price: AED {{product.price}} </h3>
 						{% comment %}
 						type like fixed and negotiable will be fixed later
-						{% endcomment %}
+
 						<p>Fixed</p>
+						{% endcomment %}
 					</div>				  
 				</div>
 				<div class="descriptionlinks">
@@ -206,12 +207,12 @@
 						<!--/Listing Features Section-->
 								
 						<!--Gallery Section-->							   
-						<div style="opacity:0;"class="card gallery-section">
+						<div style="display:none;"class="card gallery-section">
 							<div class="card-header">
 								<img src="{% static 'assets/img/galleryicon.svg' %}" alt="gallery">
 								<h4>Gallery</h4>
 							</div>
-							<div class="card-body">
+							<div style="display:none" class="card-body">
 								<div class="gallery-content">
 									<div class="row">
 										{% for image in product_images %}
@@ -252,16 +253,32 @@
 						<div class="rightsidebar">
 							<div   class="card">
 								<a style="margin-left:auto;margin-right:auto;"><img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
-								<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="#">{{request.user.full_name}}</a>
+								<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="#">{{product.created_by.full_name}}</a>
 
                 <div style="margin-top:10px;padding:0;text-align:center;" class="alert alert-light" role="alert">
                     <a href="#"  style="margin-top:20px;"class="alert-link">21 Ads Available</a>
                 </div>
-                <button class="btn btn-custom mb-3">
+                <button id="show_phone_number" class="btn btn-custom mb-3">
                     <i class="fa fa-phone"></i> Show Phone Number
                 </button>
-                <button style="background-color:#8b0000" class="btn btn-danger btn-block">SEND MESSAGE</button>
+				<button id="phone_number" style="display:none" class="btn btn-custom mb-3">
+					<i class="fa fa-phone"></i>  {{product.created_by.phone_number}}
+                </button>
 
+
+					<script>
+						const phone_number=document.getElementById('phone_number')
+						const show_phone_number=document.getElementById('show_phone_number')
+						show_phone_number.addEventListener('click',()=>{
+							phone_number.style.display='block'
+							show_phone_number.style.display='none'
+						})
+						phone_number.addEventListener('click',()=>{
+							phone_number.style.display='none'
+							show_phone_number.style.display='block'
+						})
+					</script>
+                <button style="background-color:#8b0000" class="btn btn-danger btn-block">SEND MESSAGE</button>
 								<ul>
 								</ul>
 							</div>
