@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from apps.category.models import Category
-from apps.store.models import Product
+from apps.store.models import Product,BookMark
 
 # Create your views here. i am your home
 
@@ -17,9 +17,13 @@ def home(request):
                 products = Product.objects.select_related().filter(category=category, is_available=True).order_by('-created_date')[:5]
                 latest_product = {'products':products,'category':category}
                 latest_products.append(latest_product)
+                
+            bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
+            print(bookmarked_product_ids)
             context = {
                 'latest_products': latest_products,
-                'categories':all_categories
+                'categories':all_categories,
+                'book_mark':bookmarked_product_ids,
             }
            
             return render(request,'home/index.html',context)

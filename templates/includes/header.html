@@ -172,6 +172,8 @@
                     </ul>
                 </li>
                 <li><a href="contact.html">Contact</a></li>
+
+                {% if user.is_authenticated %}
                 <li class="has-submenu">
                     <a href="#">Account <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
@@ -182,6 +184,7 @@
                         															
                     </ul>
                 </li>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <li class="login-link">
                     <a href="{% url 'logout' %}">Log Out</a>
