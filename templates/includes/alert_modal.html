@@ -1,0 +1,76 @@
+<div style="margin-top:6rem;" class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Report this listing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <!-- Name Field -->
+                        <label for="name" style="font-weight:600" >Reason</label>
+                 
+
+                        <div style="padding:0;" class="col-sm-12">
+    <div class="input-group">
+        <select class="form-control custom-input">
+            <option value="Illegal Fradulent">Illegal Fradulent</option>
+            <option value="Another Option">Another Option</option>
+        </select>
+        <div style="background-color:#d6d8db"class="input-group-append">
+            <span style="background-color:#d6d8db" class="input-group-text">
+                <i style="background-color:#d6d8db ;margin-top:10px;"class="fas fa-caret-down"></i>
+            </span>
+        </div>
+    </div>
+</div>
+<style>
+.custom-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px; /* Add space for the dropdown icon */
+}
+
+.input-group-text {
+    border: none;
+}
+</style>
+
+                    <div style="margin-top:25px;" class="mb-3">
+                        <label style="font-weight:600;">Comment</label>
+                        <textarea class="form-control custom-input" style="font-weight:600;background-color:#d6d8db" id="message" name="message" rows="6"></textarea>
+                    </div>
+                    <button type="submit" style="background-color:#8b0000"class="btn btn-danger">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        display: flex;
+        align-items: stretch; /* Ensures label and input are connected */
+    }
+
+ 
+    .custom-input {
+        background-color: #d6d8db; /* Dark gray background */
+        color: #000; /* Black text color */
+        border: 1px solid #ced4da; /* Border to match label */
+        font-weight: bold; /* Bold text */
+    }
+
+    /* Adjust border-radius to make the label and input look connected */
+
+
+    /* Remove margin for a connected look */
+    .form-group .col-form-label,
+    .form-group .form-control {
+        margin-bottom: 0;
+    }
+</style>
+
