@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from apps.category.models import Category
-from apps.store.models import Product,BookMark
+from apps.store.models import Product,BookMark,Location,ContactInformation,ProductImages
 from django.contrib.auth.decorators import login_required
-
 
 
 
@@ -11,33 +10,38 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     if request.method == 'GET':
         try:
+            # Fetch all categories
             all_categories = Category.objects.select_related().all().order_by('-id')
             latest_products = []
+            all_products = Product.objects.select_related().filter(is_available=True).order_by('-created_date')
 
             # Get the latest 5 products for each category
             for category in all_categories:
+                print(category.category_name,'categoryname')
                 products = Product.objects.select_related().filter(category=category, is_available=True).order_by('-created_date')[:5]
-                latest_product = {'products':products,'category':category}
+                print(products,'products')
+                latest_product = {'products': products, 'category': category}
                 latest_products.append(latest_product)
             
+            # Fetch bookmarked product IDs if the user is authenticated
             if request.user.is_authenticated:    
                 bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
             else: 
                 bookmarked_product_ids = []
   
-           
             context = {
                 'latest_products': latest_products,
-                'categories':all_categories,
-                'book_mark':bookmarked_product_ids,
+                'all_products': all_products,
+                'categories': all_categories,
+                'book_mark': bookmarked_product_ids,
             }
            
-            return render(request,'home/index.html',context)
+            return render(request, 'home/index.html', context)
         except Exception as e:
-            print('error')
+            print('Error:')
             print(e)
-            #later redirect to some 404 page with custom error message
-            return  "error"
+            # Redirect to a custom error page or return an error response
+            return render(request, 'home/error.html', {'error': str(e)})
 
 
 
@@ -117,35 +121,78 @@ def reviews(request):
 
 @login_required(login_url='/account/login/') 
 def add_listing(request):
-    if request.method=='POST':
-        if request.method == 'POST':
-            # Manually get data from the POST request
-            product_name = request.POST.get('product_name')
-            description = request.POST.get('description')
-            cover_image = request.FILES.get('cover_image')
-            price = request.POST.get('price')
-            is_available = request.POST.get('is_available') == 'on'
-            category_id = request.POST.get('category')
-            category = Category.objects.get(id=category_id)
-            created_by = request.user
-
+    if request.method == 'POST':
+       
+        product_name = request.POST.get('product_name')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        selected_categories = request.POST.getlist('categories')
+       
+        # Retrieve location data
+        location_name = request.POST.get('location')
+        address = request.POST.get('address')
+        map_address = request.POST.get('map_address')
+        latitude = request.POST.get('latitude')
+        longitude = request.POST.get('longitude')
         
+        # Retrieve contact information
+        email = request.POST.get('email')
+        website = request.POST.get('website')
+        phone = request.POST.get('phone')
 
-        # Create the product instance and save it to the database
-        product = Product(
-            product_name=product_name,
-          
-            description=description,
-            cover_image=cover_image,
-            price=price,
-            is_available=is_available,
-            category=category,
-            created_by=created_by
+        # Save location
+        location = Location.objects.create(
+            Location=location_name,
+            address=address,
+            map_address=map_address,
+            latitude=latitude,
+            longitude=longitude,
         )
-        product.save()
-        
-    else:    
+      
 
+        # Save contact information
+        contact_information = ContactInformation.objects.create(
+            email=email,
+            website=website,
+            phone=phone,
+        )
+      
+        # Save product without categories first
+        product = Product.objects.create(
+            product_name=product_name,
+            description=description,
+            price=price,
+            location=location,
+            contact_information=contact_information,
+            is_available=True,  # Assuming availability is always True for now
+            created_by=request.user
+        )
+      
+
+        # Add selected categories to the product
+        for category_id in selected_categories:
+            category = Category.objects.get(id=category_id)
+            product.category.add(category)
+
+        # Handle file uploads for cover image
+        cover_image = request.FILES.get('cover_image')
+        if cover_image:
+            product.cover_image = cover_image
+            product.save()
+            print('Cover image uploaded')
+
+        # Handle file uploads for gallery images
+        gallery_images = request.FILES.getlist('gallery_images')
+        for image in gallery_images:
+            ProductImages.objects.create(product=product, image=image)
+        print('Gallery images uploaded')
+
+       
+        return redirect('add_listing')
+
+
+   
+    else:    
         category=Category.objects.all()
         context={
             'categories':category

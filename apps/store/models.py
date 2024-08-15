@@ -9,7 +9,7 @@ class ContactInformation(models.Model):
     phone = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):
-        return f"Contact Info: {self.email}, {self.phone}"
+        return f"{self.email}"
     
     
 class Location(models.Model):
@@ -20,7 +20,7 @@ class Location(models.Model):
     longitude = models.DecimalField(max_digits=100, decimal_places=6,blank=True)
 
     def __str__(self):
-        return f"{self.address}, {self.city}, {self.state}"
+        return f"{self.address}"
 
 
 class Product(models.Model):
@@ -30,7 +30,7 @@ class Product(models.Model):
     cover_image=models.FileField(upload_to='photos/product_cover')
     price=models.IntegerField()
     is_available=models.BooleanField(default=True)
-    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name="product_category",blank=True,null=True)
+    category = models.ManyToManyField(Category, related_name='products')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="product_location" ,blank=True,null=True)
     contact_information = models.ForeignKey('ContactInformation', on_delete=models.CASCADE, related_name="product_contact_information",blank=True,null=True)
 
