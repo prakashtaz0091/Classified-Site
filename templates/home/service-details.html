@@ -128,82 +128,95 @@
 						</div>					
 								
 						<!--Listing Features Section-->
-						<div class="card">
-							<div class="card-header">
-								<i class="feather-list"></i>
-								<h4>Listing Features</h4>
-							</div>
-							<div class="card-body">
-								<div class="lisiting-featues">
-									<div class="row">
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-1.svg' %}" alt="Room amenities">
-											</div>
-											<div class="featues-info">
-												<h6>Room <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-2.svg' %}" alt="Bathroom amenities">
-											</div>
-											<div class="featues-info">
-												<h6>Bathroom <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-3.svg' %}" alt="Media Technology">
-											</div>
-											<div class="featues-info">
-												<h6>Media & Technology <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-4.svg' %}" alt="Food Security">
-											</div>
-											<div class="featues-info">
-												<h6>Food & Security <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-5.svg' %}" alt="Media Technology">
-											</div>
-											<div class="featues-info">
-												<h6>Services & Extra <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-6.svg' %}" alt="Outdoor & View amenities">
-											</div>
-											<div class="featues-info">
-												<h6>Outdoor & View <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex access-feature align-items-center col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-7.svg' %}" alt="Accessibility amenities">
-											</div>
-											<div class="featues-info">
-												<h6>Accessibility <br> amenities</h6>
-											</div>
-										</div>
-										<div class="featureslist d-flex align-items-center access-feature col-lg-4 col-md-4">
-											<div class="feature-img">
-												<img src="{% static 'assets/img/featured/Feature-8.svg' %}" alt="Safety & Security amenities">
-											</div>
-											<div class="featues-info">
-												<h6>Safety & Security <br> amenities</h6>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>	
-						</div>									
+<style>
+.listing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+		color:gray;
+}
+
+.feature-item {
+    display: flex;
+		cursor:pointer;
+    justify-content: space-between;
+    padding: 10px 50px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.feature-item:hover {
+    background-color: #f1f1f1;
+    color: #666;
+}
+
+.feature-title {
+    font-weight: bold;
+}
+
+.feature-value {
+    text-align: right;
+    color: #333;
+}
+
+.card-header {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    background-color: #fff;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+</style>
+	<div class="card">
+    <div class="card-header">
+        <i class="feather-list"></i>
+        <h4>Listing Features</h4>
+    </div>
+    <div class="card-body">
+        <ul class="listing-features">
+            <li class="feature-item">
+                <span class="feature-title">Registered</span>
+                <span class="feature-value">Yes</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Condition</span>
+                <span class="feature-value">Used</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Body</span>
+                <span class="feature-value">SEDAN</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Exchange Possible</span>
+                <span class="feature-value">No</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Colour</span>
+                <span class="feature-value">Green</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Fuel</span>
+                <span class="feature-value">Petrol</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Year of Manufacture</span>
+                <span class="feature-value">2016</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Make</span>
+                <span class="feature-value">Lexus</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-title">Mileage (km)</span>
+                <span class="feature-value">100,000 - 109,999</span>
+            </li>
+        </ul>
+    </div>
+</div>
+								
 						<!--/Listing Features Section-->
 								
 						<!--Gallery Section-->							   
