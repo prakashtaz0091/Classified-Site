@@ -17,9 +17,9 @@ def home(request):
 
             # Get the latest 5 products for each category
             for category in all_categories:
-                print(category.category_name,'categoryname')
+                
                 products = Product.objects.select_related().filter(category=category, is_available=True).order_by('-created_date')[:5]
-                print(products,'products')
+             
                 latest_product = {'products': products, 'category': category}
                 latest_products.append(latest_product)
             
@@ -164,7 +164,7 @@ def add_listing(request):
             price=price,
             location=location,
             contact_information=contact_information,
-            is_available=True,  # Assuming availability is always True for now
+            is_available=True,  
             created_by=request.user
         )
       

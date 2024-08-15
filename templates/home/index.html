@@ -457,7 +457,7 @@
 													 <img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
 												</div>														
 												<div class="blog-features">
-												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i> Education</span></a>
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
 													<span>  <i class="feather-eye"></i> 4000  </span>
@@ -465,11 +465,17 @@
 											</div> 
 											<h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
+												{% if product.location %}
 												<div class="location-info">
-												   <i class="feather-map-pin"></i> Los Angeles
+												   <i class="feather-map-pin"></i>{{product.location.address}}
 												</div>
+												{% else %}
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 06 Oct, 2022
+													<i class="feather-map-pin"></i>Los Angeles
+												 </div>
+												{% endif %}
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i>{{product.created_date}}
 												</div>
 											</div>
 											<div class="amount-details">
