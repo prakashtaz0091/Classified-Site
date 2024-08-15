@@ -117,8 +117,37 @@ def reviews(request):
 
 @login_required(login_url='/account/login/') 
 def add_listing(request):
-    category=Category.objects.all()
-    context={
-        'categories':category
-    }
-    return render(request,'listing/add-listing.html',context)
+    if request.method=='POST':
+        if request.method == 'POST':
+            # Manually get data from the POST request
+            product_name = request.POST.get('product_name')
+            description = request.POST.get('description')
+            cover_image = request.FILES.get('cover_image')
+            price = request.POST.get('price')
+            is_available = request.POST.get('is_available') == 'on'
+            category_id = request.POST.get('category')
+            category = Category.objects.get(id=category_id)
+            created_by = request.user
+
+        
+
+        # Create the product instance and save it to the database
+        product = Product(
+            product_name=product_name,
+          
+            description=description,
+            cover_image=cover_image,
+            price=price,
+            is_available=is_available,
+            category=category,
+            created_by=created_by
+        )
+        product.save()
+        
+    else:    
+
+        category=Category.objects.all()
+        context={
+            'categories':category
+        }
+        return render(request,'listing/add-listing.html',context)
