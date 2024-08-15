@@ -12,6 +12,8 @@ class Product(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name="product_category")
     created_date=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
+
+    view_count=models.IntegerField(default=0)
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
 
     # def get_url(self):
