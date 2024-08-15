@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.paginator import Paginator
 from apps.category.models import Category
 from apps.store.models import Product,BookMark
 
@@ -87,16 +87,21 @@ def my_listing(request):
     return render(request,'others/my-listing.html')
 
 
-
 def book_marks(request):
-    book_marks=BookMark.objects.filter(user=request.user)
-    print(book_marks,'bookmarks')
    
-    context={
-        'book_marks':book_marks
+    book_marks = BookMark.objects.filter(user=request.user)
+    
+    # paginations added 
+    paginator = Paginator(book_marks, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'book_marks': page_obj,  
+        'page_obj': page_obj,     
+        'count': paginator.count 
     }
-    return render(request,'others/bookmarks.html',context)
 
+    return render(request, 'others/bookmarks.html', context)
 
 def messages(request):
     return render(request,'others/messages.html')

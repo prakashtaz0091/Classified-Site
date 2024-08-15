@@ -95,36 +95,44 @@
 					<div class="blog-pagination">
 						<nav>
 							<ul class="pagination">
-								<li class="page-item previtem">
-									<a class="page-link" href="#"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
+								<!-- Previous button: disable if on the first page -->
+								<li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+									<a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+										<i class="fas fa-regular fa-arrow-left"></i> Prev
+									</a>
 								</li>
+					
+								<!-- Page numbers -->
 								<li class="justify-content-center pagination-center"> 
 									<div class="pagelink">
 										<ul>
-											<li class="page-item">
-												<a class="page-link" href="#">1</a>
-											</li>
-											<li class="page-item active">
-												<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" href="#">3</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" href="#">...</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" href="#">14</a>
-											</li>
+											{% for num in page_obj.paginator.page_range %}
+												{% if page_obj.number == num %}
+													<!-- Current page -->
+													<li class="page-item active">
+														<a class="page-link" href="#">{{ num }} <span class="visually-hidden">(current)</span></a>
+													</li>
+												{% else %}
+													<!-- Other pages -->
+													<li class="page-item">
+														<a class="page-link" href="?page={{ num }}">{{ num }}</a>
+													</li>
+												{% endif %}
+											{% endfor %}
 										</ul>
 									</div>													
-								</li>													
-								<li class="page-item nextlink">
-									<a class="page-link" href="#">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+								</li>
+					
+								<!-- Next button: disable if on the last page -->
+								<li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+									<a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
+										Next <i class="fas fa-regular fa-arrow-right"></i>
+									</a>
 								</li>
 							</ul>
 						</nav>
 					</div>
+					
 					<!--/Pagination-->	
 											
 				</div>
