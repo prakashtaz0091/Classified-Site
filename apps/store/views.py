@@ -20,9 +20,16 @@ def service_details(request,product_slug):
         if product_instance is None:
             raise Exception("Product with the provided slug is not found")
         product_images=ProductImages.objects.filter(product=product_instance)
+        bookmarked_product_ids=None
+        if request.user.is_authenticated:    
+                bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
+        else: 
+                bookmarked_product_ids = []
+        print(bookmarked_product_ids)
         context={
             'product':product_instance,
-            'product_images':product_images
+            'product_images':product_images,
+                'book_mark':bookmarked_product_ids,
         }
         return render(request,'home/service-details.html',context)    
     except Exception as e:
@@ -47,7 +54,7 @@ def toggle_bookmark(request):
                 bookmark.delete()
                 return JsonResponse({'success': True})
             
-            return JsonResponse({'status': True})
+            return JsonResponse({'success': True})
         
         except json.JSONDecodeError:
             return JsonResponse({'success': False, 'error': 'Invalid JSON'}, status=400)

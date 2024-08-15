@@ -28,8 +28,6 @@ class ProductImages(models.Model):
 
 
 class BookMark(models.Model):
-   
-
     user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='bookmark')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='bookmark')
     created_at = models.DateTimeField(auto_now_add=True)
