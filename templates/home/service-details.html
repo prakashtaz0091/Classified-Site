@@ -86,13 +86,14 @@
 						{% endcomment %}
 					</div>				  
 				</div>
+				{% include 'includes/alert_modal.html' %}
 				<div class="descriptionlinks">
 					<div class="row">
 						<div class="col-lg-9">
 							<ul>
 						<li><a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
 
-								<li><a href="javascript:void(0);"><i class="feather-flag"></i> report</a></li>
+								<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
 								<li><a href="javascript:void(0);"><i class="feather-heart"></i> Add To Favourites</a></li>
 							</ul>
 						</div>
