@@ -17,9 +17,13 @@ def home(request):
                 products = Product.objects.select_related().filter(category=category, is_available=True).order_by('-created_date')[:5]
                 latest_product = {'products':products,'category':category}
                 latest_products.append(latest_product)
-                
-            bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
-            print(bookmarked_product_ids)
+            
+            if request.user.is_authenticated:    
+                bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
+            else: 
+                bookmarked_product_ids = []
+  
+           
             context = {
                 'latest_products': latest_products,
                 'categories':all_categories,

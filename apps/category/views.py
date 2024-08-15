@@ -4,6 +4,8 @@ from apps.store.models import Product
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+
 
 # Create your views here.
 # def category_view(request):
@@ -70,3 +72,19 @@ def search(request):
     product_list = list(products.values('id', 'product_name', 'price', 'description', 'cover_image'))
     
     return JsonResponse(product_list, safe=False)
+
+
+
+
+def category(request):
+    try:
+        category = Category.objects.all()
+        print(category, 'category')
+        context = {
+            'category': category
+        }
+        return render(request, 'others/categories.html', context)
+        
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return HttpResponse("An error occurred while processing your request.", status=500)

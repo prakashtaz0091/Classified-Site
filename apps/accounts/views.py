@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+import requests
 
 
 
@@ -22,9 +23,19 @@ def Login(request):
 
         if user is not None:
             auth.login(request, user)
+            # url = request.META.get('HTTP_REFERER')
+            # try:
+            #     query = requests.utils.urlparse(url).query
+               
+            #     params = dict(x.split('=') for x in query.split('&'))
+            #     if 'next' in params:
+            #         nextPage = params['next']
+            #         return redirect(nextPage)
+            # except:   
             messages.success(request, 'You are now logged in.')
             return redirect('home')
-           
+    else:
+        return render(request,'accounts/login.html')       
     return render(request,'accounts/login.html')
 
 def Register(request):
