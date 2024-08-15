@@ -88,5 +88,12 @@ class UserProfile(models.Model):
     google_plus = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
     
+    
+    def get_photo_url(self):
+        if self.profile_photo:
+            return self.profile_photo.url
+        return '/static/assets/img/profile-img.jpg'
+    
+    
     def __str__(self):
         return self.full_name
