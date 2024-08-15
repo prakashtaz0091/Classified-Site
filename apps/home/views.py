@@ -92,7 +92,7 @@ def book_marks(request):
     book_marks = BookMark.objects.filter(user=request.user)
     
     # paginations added 
-    paginator = Paginator(book_marks, 1)
+    paginator = Paginator(book_marks, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {

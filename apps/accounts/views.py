@@ -191,18 +191,38 @@ def update_profile(request):
    
     else:
         profile = get_object_or_404(UserProfile, user=request.user)
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
+        
+        
+        try:
+           
+            profile.full_name =request.POST.get('full_name')
+            profile.phone_number = request.POST.get('phone_number')
+            profile.email_address = request.POST.get('email_address')
+            profile.notes = request.POST.get('notes')
+            profile.facebook = request.POST.get('facebook')
+            profile.twitter = request.POST.get('twitter')
+            profile.google_plus = request.POST.get('google_plus')
+            profile.instagram = request.POST.get('instagram')
+            profile_photo = request.FILES.get('profile_photo')
+           
+            if profile_photo:
+                profile.profile_photo = profile_photo
+            
+            # Save the profile instance
+            profile.save()
+          
+            
             return redirect('profile')
         
         
-        else:
-            context={
-                'profile':profile
-            }
-            return render(request,'others/profile.html',context)
+        except:
+            
+            print('i am bad')
+            return redirect('profile')
+
         
+        
+      
         
 
 

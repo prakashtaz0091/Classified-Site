@@ -44,14 +44,24 @@
 									<h4>Profile Details</h4>																
 								</div>
 								{% include 'includes/alert.html' %}
+
                                 <div class="card-body">
+									<form action='{% url 'profile' %}' method="POST" enctype="multipart/form-data">
+												{% csrf_token %}
 								    <div class="profile-photo">
 									    <div class="profile-img">
 										    <div class="settings-upload-img">
-												 <img src="{% static 'assets/img/profile-img.jpg' %}" alt="profile">
+												{% if profile.profile_photo %}
+												<img src="{{profile.profile_photo.url}}" alt="profile" >
+												 
+												{% else %}
+												 <img src="{% static 'assets/img/profile-img.jpg' %}" alt="profile" >
+												 											
+												 
+												 {% endif %} 
 											</div>										    
 											 <div class="settings-upload-btn">											    
-												<input type="file" accept="image/*" name="image" class="hide-input image-upload" id="file">
+												<input type="file" accept="image/*" name="profile_photo" class="hide-input image-upload" id="file">
 												<label for="file" class="file-upload">Upload New photo</label>												
 											 </div>	
 											 <span>Max file size: 10 MB</span>
@@ -59,8 +69,6 @@
                                         <a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>										
 									</div>
 									<div class="profile-form">
-									     <form action='{% url 'profile' %}' method="POST" enctype="multipart/form-data">
-											{% csrf_token %}
 										    <div class="form-group">
 											    <label class="col-form-label">Your Full Name{{profile.full_name}}</label>
 										        <div class="pass-group group-img">
