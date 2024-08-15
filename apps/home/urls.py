@@ -15,4 +15,5 @@ urlpatterns = [
     path('book_marks/',views.book_marks,name='book_marks'),
     path('messages/',views.messages,name='messages'),
     path('reviews/',views.reviews,name='reviews'),
+    path('feedback/<str:hashed_user_id>/',views.feedback,name='customer_feeback'),
 ]

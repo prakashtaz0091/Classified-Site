@@ -10,8 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
-    
-    
 def service_details(request,product_slug):
     try:
         product_instance=Product.objects.filter(slug=product_slug).first()

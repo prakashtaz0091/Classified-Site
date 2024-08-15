@@ -91,9 +91,8 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<ul>
-						<li><a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
-
-								<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
+						<li id="submitFeedback" data-user-id="{{ user.id }}"> <a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+					<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
 
 <style>
 .favorited {
@@ -389,6 +388,22 @@
 
 <!-- Custom JS -->
 <script src="{% static 'assets/js/script.js' %}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+			  <script>
+    function generateMD5Hash(userId) {
+      return CryptoJS.MD5(userId.toString()).toString();
+    }
+
+    document.getElementById("submitFeedback").onclick = function() {
+      const originalUserId = this.getAttribute('data-user-id');
+      const hashedUserId = generateMD5Hash(originalUserId);
+
+      // Redirect with the hashed user ID in the URL
+		window.location.href = `/feedback/${hashedUserId}/`;
+    }
+
+		</script>
 
 	<script>
 document.addEventListener('DOMContentLoaded', function() {

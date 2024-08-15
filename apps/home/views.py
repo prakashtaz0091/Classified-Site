@@ -96,8 +96,8 @@ def book_marks(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        'book_marks': page_obj,  
-        'page_obj': page_obj,     
+        'book_marks': page_obj, 
+        'page_obj': page_obj,
         'count': paginator.count 
     }
 
@@ -109,3 +109,15 @@ def messages(request):
 
 def reviews(request):
     return render( request,'others/reviews.html')
+
+# For customers to provide feedback or opinions to user
+def feedback(request,hashed_user_id):
+    try:
+
+        return render(request,'home/feedback.html')
+    except Exception as e:
+        print(e)
+        #will later move it to 404 page
+        return e
+
+
