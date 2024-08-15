@@ -208,7 +208,7 @@
         {% if user.is_authenticated %}
         <ul class="nav header-navbar-rht">
             <li class="nav-item">
-                <a class="nav-link add-listing" href="add-listing.html"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
+                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
             </li>
             <li class="nav-item dropdown has-arrow logged-item">
                 <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">

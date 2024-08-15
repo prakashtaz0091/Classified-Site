@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from apps.category.models import Category
 from apps.store.models import Product,BookMark
+from django.contrib.auth.decorators import login_required
 
-# Create your views here. i am your home
+
+
 
 
 def home(request):
@@ -109,3 +111,14 @@ def messages(request):
 
 def reviews(request):
     return render( request,'others/reviews.html')
+
+
+
+
+@login_required(login_url='/account/login/') 
+def add_listing(request):
+    category=Category.objects.all()
+    context={
+        'categories':category
+    }
+    return render(request,'listing/add-listing.html',context)

@@ -1,7 +1,9 @@
 from django.db import models
 from apps.category.models import Category
 from apps.accounts.models import Account
-# Create your models here.
+from django.utils.text import slugify
+
+
 class Product(models.Model):
     product_name=models.CharField(max_length=500)
     slug=models.SlugField(max_length=200,unique=True)
@@ -12,12 +14,13 @@ class Product(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name="product_category")
     created_date=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
-
     view_count=models.IntegerField(default=0)
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
 
-    # def get_url(self):
-    #     return reverse('product_details',args=[self.category.slug, self.slug])
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.product_name)
+        super(Product, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.product_name

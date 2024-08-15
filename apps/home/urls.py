@@ -15,4 +15,5 @@ urlpatterns = [
     path('book_marks/',views.book_marks,name='book_marks'),
     path('messages/',views.messages,name='messages'),
     path('reviews/',views.reviews,name='reviews'),
+    path('add_listing/',views.add_listing,name='add_listing'),
 ]
