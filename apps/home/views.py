@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from apps.category.models import Category
+from apps.home.models import Reviews
 from apps.store.models import Product,BookMark
 
 # Create your views here. i am your home
@@ -67,13 +68,21 @@ def how_it_works(request):
 
 
 def dashboard(request):
-    book_marks=BookMark.objects.filter(user=request.user)
-    count=book_marks.count()
-    context={
-        'book_marks':book_marks,
-        'count':count
-    }
-    return render(request,'others/dashboard.html',context)
+    try:
+        book_marks=BookMark.objects.filter(user=request.user)
+
+        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
+        print(reviews_list)
+        count=book_marks.count()
+        context={
+            'book_marks':book_marks,
+            'count':count,
+            'reviews_list':reviews_list
+        }
+        return render(request,'others/dashboard.html',context)
+    except Exception as e:
+        print(e)
+        # will later redirect to 404 page
 
 
 
