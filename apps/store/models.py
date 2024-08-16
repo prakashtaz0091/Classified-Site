@@ -34,3 +34,4 @@ class BookMark(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.user.full_name} on {self.product.product_name}"
+
