@@ -8,7 +8,6 @@ from django.template.loader import render_to_string
 
 
 
-
 def home(request):
     if request.method == 'GET':
         try:
@@ -89,32 +88,27 @@ def dashboard(request):
 
 
 
+
 def my_listing(request):
     if request.method == 'GET':
-        products = Product.objects.filter(created_by=request.user)
+        sort_option = request.GET.get('sort', '-created_date')  # Default to newest
+        products = Product.objects.filter(created_by=request.user).order_by(sort_option)
         
-        # Paginate the products list
         paginator = Paginator(products, 3)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         
-        # Apply sorting only to the current page's products
-        sort_option = request.GET.get('sort', '-created_date')  
-        sorted_products = sorted(page_obj.object_list, key=lambda x: getattr(x, 'created_date'), reverse=(sort_option == '-created_date'))
-        
-        # Handle AJAX requests
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             data = {
-                'products_html': render_to_string('partials/product_list.html', {'products': sorted_products}, request=request),
+                'products_html': render_to_string('partials/product_list.html', {'products': page_obj.object_list}, request=request),
             }
             return JsonResponse(data)
         
         context = {
             'page_obj': page_obj,
-            'products': sorted_products,
+            'products': page_obj.object_list,
         }
         return render(request, 'others/my-listing.html', context)
-
 
 def delete_my_listing(request,id):
     try:
