@@ -34,6 +34,7 @@ class Product(models.Model):
     slug=models.SlugField(max_length=200,unique=True)
     description=models.TextField(blank=True)
     cover_image=models.FileField(upload_to='photos/product_cover')
+    tagline=models.TextField(max_length=550,blank=True,null=True)
     price=models.IntegerField()
     is_available=models.BooleanField(default=True)
     features = models.ManyToManyField(Feature, related_name='stores')

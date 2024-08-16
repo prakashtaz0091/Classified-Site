@@ -139,6 +139,7 @@ def edit_my_listing(request,id):
         product.product_name = request.POST.get('product_name')
         product.description = request.POST.get('description')
         product.price = request.POST.get('price')
+        product.tagline=request.POST.get('tagline')
         product.is_available = True
 
         # Update location details
@@ -234,6 +235,7 @@ def add_listing(request):
         product_name = request.POST.get('product_name')
         description = request.POST.get('description')
         price = request.POST.get('price')
+        tagline= request.POST.get('tagline')
         selected_categories = request.POST.getlist('categories')
         selected_features = request.POST.getlist('features')
        
@@ -271,6 +273,7 @@ def add_listing(request):
             product_name=product_name,
             description=description,
             price=price,
+            tagline=tagline,
             location=location,
             contact_information=contact_information,
             is_available=True,  

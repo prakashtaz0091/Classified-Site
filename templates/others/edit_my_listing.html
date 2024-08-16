@@ -84,7 +84,8 @@
 									
 									<div class="form-group formlast-input">
 										<label class="col-form-label label-heading">Tagline</label>								    
-										<textarea rows="2" class="form-control tagline" placeholder="" name='tagline' value={{product.tagline}}></textarea>									   
+										<textarea rows="2" class="form-control tagline" placeholder="" name='tagline'>{{product.tagline}}
+										</textarea>									   
 									</div>					
 								</div>   							
 							</div>	
@@ -95,7 +96,7 @@
 								<div class="card-body">
 									<div class="form-group">
 										<label class="col-form-label">Price Range</label>								    
-										<input type="text"  class="form-control pass-input" placeholder="enter a price" name='price' value={{product.price}}>									   
+										<input type="text"  class="form-control pass-input" placeholder="enter a price" name='price' value="{{product.price}}">									   
 									</div>
 									{% comment %} <div class="row">
 										<div class="col-lg-6 col-md-6">
