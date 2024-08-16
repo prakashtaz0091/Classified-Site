@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from apps.accounts.models import Account
+from apps.home.models import Reviews
 from apps.store.models import Product, ProductImages
 from django.contrib.auth.decorators import login_required
 from apps.store.models import BookMark
@@ -23,7 +25,6 @@ def service_details(request,product_slug):
                 bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
         else: 
                 bookmarked_product_ids = []
-        print(bookmarked_product_ids)
         context={
             'product':product_instance,
             'product_images':product_images,
@@ -56,3 +57,30 @@ def toggle_bookmark(request):
         
         except json.JSONDecodeError:
             return JsonResponse({'success': False, 'error': 'Invalid JSON'}, status=400)
+
+import base64
+
+def decode_id(encoded_id):
+    try:
+        decoded_string = base64.b64decode(encoded_id).decode('utf-8')
+        user_id = decoded_string.split(':')[0]  # Extract userId
+        return user_id
+    except (base64.binascii.Error, UnicodeDecodeError):
+        return None
+
+@csrf_exempt
+def add_review(request):
+    try:
+        data=json.loads(request.body)
+        print(data)
+        feedback=data.get('feedback')
+        rating=data.get('rating','')
+        if rating=="":
+            rating=0
+        reviewed_for=Account.objects.filter(id=(decode_id(data.get('reviewed_for')))).first()
+        created_by=Account.objects.filter(id=data.get('created_by')).first()
+
+        Reviews.objects.create(review=feedback,rating=rating,reviewed_for=reviewed_for,created_by=created_by)
+        return JsonResponse({'status':True,'message':"Review Added Successfully"})
+    except Exception as e:
+        print(e)

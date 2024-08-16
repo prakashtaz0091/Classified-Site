@@ -388,16 +388,16 @@
 
 <!-- Custom JS -->
 <script src="{% static 'assets/js/script.js' %}"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-			  <script>
-    function generateMD5Hash(userId) {
-      return CryptoJS.MD5(userId.toString()).toString();
-    }
+<script>
+	 function encodeId(userId) {
+    // Generate a random string and combine it with the userId
+    const randomString = Math.random().toString(36).substring(2, 15); // Random string
+    return btoa(userId + ':' + randomString); // Encode with random string
+  }
 
     document.getElementById("submitFeedback").onclick = function() {
       const originalUserId = this.getAttribute('data-user-id');
-      const hashedUserId = generateMD5Hash(originalUserId);
+      const hashedUserId = encodeId(originalUserId);
 
       // Redirect with the hashed user ID in the URL
 		window.location.href = `/feedback/${hashedUserId}/`;
