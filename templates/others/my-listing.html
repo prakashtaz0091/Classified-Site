@@ -33,7 +33,7 @@
 		<!-- /Breadscrumb Section -->
 		
 		<!-- Dashboard Content -->
-        <div class="dashboard-content listing-section ">		
+        <div class="dashboard-content listing-section " style='padding:0'>		
 			<div class="container">
 				{% include 'includes/dashboard.html' %}
 				<div class="dash-listingcontent dashboard-info">
@@ -54,11 +54,11 @@
 									 <div class="sortbyset">
 										<span class="sortbytitle">Sort by</span>
 										<div class="sorting-select">
-											 <select class="form-control select">
-												<option>Newest</option>
-												<option>Newest</option>
-												<option>Oldest</option>
+											<select class="form-control select" id="sortSelect" onchange="sortProducts(this)">
+												<option value="-created_date">Newest</option>
+												<option value="created_date">Oldest</option>
 											</select>
+											
 										</div>
 									</div>						
 								</div>																
@@ -74,10 +74,11 @@
 									    <th class="no-sort">Action</th>										 
 									 </tr>	
                                      </thead>
-                                     <tbody>	
+                                     <tbody id="productContainer">	
 										
 									{% for item in products %}
-                                     <tr>
+                                     <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
+										
 									     <td>
 										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
 										 </td>
@@ -114,37 +115,35 @@
                                      </tbody>									 
 							    </table>				
 							</div>
-                            
-							
-
-							<div class="blog-pagination">
-								<nav>
-									<ul class="pagination">
-										<li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
-											<a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
-												<i class="fas fa-regular fa-arrow-left"></i> Prev
-											</a>
-										</li>
-										<li class="justify-content-center pagination-center"> 
-											<div class="pagelink">
-												<ul>
-													{% for num in page_obj.paginator.page_range %}
-														<li class="page-item {% if page_obj.number == num %}active{% endif %}">
-															<a class="page-link" href="?page={{ num }}">{{ num }}</a>
-														</li>
-													{% endfor %}
-												</ul>
-											</div>                                                
-										</li>                                                
-										<li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
-											<a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
-												Next <i class="fas fa-regular fa-arrow-right"></i>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-							
+                            <div class="blog-pagination">
+								<!-- Pagination Controls -->
+<div class="blog-pagination">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+                    <i class="fas fa-regular fa-arrow-left"></i> Prev
+                </a>
+            </li>
+            <li class="justify-content-center pagination-center"> 
+                <div class="pagelink">
+                    <ul>
+                        {% for num in page_obj.paginator.page_range %}
+                            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>                                                
+            </li>                                                
+            <li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
+                    Next <i class="fas fa-regular fa-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+							</div>										
 					    </div>							
 					</div>                  							
 				</div>							
@@ -174,6 +173,22 @@
 			function confirmDelete() {
 				return confirm("Do you really want to delete this item?");
 			}
+
+			function sortProducts(selectElement) {
+				var sortValue = selectElement.value;
+				$.ajax({
+					url: window.location.href,
+					data: {
+						sort: sortValue,
+					},
+					success: function (data) {
+						$('#productContainer').html(data.products_html);
+					}
+				});
+			}
+			
 		
 	</script>
+
+
 {% endblock %}
