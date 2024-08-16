@@ -438,9 +438,7 @@
 										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
-											
 												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
-												
 											</a>	
 											
 											
@@ -471,7 +469,7 @@
 													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
 												</div>
 											</div> 
-											<h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												{% if product.location %}
 												<div class="location-info">

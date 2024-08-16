@@ -16,6 +16,7 @@ urlpatterns = [
     path('book_marks/',views.book_marks,name='book_marks'),
     path('messages/',views.messages,name='messages'),
     path('reviews/',views.reviews,name='reviews'),
+    path('feedback/<str:hashed_user_id>/',views.feedback,name='customer_feeback'),
     path('add_listing/',views.add_listing,name='add_listing'),
     path('delete_my_listing/<int:id>/',views.delete_my_listing,name='delete_my_listing'),
     path('edit_my_listing/<int:id>/',views.edit_my_listing,name='edit_my_listing'),

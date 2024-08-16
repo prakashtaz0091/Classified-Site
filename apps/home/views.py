@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from apps.category.models import Category
+from apps.home.models import Reviews
 from apps.store.models import Product,BookMark,Location,ContactInformation,ProductImages,Feature
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -29,7 +30,7 @@ def home(request):
                 bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
             else: 
                 bookmarked_product_ids = []
-  
+
             context = {
                 'latest_products': latest_products,
                 'all_products': all_products,
@@ -74,19 +75,21 @@ def how_it_works(request):
 
 
 def dashboard(request):
-    book_marks=BookMark.objects.filter(user=request.user)
-    count=book_marks.count()
-    context={
-        'book_marks':book_marks,
-        'count':count
-    }
-    return render(request,'others/dashboard.html',context)
+    try:
+        book_marks=BookMark.objects.filter(user=request.user)
 
-
-
-
-
-
+        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
+        print(reviews_list)
+        count=book_marks.count()
+        context={
+            'book_marks':book_marks,
+            'count':count,
+            'reviews_list':reviews_list
+        }
+        return render(request,'others/dashboard.html',context)
+    except Exception as e:
+        print(e)
+        # will later redirect to 404 page
 
 
 def my_listing(request):
@@ -211,8 +214,8 @@ def book_marks(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        'book_marks': page_obj,  
-        'page_obj': page_obj,     
+        'book_marks': page_obj, 
+        'page_obj': page_obj,
         'count': paginator.count 
     }
 
@@ -223,6 +226,30 @@ def messages(request):
 
 
 def reviews(request):
+    try:
+        visitor_reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')
+        your_reviews_list=Reviews.objects.select_related().filter(created_by=request.user).order_by('-id')
+        context={
+            'visitor_reviews_list':visitor_reviews_list,
+            'your_reviews_list':your_reviews_list
+        }
+        return render( request,'others/reviews.html',context)
+    except Exception as e:
+        print(e)
+        # will later forward to 404 page 
+
+
+# For customers to provide feedback or opinions to user
+def feedback(request,hashed_user_id):
+    try:
+
+        return render(request,'home/feedback.html')
+    except Exception as e:
+        print(e)
+        #will later move it to 404 page
+        return e
+
+
     return render( request,'others/reviews.html')
 
 
