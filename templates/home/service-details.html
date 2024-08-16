@@ -91,10 +91,33 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<ul>
-						<li><a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+						<li id="submitFeedback" data-user-id="{{ user.id }}"> <a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+					<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
 
-								<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
-								<li><a href="javascript:void(0);"><i class="feather-heart"></i> Add To Favourites</a></li>
+<style>
+.favorited {
+
+    background-color: #c10037; /* The background color you want */
+    color: white!important; /* The color of the icon */
+    border-radius: 50%; /* Makes the background circular */
+    align-items: center;
+		display:flex;
+    justify-content: center;
+		text-align:center;
+			padding-right:5px!important;
+				padding-left:5px!important;
+    width: 28px; /* Adjust the size to fit the icon */
+    height: 28px;
+}
+
+</style>
+								<li class="fav-item" data-id="{{product.id}}" ><a href="javascript:void(0);" id="fav-icon"><i class="feather-heart {% if product.id in book_mark %}favorited{% endif %}"></i>
+										{% if product.id in book_mark %}
+										Added To Favourites
+										{% else %}
+										Add To Favourites
+										{% endif %}
+									</a></li>
 							</ul>
 						</div>
 					</div>
@@ -365,6 +388,62 @@
 
 <!-- Custom JS -->
 <script src="{% static 'assets/js/script.js' %}"></script>
+<script>
+	 function encodeId(userId) {
+    // Generate a random string and combine it with the userId
+    const randomString = Math.random().toString(36).substring(2, 15); // Random string
+    return btoa(userId + ':' + randomString); // Encode with random string
+  }
 
+    document.getElementById("submitFeedback").onclick = function() {
+      const originalUserId = this.getAttribute('data-user-id');
+      const hashedUserId = encodeId(originalUserId);
+
+      // Redirect with the hashed user ID in the URL
+		window.location.href = `/feedback/${hashedUserId}/`;
+    }
+
+		</script>
+
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('#fav-icon').forEach(function(icon) {
+        icon.addEventListener('click', function() {
+            var itemId = this.closest('.fav-item').getAttribute('data-id');
+            var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            fetch('/ad/toggle-bookmark/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken 
+                },
+                body: JSON.stringify({ id: itemId })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    // Toggle the favorited class for the icon
+                    const iconElement = this.querySelector('i');
+                    iconElement.classList.toggle('favorited');
+
+                    // Change the text based on the favorited state
+                    const linkText = iconElement.classList.contains('favorited') ? 'Added To Favourites' : 'Add To Favourites';
+                    this.innerHTML = `<i class="feather-heart ${iconElement.classList.contains('favorited') ? 'favorited' : ''}"></i> ${linkText}`;
+                } else {
+                    console.error('Failed to favorite item.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
 </body>
 </html>
