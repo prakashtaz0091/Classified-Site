@@ -101,7 +101,7 @@
 									     <td>
 										    <div class="action">
         										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
+											    <a href="{% url 'edit_my_listing' item.id %}" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
 												<a href="{% url 'delete_my_listing' item.id %}" class="action-btn btn-trash" onclick="return confirmDelete();">
 													<i class="feather-trash-2"></i>
 												</a>

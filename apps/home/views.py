@@ -109,6 +109,29 @@ def my_listing(request):
             'products': page_obj.object_list,
         }
         return render(request, 'others/my-listing.html', context)
+    
+    
+    
+def edit_my_listing(request,id):
+    if request.method=='GET':
+        product=Product.objects.get(id=id) 
+        categories=Category.objects.all() 
+        product_images=ProductImages.objects.filter(product=product)  
+        selected_categories = product.category.all().values_list('id', flat=True)
+        print(product_images,'product images')
+        context={
+            'product':product,
+            'categories':categories,
+            'product_images':product_images,
+            'selected_categories':selected_categories
+        }
+       
+        return render(request,'others/edit_my_listing.html',context)
+    else:
+        pass
+
+
+     
 
 def delete_my_listing(request,id):
     try:

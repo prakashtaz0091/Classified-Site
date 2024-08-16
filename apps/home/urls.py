@@ -18,4 +18,5 @@ urlpatterns = [
     path('reviews/',views.reviews,name='reviews'),
     path('add_listing/',views.add_listing,name='add_listing'),
     path('delete_my_listing/<int:id>/',views.delete_my_listing,name='delete_my_listing'),
+    path('edit_my_listing/<int:id>/',views.edit_my_listing,name='edit_my_listing'),
 ]

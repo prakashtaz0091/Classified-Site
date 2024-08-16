@@ -32,7 +32,7 @@ class Product(models.Model):
     is_available=models.BooleanField(default=True)
     category = models.ManyToManyField(Category, related_name='products')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="product_location" ,blank=True,null=True)
-    contact_information = models.ForeignKey('ContactInformation', on_delete=models.CASCADE, related_name="product_contact_information",blank=True,null=True)
+    contact_information = models.ForeignKey(ContactInformation, on_delete=models.CASCADE, related_name="product_contact_information",blank=True,null=True)
 
     created_date=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
@@ -50,6 +50,10 @@ class Product(models.Model):
 class ProductImages(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     image=models.FileField(upload_to="photos/products")
+    
+    
+    def __str__(self):
+        return self.product.product_name
 
 
 class BookMark(models.Model):
