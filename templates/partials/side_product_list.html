@@ -18,13 +18,24 @@
             <div class="card-body">
                  <div class="blogfeaturelink">
                     <div class="blog-features">
-                       <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i> Construction</span></a>
+
+                       <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>
+                         {% for category in product.category.all %}
+                        {{ category.category_name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}</span></a>
                     </div>																	  
-                    <div class="blog-author"> 
+                    <div class="blog-author">
+                        {% if product.created_by.profile.profile_photo %} 
                        
                         <div class="blog-author-img">
-                            <img src="{{user_profile.get_photo_url}}" alt="author">
+                            <img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
                         </div>
+                        {% else %}
+
+                        <div class='blog-author-img'>
+                            <img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+                        </div>
+                        {% endif %}
                        
                         
                       <a href="javascript:void(0);">{{product.created_by.full_name}}</a>

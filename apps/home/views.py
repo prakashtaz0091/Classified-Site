@@ -94,6 +94,8 @@ def my_listing(request):
         sort_option = request.GET.get('sort', '-created_date')  # Default to newest
         products = Product.objects.filter(created_by=request.user).order_by(sort_option)
         
+       
+        
         paginator = Paginator(products, 3)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -317,3 +319,41 @@ def add_listing(request):
             'features':features
         }
         return render(request,'listing/add-listing.html',context)
+    
+    
+    
+
+
+def listing_grid(request):
+    category = request.GET.get('category')
+    print(category)
+    # Apply filters based on query parameters
+    products = Product.objects.filter(category=category)
+    
+    context = {
+        'products': products,
+        'category': category,
+        # Pass other filters or context variables as needed
+    }
+    
+
+
+    
+    return render(request,'listing/listing-sidebar.html',context)
+
+
+def listing_grid_sidebar(request):
+    category = request.GET.get('category')
+    products = Product.objects.filter(category=category)
+    
+    context = {
+        'products': products,
+        'category': category,
+        # Include other context variables as needed
+    }
+
+    return render(request,'listing/listing-grid-sidebar.html',context) 
+    
+
+
+    
