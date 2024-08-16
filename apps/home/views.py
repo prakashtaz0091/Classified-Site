@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from apps.category.models import Category
-from apps.store.models import Product,BookMark,Location,ContactInformation,ProductImages
+from apps.store.models import Product,BookMark,Location,ContactInformation,ProductImages,Feature
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -113,22 +113,74 @@ def my_listing(request):
     
     
 def edit_my_listing(request,id):
+    product=Product.objects.get(id=id)
     if request.method=='GET':
-        product=Product.objects.get(id=id) 
+         
+        features=Feature.objects.all() 
         categories=Category.objects.all() 
         product_images=ProductImages.objects.filter(product=product)  
         selected_categories = product.category.all().values_list('id', flat=True)
-        print(product_images,'product images')
+        selected_features=product.features.all().values_list('id',flat=True)
+       
         context={
             'product':product,
             'categories':categories,
             'product_images':product_images,
-            'selected_categories':selected_categories
+            'selected_categories':selected_categories,
+            'selected_features':selected_features,
+            'features':features,
+            'id':id,
         }
        
         return render(request,'others/edit_my_listing.html',context)
     else:
-        pass
+       # Update basic product details
+        
+        product.product_name = request.POST.get('product_name')
+        product.description = request.POST.get('description')
+        product.price = request.POST.get('price')
+        product.is_available = True
+
+        # Update location details
+        product.location.Location = request.POST.get('location')
+        product.location.address = request.POST.get('address')
+        product.location.map_address = request.POST.get('map_address')
+        product.location.latitude = request.POST.get('latitude')
+        product.location.longitude = request.POST.get('longitude')
+        product.location.save()
+
+        # Update contact information
+        product.contact_information.email = request.POST.get('email')
+        product.contact_information.website = request.POST.get('website')
+        product.contact_information.phone = request.POST.get('phone')
+        product.contact_information.save()
+
+        # Update categories
+        selected_categories = request.POST.getlist('categories')
+        product.category.set(selected_categories)
+
+        # Update features
+        selected_features = request.POST.getlist('features')
+        product.features.set(selected_features)
+
+        # Handle cover image update
+        cover_image = request.FILES.get('cover_image')
+        if cover_image:
+            product.cover_image = cover_image
+
+        # Handle gallery images update
+        gallery_images = request.FILES.getlist('gallery_images')
+        if gallery_images:
+            ProductImages.objects.filter(product=product).delete()
+            for image in gallery_images:
+                ProductImages.objects.create(product=product, image=image)
+
+        # Save all changes to the product
+        product.save()
+        
+        print('saved')
+
+        return redirect('my_listing')  # Redirect to an appropriate page after saving
 
 
      
@@ -183,6 +235,7 @@ def add_listing(request):
         description = request.POST.get('description')
         price = request.POST.get('price')
         selected_categories = request.POST.getlist('categories')
+        selected_features = request.POST.getlist('features')
        
         # Retrieve location data
         location_name = request.POST.get('location')
@@ -229,6 +282,11 @@ def add_listing(request):
         for category_id in selected_categories:
             category = Category.objects.get(id=category_id)
             product.category.add(category)
+            
+            
+        for feature_id in selected_features:
+            feature=Feature.objects.get(id=feature_id)
+            product.features.add(feature)    
 
         # Handle file uploads for cover image
         cover_image = request.FILES.get('cover_image')
@@ -250,7 +308,9 @@ def add_listing(request):
    
     else:    
         category=Category.objects.all()
+        features=Feature.objects.all()
         context={
-            'categories':category
+            'categories':category,
+            'features':features
         }
         return render(request,'listing/add-listing.html',context)

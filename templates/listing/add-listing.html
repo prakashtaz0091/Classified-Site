@@ -134,42 +134,17 @@
 								<div class="card-body">
 									<div class="form-group featuresform-list mb-0">
 										<ul>
+
+											{% for feature in features %}
 											<li>
 												<label class="custom_check">
-													<input type="checkbox" name="wireless-internet">
-													<span class="checkmark"></span> Accepts Credit Cards
+													<input type="checkbox" name="features" value="{{feature.id}}"> 
+													<span class="checkmark"></span>{{feature.name}}
 												</label>
 											</li>
-											<li>
-												<label class="custom_check">
-													<input type="checkbox" name="accept-credit-card">
-													<span class="checkmark"></span> Bike Parking 
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-													<input type="checkbox" name="Coupouns">
-													<span class="checkmark"></span> Parking Street
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-													<input type="checkbox" name="parking-street">
-													<span class="checkmark"></span> Pets Friendly
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-													<input type="checkbox" name="Coupouns">
-													<span class="checkmark"></span> Wheelchair Accessible
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-													<input type="checkbox" name="parking-street">
-													<span class="checkmark"></span> Wireless Internet
-												</label>
-											</li>										
+											{% endfor %}
+											
+																					
 										</ul>	
 										<div class="clearfix"></div>   									
 									</div>								

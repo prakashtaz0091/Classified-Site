@@ -11,7 +11,13 @@ class ContactInformation(models.Model):
     def __str__(self):
         return f"{self.email}"
     
+class Feature(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
     
+       
 class Location(models.Model):
     Location=models.CharField(max_length=250,blank=True,null=True)
     address = models.CharField(max_length=255,blank=True)
@@ -30,6 +36,7 @@ class Product(models.Model):
     cover_image=models.FileField(upload_to='photos/product_cover')
     price=models.IntegerField()
     is_available=models.BooleanField(default=True)
+    features = models.ManyToManyField(Feature, related_name='stores')
     category = models.ManyToManyField(Category, related_name='products')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="product_location" ,blank=True,null=True)
     contact_information = models.ForeignKey(ContactInformation, on_delete=models.CASCADE, related_name="product_contact_information",blank=True,null=True)
