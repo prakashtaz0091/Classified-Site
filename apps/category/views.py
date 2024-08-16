@@ -25,6 +25,8 @@ def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
     sort_by = request.GET.get('sort', 'default')
     products = Product.objects.filter(category=category).order_by('created_date')
+    
+    
 
     # For pagination
     paginator = Paginator(products, 3)  # Adjust the number for items per page

@@ -21,10 +21,13 @@
                        <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i> Construction</span></a>
                     </div>																	  
                     <div class="blog-author"> 
-                      <div class="blog-author-img">
-                        <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="author">
-                      </div>
-                      <a href="javascript:void(0);">John Doe</a>
+                       
+                        <div class="blog-author-img">
+                            <img src="{{user_profile.get_photo_url}}" alt="author">
+                        </div>
+                       
+                        
+                      <a href="javascript:void(0);">{{product.created_by.full_name}}</a>
                     </div>
                 </div> 
                 <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
@@ -32,9 +35,11 @@
                     <div class="location-info">
                        <i class="feather-map-pin"></i> Los Angeles
                     </div>
+                 
                     <div class="location-info">
-                       <i class="feather-phone-call"></i> +44 6633 6526
+                       <i class="feather-phone-call"></i>{{product.created_by.profile.phone_number}}
                     </div>
+                    
                     <div class="location-info">
                        <i class="feather-eye"></i>0
                     </div>

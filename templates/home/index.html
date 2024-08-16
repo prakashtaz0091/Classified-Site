@@ -453,9 +453,17 @@
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
 												<div class="grid-author">
-													 <img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-												</div>														
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
 												<div class="blog-features">
 												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
 												</div>																	  

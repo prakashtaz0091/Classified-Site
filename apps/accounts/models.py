@@ -93,7 +93,7 @@ class UserProfile(models.Model):
     def get_photo_url(self):
         if self.profile_photo:
             return self.profile_photo.url
-        return '/static/assets/img/profile-img.jpg'
+        return '/assets/img/profile-img.jpg'
     
     
     def __str__(self):
