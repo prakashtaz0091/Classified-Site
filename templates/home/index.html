@@ -411,7 +411,7 @@
 
 	<!---addd the feature category-->
 	<section class="latestad-section grid-view featured-slider">
-		{% for latest_product  in latest_products %}	
+		{% for latest_product  in latest_products|slice:":3" %}	
 		<div class="container">		
 				<div class="section-heading">
 						<div class="row align-items-center">

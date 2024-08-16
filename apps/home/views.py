@@ -89,10 +89,39 @@ def dashboard(request):
 
 
 def my_listing(request):
+    if request.method == 'GET':
+        products=Product.objects.filter(created_by=request.user).order_by('-created_date') 
+        
+       # Paginate the products list
+        paginator = Paginator(products, 1)  
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context = {
+            'page_obj': page_obj,
+            'products': page_obj.object_list,
+        }
     
-    return render(request,'others/my-listing.html')
+        return render(request, 'others/my-listing.html', context)
 
 
+
+def delete_my_listing(request,id):
+    try:
+        product=Product.objects.get(id=id)
+        product.delete()
+        return redirect('my_listing')
+        
+    except:
+        return redirect('error') 
+    
+    
+    
+def something_wrong(request):
+    return render(request,'error/error-500.html')  
+
+
+     
 def book_marks(request):
    
     book_marks = BookMark.objects.filter(user=request.user)

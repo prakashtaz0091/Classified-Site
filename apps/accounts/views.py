@@ -57,7 +57,7 @@ def Register(request):
             profile.user = user
             profile.full_name=form.cleaned_data['full_name']
             profile.email_address=form.cleaned_data['email']
-            profile.profile_photo = 'userprofile/profilepic.webp'
+            profile.profile_photo = 'assets/img/profile-img.jpg'
             profile.save()
 
             # Send activation email

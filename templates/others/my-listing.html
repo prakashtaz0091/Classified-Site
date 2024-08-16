@@ -74,277 +74,77 @@
 									    <th class="no-sort">Action</th>										 
 									 </tr>	
                                      </thead>
-                                     <tbody>									 
+                                     <tbody>	
+										
+									{% for item in products %}
                                      <tr>
 									     <td>
-										    <div class="listingtable-img"> <a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-1.jpg' %}" alt=""></a></div>
+										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
 										 </td>
 									     <td>
-										     <h6><a href="service-details.html">Villa 457 sq.m. In Benidorm Fully Qquipped House</a></h6>
-										     <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-										     <p>Mauris vestibulum lorem a condimentum vulputate.</p>
+										     <h6><a href="service-details.html">{{item.product_name}}</a></h6>
+											 <div class="listingtable-rate">
+												<a href="javascript:void(0)" class="cat-icon">
+													<i class="fa-regular fa-circle-stop"></i>
+													{% for category in item.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}
+												</a> 
+												<span class="discount-amt">$350000.00</span>
+												<span class="fixed-amt">${{ item.price }}</span>
+											</div>
+											<p>{{item.description}}</p>
 										 </td>
 									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">1523</span></td>
+									     <td><Span class="views-count">{{item.view_count}}</span></td>
 									     <td>
 										    <div class="action">
         										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
 											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>
-											
+												<a href="{% url 'delete_my_listing' item.id %}" class="action-btn btn-trash" onclick="return confirmDelete();">
+													<i class="feather-trash-2"></i>
+												</a>
+																							
 										    </div>
 										 </td>
                                      </tr> 
-                                     <tr>
-									     <td>
-										      <div class="listingtable-img"><a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-2.jpg' %}" alt=""></a></div>
-										 </td>
-									     <td>
-										     <h6><a href="service-details.html">CDL A OTR Compnay Driver Job-N</a></h6>
-										     <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-										     <p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										 </td>
-									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">1523</span></td>
-									     <td>
-        									<div class="action">
-        										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-										    </div>						 										 
-										 </td>
-                                     </tr> 
-                                     <tr>
-									     <td>
-										      <div class="listingtable-img"><a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-3.jpg' %}" alt=""></a></div>
-										 </td>
-									     <td>
-										     <h6><a href="service-details.html">HP Gaming 15.6 Touchscren 12G</a></h6>
-										      <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-										     <p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										 </td>
-									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">1523</span></td>
-									      <td>
-        									<div class="action">
-        										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-										    </div>						 										 
-										 </td>
-                                     </tr>
-                                      <tr>
-									     <td>
-										     <div class="listingtable-img"> <a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-4.jpg' %}" alt=""></a></div>
-										 </td>
-									     <td>
-										     <h6><a href="service-details.html">2012 AudiR8  GT Spider Convrtibile</a></h6>
-										      <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-										     <p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										 </td>
-									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">1523</span></td>
-									      <td>
-        									<div class="action">
-        										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-										    </div>						 										 
-										 </td>
-                                     </tr>   
-                                     <tr>
-									     <td>
-										     <div class="listingtable-img"> <a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-5.jpg' %}" alt=""></a></div>
-										 </td>
-									     <td>
-										     <h6><a href="service-details.html">2017 Gulfsteam Ameri-Lite</a></h6>
-										      <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-										     <p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										 </td>
-									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">1523</span></td>
-									      <td>
-        									<div class="action">
-        										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-											    <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-										    </div>						 										 
-										 </td>
-                                     </tr>   
-									 <tr>
-										<td>
-											<div class="listingtable-img">
-												<a href="service-details.html">
-													<img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-6.jpg' %}" alt="">
-												</a>
-											</div>
-										</td>
-										<td>
-											<h6><a href="service-details.html">Fashion Luxury Men Date</a></h6>
-											<div class="listingtable-rate">
-												<a href="javascript:void(0)" class="cat-icon">
-													<i class="fa-regular fa-circle-stop"></i> Electronics
-												</a>
-												<span class="discount-amt">$350000.00</span>
-												<span class="fixed-amt">$40000</span>
-											</div>
-											<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										</td>
-										<td><span class="status-text">Published</span></td>
-										<td><span class="views-count">1523</span></td>
-										<td>
-											<div class="action">
-												<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>                                                 
-											</div>                                                 
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="listingtable-img">
-												<a href="service-details.html">
-													<img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-7.jpg' %}" alt="">
-												</a>
-											</div>
-										</td>
-										<td>
-											<h6><a href="service-details.html">Apple iPhone 6 16GB 4G LTE </a></h6>
-											<div class="listingtable-rate">
-												<a href="javascript:void(0)" class="cat-icon">
-													<i class="fa-regular fa-circle-stop"></i> Electronics
-												</a>
-												<span class="discount-amt">$350000.00</span>
-												<span class="fixed-amt">$40000</span>
-											</div>
-											<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										</td>
-										<td><span class="status-text">Published</span></td>
-										<td><span class="views-count">1523</span></td>
-										<td>
-											<div class="action">
-												<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>                                                 
-											</div>                                                 
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="listingtable-img">
-												<a href="service-details.html">
-													<img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-8.jpg' %}" alt="">
-												</a>
-											</div>
-										</td>
-										<td>
-											<h6><a href="service-details.html">Customized Apple iMac 21.5″ All-In </a></h6>
-											<div class="listingtable-rate">
-												<a href="javascript:void(0)" class="cat-icon">
-													<i class="fa-regular fa-circle-stop"></i> Electronics
-												</a>
-												<span class="discount-amt">$350000.00</span>
-												<span class="fixed-amt">$40000</span>
-												<tr>
-													<td>
-													   <div class="listingtable-img">  <a href="service-details.html"><img class="img-fluid avatar-img" src="assets/img/list/tablelist-6.jpg" alt=""></a></div>
-													</td>
-													<td>
-														<h6><a href="service-details.html">Fashion Luxury Men Date</a></h6>
-														 <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-														<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-													</td>
-													<td><span class="status-text">Published</span></td>
-													<td><Span class="views-count">1523</span></td>
-													 <td>
-													   <div class="action">
-														   <a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-													   </div>						 										 
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="listingtable-img"> <a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-7.jpg' %}" alt=""></a></div>
-													</td>
-													<td>
-														<h6><a href="service-details.html">Apple iPhone 6 16GB 4G LTE </a></h6>
-														 <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-														<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-													</td>
-													<td><span class="status-text">Published</span></td>
-													<td><Span class="views-count">1523</span></td>
-													 <td>
-													   <div class="action">
-														   <a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-													   </div>						 										 
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="listingtable-img"> <a href="service-details.html"><img class="img-fluid avatar-img" src="{% static 'assets/img/list/tablelist-8.jpg' %}" alt=""></a></div>
-													</td>
-													<td>
-														<h6><a href="service-details.html">Customized Apple iMac 21.5″ All-In </a></h6>
-														 <div class="listingtable-rate"><a href="javascript:void(0)" class="cat-icon"><i class="fa-regular fa-circle-stop"></i> Electronics</a> <span class="discount-amt">$350000.00</span><span class="fixed-amt">$40000</span></div>
-														<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-													</td>
-													<td><span class="status-text unpublish">Un Published</span></td>
-													<td><Span class="views-count">1523</span></td>
-													 <td>
-													   <div class="action">
-														   <a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-														   <a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>						 										 
-													   </div>						 										 
-													</td>
-												</tr>			</div>
-											<p>Mauris vestibulum lorem a condimentum vulputate.</p>
-										</td>
-										<td><span class="status-text unpublish">Un Published</span></td>
-										<td><span class="views-count">1523</span></td>
-										<td>
-											<div class="action">
-												<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-												<a href="javascript:void(0)" class="action-btn btn-trash"><i class="feather-trash-2"></i></a>                                                 
-											</div>                                                 
-										</td>
-									</tr>
+									 {% endfor %}
+                                   
 									
                                      </tbody>									 
 							    </table>				
 							</div>
-                            <div class="blog-pagination">
+                            
+							
+
+							<div class="blog-pagination">
 								<nav>
 									<ul class="pagination">
-										<li class="page-item previtem">
-											<a class="page-link" href="#"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
-								    	</li>
+										<li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+											<a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+												<i class="fas fa-regular fa-arrow-left"></i> Prev
+											</a>
+										</li>
 										<li class="justify-content-center pagination-center"> 
 											<div class="pagelink">
 												<ul>
-													<li class="page-item">
-														<a class="page-link" href="#">1</a>
-													</li>
-													<li class="page-item active">
-														<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-													</li>
-													<li class="page-item">
-														<a class="page-link" href="#">3</a>
-												   </li>
-											   </ul>
-											</div>													
-										</li>													
-										<li class="page-item nextlink">
-											<a class="page-link" href="#">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+													{% for num in page_obj.paginator.page_range %}
+														<li class="page-item {% if page_obj.number == num %}active{% endif %}">
+															<a class="page-link" href="?page={{ num }}">{{ num }}</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</div>                                                
+										</li>                                                
+										<li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+											<a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
+												Next <i class="fas fa-regular fa-arrow-right"></i>
+											</a>
 										</li>
 									</ul>
 								</nav>
-							</div>										
+							</div>
+							
 					    </div>							
 					</div>                  							
 				</div>							
@@ -366,5 +166,14 @@
 		</svg>
 	</div>
 	<!-- scrollToTop end -->
+
 	
+
+	<script>
+		
+			function confirmDelete() {
+				return confirm("Do you really want to delete this item?");
+			}
+		
+	</script>
 {% endblock %}
