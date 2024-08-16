@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-
+from django.template.loader import render_to_string
 
 # Create your views here.
 # def category_view(request):
@@ -26,10 +26,8 @@ def listing_view(request, slug):
     sort_by = request.GET.get('sort', 'default')
     products = Product.objects.filter(category=category).order_by('created_date')
     
-    
-
     # For pagination
-    paginator = Paginator(products, 3)  # Adjust the number for items per page
+    paginator = Paginator(products, 1)  # Adjust the number for items per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -46,8 +44,17 @@ def listing_view(request, slug):
         'page_obj': page_obj,
     }
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return render(request, 'partials/side_product_list.html', context)  # Return only the product list for AJAX
+    if request.headers.get('x-requested-with') == 'FETCH':
+        product_list= render_to_string( 'partials/side_product_list.html', context,request=request)  # Return only the product list for AJAX
+        print(product_list)
+        pagination_data= 'hello'
+        response_data={
+            'product_data':product_list,
+            'pagination_data':pagination_data
+        }
+        print(response_data)
+        return JsonResponse(response_data)
+
 
     return render(request, 'listing/listing-sidebar.html', context)
 

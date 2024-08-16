@@ -151,7 +151,7 @@
                 <!--Pagination--> 
                 <div class="listing-pagination">
 					<nav>
-						<ul class="pagination">
+						<ul id="pagination_click"  class="pagination">
 							<!-- Previous Button -->
 							<li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
 								{% if page_obj.has_previous %}
@@ -216,7 +216,45 @@
 
 
 	<!-- scrollToTop end -->
-   
+   <script>
+	const paginator=document.querySelectorAll('#pagination_click');
+
+	paginator.forEach(function(element){	
+	element.addEventListener('click', (e) => {
+		if (e.target.tagName === 'A' || e.target.parentNode.tagName === 'A'||e.target.parentNode.parentNode.tagName==='A') {
+			e.preventDefault();
+
+			var targetElement
+			if (e.target.tagName==='A'){
+				
+				targetElement=e.target
+			}else if (e.target.parentNode.tagName=='A'){
+				targetElement=e.target.parentNode
+			}else if(e.target.parentNode.tagName=='svg'){
+				targetElement=e.target.parentNode.parentNode
+			}
+			data_content=element.getAttribute('data-content')
+			data_content=document.getElementById(data_content)
+			const nextPageHref = targetElement.getAttribute('href');
+
+			fetch(nextPageHref,{
+				method: 'GET',  
+				headers: {
+					'X-Requested-With': 'FETCH'
+				},
+			})   .then(response=>response.json()).then(data=>{
+                console.log(data.product_data)
+				document.getElementById('productContainerWrapper').innerhtml=data.product_data
+				element.innerhtml=data.pagination
+			        })
+                .catch(error => console.error('There has been a problem with your fetch operation:', error));
+            
+
+		}
+	});
+})
+	
+</script>
 
     <script>
         
@@ -235,15 +273,10 @@
                         'X-Requested-With': 'XMLHttpRequest',
                     }
                 })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(data => {
-                    document.getElementById('productContainerWrapper').innerHTML = data;
-                })
+                .then(response=>response.json()).then(data=>{
+				document.getElementById('productContainerWrapper').innerhtml=data.content
+				element.innerhtml=data.pagination
+			        })
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
             }
             </script>
