@@ -55,9 +55,7 @@
 												<img src="{{profile.profile_photo.url}}" alt="profile" >
 												 
 												{% else %}
-												 <img src="{% static 'assets/img/profile-img.jpg' %}" alt="profile" >
-												 											
-												 
+												 <img src="{% static 'assets/img/profile-img.jpg' %}" alt="profile" >			 
 												 {% endif %} 
 											</div>										    
 											 <div class="settings-upload-btn">											    
@@ -66,7 +64,7 @@
 											 </div>	
 											 <span>Max file size: 10 MB</span>
 										</div>                                        									
-                                        <a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>										
+                                        {% comment %} <a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>										 {% endcomment %}
 									</div>
 									<div class="profile-form">
 										    <div class="form-group">

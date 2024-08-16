@@ -411,7 +411,7 @@
 
 	<!---addd the feature category-->
 	<section class="latestad-section grid-view featured-slider">
-		{% for latest_product  in latest_products %}	
+		{% for latest_product  in latest_products|slice:":3" %}	
 		<div class="container">		
 				<div class="section-heading">
 						<div class="row align-items-center">
@@ -451,23 +451,37 @@
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
 												<div class="grid-author">
-													 <img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-												</div>														
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
 												<div class="blog-features">
-												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i> Education</span></a>
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
-													<span>  <i class="feather-eye"></i> 4000  </span>
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
 												</div>
 											</div> 
 											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
+												{% if product.location %}
 												<div class="location-info">
-												   <i class="feather-map-pin"></i> Los Angeles
+												   <i class="feather-map-pin"></i>{{product.location.address}}
 												</div>
+												{% else %}
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 06 Oct, 2022
+													<i class="feather-map-pin"></i>Los Angeles
+												 </div>
+												{% endif %}
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i>{{product.created_date}}
 												</div>
 											</div>
 											<div class="amount-details">
@@ -512,7 +526,7 @@
                     or Find Anything you desire</h3>
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humo or randomised words which don't look even slightlys</p>
                     <div class="cta-btn">
-                        <a href="add-listing.html" class="btn-primary postad-btn">Post Your Ads</a>
+                        <a href="{% url 'add_listing' %}" class="btn-primary postad-btn">Post Your Ads</a>
                         <a href="listing-grid-sidebar.html" class="browse-btn">Browse Ads</a>							  
                     </div>
                 </div>

@@ -43,7 +43,7 @@
                                 <input type="text" id="searchQuery" name="searchQuery" class="form-control" placeholder="What are you looking for?">
                             </div>
                             <div class="filter-content form-group">
-                                <select id="categorySelect" name="categorySelect" class="form-control select category-select">
+                                <select id="categorySelect" name="categorySelect" class="form-control select category-select" >
                                     <option value="">Choose Category</option>
                                     <option value="Computer">Computer</option>
                                     <option value="Electronics">Electronics</option>
@@ -121,7 +121,7 @@
                         <div class="sortbyset">
                             <span class="sortbytitle">Sort by</span>
                             <div class="sorting-select">
-                                <select id="sortSelect" class="form-control select" onchange="handleSortChange(this)">
+                                <select id="sortSelect" class="form-control select" onchange="sortProducts(this)">
                                     <option value="default">Default</option>
                                     <option value="low-high">Price Low to High</option>
                                     <option value="high-low">Price High to Low</option>
@@ -145,63 +145,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog-listview" id='productContainer'>
-
-					{% for product in products %}
-                    <div class="card" data-index="{{ forloop.counter }}">
-                        <div class="blog-widget">
-                            <div class="blog-img">
-                                <a href="service-details.html">
-                                    <img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
-                                </a>
-                                <div class="fav-item">
-                                    <span class="featured-text">Featured</span>
-                                    <a href="javascript:void(0)" class="fav-icon">
-                                        <i class="feather-heart"></i>
-                                    </a>										
-                                </div>															    
-                            </div>
-                            <div class="bloglist-content">
-                                <div class="card-body">
-                                     <div class="blogfeaturelink">
-                                        <div class="blog-features">
-                                           <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i> Construction</span></a>
-                                        </div>																	  
-                                        <div class="blog-author"> 
-                                          <div class="blog-author-img">
-                                            <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="author">
-                                          </div>
-                                          <a href="javascript:void(0);">John Doe</a>
-                                        </div>
-                                    </div> 
-                                    <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
-                                    <div class="blog-location-details">
-                                        <div class="location-info">
-                                           <i class="feather-map-pin"></i> Los Angeles
-                                        </div>
-                                        <div class="location-info">
-                                           <i class="feather-phone-call"></i> +44 6633 6526
-                                        </div>
-                                        <div class="location-info">
-                                           <i class="feather-eye"></i>0
-                                        </div>
-                                    </div>
-                                    <p class="ratings">
-                                        <span>4.0</span> ( 50 Reviews )
-                                    </p>
-                                    <div class="amount-details">
-                                        <div class="amount">
-                                            <span class="validrate">${{product.price}}</span>
-                                            <span>$450</span>
-                                        </div>
-                                        <a href="service-details.html">View details</a>
-                                    </div>	
-                                </div>	
-                            </div>			 
-                        </div> 
-                    </div>
-                   
-					{% endfor %}							
+                <div class="blog-listview" id='productContainerWrapper' >
+                    {% include 'partials/side_product_list.html' %}
                 </div>	
                 <!--Pagination--> 
                 <div class="listing-pagination">
@@ -271,123 +216,38 @@
 
 
 	<!-- scrollToTop end -->
-   <script>
-    function handleSortChange(selectElement) {
-        const productContainer = document.getElementById("productContainer");
-        let products = Array.from(productContainer.getElementsByClassName("card"));
-        let selectedValue = selectElement.value;
-    
-    
-        products.sort((a, b) => {
-            let priceA = parseFloat(a.querySelector("h6 a").textContent.replace("$", ""));
-            let priceB = parseFloat(b.querySelector("h6 a").textContent.replace("$", ""));
-    
-    
-            if (selectedValue === "low-high") {
-                return priceA - priceB;  
-            } else if (selectedValue === "high-low") {
-                return priceB - priceA; 
-            } else {
-                return a.dataset.index - b.dataset.index; 
-            }
-        });
-    
-        products.forEach(product => {
-            productContainer.appendChild(product);
-        });
-    }
-    
-   </script>
-
-
    
-<script>
 
-
-    document.addEventListener("DOMContentLoaded", function() {
-     
-    
-        const filterForm = document.getElementById("filterForm");
-        if (!filterForm) {
-         
-            return;
-        }
-    
-        filterForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-    
-            const formData = new FormData(filterForm);
-            for (const pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
-    
-            const searchParams = new URLSearchParams(formData);
-            console.log(searchParams.toString(), 'URL parameters');
-    
-            const url = `/category/search/?${searchParams.toString()}`;
-            console.log(url, 'constructed URL');
-    
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Received Data:", data);
-                    updateProductList(data);
+    <script>
+        
+            function sortProducts(element) {
+                console.log('i am ')
+                let sortValue = element.value;
+                let url = new URL(window.location.href);
+                url.searchParams.set('sort', sortValue);
+                console.log('i am running')
+                console.log(url,sortValue)
+            
+            
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
                 })
-                .catch(error => console.error("Error:", error));
-        });
-    
-        function updateProductList(products) {
-            const productContainer = document.getElementById('productContainer');
-            productContainer.innerHTML = ''; 
-    
-            products.forEach(product => {
-                const productElement = document.createElement('div');
-                productElement.className = 'card';
-                productElement.innerHTML = `
-                    <div class="blog-widget">
-                        <div class="blog-img">
-                            <a href="service-details.html">
-                                <img src="/media/${product.cover_image}" class="img-fluid" alt="blog-img">
-                            </a>
-                            <div class="fav-item">
-                                <span class="featured-text">Featured</span>
-                                <a href="javascript:void(0)" class="fav-icon">
-                                    <i class="feather-heart"></i>
-                                </a>										
-                            </div>															    
-                        </div>
-                        <div class="bloglist-content">
-                            <div class="card-body">
-                                <h6><a href="service-details.html">${product.product_name}</a></h6>																	 
-                                <div class="blog-location-details">
-                                    <div class="location-info">
-                                       <i class="feather-map-pin"></i> Los Angeles
-                                    </div>
-                                    <div class="location-info">
-                                       <i class="feather-phone-call"></i> +44 6633 6526
-                                    </div>
-                                    <div class="location-info">
-                                       <i class="feather-eye"></i>0
-                                    </div>
-                                </div>
-                                <p class="ratings">
-                                    <span>4.0</span> ( 50 Reviews )
-                                </p>
-                                <div class="amount-details">
-                                    <div class="amount">
-                                        <span class="validrate">$${product.price}</span>
-                                        <span>$450</span>
-                                    </div>
-                                    <a href="service-details.html">View details</a>
-                                </div>	
-                            </div>	
-                        </div>			 
-                    </div>`;
-                productContainer.appendChild(productElement);
-            });
-        }
-    });
-    
-</script>
-	
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    document.getElementById('productContainerWrapper').innerHTML = data;
+                })
+                .catch(error => console.error('There has been a problem with your fetch operation:', error));
+            }
+            </script>
+            
+       
+        
 	{% endblock %}

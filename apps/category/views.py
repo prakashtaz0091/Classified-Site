@@ -21,30 +21,35 @@ from django.http import HttpResponse
 #     return render(request, 'home/index.html', context)
 
 
+def listing_view(request, slug):
+    category = Category.objects.get(slug=slug)
+    sort_by = request.GET.get('sort', 'default')
+    products = Product.objects.filter(category=category).order_by('created_date')
+    
+    
 
-def listing_view(request,slug):
-    try:
-        category=Category.objects.get(slug=slug)
-        products=Product.objects.filter(category=category)
-        count=products.count()
-        # for pagination 
-        paginator = Paginator(products, 1)  
-        page_number = request.GET.get('page')  
-        page_obj = paginator.get_page(page_number)  
+    # For pagination
+    paginator = Paginator(products, 3)  # Adjust the number for items per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-        context = {
-            'products': page_obj, 
-            'count': paginator.count,
-            'category': category,  
-            'page_obj': page_obj, 
-            'count':count
-        }
-        return render(request,'listing/listing-sidebar.html',context)
-    except Exception as e:
-        print(e)
-        # will later redirect to 400 pages
+    # Apply sorting to the items on the current page only
+    if sort_by == 'low-high':
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+    elif sort_by == 'high-low':
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
 
+    context = {
+        'products': page_obj,
+        'count': paginator.count,
+        'category': category,
+        'page_obj': page_obj,
+    }
 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'partials/side_product_list.html', context)  # Return only the product list for AJAX
+
+    return render(request, 'listing/listing-sidebar.html', context)
 
 
 
