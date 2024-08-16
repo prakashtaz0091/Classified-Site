@@ -23,8 +23,6 @@ def home(request):
                 bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
             else: 
                 bookmarked_product_ids = []
-  
-           
             context = {
                 'latest_products': latest_products,
                 'categories':all_categories,
@@ -85,12 +83,6 @@ def dashboard(request):
         # will later redirect to 404 page
 
 
-
-
-
-
-
-
 def my_listing(request):
     
     return render(request,'others/my-listing.html')
@@ -117,7 +109,18 @@ def messages(request):
 
 
 def reviews(request):
-    return render( request,'others/reviews.html')
+    try:
+        visitor_reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')
+        your_reviews_list=Reviews.objects.select_related().filter(created_by=request.user).order_by('-id')
+        context={
+            'visitor_reviews_list':visitor_reviews_list,
+            'your_reviews_list':your_reviews_list
+        }
+        return render( request,'others/reviews.html',context)
+    except Exception as e:
+        print(e)
+        # will later forward to 404 page 
+
 
 # For customers to provide feedback or opinions to user
 def feedback(request,hashed_user_id):
