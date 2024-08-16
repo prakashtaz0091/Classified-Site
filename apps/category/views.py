@@ -23,27 +23,26 @@ from django.http import HttpResponse
 
 
 def listing_view(request,slug):
-    category=Category.objects.get(slug=slug)
-    products=Product.objects.filter(category=category)
-    count=products.count()
-    
-    
-    # for pagination 
-    
-    
-    paginator = Paginator(products, 3)  
-    page_number = request.GET.get('page')  
-    page_obj = paginator.get_page(page_number)  
+    try:
+        category=Category.objects.get(slug=slug)
+        products=Product.objects.filter(category=category)
+        count=products.count()
+        # for pagination 
+        paginator = Paginator(products, 1)  
+        page_number = request.GET.get('page')  
+        page_obj = paginator.get_page(page_number)  
 
-    context = {
-        'products': page_obj, 
-        'count': paginator.count,
-        'category': category,  
-        'page_obj': page_obj, 
-        'count':count
-    }
-   
-    return render(request,'listing/listing-sidebar.html',context)
+        context = {
+            'products': page_obj, 
+            'count': paginator.count,
+            'category': category,  
+            'page_obj': page_obj, 
+            'count':count
+        }
+        return render(request,'listing/listing-sidebar.html',context)
+    except Exception as e:
+        print(e)
+        # will later redirect to 400 pages
 
 
 
