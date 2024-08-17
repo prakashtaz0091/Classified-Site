@@ -7,20 +7,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 
-# Create your views here.
-# def category_view(request):
-#     categories = Category.objects.prefetch_related('sub_categories').all()
-
-#     context = {
-#         'categories': categories,
-#     }
-    
-#     print(context)
-    
-    
-#     return render(request, 'home/index.html', context)
-
-
 def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
     sort_by = request.GET.get('sort', 'default')
