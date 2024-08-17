@@ -346,3 +346,25 @@ def add_listing(request):
             'features':features
         }
         return render(request,'listing/add-listing.html',context)
+
+
+
+def all_ads(request):
+    product_list=Product.objects.all().order_by('-created_date')
+    if request.user.is_authenticated:    
+        bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
+    else: 
+        bookmarked_product_ids = []
+
+    
+    paginator = Paginator(product_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    products = page_obj.object_list  # Get the list of products on the current page
+
+    context = {
+        'page_obj': page_obj,
+        'products': products,
+        'book_mark':bookmarked_product_ids
+    }
+    return render(request, 'listing/listing-grid.html', context)

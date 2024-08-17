@@ -527,7 +527,7 @@
                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humo or randomised words which don't look even slightlys</p>
                     <div class="cta-btn">
                         <a href="{% url 'add_listing' %}" class="btn-primary postad-btn">Post Your Ads</a>
-                        <a href="listing-grid-sidebar.html" class="browse-btn">Browse Ads</a>							  
+                        <a href="{% url 'all_ads' %}" class="browse-btn">Browse Ads</a>							  
                     </div>
                 </div>
             </div>
@@ -878,7 +878,6 @@
 		document.querySelectorAll('.fav-icon').forEach(function(icon) {
 			icon.addEventListener('click', function() {
 				var itemId = this.closest('.fav-item').getAttribute('data-id');
-				console.log(itemId, 'itemid');  // Log the item ID for debugging
 				var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 	
 				fetch('/ad/toggle-bookmark/', {

@@ -11,6 +11,7 @@ urlpatterns = [
     path('contact/',views.contact,name='contact'),
     path('how_it_works/',views.how_it_works,name='how_it_works'),
     path('dashboard/',views.dashboard,name='dashboard'),
+    path('all_ads/',views.all_ads,name='all_ads'),
    
     path('my_listing/',views.my_listing,name='my_listing'),
     path('book_marks/',views.book_marks,name='book_marks'),
@@ -20,6 +21,5 @@ urlpatterns = [
     path('add_listing/',views.add_listing,name='add_listing'),
     path('delete_my_listing/<int:id>/',views.delete_my_listing,name='delete_my_listing'),
     path('edit_my_listing/<int:id>/',views.edit_my_listing,name='edit_my_listing'),
-    path('listing_grid/',views.listing_grid,name='listing_grid'),
-    path('listing_grid_sidebar/',views.listing_grid_sidebar,name='listing_grid_sidebar'),
+    
 ]
