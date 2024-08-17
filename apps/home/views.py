@@ -97,6 +97,8 @@ def my_listing(request):
         sort_option = request.GET.get('sort', '-created_date')  # Default to newest
         products = Product.objects.filter(created_by=request.user).order_by(sort_option)
         
+       
+        
         paginator = Paginator(products, 3)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
