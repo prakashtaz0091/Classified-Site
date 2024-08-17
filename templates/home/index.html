@@ -118,45 +118,65 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">						
-						<div class="owl-carousel featured-slider grid-view">								
+						<div class="owl-carousel featured-slider grid-view">
+							{% for product in all_products %}								
 							<div class="card aos" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
 										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
+											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
-										<div class="fav-item">
+										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
+													{% if product.created_by.profile.profile_photo %}
+													<img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
 												</div>
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Education</span></a>
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>
+														 {% for category in product.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
-													<span>  <i class="feather-eye"></i>4000 </span>
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
 												</div>
 											</div> 
-											<h6><a href="{% url 'service_details' %}">2017 Gulfsteam Ameri-lite</a></h6>																	 
+											<h6><a href="{% url 'service_details' %}">{{product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
+													{% if product.location.address %}
+													<i class="feather-map-pin"></i>{{product.location.address}}
+													{% else %}
 													<i class="feather-map-pin"></i> Los Angeles
+
+
+													{% endif %}
 												</div>
 												<div class="location-info">
-													<i class="fa-regular fa-calendar-days"></i> 06 Oct, 2022
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
 												</div>
 											</div>
 											<div class="amount-details">
 												<div class="amount">
-													<span class="validrate">$350</span>
+													<span class="validrate">${{product.price}}</span>
 													<span>$450</span>
 												</div>
 												<div class="ratings">
@@ -167,240 +187,8 @@
 									</div>			 
 								</div> 
 							</div>
-							<div class="card aos" data-aos="fade-up">
-								<div class="blog-widget">
-									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-2.jpg' %}" class="img-fluid" alt="blog-img">
-										</a>
-										<div class="fav-item">
-											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
-									</div>
-									<div class="bloglist-content">
-										<div class="card-body">
-											<div class="blogfeaturelink">
-												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="author">
-												</div>											    	
-												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
-												</div>																	  
-												<div class="blog-author text-end"> 
-													<span>   <i class="feather-eye"></i>4000  </span>
-												</div>
-											</div> 
-											<h6><a href="{% url 'service_details' %}">Fashion luxury Men date</a></h6>																	 
-											<div class="blog-location-details">
-												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 08 Oct, 2022
-												</div>
-											</div>
-											<div class="amount-details">
-												<div class="amount">
-													<span class="validrate">$250</span>
-													<span>$350</span>
-												</div>
-												<div class="ratings">
-													<span>4.6</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
-								</div> 
-							</div>										
-							<div class="card aos" data-aos="fade-up">
-								<div class="blog-widget">
-									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-3.jpg' %}" class="img-fluid" alt="blog-img">
-										</a>
-										<div class="fav-item">
-											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
-									</div>
-									<div class="bloglist-content">
-										<div class="card-body">
-											<div class="blogfeaturelink">
-												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-04.jpg' %}" alt="author">
-												</div>
-												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Electronics</span></a>
-												</div>																	  
-												<div class="blog-author text-end"> 
-													<span>   <i class="feather-eye"></i>4000  </span>
-												</div>
-											</div> 
-											<h6><a href="{% url 'service_details' %}">Apple Iphone 6 16GB 4G LTE</a></h6>																	 
-											<div class="blog-location-details">
-												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 09 Oct, 2022
-												</div>
-											</div>
-											<div class="amount-details">
-												<div class="amount">
-													<span class="validrate">$550</span>
-													<span>$400</span>
-												</div>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
-								</div> 
-							</div>																			
-							<div class="card aos" data-aos="fade-up">
-								<div class="blog-widget">
-									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-4.jpg' %}" class="img-fluid" alt="blog-img">
-										</a>
-										<div class="fav-item">
-											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
-									</div>
-									<div class="bloglist-content">
-										<div class="card-body">
-											<div class="blogfeaturelink">
-												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="author">
-												</div>	
-												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Gadgets</span></a>
-												</div>																	  
-												<div class="blog-author text-end"> 
-													<span> <i class="feather-eye"></i>4000  </span>
-												</div>
-											</div> 
-											<h6><a href="{% url 'service_details' %}">Customized Apple Imac </a></h6>																	 
-											<div class="blog-location-details">
-												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 10 Oct, 2022
-												</div>
-											</div>
-											<div class="amount-details">
-												<div class="validrate">$450</div>
-												<span>$300</span>
-												<div class="ratings">
-													<span>4.5</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
-								</div> 
-							</div>	
-							<div class="card aos" data-aos="fade-up">
-								<div class="blog-widget">
-									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-9.jpg' %}" class="img-fluid" alt="blog-img">
-										</a>
-										<div class="fav-item">
-											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
-									</div>
-									<div class="bloglist-content">
-										<div class="card-body">
-											<div class="blogfeaturelink">
-												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-												</div>											    	
-												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Education</span></a>
-												</div>																	  
-												<div class="blog-author text-end"> 
-													<span> <i class="feather-eye"></i>4000  </span>
-												</div>
-											</div> 
-											<h6><a href="{% url 'service_details' %}">2017 Gulfsteam Ameri-lite</a></h6>																	 
-											<div class="blog-location-details">
-												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 06 Oct, 2022
-												</div>
-											</div>
-											<div class="amount-details">
-												<div class="validrate">$350</div>
-												<span>$450</span>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>
-											</div>	
-										</div>	
-									</div>			 
-								</div> 
-							</div>
-							<div class="card aos" data-aos="fade-up">
-								<div class="blog-widget">
-									<div class="blog-img">
-										<a href="{% url 'service_details' %}">
-											<img src="{% static 'assets/img/featured/feature-5.jpg' %}" class="img-fluid" alt="blog-img">
-										</a>
-										<div class="fav-item">
-											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
-									</div>
-									<div class="bloglist-content">
-										<div class="card-body">
-											<div class="blogfeaturelink">
-												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-06.jpg' %}" alt="author">
-												</div>											   
-												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Construction</span></a>
-												</div>																	  
-												<div class="blog-author text-end"> 
-													<span><i class="feather-eye"></i> 4000  </span>
-												</div>
-											</div> 
-											<h6><a href="{% url 'service_details' %}">Villa 457 sq.m. In Benidorm Fully</a></h6>																	 
-											<div class="blog-location-details">
-												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
-												</div>
-												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i> 11 Oct, 2022
-												</div>
-											</div>
-											<div class="amount-details">
-												<div class="validrate">$650</div>
-												<span>$600</span>
-												<div class="ratings">
-													<span>4.5</span> (50)
-												</div>												
-											</div>	
-										</div>	
-									</div>			 
-								</div> 
-							</div>										
+							{% endfor %}
+																
 						</div>							
 					</div>
 				</div>
