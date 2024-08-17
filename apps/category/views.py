@@ -47,7 +47,7 @@ def listing_view(request, slug):
     if request.headers.get('x-requested-with') == 'FETCH':
         product_list= render_to_string( 'partials/side_product_list.html', context,request=request)  # Return only the product list for AJAX
         print(product_list)
-        pagination_data= 'hello'
+        pagination_data= render_to_string('partials/pagination.html',context,request=request)
         response_data={
             'product_data':product_list,
             'pagination_data':pagination_data

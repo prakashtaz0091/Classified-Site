@@ -244,11 +244,10 @@
 				},
 			})   .then(response=>response.json()).then(data=>{
                 console.log(data.product_data)
-				document.getElementById('productContainerWrapper').innerhtml=data.product_data
-				element.innerhtml=data.pagination
+				document.getElementById('productContainerWrapper').innerHTML=data.product_data
+				element.innerHTML=data.pagination_data
 			        })
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
-            
 
 		}
 	});
@@ -259,23 +258,20 @@
     <script>
         
             function sortProducts(element) {
-                console.log('i am ')
                 let sortValue = element.value;
                 let url = new URL(window.location.href);
                 url.searchParams.set('sort', sortValue);
-                console.log('i am running')
-                console.log(url,sortValue)
             
             
                 fetch(url, {
                     method: 'GET',
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-Requested-With': 'FETCH',
                     }
                 })
                 .then(response=>response.json()).then(data=>{
-				document.getElementById('productContainerWrapper').innerhtml=data.content
-				element.innerhtml=data.pagination
+				document.getElementById('productContainerWrapper').innerHTML=data.content
+				element.innerHTML=data.pagination_data
 			        })
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
             }
