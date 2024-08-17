@@ -77,7 +77,6 @@
 						    <div class="card">
 				                <h4><img  src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Filter</h4>
 							    <form id='filter-form'>
-									{% csrf_token %}
 								    <div class="filter-content looking-input form-group">
 									  <input type="text" class="form-control" name='query' placeholder="What are you looking for?">
 									</div> 
@@ -134,7 +133,6 @@
 										</div>  
 									</div>
 								</form>
-								<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 							</div>
 						</div>
 					</div>
@@ -271,36 +269,7 @@
         }
     </script>
 
-
-	<script>
-		document.getElementById('filter-form').addEventListener('submit', function(e) {
-			e.preventDefault(); // Prevent the default form submission
-			
-            let url = new URL(window.location.href);
-			
-			var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-		
-			let formData = new FormData(this);
-		
-			fetch(url, {
-				method: 'POST',
-				headers: {
-					'X-CSRFToken': '{{ csrf_token }}',
-				},
-				body: formData
-			})
-			.then(response => response.text())
-			.then(html => {
-				console.log(html,'data search')
-				document.getElementById('productContainerWrapper').innerHTML = html;
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		});
-		
-	</script>
+	
 
 
 	

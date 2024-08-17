@@ -13,61 +13,6 @@ def listing_view(request, slug):
     products = Product.objects.filter(category=category).order_by('created_date')
     
     
-    if request.method=="POST":
-        query = request.POST.get('query')
-        location = request.POST.get('location')
-        region = request.POST.get('region')
-        features = request.POST.getlist('features')
-        radius = request.POST.get('radius')
-        min_price = request.POST.get('min_price')
-        max_price = request.POST.get('max_price')
-        
-        
-        
-        if query:
-                products = products.filter(product_name__icontains=query)
-        if location:
-            products = products.filter(location__icontains=location)
-        if region:
-            products = products.filter(region=region)
-        if features:
-            products = products.filter(feature__name__in=features).distinct()
-        if radius:
-            # Add radius filtering logic here
-            pass
-        if min_price:
-            products = products.filter(price__gte=min_price)
-        if max_price:
-            products = products.filter(price__lte=max_price)
-            
-        
-        paginator = Paginator(products, 3)  # Adjust the number for items per page
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-
-        # Apply sorting to the items on the current page only
-        if sort_by == 'low-high':
-            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
-        elif sort_by == 'high-low':
-            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
-            
-        
-        feature=Feature.objects.all()    
-
-        context = {
-            'products': page_obj,
-            'count': paginator.count,
-            'category': category,
-            'page_obj': page_obj,
-            'current_page_product_count': len(page_obj.object_list),
-            'features':feature
-        }
-
-    
-        return render(request, 'partials/side_product_list.html', context)
-    
-
-
 
     # For pagination
     paginator = Paginator(products, 3)  # Adjust the number for items per page
@@ -99,37 +44,29 @@ def listing_view(request, slug):
 
 
 
-def search_products(request):
-    if request.method == "POST":
-        query = request.POST.get('query')
-        location = request.POST.get('location')
-        region = request.POST.get('region')
-        features = request.POST.getlist('features')
-        radius = request.POST.get('radius')
-        min_price = request.POST.get('min_price')
-        max_price = request.POST.get('max_price')
+def search(request):
+    query = request.GET.get('searchQuery', '')
+    category = request.GET.get('categorySelect', '')
+    location = request.GET.get('locationInput', '')
+    region = request.GET.get('regionSelect', '')
+    min_price = request.GET.get('minPrice', None)
+    max_price = request.GET.get('maxPrice', None)
+ 
+    products = Product.objects.all()
 
-        products = Product.objects.all()
+    if query:
+        products = products.filter(product_name__icontains=query) 
+    if category:
+        products = products.filter(category__icontains=category)
+    if min_price:
+        products = products.filter(price__gte=min_price)
+    if max_price:
+        products = products.filter(price__lte=max_price)
 
-        # Add filtering logic here based on the form data
-        if query:
-            products = products.filter(product_name__icontains=query)
-        if location:
-            products = products.filter(location__icontains=location)
-        if region:
-            products = products.filter(region=region)
-        if features:
-            products = products.filter(feature__name__in=features).distinct()
-        if radius:
-            # Add radius filtering logic here
-            pass
-        if min_price:
-            products = products.filter(price__gte=min_price)
-        if max_price:
-            products = products.filter(price__lte=max_price)
-
-        return render(request, 'partials/side_product_list.html', {'products': products})
-    return HttpResponse(status=400)
+    # Prepare data to be sent as JSON
+    product_list = list(products.values('id', 'product_name', 'price', 'description', 'cover_image'))
+    
+    return JsonResponse(product_list, safe=False)
 
 
 
