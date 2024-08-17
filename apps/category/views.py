@@ -23,10 +23,10 @@ from apps.store.models import Product,Feature
 def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
     sort_by = request.GET.get("sort", "default")
-    products = Product.objects.filter(category=category).order_by("created_date")
+    products = Product.objects.filter(category=category).order_by("-id")
 
     # For pagination
-    paginator = Paginator(products, 10)  # Adjust the number for items per page
+    paginator = Paginator(products, 1)  # Adjust the number for items per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -52,7 +52,6 @@ def listing_view(request, slug):
         product_list = render_to_string(
             "partials/side_product_list.html", context, request=request
         )  # Return only the product list for AJAX
-        print(product_list)
         pagination_data = render_to_string(
             "partials/pagination.html", context, request=request
         )
@@ -74,9 +73,9 @@ def filter_category(request):
         min_price = request.GET.get("min_price", None)
         max_price = request.GET.get("max_price", None)
 
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category).order_by('-id')
 
-        if query:
+        if query!="":
             products = products.filter(product_name__icontains=query)
         if min_price:
             products = products.filter(price__gte=min_price)
@@ -88,8 +87,16 @@ def filter_category(request):
         page_obj = paginator.get_page(page_number)
 
         # Prepare data for rendering
+        
         product_list_html = render_to_string("partials/side_product_list.html", {"products": page_obj}, request=request)
-        pagination_html = render_to_string("partials/pagination.html", {"page_obj": page_obj}, request=request)
+        pagination_context={
+            'page_obj':page_obj,
+            'category':category,
+            'query':query,
+            'min_price':min_price,
+            'max_price':max_price
+        }
+        pagination_html = render_to_string("partials/filter_paginations.html", pagination_context, request=request)
 
         if request.headers.get("x-requested-with") == "FETCH":
             response_data = {

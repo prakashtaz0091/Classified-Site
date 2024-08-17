@@ -1,0 +1,30 @@
+        <!-- Previous Page -->
+        <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+            <a class="page-link" 
+               href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}&category={{category}}&query={{query}}&min_price={{min_price}}&max_price={{max_price}}{% else %}#{% endif %}" 
+               data-page="{% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+                <i class="fas fa-arrow-left"></i> Prev
+            </a>
+        </li>
+
+        <!-- Page Numbers -->
+        <li class="justify-content-center pagination-center">
+            <div class="pagelink">
+                <ul>
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="{% url 'filter_category' %}?page={{ num }}&category={{category}}&query={{query}}&min_price={{min_price}}&max_price={{max_price}}" data-page="{{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>                                                
+        </li>                                                
+
+        <!-- Next Page -->
+        <li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+            <a class="page-link" 
+               href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&category={{category}}&query={{query}}&min_price={{min_price}}&max_price={{max_price}}{% else %}#{% endif %}" 
+               data-page="{% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}#{% endif %}">
+                Next <i class="fas fa-arrow-right"></i>
+            </a>
+        </li>
