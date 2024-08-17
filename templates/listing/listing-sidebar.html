@@ -261,8 +261,6 @@
                 let sortValue = element.value;
                 let url = new URL(window.location.href);
                 url.searchParams.set('sort', sortValue);
-            
-            
                 fetch(url, {
                     method: 'GET',
                     headers: {
@@ -270,13 +268,10 @@
                     }
                 })
                 .then(response=>response.json()).then(data=>{
-				document.getElementById('productContainerWrapper').innerHTML=data.content
-				element.innerHTML=data.pagination_data
+				document.getElementById('productContainerWrapper').innerHTML=data.product_data
 			        })
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
             }
             </script>
-            
-       
         
 	{% endblock %}
