@@ -77,9 +77,11 @@ def how_it_works(request):
 def dashboard(request):
     try:
         book_marks=BookMark.objects.filter(user=request.user)
-
+        
+      
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
-        print(reviews_list)
+        
+       
         count=book_marks.count()
         context={
             'book_marks':book_marks,
