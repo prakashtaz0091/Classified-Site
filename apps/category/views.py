@@ -1,11 +1,10 @@
-from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
+
 from apps.category.models import Category
 from apps.store.models import Product
-from django.http import JsonResponse
-from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.template.loader import render_to_string
 
 # Create your views here.
 # def category_view(request):
@@ -14,64 +13,67 @@ from django.template.loader import render_to_string
 #     context = {
 #         'categories': categories,
 #     }
-    
+
 #     print(context)
-    
-    
+
+
 #     return render(request, 'home/index.html', context)
 
 
 def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
-    sort_by = request.GET.get('sort', 'default')
-    products = Product.objects.filter(category=category).order_by('created_date')
-    
+    sort_by = request.GET.get("sort", "default")
+    products = Product.objects.filter(category=category).order_by("created_date")
+
     # For pagination
     paginator = Paginator(products, 1)  # Adjust the number for items per page
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
     # Apply sorting to the items on the current page only
-    if sort_by == 'low-high':
+    if sort_by == "low-high":
         page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
-    elif sort_by == 'high-low':
-        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+    elif sort_by == "high-low":
+        page_obj.object_list = sorted(
+            page_obj.object_list, key=lambda x: x.price, reverse=True
+        )
 
     context = {
-        'products': page_obj,
-        'count': paginator.count,
-        'category': category,
-        'page_obj': page_obj,
+        "products": page_obj,
+        "count": paginator.count,
+        "category": category,
+        "page_obj": page_obj,
     }
 
-    if request.headers.get('x-requested-with') == 'FETCH':
-        product_list= render_to_string( 'partials/side_product_list.html', context,request=request)  # Return only the product list for AJAX
+    if request.headers.get("x-requested-with") == "FETCH":
+        product_list = render_to_string(
+            "partials/side_product_list.html", context, request=request
+        )  # Return only the product list for AJAX
         print(product_list)
-        pagination_data= render_to_string('partials/pagination.html',context,request=request)
-        response_data={
-            'product_data':product_list,
-            'pagination_data':pagination_data
+        pagination_data = render_to_string(
+            "partials/pagination.html", context, request=request
+        )
+        response_data = {
+            "product_data": product_list,
+            "pagination_data": pagination_data,
         }
-        print(response_data)
         return JsonResponse(response_data)
 
-
-    return render(request, 'listing/listing-sidebar.html', context)
-
+    return render(request, "listing/listing-sidebar.html", context)
 
 
 def search(request):
-    query = request.GET.get('searchQuery', '')
-    category = request.GET.get('categorySelect', '')
-    location = request.GET.get('locationInput', '')
-    region = request.GET.get('regionSelect', '')
-    min_price = request.GET.get('minPrice', None)
-    max_price = request.GET.get('maxPrice', None)
- 
+    query = request.GET.get("searchQuery", "")
+    category = request.GET.get("categorySelect", "")
+    location = request.GET.get("locationInput", "")
+    region = request.GET.get("regionSelect", "")
+    min_price = request.GET.get("minPrice", None)
+    max_price = request.GET.get("maxPrice", None)
+
     products = Product.objects.all()
 
     if query:
-        products = products.filter(product_name__icontains=query) 
+        products = products.filter(product_name__icontains=query)
     if category:
         products = products.filter(category__icontains=category)
     if min_price:
@@ -80,22 +82,22 @@ def search(request):
         products = products.filter(price__lte=max_price)
 
     # Prepare data to be sent as JSON
-    product_list = list(products.values('id', 'product_name', 'price', 'description', 'cover_image'))
-    
+    product_list = list(
+        products.values("id", "product_name", "price", "description", "cover_image")
+    )
+
     return JsonResponse(product_list, safe=False)
-
-
 
 
 def category(request):
     try:
         category = Category.objects.all()
-        print(category, 'category')
-        context = {
-            'category': category
-        }
-        return render(request, 'others/categories.html', context)
-        
+        print(category, "category")
+        context = {"category": category}
+        return render(request, "others/categories.html", context)
+
     except Exception as e:
         print(f"Error occurred: {e}")
-        return HttpResponse("An error occurred while processing your request.", status=500)
+        return HttpResponse(
+            "An error occurred while processing your request.", status=500
+        )

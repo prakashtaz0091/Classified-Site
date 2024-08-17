@@ -1,15 +1,17 @@
 from django.contrib import admin
-from .models import Product,ProductImages,BookMark,Location,ContactInformation,Feature
-# Register your models here.
 
+from .models import (BookMark, ContactInformation, Feature, Location, Product,
+                     ProductImages)
+
+# Register your models here.
 
 
 class Store_Admin(admin.ModelAdmin):
     prepopulated_fields = {
-        'slug': ['product_name'],
+        "slug": ["product_name"],
     }
-    list_display=('product_name','price','modified_at','is_available')
-    list_display_links=('product_name','price','modified_at','is_available')
+    list_display = ("product_name", "price", "modified_at", "is_available")
+    list_display_links = ("product_name", "price", "modified_at", "is_available")
 
 
 admin.site.register(Product, Store_Admin)
