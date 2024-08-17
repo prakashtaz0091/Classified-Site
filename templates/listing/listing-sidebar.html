@@ -76,26 +76,20 @@
 			            <div class="listings-sidebar">
 						    <div class="card">
 				                <h4><img  src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Filter</h4>
-							    <form>
+							    <form id='filter-form'>
+									{% csrf_token %}
 								    <div class="filter-content looking-input form-group">
-									  <input type="text" class="form-control" placeholder="What are you looking for?">
+									  <input type="text" class="form-control" name='query' placeholder="What are you looking for?">
 									</div> 
-									<div class="filter-content form-group">  
-									   <select class="form-control select category-select">
-									    	<option value="">Choose Category</option>
-											<option>Computer</option>
-											<option>Electronics</option>
-											<option>Car wash</option>
-										</select>
-									</div>
+								
 									<div class="filter-content looking-input form-group input-placeholder">
 										<div class="group-img">
-										  <input type="text" class="form-control" placeholder="Where to look?">
+										  <input type="text" class="form-control" name='location' placeholder="Where to look?">
 										  <i class="feather-map-pin"></i>
 									    </div>
 									</div>
 									<div class="filter-content form-group region">
-									    <select class="form-control select region-select">
+									    <select class="form-control select region-select" name='region'>
 											<option value="">Region</option>
 											<option>Canada</option>
 											<option>USA</option>
@@ -104,43 +98,16 @@
 									</div>
 									<div class="filter-content form-group amenities">
 									    <h4> Amenities</h4>
+
 										<ul>
+											{% for feature in features %}
 											<li>
 												<label class="custom_check">
-												<input type="checkbox" name="wireless-internet">
-												<span class="checkmark"></span> Wireless Internet
+												<input type="checkbox" name="features">
+												<span class="checkmark"></span> {{feature.name}}
 												</label>
 											</li>
-											<li>
-												<label class="custom_check">
-												<input type="checkbox" name="accept-credit-card">
-												<span class="checkmark"></span> Accepts Credit Cards 
-										    	 </label>
-											</li>
-											<li>
-												<label class="custom_check">
-												<input type="checkbox" name="Coupouns">
-												<span class="checkmark"></span> Coupouns
-										        </label>
-											</li>
-											<li>
-												<label class="custom_check">
-												<input type="checkbox" name="parking-street">
-												<span class="checkmark"></span> Parking Street
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-												<input type="checkbox" name="bike-parking">
-												<span class="checkmark"></span> Bike Parking
-												</label>
-											</li>
-											<li>
-												<label class="custom_check">
-												<input type="checkbox" name="Smoking-Allowed">
-												<span class="checkmark"></span> Smoking Allowed
-												</label>
-											</li>
+											{% endfor %}
 										</ul>
 									</div>
 									<div class="filter-content form-group amenities radius">
@@ -151,15 +118,15 @@
 											</div>
 										    <div class="clearfix"></div>
 											<div class="filter-range">
-												<input type="text"  class="input-range">
+												<input type="text"  class="input-range" name='radius'>
 											</div>
 										</div>
 									</div>									
 									<div class="filter-content amenities mb-0">
     									<h4> Price Range</h4>
 										<div class="form-group mb-0">
-										     <input type="text" class="form-control" placeholder="Min">
-										     <input type="text" class="form-control me-0" placeholder="Max">
+										     <input type="text" class="form-control" placeholder="Min" name='min_price'>
+										     <input type="text" class="form-control me-0" placeholder="Max" name='max_price'>
 										</div>
 										<div class="search-btn">
 											<button class="btn btn-primary" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
@@ -167,6 +134,7 @@
 										</div>  
 									</div>
 								</form>
+								<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 							</div>
 						</div>
 					</div>
@@ -174,7 +142,7 @@
                         <div class="row sorting-div">
 					    	<div class="col-lg-4 col-sm-4 align-items-center d-flex">
 								<div class="count-search">
-									<p>Showing <span>1-8</span> of 10 Results</p>
+									<p>Showing <span>{{page_obj.start_index}}-{{page_obj.end_index}}</span> of {{count}} Results</p>
 								</div>
 							</div>
 						    <div class="col-lg-8 col-sm-8  align-items-center">
@@ -302,6 +270,39 @@
             .catch(error => console.error('There has been a problem with your fetch operation:', error));
         }
     </script>
+
+
+	<script>
+		document.getElementById('filter-form').addEventListener('submit', function(e) {
+			e.preventDefault(); // Prevent the default form submission
+			
+            let url = new URL(window.location.href);
+			
+			var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+		
+			let formData = new FormData(this);
+		
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'X-CSRFToken': '{{ csrf_token }}',
+				},
+				body: formData
+			})
+			.then(response => response.text())
+			.then(html => {
+				console.log(html,'data search')
+				document.getElementById('productContainerWrapper').innerHTML = html;
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		});
+		
+	</script>
+
+
 	
     <!-- jQuery -->
     <script src="{% static 'assets/js/jquery-3.7.0.min.js' %}"></script>

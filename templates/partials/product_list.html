@@ -1,5 +1,5 @@
 {% for item in products %}
-<tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
+<tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}"  id='product-list'>
     <td>
         <div class="listingtable-img"> 
             <a href="{% url 'service_detail' item.slug %}">
