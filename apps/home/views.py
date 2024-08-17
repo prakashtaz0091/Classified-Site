@@ -80,21 +80,6 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
-<<<<<<< HEAD
-        book_marks = BookMark.objects.filter(user=request.user)
-
-        reviews_list = (
-            Reviews.objects.select_related()
-            .filter(reviewed_for=request.user)
-            .order_by("-id")[:5]
-        )
-        print(reviews_list)
-        count = book_marks.count()
-        context = {
-            "book_marks": book_marks,
-            "count": count,
-            "reviews_list": reviews_list,
-=======
         book_marks=BookMark.objects.filter(user=request.user)
         
       
@@ -106,7 +91,6 @@ def dashboard(request):
             'book_marks':book_marks,
             'count':count,
             'reviews_list':reviews_list
->>>>>>> origin/master
         }
         return render(request, "others/dashboard.html", context)
     except Exception as e:
@@ -353,15 +337,6 @@ def add_listing(request):
 
         return redirect("add_listing")
 
-<<<<<<< HEAD
-    else:
-        category = Category.objects.all()
-        features = Feature.objects.all()
-        context = {"categories": category, "features": features}
-        return render(request, "listing/add-listing.html", context)
-=======
-
-   
     else:    
         category=Category.objects.all()
         features=Feature.objects.all()
@@ -392,4 +367,3 @@ def all_ads(request):
         'book_mark':bookmarked_product_ids
     }
     return render(request, 'listing/listing-grid.html', context)
->>>>>>> origin/master

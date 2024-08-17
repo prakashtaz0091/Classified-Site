@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-<<<<<<< HEAD
     path("", views.home, name="home"),
     path("privacy/", views.privacy, name="privacy"),
     path("something_wrong/", views.something_wrong, name="error"),
@@ -24,7 +23,6 @@ urlpatterns = [
     path("edit_my_listing/<int:id>/", views.edit_my_listing, name="edit_my_listing"),
     #    path('listing_grid/',views.listing_grid,name='listing_grid'),
     #    path('listing_grid_sidebar/',views.listing_grid_sidebar,name='listing_grid_sidebar'),
-=======
     
     path('',views.home,name='home'),
     path('privacy/',views.privacy,name='privacy'),
@@ -45,5 +43,4 @@ urlpatterns = [
     path('delete_my_listing/<int:id>/',views.delete_my_listing,name='delete_my_listing'),
     path('edit_my_listing/<int:id>/',views.edit_my_listing,name='edit_my_listing'),
     
->>>>>>> origin/master
 ]
