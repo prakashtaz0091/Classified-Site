@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
 from apps.category.models import Category
+<<<<<<< HEAD
 from apps.store.models import Product
 
 # Create your views here.
@@ -20,6 +21,15 @@ from apps.store.models import Product
 #     return render(request, 'home/index.html', context)
 
 
+=======
+from apps.store.models import Product,Feature
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+
+
+>>>>>>> origin/master
 def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
     sort_by = request.GET.get("sort", "default")
@@ -33,6 +43,7 @@ def listing_view(request, slug):
     # Apply sorting to the items on the current page only
     if sort_by == "low-high":
         page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+<<<<<<< HEAD
     elif sort_by == "high-low":
         page_obj.object_list = sorted(
             page_obj.object_list, key=lambda x: x.price, reverse=True
@@ -43,6 +54,21 @@ def listing_view(request, slug):
         "count": paginator.count,
         "category": category,
         "page_obj": page_obj,
+=======
+    elif sort_by == 'high-low':
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        
+    
+    feature=Feature.objects.all()    
+
+    context = {
+        'products': page_obj,
+        'count': paginator.count,
+        'category': category,
+        'page_obj': page_obj,
+        'current_page_product_count': len(page_obj.object_list),
+        'features':feature
+>>>>>>> origin/master
     }
 
     if request.headers.get("x-requested-with") == "FETCH":

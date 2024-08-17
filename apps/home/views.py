@@ -80,6 +80,7 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
+<<<<<<< HEAD
         book_marks = BookMark.objects.filter(user=request.user)
 
         reviews_list = (
@@ -93,6 +94,19 @@ def dashboard(request):
             "book_marks": book_marks,
             "count": count,
             "reviews_list": reviews_list,
+=======
+        book_marks=BookMark.objects.filter(user=request.user)
+        
+      
+        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
+        
+       
+        count=book_marks.count()
+        context={
+            'book_marks':book_marks,
+            'count':count,
+            'reviews_list':reviews_list
+>>>>>>> origin/master
         }
         return render(request, "others/dashboard.html", context)
     except Exception as e:
@@ -339,8 +353,43 @@ def add_listing(request):
 
         return redirect("add_listing")
 
+<<<<<<< HEAD
     else:
         category = Category.objects.all()
         features = Feature.objects.all()
         context = {"categories": category, "features": features}
         return render(request, "listing/add-listing.html", context)
+=======
+
+   
+    else:    
+        category=Category.objects.all()
+        features=Feature.objects.all()
+        context={
+            'categories':category,
+            'features':features
+        }
+        return render(request,'listing/add-listing.html',context)
+
+
+
+def all_ads(request):
+    product_list=Product.objects.all().order_by('-created_date')
+    if request.user.is_authenticated:    
+        bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
+    else: 
+        bookmarked_product_ids = []
+
+    
+    paginator = Paginator(product_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    products = page_obj.object_list  # Get the list of products on the current page
+
+    context = {
+        'page_obj': page_obj,
+        'products': products,
+        'book_mark':bookmarked_product_ids
+    }
+    return render(request, 'listing/listing-grid.html', context)
+>>>>>>> origin/master
