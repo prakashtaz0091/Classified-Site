@@ -26,7 +26,7 @@ def listing_view(request, slug):
     products = Product.objects.filter(category=category).order_by("created_date")
 
     # For pagination
-    paginator = Paginator(products, 1)  # Adjust the number for items per page
+    paginator = Paginator(products, 10)  # Adjust the number for items per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -65,31 +65,42 @@ def listing_view(request, slug):
     return render(request, "listing/listing-sidebar.html", context)
 
 
-def search(request):
-    query = request.GET.get("searchQuery", "")
-    category = request.GET.get("categorySelect", "")
-    location = request.GET.get("locationInput", "")
-    region = request.GET.get("regionSelect", "")
-    min_price = request.GET.get("minPrice", None)
-    max_price = request.GET.get("maxPrice", None)
+def filter_category(request):
+    try:
+        query = request.GET.get("query", "")
+        category = request.GET.get("category",None)
+        location = request.GET.get("location", "")
+        region = request.GET.get("region", "")
+        min_price = request.GET.get("min_price", None)
+        max_price = request.GET.get("max_price", None)
 
-    products = Product.objects.all()
+        products = Product.objects.filter(category=category)
 
-    if query:
-        products = products.filter(product_name__icontains=query)
-    if category:
-        products = products.filter(category__icontains=category)
-    if min_price:
-        products = products.filter(price__gte=min_price)
-    if max_price:
-        products = products.filter(price__lte=max_price)
+        if query:
+            products = products.filter(product_name__icontains=query)
+        if min_price:
+            products = products.filter(price__gte=min_price)
+        if max_price:
+            products = products.filter(price__lte=max_price)
 
-    # Prepare data to be sent as JSON
-    product_list = list(
-        products.values("id", "product_name", "price", "description", "cover_image")
-    )
+        paginator = Paginator(products, 1)  # Show 10 products per page
+        page_number = request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
 
-    return JsonResponse(product_list, safe=False)
+        # Prepare data for rendering
+        product_list_html = render_to_string("partials/side_product_list.html", {"products": page_obj}, request=request)
+        pagination_html = render_to_string("partials/pagination.html", {"page_obj": page_obj}, request=request)
+
+        if request.headers.get("x-requested-with") == "FETCH":
+            response_data = {
+                "product_data": product_list_html,
+                "pagination_data": pagination_html,
+            }
+            return JsonResponse(response_data)
+        # Prepare data to be sent as JSON
+    except Exception as e:
+        print(e)
+        #later redirect to 404
 
 
 def category(request):

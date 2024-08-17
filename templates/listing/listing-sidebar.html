@@ -88,6 +88,7 @@
 										  <i class="feather-map-pin"></i>
 									    </div>
 									</div>
+									<input type="hidden" name="category" value="{{category.id}}" />
 									<div class="filter-content form-group region">
 									    <select class="form-control select region-select" name='region'>
 											<option value="">Region</option>
@@ -178,7 +179,7 @@
 						<!--Pagination--> 
 						<div class="listing-pagination">
 							<nav>
-                                <ul id="pagination_click" class="pagination">
+                                <ul id="paginationClick" class="pagination">
                                     <!-- Previous Button -->
                                     <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
                                         {% if page_obj.has_previous %}
@@ -240,8 +241,9 @@
 
     {% include 'includes/pagination_script.html' %}
 	<!-- scrollToTop end -->
+
+
      <script>
-        
             function sortProducts(element) {
                 let sortValue = element.value;
                 let url = new URL(window.location.href);
@@ -258,7 +260,37 @@
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
             }
             </script>
-        
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('filter-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Collect form values
+        const formData = new FormData(form);
+        const queryParams = new URLSearchParams(formData).toString();
+
+        // Make AJAX request
+		const url="{% url 'filter_category' %}"
+		fetch(`${url}?${queryParams}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'FETCH',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the page with new product list and pagination
+            document.getElementById('productContainerWrapper').innerHTML = data.product_data;
+            document.getElementById('paginationClick').innerHTML = data.pagination_data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+</script>
 	
 
 
