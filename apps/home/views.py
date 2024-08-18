@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
+from apps.accounts.models import Account
 from apps.category.models import Category
 from apps.home.models import Reviews
 from apps.store.models import (BookMark, ContactInformation, Feature, Location,
@@ -250,10 +251,20 @@ def reviews(request):
 
 
 # For customers to provide feedback or opinions to user
+from apps.store.views import decode_id
 def feedback(request, hashed_user_id):
     try:
+        print(hashed_user_id)
+        decoded_id=decode_id(hashed_user_id)
+        print(decoded_id)
+        review_for=Account.objects.filter(id=decoded_id).values('full_name').first()
 
-        return render(request, "home/feedback.html")
+        context={
+            'review_for':review_for.get('full_name')
+        }
+        print(context)
+            
+        return render(request, "home/feedback.html",context)
     except Exception as e:
         print(e)
         # will later move it to 404 page
@@ -354,7 +365,6 @@ def all_ads(request):
         bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
     else: 
         bookmarked_product_ids = []
-
     
     paginator = Paginator(product_list, 3)
     page_number = request.GET.get('page')
