@@ -74,7 +74,7 @@
 						</div>
 						<div class="authordetails">
 							<h5>{{product.product_name}}</h5>
-							<p>Listed On: {{product.created_date}}</p>
+							<p>Listed On: {{product.created_date|date:"Y-m-d"}} ({{product.created_date|timesince}} ago)</p>
 						</div>
 					</div>
 					<div class="rate-details">
@@ -91,7 +91,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<ul>
-						<li id="submitFeedback" data-user-id="{{ user.id }}"> <a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+						<li id="submitFeedback" data-user-id="{{ product.created_by.id }}"> <a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
 					<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
 
 <style>

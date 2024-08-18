@@ -273,7 +273,8 @@
 												 </div>
 												{% endif %}
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i>{{product.created_date}}
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
 												</div>
 											</div>
 											<div class="amount-details">
