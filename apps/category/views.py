@@ -24,11 +24,13 @@ def listing_view(request, slug):
     category = Category.objects.get(slug=slug)
     sort_by = request.GET.get("sort", "default")
     products = Product.objects.filter(category=category).order_by("-id")
+    print(products)
 
     # For pagination
-    paginator = Paginator(products, 1)  # Adjust the number for items per page
+    paginator = Paginator(products, 10)  # Adjust the number for items per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    print(page_obj)
 
     # Apply sorting to the items on the current page only
     if sort_by == "low-high":
@@ -36,7 +38,6 @@ def listing_view(request, slug):
     elif sort_by == 'high-low':
         page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
         
-    
     feature=Feature.objects.all()    
 
     context = {
