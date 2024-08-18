@@ -66,6 +66,7 @@ import base64
 def decode_id(encoded_id):
     try:
         decoded_string = base64.b64decode(encoded_id).decode("utf-8")
+        print(decoded_string,"jl")
         user_id = decoded_string.split(":")[0]  # Extract userId
         return user_id
     except (base64.binascii.Error, UnicodeDecodeError):
