@@ -74,7 +74,7 @@
 						</div>
 						<div class="authordetails">
 							<h5>{{product.product_name}}</h5>
-							<p>Listed On: {{product.created_date}}</p>
+							<p>Listed On: {{product.created_date|date:"Y-m-d"}} ({{product.created_date|timesince}} ago)</p>
 						</div>
 					</div>
 					<div class="rate-details">

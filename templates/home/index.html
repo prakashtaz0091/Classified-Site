@@ -165,7 +165,7 @@
 													{% if product.location.address %}
 													<i class="feather-map-pin"></i>{{product.location.address}}
 													{% else %}
-													<i class="feather-map-pin"></i> Los Angeles
+													<i class="feather-map-pin"></i> Dubai
 
 
 													{% endif %}
@@ -265,11 +265,12 @@
 												</div>
 												{% else %}
 												<div class="location-info">
-													<i class="feather-map-pin"></i>Los Angeles
+													<i class="feather-map-pin"></i>Dubai
 												 </div>
 												{% endif %}
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i>{{product.created_date}}
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
 												</div>
 											</div>
 											<div class="amount-details">
