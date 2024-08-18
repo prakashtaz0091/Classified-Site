@@ -66,6 +66,55 @@ def listing_view(request, subcategory_slug):
     return render(request, "listing/listing-sidebar.html", context)
 
 
+
+
+
+def viewall_listing_view(request, subcategory_slug):
+    sub_category = Category.objects.get(slug=subcategory_slug)
+    
+    sort_by = request.GET.get("sort", "default")
+    products = Product.objects.filter(category=sub_category).order_by("-id")
+    
+
+    # For pagination
+    paginator = Paginator(products, 1)  # Adjust the number for items per page
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    # Apply sorting to the items on the current page only
+    if sort_by == "low-high":
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+    elif sort_by == 'high-low':
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        
+    
+    feature=Feature.objects.all()    
+
+    context = {
+        'products': page_obj,
+        'count': paginator.count,
+        'products':products,
+        'page_obj': page_obj,
+        'current_page_product_count': len(page_obj.object_list),
+        'features':feature
+    }
+
+    if request.headers.get("x-requested-with") == "FETCH":
+        product_list = render_to_string(
+            "partials/side_product_list.html", context, request=request
+        )  # Return only the product list for AJAX
+        pagination_data = render_to_string(
+            "partials/pagination.html", context, request=request
+        )
+        response_data = {
+            "product_data": product_list,
+            "pagination_data": pagination_data,
+        }
+        return JsonResponse(response_data)
+
+    return render(request, "listing/listing-sidebar.html", context)
+
+
 def filter_category(request):
     try:
         query = request.GET.get("query", "")
