@@ -4,7 +4,7 @@
 <div class="card" data-index="{{ forloop.counter }}">
     <div class="blog-widget">
         <div class="blog-img">
-            <a href="service-details.html">
+            <a href="{% url 'service_detail' product.slug %}">
                 <img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
             </a>
             <div class="fav-item">
@@ -44,15 +44,18 @@
                 <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
                 <div class="blog-location-details">
                     <div class="location-info">
-                       <i class="feather-map-pin"></i> Los Angeles
+                        <i class="feather-map-pin"></i>{{product.location.address}}
                     </div>
                  
+                    {% comment %}
                     <div class="location-info">
                        <i class="feather-phone-call"></i>{{product.created_by.profile.phone_number}}
                     </div>
                     
+                    {% endcomment %}
+
                     <div class="location-info">
-                       <i class="feather-eye"></i>0
+                        <i class="feather-eye"></i>{{product.view_count}}
                     </div>
                 </div>
                 <p class="ratings">
@@ -60,10 +63,10 @@
                 </p>
                 <div class="amount-details">
                     <div class="amount">
-                        <span class="validrate">${{product.price}}</span>
+                        <span class="validrate">AED {{product.price}}</span>
                         <span>$450</span>
                     </div>
-                    <a href="service-details.html">View details</a>
+                    <a href="{% url 'service_detail' product.slug %}">View details</a>
                 </div>	
             </div>	
         </div>			 
