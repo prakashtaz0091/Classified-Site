@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
-from apps.category.models import Category
+from apps.category.models import Category,SubCategory
 from apps.store.models import Product,Feature
 
 # Create your views here.
@@ -20,10 +20,12 @@ from apps.store.models import Product,Feature
 #     return render(request, 'home/index.html', context)
 
 
-def listing_view(request, slug):
-    category = Category.objects.get(slug=slug)
+def listing_view(request, subcategory_slug):
+    sub_category = SubCategory.objects.get(slug=subcategory_slug)
+    
     sort_by = request.GET.get("sort", "default")
-    products = Product.objects.filter(category=category).order_by("-id")
+    products = Product.objects.filter(sub_category=sub_category).order_by("-id")
+    
 
     # For pagination
     paginator = Paginator(products, 1)  # Adjust the number for items per page
@@ -42,7 +44,7 @@ def listing_view(request, slug):
     context = {
         'products': page_obj,
         'count': paginator.count,
-        'category': category,
+        'products':products,
         'page_obj': page_obj,
         'current_page_product_count': len(page_obj.object_list),
         'features':feature
@@ -113,9 +115,32 @@ def filter_category(request):
 def category(request):
     try:
         category = Category.objects.all()
-        print(category, "category")
         context = {"category": category}
         return render(request, "others/categories.html", context)
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return HttpResponse(
+            "An error occurred while processing your request.", status=500
+        )
+
+
+
+
+def sub_category_list(request, slug):
+    try:
+        category = get_object_or_404(Category, slug=slug)
+    
+        subcategories = SubCategory.objects.filter(parent=category)
+     
+        
+        
+
+        context = {
+            "category": category,
+            "subcategories": subcategories,
+        }
+        return render(request, "others/sub_categories.html", context)
 
     except Exception as e:
         print(f"Error occurred: {e}")

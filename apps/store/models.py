@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from apps.accounts.models import Account
-from apps.category.models import Category
+from apps.category.models import Category,SubCategory
 
 
 class ContactInformation(models.Model):
@@ -41,7 +41,8 @@ class Product(models.Model):
     price = models.IntegerField()
     is_available = models.BooleanField(default=True)
     features = models.ManyToManyField(Feature, related_name="stores")
-    category = models.ManyToManyField(Category, related_name="products")
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
+    sub_category = models.ManyToManyField(SubCategory, related_name="products")
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,

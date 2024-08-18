@@ -29,6 +29,8 @@ class SubCategory(models.Model):
         Category, on_delete=models.CASCADE, related_name="sub_categories"
     )
     slug = models.SlugField(max_length=1000, unique=True)
+    image=models.FileField(upload_to="sub_category/",blank=True,null=True,default="/path/to/default/image.jpg")
+    description=models.CharField(max_length=500,blank=True)
 
     def __str__(self):
         return self.category_name
