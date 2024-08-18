@@ -62,7 +62,7 @@
 										<i class="fa fa-star {% if visitor_review.rating >= 4 %}filled {% endif %}"aria-hidden="true"></i>
 										<i class="fa fa-star {% if visitor_review.rating >= 5 %}filled {% endif %}"aria-hidden="true"></i>
 										</div>							        
-										<div><i class="fa-sharp fa-solid fa-calendar-days"></i>{{visitor_review.created_at|timesince}} ago</div>
+										<div><i class="fa-sharp fa-solid fa-calendar-days"></i>{{visitor_review.created_at|date}}</div>
 									</div>		
 									<p>{{visitor_review.review}}</p>																	
 
@@ -99,7 +99,7 @@
 										<i class="fa fa-star {% if your_review.rating >= 4 %}filled {% endif %}"aria-hidden="true"></i>
 										<i class="fa fa-star {% if your_review.rating >= 5 %}filled {% endif %}"aria-hidden="true"></i>
 										</div>							        
-										<div><i class="fa-sharp fa-solid fa-calendar-days"></i>{{your_review.created_at|timesince}}</div>
+										<div><i class="fa-sharp fa-solid fa-calendar-days"></i>{{your_review.created_at|date}}</div>
 									</div>		
 									<p>{{your_review.review}}</p>																	
 								</div>

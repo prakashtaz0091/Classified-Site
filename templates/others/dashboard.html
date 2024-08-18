@@ -148,9 +148,8 @@
 														<i class="fa fa-star {% if review.rating >= 4 %}filled {% endif %}"aria-hidden="true"></i>
 														<i class="fa fa-star {% if review.rating >= 5 %}filled {% endif %}"aria-hidden="true"></i>
 													</div>                                        
-													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> {{review.created_at|timesince}} ago</div>
+													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> {{review.created_at|date}} </div>
 
-													<div>by: {{review.created_by.full_name}}</div>
 												</div>        
 												<p>{{review.review}}</p>                                                                    
 											</div>
