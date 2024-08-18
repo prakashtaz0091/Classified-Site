@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
-from apps.category.models import Category
+from apps.category.models import Category,SubCategory
 from apps.store.models import Product,Feature
 
 # Create your views here.
@@ -20,11 +20,12 @@ from apps.store.models import Product,Feature
 #     return render(request, 'home/index.html', context)
 
 
-def listing_view(request, slug):
-    category = Category.objects.get(slug=slug)
+def listing_view(request, subcategory_slug):
+    sub_category = SubCategory.objects.get(slug=subcategory_slug)
+    
     sort_by = request.GET.get("sort", "default")
-    products = Product.objects.filter(category=category).order_by("-id")
-    print(products)
+    products = Product.objects.filter(sub_category=sub_category).order_by("-id")
+    
 
     # For pagination
     paginator = Paginator(products, 10)  # Adjust the number for items per page
@@ -43,7 +44,56 @@ def listing_view(request, slug):
     context = {
         'products': page_obj,
         'count': paginator.count,
-        'category': category,
+        'products':products,
+        'page_obj': page_obj,
+        'current_page_product_count': len(page_obj.object_list),
+        'features':feature
+    }
+
+    if request.headers.get("x-requested-with") == "FETCH":
+        product_list = render_to_string(
+            "partials/side_product_list.html", context, request=request
+        )  # Return only the product list for AJAX
+        pagination_data = render_to_string(
+            "partials/pagination.html", context, request=request
+        )
+        response_data = {
+            "product_data": product_list,
+            "pagination_data": pagination_data,
+        }
+        return JsonResponse(response_data)
+
+    return render(request, "listing/listing-sidebar.html", context)
+
+
+
+
+
+def viewall_listing_view(request, subcategory_slug):
+    sub_category = Category.objects.get(slug=subcategory_slug)
+    
+    sort_by = request.GET.get("sort", "default")
+    products = Product.objects.filter(category=sub_category).order_by("-id")
+    
+
+    # For pagination
+    paginator = Paginator(products, 1)  # Adjust the number for items per page
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    # Apply sorting to the items on the current page only
+    if sort_by == "low-high":
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+    elif sort_by == 'high-low':
+        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        
+    
+    feature=Feature.objects.all()    
+
+    context = {
+        'products': page_obj,
+        'count': paginator.count,
+        'products':products,
         'page_obj': page_obj,
         'current_page_product_count': len(page_obj.object_list),
         'features':feature
@@ -114,9 +164,32 @@ def filter_category(request):
 def category(request):
     try:
         category = Category.objects.all()
-        print(category, "category")
         context = {"category": category}
         return render(request, "others/categories.html", context)
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return HttpResponse(
+            "An error occurred while processing your request.", status=500
+        )
+
+
+
+
+def sub_category_list(request, slug):
+    try:
+        category = get_object_or_404(Category, slug=slug)
+    
+        subcategories = SubCategory.objects.filter(parent=category)
+     
+        
+        
+
+        context = {
+            "category": category,
+            "subcategories": subcategories,
+        }
+        return render(request, "others/sub_categories.html", context)
 
     except Exception as e:
         print(f"Error occurred: {e}")

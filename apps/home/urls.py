@@ -21,8 +21,7 @@ urlpatterns = [
         "delete_my_listing/<int:id>/", views.delete_my_listing, name="delete_my_listing"
     ),
     path("edit_my_listing/<int:id>/", views.edit_my_listing, name="edit_my_listing"),
-    #    path('listing_grid/',views.listing_grid,name='listing_grid'),
-    #    path('listing_grid_sidebar/',views.listing_grid_sidebar,name='listing_grid_sidebar'),
+ 
     
     path('',views.home,name='home'),
     path('privacy/',views.privacy,name='privacy'),
@@ -42,5 +41,11 @@ urlpatterns = [
     path('add_listing/',views.add_listing,name='add_listing'),
     path('delete_my_listing/<int:id>/',views.delete_my_listing,name='delete_my_listing'),
     path('edit_my_listing/<int:id>/',views.edit_my_listing,name='edit_my_listing'),
+    
+    
+    
+    # for subcategory 
+    
+    path('sub_category/',views.sub_category,name='sub_category')
     
 ]

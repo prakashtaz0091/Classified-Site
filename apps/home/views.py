@@ -22,6 +22,8 @@ def home(request):
                 .filter(is_available=True)
                 .order_by("-created_date")
             )
+            
+            print(all_products,'all products ')
 
             # Get the latest 5 products for each category
             for category in all_categories:
@@ -377,3 +379,10 @@ def all_ads(request):
         'book_mark':bookmarked_product_ids
     }
     return render(request, 'listing/listing-grid.html', context)
+
+
+
+
+
+def sub_category(request):
+   return render(request,'others/sub_categories.html')

@@ -87,7 +87,7 @@
 				<div class="row">
 					{% for category in categories %}
 					<div class="col-lg-2 col-md-3 col-sm-6">
-						<a href="{% url 'listing' category.slug %}" class="category-links">
+						<a href="{% url 'sub_category' category.slug %}" class="category-links">
 							<h5>{{ category.category_name|slice:":16" }}
 							</h5>
 							<span>{{category.product_category.count}} Ads</span>
@@ -138,7 +138,9 @@
 										
 										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-									</div>
+									</div>	 {% for category in product.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}</span></a>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
@@ -151,9 +153,9 @@
 												</div>
 												<div class="blog-features">
 													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>
-														 {% for category in product.category.all %}
-														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
-													{% endfor %}</span></a>
+													
+														{{ product.category.category_name }} 
+
 												</div>																	  
 												<div class="blog-author text-end"> 
 													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
@@ -208,7 +210,7 @@
 									<p>checkout these latest cool ads from our members {{latest_product.category.category_name|slice:":16"}}</p>
 							</div>
 							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-								<a href="{% url 'listing' latest_product.category.slug %}" class="btn  btn-view">View All</a>
+								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
 							</div>		
 						</div>
 				</div>

@@ -18,7 +18,7 @@ class subcategory(admin.ModelAdmin):
     prepopulated_fields = {
         "slug": ["category_name"],
     }
-    list_display = ("category_name", "slug")
+    list_display = ("category_name", "slug",)
 
 
 admin.site.register(Category, category_admin)

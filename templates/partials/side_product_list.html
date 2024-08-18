@@ -20,8 +20,9 @@
                     <div class="blog-features">
 
                        <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>
-                         {% for category in product.category.all %}
-                        {{ category.category_name }}{% if not forloop.last %}, {% endif %}
+                         {% for sub_category in product.sub_category.all %}
+                        
+                        {{ sub_category.category_name }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}</span></a>
                     </div>																	  
                     <div class="blog-author">

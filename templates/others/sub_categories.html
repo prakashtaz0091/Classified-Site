@@ -1,0 +1,78 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+	
+	<div class="main-wrapper innerpagebg">	
+		
+		<!-- Header -->
+		<header class="header">
+			{% include 'includes/header.html' %}
+		</header>
+		<!-- /Header -->		
+		
+		<!-- Breadscrumb Section -->
+		<div class="breadcrumb-bar">
+			<div class="container">
+				<div class="row align-items-center text-center">
+		    		<div class="col-md-12 col-12">
+			    	    <h2 class="breadcrumb-title">Listings-Sub Categories</h2>
+				    	<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Sub Categories</li>
+							</ol>
+						</nav>							
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadscrumb Section -->
+		
+		<!-- Categories Section -->
+		<div class="categorieslist-section listing-section ">
+            <div class="container">
+		        <div class="row" style='margin:10px 0 0  0'>
+
+                {% for sub_category in subcategories %}
+			       <div class="col-lg-3 col-md-4">
+				
+				    	<div class="categories-content">
+							<a href="{% url 'listing' sub_category.slug %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
+		    				   
+								<img src="{{sub_category.image.url}}" alt="car1">
+							   <h6>{{sub_category.category_name}}</h6>
+							   <span class="ads">09 Ads</span>
+							   <span>{{sub_category.description}}</span>
+							</a>								   
+					   </div>
+				   </div>
+                {% endfor %}
+			       
+					  
+					
+				</div>
+			</div>
+		</div>
+		<!-- /Categories Section -->
+		
+		<!-- Footer -->
+		{% include 'includes/footer.html' %}
+		<!-- /Footer -->
+		
+	</div>
+
+    <!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+		</svg>
+	</div>
+	<!-- scrollToTop end -->
+	
+	
+	<!-- jQuery -->
+{% endblock %}
