@@ -29,6 +29,7 @@ urlpatterns = [
     path('freq_question/',views.freq_question,name='freq_question'),
     path('terms/',views.terms,name='terms'),
     path('contact/',views.contact,name='contact'),
+    path('search/',views.search,name='search'),
     path('how_it_works/',views.how_it_works,name='how_it_works'),
     path('dashboard/',views.dashboard,name='dashboard'),
     path('all_ads/',views.all_ads,name='all_ads'),

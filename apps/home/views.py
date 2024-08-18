@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -376,3 +376,42 @@ def all_ads(request):
 
 def sub_category(request):
    return render(request,'others/sub_categories.html')
+
+
+
+
+
+def search(request):
+    if request.method == "POST":
+        category_id = request.POST.get('category')
+        location = request.POST.get('location')
+    else:
+        category_id = request.GET.get('category')
+        location = request.GET.get('location')
+
+    products = Product.objects.all().order_by('-id')
+
+    if category_id:
+        products = products.filter(category_id=category_id)
+    
+    if location:
+        products = products.filter(location__address__icontains=location)
+        
+    # Pagination logic
+    page = request.GET.get('page', 1)
+    paginator = Paginator(products, 1)  # Show 10 products per page
+    
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    
+    context = {
+        'products': products,
+        'category': category_id,
+        'location': location,
+    }
+
+    return render(request, 'others/search.html', context)
