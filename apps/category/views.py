@@ -22,22 +22,17 @@ from apps.store.models import Product,Feature
 # For subcategory
 def listing_view(request, subcategory_slug):
     try:
+        print(subcategory_slug)
         sub_category = SubCategory.objects.get(slug=subcategory_slug)
         
-        sort_by = request.GET.get("sort", "default")
         products = Product.objects.filter(sub_category=sub_category).order_by("-id")
         # For pagination
-        paginator = Paginator(products, 1)  # Adjust the number for items per page
+        paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
-        print(page_obj)
 
         # Apply sorting to the items on the current page only
-        if sort_by == "low-high":
-            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
-        elif sort_by == 'high-low':
-            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
-            
+                
         feature=Feature.objects.all()    
 
         context = {
@@ -159,6 +154,8 @@ def filter_category(request):
 def filter_sub_category(request):
     try:
         print(request.GET)
+
+        sort_by = request.GET.get("sort", "default")
         query = request.GET.get("query", "")
         category = request.GET.get("category",None)
         location = request.GET.get("location", "")
@@ -175,12 +172,16 @@ def filter_sub_category(request):
         if max_price:
             products = products.filter(price__lte=max_price)
 
-        paginator = Paginator(products, 1)  # Show 10 products per page
+        paginator = Paginator(products, 10)  # Show 10 products per page
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
 
         # Prepare data for rendering
-        
+        if sort_by == "low-high":
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+        elif sort_by == 'high-low':
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+       
         product_list_html = render_to_string("partials/side_product_list.html", {"products": page_obj}, request=request)
         pagination_context={
             'page_obj':page_obj,

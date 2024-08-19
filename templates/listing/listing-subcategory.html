@@ -240,16 +240,21 @@
      <script>
             function sortProducts(element) {
                 let sortValue = element.value;
-                let url = new URL(window.location.href);
-                url.searchParams.set('sort', sortValue);
-                fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-Requested-With': 'FETCH',
-                    }
-                })
+
+    const form = document.getElementById('filter-form');
+        const formData = new FormData(form);
+        const queryParams = new URLSearchParams(formData).toString();
+	
+		const url="{% url 'filter_sub_category' %}"
+				fetch(`${url}?${queryParams}&sort=${sortValue}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'FETCH',
+            },
+        })
                 .then(response=>response.json()).then(data=>{
 				document.getElementById('productContainerWrapper').innerHTML=data.product_data
+            document.getElementById('paginationClick').innerHTML = data.pagination_data;
 			        })
                 .catch(error => console.error('There has been a problem with your fetch operation:', error));
             }
