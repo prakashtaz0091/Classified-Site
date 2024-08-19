@@ -422,3 +422,8 @@ def search(request):
     }
 
     return render(request, 'others/search.html', context)
+
+
+def job(request):
+    return render(request,'home/index-8.html')
+    
