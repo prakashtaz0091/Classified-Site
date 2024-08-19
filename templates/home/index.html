@@ -29,10 +29,11 @@
 								<p>Country's most loved and trusted classified ad listing website. Browse thousands of items near you.</p>
 
 								<div class="search-box">
-									<form action="listing-grid-sidebar.html" class="d-flex"> 
+									<form action="{% url 'search' %}" class="d-flex" > 
+									
 										<div class="search-input line">											
 											<div class="form-group">																							
-												<select class="form-control select category-select">													
+												<select class="form-control select category-select" name='category'>													
 													<option value="">Choose Category</option>
 													{% for category in categories %}
 													<option value="{{category.id}}">{{ category.category_name|slice:":16" }}
@@ -41,10 +42,11 @@
 												</select>
 											</div>
 										</div>
+										
 										<div class="search-input">											
 											<div class="form-group">												
 												<div class="group-img">
-													<input type="text" class="form-control" placeholder="Choose Location">
+													<input type="text" class="form-control" name='location'  placeholder="Choose Location" required>
 													<i class="feather-map-pin"></i>
 												</div>
 											</div>
