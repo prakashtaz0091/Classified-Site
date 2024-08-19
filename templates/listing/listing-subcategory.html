@@ -1,0 +1,326 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Listee | Template</title>
+
+        <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
+
+    <!-- Aos CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/aos/aos.css' %}">
+
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/feather.css' %}">
+
+    <!-- Owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+
+    <!-- Rangeslider CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css' %}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+	
+</head>
+
+<body>
+
+	
+	<div class="main-wrapper innerpagebg">
+	
+		<!-- Header -->
+		<header class="header">
+			{% include 'includes/header.html' %}
+		</header>
+		<!-- /Header -->
+		
+		<!-- Breadscrumb Section -->
+		<div class="breadcrumb-bar">
+			<div class="container">
+				<div class="row align-items-center text-center">
+					<div class="col-md-12 col-12">
+					   <h2 class="breadcrumb-title">Listings-List</h2>
+		    		   <nav aria-label="breadcrumb" class="page-breadcrumb">
+						    <ol class="breadcrumb">
+							    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">List</li>
+							</ol>
+						</nav>							
+					</div>
+				</div>
+			</div>			
+		</div>
+		<!-- /Breadscrumb Section -->
+		
+		<!-- Main Content Section -->
+
+		<div class="list-content">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-4 theiaStickySidebar">
+			            <div class="listings-sidebar">
+						    <div class="card">
+				                <h4><img  src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Filter</h4>
+							    <form id='filter-form'>
+								    <div class="filter-content looking-input form-group">
+									  <input type="text" class="form-control" name='query' placeholder="What are you looking for?">
+									</div> 
+								
+									<div class="filter-content looking-input form-group input-placeholder">
+										<div class="group-img">
+										  <input type="text" class="form-control" name='location' placeholder="Where to look?">
+										  <i class="feather-map-pin"></i>
+									    </div>
+									</div>
+									<input type="hidden" name="category" value="{{sub_category.id}}" />
+									<div class="filter-content form-group region">
+									    <select class="form-control select region-select" name='region'>
+											<option value="">Region</option>
+											<option>Canada</option>
+											<option>USA</option>
+											<option>india</option>
+										</select>						  
+									</div>
+									<div class="filter-content form-group amenities">
+									    <h4> Amenities</h4>
+
+										<ul>
+											{% for feature in features %}
+											<li>
+												<label class="custom_check">
+												<input type="checkbox" name="features">
+												<span class="checkmark"></span> {{feature.name}}
+												</label>
+											</li>
+											{% endfor %}
+										</ul>
+									</div>
+									<div class="filter-content form-group amenities radius">
+									    <div class="slidecontainer">
+										    <div class="slider-info">
+											    <h4> Radius</h4>
+											    <div class="demo"><span>50</span> Radius</div>
+											</div>
+										    <div class="clearfix"></div>
+											<div class="filter-range">
+												<input type="text"  class="input-range" name='radius'>
+											</div>
+										</div>
+									</div>									
+									<div class="filter-content amenities mb-0">
+    									<h4> Price Range</h4>
+										<div class="form-group mb-0">
+										     <input type="text" class="form-control" placeholder="Min" name='min_price'>
+										     <input type="text" class="form-control me-0" placeholder="Max" name='max_price'>
+										</div>
+										<div class="search-btn">
+											<button class="btn btn-primary" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+											<button class="btn btn-reset mb-0" type="submit"> <i class="fas fa-light fa-arrow-rotate-right"></i> Reset Filters</button>
+										</div>  
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+                        <div class="row sorting-div">
+					    	<div class="col-lg-4 col-sm-4 align-items-center d-flex">
+								<div class="count-search">
+									<p>Showing <span>{{page_obj.start_index}}-{{page_obj.end_index}}</span> of {{count}} Results</p>
+								</div>
+							</div>
+						    <div class="col-lg-8 col-sm-8  align-items-center">
+							    <div class="sortbyset">
+							        <span class="sortbytitle">Sort by</span>
+                                    <div class="sorting-select">
+                                        <select id="sortSelect" class="form-control select" onchange="sortProducts(this)">
+                                            <option value="default">Default</option>
+                                            <option value="low-high">Price Low to High</option>
+                                            <option value="high-low">Price High to Low</option>
+                                        </select>
+                                        
+                                    </div>
+								</div>
+								<div class="grid-listview">
+									<ul>
+								    	<li>
+									    	<a href="listing-list-sidebar.html" class="active">
+												<i class="feather-list"></i>
+											</a>
+										</li>
+										<li>
+											<a href="listing-grid-sidebar.html">
+												<i class="feather-grid"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="blog-listview" id='productContainerWrapper' >
+                            {% include 'partials/side_product_list.html' %}
+                        </div>	
+						<!--Pagination--> 
+						<div class="listing-pagination">
+							<nav>
+                                <ul id="paginationClick" class="pagination">
+                                    <!-- Previous Button -->
+                                    <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+                                        {% if page_obj.has_previous %}
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
+                                        {% else %}
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
+                                        {% endif %}
+                                    </li>
+                                    
+                                    <li class="justify-content-center pagination-center"> 
+                                        <div class="pagelink">
+                                            <ul>
+											{% for num in page_obj.paginator.page_range %}
+										<li class="page-item {% if page_obj.number == num %}active{% endif %}">
+											<a class="page-link" href="?page={{ num }}" data-page="{{ num }}">{{ num }}</a>
+										</li>
+									{% endfor %}
+                                            </ul>
+                                        </div>													
+                                    </li>
+                                    
+                                    <!-- Next Button -->
+                                    <li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+                                        {% if page_obj.has_next %}
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+                                        {% else %}
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </nav>
+						</div>
+						<!--/Pagination-->					
+					</div>
+				</div>
+		 	</div>			  
+	   	</div>	
+		<!-- /Main Content Section -->
+				
+        <!-- Footer -->
+		{% include 'includes/footer.html' %}
+		<!-- /Footer -->
+		
+	</div>
+
+    <!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+		</svg>
+	</div>
+
+
+    {% include 'includes/pagination_script.html' %}
+	<!-- scrollToTop end -->
+
+
+     <script>
+            function sortProducts(element) {
+                let sortValue = element.value;
+                let url = new URL(window.location.href);
+                url.searchParams.set('sort', sortValue);
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'FETCH',
+                    }
+                })
+                .then(response=>response.json()).then(data=>{
+				document.getElementById('productContainerWrapper').innerHTML=data.product_data
+			        })
+                .catch(error => console.error('There has been a problem with your fetch operation:', error));
+            }
+            </script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('filter-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Collect form values
+        const formData = new FormData(form);
+        const queryParams = new URLSearchParams(formData).toString();
+		console.log(queryParams)
+        // Make AJAX request
+		const url="{% url 'filter_sub_category' %}"
+		fetch(`${url}?${queryParams}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'FETCH',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the page with new product list and pagination
+            document.getElementById('productContainerWrapper').innerHTML = data.product_data;
+            document.getElementById('paginationClick').innerHTML = data.pagination_data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+</script>
+	
+
+
+	
+    <!-- jQuery -->
+    <script src="{% static 'assets/js/jquery-3.7.0.min.js' %}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    
+    <!-- Select2 JS -->
+    <script src="{% static 'assets/plugins/select2/js/select2.min.js' %}"></script>
+    
+
+    <!-- Rangeslider JS -->
+    <script src="{% static 'assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/ion-rangeslider/js/custom-rangeslider.js' %}"></script>
+    
+    <!-- Aos -->
+    <script src="{% static 'assets/plugins/aos/aos.js' %}"></script>
+    
+    <!-- Top JS -->
+    <script src="{% static 'assets/js/backToTop.js' %}"></script>    
+    
+    <!-- Feather JS -->
+    <script src="{% static 'assets/js/feather.min.js' %}"></script>
+    
+    <!-- Sticky Sidebar JS -->
+    <script src="{% static 'assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+    <script src="{% static 'assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+    
+    <!-- Owl Carousel JS -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+</body>
+</html>
