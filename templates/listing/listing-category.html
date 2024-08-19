@@ -240,14 +240,17 @@
      <script>
             function sortProducts(element) {
                 let sortValue = element.value;
-                let url = new URL(window.location.href);
-                url.searchParams.set('sort', sortValue);
-                fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-Requested-With': 'FETCH',
-                    }
-                })
+   const form = document.getElementById('filter-form');
+        const formData = new FormData(form);
+        const queryParams = new URLSearchParams(formData).toString();
+	
+		const url="{% url 'filter_category' %}"
+				fetch(`${url}?${queryParams}&sort=${sortValue}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'FETCH',
+            },
+        })
                 .then(response=>response.json()).then(data=>{
 				document.getElementById('productContainerWrapper').innerHTML=data.product_data
 			        })
@@ -261,13 +264,14 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
+	const sortValue=document.getElementById('sortSelect').value
         // Collect form values
         const formData = new FormData(form);
         const queryParams = new URLSearchParams(formData).toString();
 
         // Make AJAX request
 		const url="{% url 'filter_category' %}"
-		fetch(`${url}?${queryParams}`, {
+		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
             method: 'GET',
             headers: {
                 'X-Requested-With': 'FETCH',

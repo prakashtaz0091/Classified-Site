@@ -264,15 +264,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('filter-form');
 
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
 
+        event.preventDefault(); // Prevent the default form submission
+const sortValue=document.getElementById('sortSelect').value
         // Collect form values
         const formData = new FormData(form);
         const queryParams = new URLSearchParams(formData).toString();
 		console.log(queryParams)
         // Make AJAX request
 		const url="{% url 'filter_sub_category' %}"
-		fetch(`${url}?${queryParams}`, {
+		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
             method: 'GET',
             headers: {
                 'X-Requested-With': 'FETCH',

@@ -24,7 +24,6 @@ def listing_view(request, subcategory_slug):
     try:
         print(subcategory_slug)
         sub_category = SubCategory.objects.get(slug=subcategory_slug)
-        
         products = Product.objects.filter(sub_category=sub_category).order_by("-id")
         # For pagination
         paginator = Paginator(products, 10)  # Adjust the number for items per page
@@ -43,7 +42,6 @@ def listing_view(request, subcategory_slug):
             'current_page_product_count': len(page_obj.object_list),
             'features':feature
         }
-
         if request.headers.get("x-requested-with") == "FETCH":
             product_list = render_to_string(
                 "partials/side_product_list.html", context, request=request
@@ -61,49 +59,46 @@ def listing_view(request, subcategory_slug):
     except Exception as e:
         print(e)
 
-
-
+#For vieweign directly in category
 def viewall_listing_view(request, subcategory_slug):
-    category = Category.objects.get(slug=subcategory_slug)
-    sort_by = request.GET.get("sort", "default")
-    products = Product.objects.filter(category=category).order_by("-id")
+    try:
+        category = Category.objects.get(slug=subcategory_slug)
+        products = Product.objects.filter(category=category).order_by("-id")
+        print(products)
 
-    # For pagination
-    paginator = Paginator(products, 1)  # Adjust the number for items per page
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    # Apply sorting to the items on the current page only
-    if sort_by == "low-high":
-        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
-    elif sort_by == 'high-low':
-        page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        # For pagination
+        paginator = Paginator(products, 10)  # Adjust the number for items per page
+        page_number = request.GET.get("page",1)
+        page_obj = paginator.get_page(page_number)
         
-    
-    feature=Feature.objects.all()    
+        feature=Feature.objects.all()    
 
-    context = {
-        'products': page_obj,
-        'count': paginator.count,
-        'products':products,
-        'page_obj': page_obj,
-        'current_page_product_count': len(page_obj.object_list),
-        'features':feature
-    }
-
-    if request.headers.get("x-requested-with") == "FETCH":
-        product_list = render_to_string(
-            "partials/side_product_list.html", context, request=request
-        )  # Return only the product list for AJAX
-        pagination_data = render_to_string(
-            "partials/pagination.html", context, request=request
-        )
-        response_data = {
-            "product_data": product_list,
-            "pagination_data": pagination_data,
+        context = {
+            'products': page_obj,
+            'count': paginator.count,
+            'page_obj': page_obj,
+            'category':category,
+            'current_page_product_count': len(page_obj.object_list),
+            'features':feature
         }
-        return JsonResponse(response_data)
 
-    return render(request, "listing/listing-category.html", context)
+        if request.headers.get("x-requested-with") == "FETCH":
+            product_list = render_to_string(
+                "partials/side_product_list.html", context, request=request
+            )  # Return only the product list for AJAX
+            pagination_data = render_to_string(
+                "partials/pagination.html", context, request=request
+            )
+            response_data = {
+                "product_data": product_list,
+                "pagination_data": pagination_data,
+            }
+            return JsonResponse(response_data)
+
+        return render(request, "listing/listing-category.html", context)
+    except Exception as e:
+        print(e)
+        return e
 
 
 def filter_category(request):
@@ -113,6 +108,8 @@ def filter_category(request):
         location = request.GET.get("location", "")
         region = request.GET.get("region", "")
         min_price = request.GET.get("min_price", None)
+
+        sort_by = request.GET.get("sort", "default")
         max_price = request.GET.get("max_price", None)
 
         products = Product.objects.filter(category=category).order_by('-id')
@@ -124,9 +121,14 @@ def filter_category(request):
         if max_price:
             products = products.filter(price__lte=max_price)
 
-        paginator = Paginator(products, 1)  # Show 10 products per page
+        paginator = Paginator(products, 10)  # Show 10 products per page
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
+        if sort_by == "low-high":
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+        elif sort_by == 'high-low':
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        
 
         # Prepare data for rendering
         
