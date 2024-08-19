@@ -392,12 +392,9 @@ def sub_category(request):
 
 
 def search(request):
-    if request.method == "POST":
-        category_id = request.POST.get('category')
-        location = request.POST.get('location')
-    else:
-        category_id = request.GET.get('category')
-        location = request.GET.get('location')
+   
+    category_id = request.GET.get('category')
+    location = request.GET.get('location')
 
     products = Product.objects.all().order_by('-id')
 
