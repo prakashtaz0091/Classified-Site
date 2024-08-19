@@ -27,7 +27,7 @@ def listing_view(request, subcategory_slug):
         sort_by = request.GET.get("sort", "default")
         products = Product.objects.filter(sub_category=sub_category).order_by("-id")
         # For pagination
-        paginator = Paginator(products, 10)  # Adjust the number for items per page
+        paginator = Paginator(products, 1)  # Adjust the number for items per page
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
         print(page_obj)
@@ -158,6 +158,7 @@ def filter_category(request):
 
 def filter_sub_category(request):
     try:
+        print(request.GET)
         query = request.GET.get("query", "")
         category = request.GET.get("category",None)
         location = request.GET.get("location", "")
@@ -188,7 +189,7 @@ def filter_sub_category(request):
             'min_price':min_price,
             'max_price':max_price
         }
-        pagination_html = render_to_string("partials/filter_paginations.html", pagination_context, request=request)
+        pagination_html = render_to_string("partials/filter_subcategory_pagination.html", pagination_context, request=request)
 
         if request.headers.get("x-requested-with") == "FETCH":
             response_data = {
