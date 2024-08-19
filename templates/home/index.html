@@ -30,7 +30,7 @@
 
 								<div class="search-box">
 									<form action="{% url 'search' %}" class="d-flex" > 
-										{% csrf_token %}
+									
 										<div class="search-input line">											
 											<div class="form-group">																							
 												<select class="form-control select category-select" name='category'>													
@@ -46,7 +46,7 @@
 										<div class="search-input">											
 											<div class="form-group">												
 												<div class="group-img">
-													<input type="text" class="form-control" name='location' value="{{location}}" placeholder="Choose Location" required>
+													<input type="text" class="form-control" name='location'  placeholder="Choose Location" required>
 													<i class="feather-map-pin"></i>
 												</div>
 											</div>
