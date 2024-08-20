@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import JobCategory,Job
+from django.db.models import Count
 # Create your views here.
 
 def job(request):
-    job_category=JobCategory.objects.all()
+    job_category = JobCategory.objects.annotate(num_jobs=Count('job'))
     job_vacancy=Job.objects.all()
     context={
         'job_category':job_category,
