@@ -45,11 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'apps.accounts.apps.AccountsConfig',
     'apps.home.apps.HomeConfig',
     'apps.store.apps.StoreConfig',
-    'apps.category.apps.CategoryConfig'
+    'apps.category.apps.CategoryConfig',
+    'apps.job.apps.JobConfig'
 
 ]
 
