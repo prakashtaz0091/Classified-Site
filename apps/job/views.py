@@ -70,3 +70,9 @@ def search_job(request):
     }
     
     return render(request,'jobs/search.html',context)
+
+
+
+
+def job_details(request,slug):
+    return render(request,'jobs/job_details.html')

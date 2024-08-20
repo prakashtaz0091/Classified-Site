@@ -155,7 +155,7 @@
                         <div class="card">
                             <div class="blog-widget">
                                 <div class="blog-img">
-                                  <a href="service-details.html">
+                                  <a href="{% url 'job_details' job.slug %}">
                                   <img src="{% static 'assets/img/blog/bloglistimg-1.jpg' %}" class="img-fluid" alt="blog-img">
                                 </a>
                                           <div class="fav-item">
@@ -175,10 +175,10 @@
                                         <div class="blog-author-img">
                                           <img src="{{job.image.url}}" alt="author">
                                         </div>
-                                        <a href="javascript:void(0);">{{job.company_name}}</a>
+                                        <a href="{% url 'job_details' job.slug %}">{{job.company_name}}</a>
                                         </div>
                                    </div> 
-                                              <h6><a href="service-details.html">{{job.title}}</a></h6>																	 
+                                              <h6><a href="{% url 'job_details' job.slug %}">{{job.title}}</a></h6>																	 
                                    <div class="blog-location-details">
                                        <div class="location-info">
                                          <i class="feather-map-pin"></i> {{job.location}}

@@ -211,7 +211,9 @@
 									<div class="time">
 										<p>
 											<i class="feather-briefcase"></i>{{job.job_type}}
-											<span class="p-rate">AED{{salary_min}} - AED{{salary_max}}</span>
+											<span class="p-rate">AED{{job.salary_min|floatformat:0}}-{{job.salary_max|floatformat:0}}K Mo..</span>
+
+											
 										</p>
 									</div>
 									<div class="footer-btn">

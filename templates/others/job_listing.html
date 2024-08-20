@@ -169,16 +169,16 @@
                                  <div class="card-body">
                                     <div class="blogfeaturelink">
                                        <div class="blog-features">
-                                          <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>{{job.category.name}}</span></a>
+                                          <a href="{% url 'job_details' job.slug %}"><span> <i class="fa-regular fa-circle-stop"></i>{{job.category.name}}</span></a>
                                                   </div>																	  
                                        <div class="blog-author"> 
                                         <div class="blog-author-img">
                                           <img src="{{job.image.url}}" alt="author">
                                         </div>
-                                        <a href="javascript:void(0);">{{job.company_name}}</a>
+                                        <a href="{% url 'job_details' job.slug %}">{{job.company_name}}</a>
                                         </div>
                                    </div> 
-                                              <h6><a href="service-details.html">{{job.title}}</a></h6>																	 
+                                              <h6><a href="{% url 'job_details' job.slug %}">{{job.title}}</a></h6>																	 
                                    <div class="blog-location-details">
                                        <div class="location-info">
                                          <i class="feather-map-pin"></i> {{job.location}}
@@ -199,7 +199,7 @@
                                 
                                    <div class="amount-details">
                                       <div class="amount">
-                                          <span class="validrate">AED{{job.salary_min}}-AED{{job.salary_max}}</span>
+                                          <span class="validrate">AED{{job.salary_min|floatformat:0}}K-AED{{job.salary_max|floatformat:0}}K /Months</span>
                                        
                                       </div>
                                       <a href="service-details.html">View details</a>
