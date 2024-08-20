@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
    path("jobs/",views.job,name='job'),
    path("job_category/",views.job_category,name='job_category'),
-   path("jobs/<slug:slug>",views.job_category,name='job_category'),
+   path("all_jobs/",views.view_all_jobs,name='all_jobs'),
+   path("search_jobs/",views.search_job,name='search_job'),
+   path("jobs/<slug:slug>/",views.job_category_listing,name='job_category_listing'),
    
 ]

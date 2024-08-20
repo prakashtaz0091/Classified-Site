@@ -7,7 +7,7 @@ class JobCategory(models.Model):
         ('popular', 'Popular'),
         ('new', 'New'),
         ('featured', 'Featured'),
-        # Add other categories as needed
+      
     ]
 
     name = models.CharField(max_length=255, unique=True)
@@ -20,7 +20,7 @@ class JobCategory(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        super(Job, self).save(*args, **kwargs)
+        super(JobCategory, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Job Category'
