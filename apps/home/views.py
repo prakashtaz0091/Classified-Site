@@ -110,15 +110,19 @@ def my_listing(request):
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
-        if request.headers.get("x-requested-with") == "XMLHttpRequest":
-            data = {
-                "products_html": render_to_string(
-                    "partials/product_list.html",
+        if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_mylist.html",
                     {"products": page_obj.object_list},
                     request=request,
                 ),
-            }
-            return JsonResponse(data)
+            pagination_data=render_to_string(
+                "partials/pagination.html",
+                {'page_obj':page_obj},
+                request=request
+            )
+            print(pagination_data)
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
 
         context = {
             "page_obj": page_obj,
