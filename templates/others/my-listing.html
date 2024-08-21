@@ -174,42 +174,38 @@
 			}
 
 			function sortProducts(selectElement) {
+				var searchQuery = document.getElementById('productSearch').value.toLowerCase();
 				var sortValue = selectElement.value;
 				$.ajax({
 					url: window.location.href,
 					data: {
 						sort: sortValue,
+						search:searchQuery
 					},
 					success: function (data) {
 						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
 					}
 				});
 			}
 			
 		function searchProducts() {
     // Get the search input value
-			console.log("hello")
     var searchQuery = document.getElementById('productSearch').value.toLowerCase();
-    
     // Get the product rows
-    var productRows = document.querySelectorAll('#productContainerWrapper .product-row');
+				var sortValue = document.getElementById('sortSelect').value;
+				$.ajax({
+					url: window.location.href,
+					data: {
+						sort: sortValue,
+						search:searchQuery
+					},
+					success: function (data) {
+						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
+					}
+				});
 
-    // Loop through the product rows
-    productRows.forEach(function(row) {
-        // Get the product name and description text
-        var productName = row.querySelector('h6 a').textContent.toLowerCase();
-        var productDescription = row.querySelector('p').textContent.toLowerCase();
-        var productCategory = row.querySelector('.cat-icon').textContent.toLowerCase();
-
-        // Check if the product name or description includes the search query
-        if (productName.includes(searchQuery) || productDescription.includes(searchQuery) || productCategory.includes(searchQuery)) {
-            // Show the row if it matches the query
-            row.style.display = '';
-        } else {
-            // Hide the row if it doesn't match the query
-            row.style.display = 'none';
-        }
-    });
 }
 
 	</script>

@@ -104,8 +104,17 @@ def dashboard(request):
 def my_listing(request):
     if request.method == "GET":
         sort_option = request.GET.get("sort", "-created_date")  # Default to newest
-        products = Product.objects.filter(created_by=request.user).order_by(sort_option)
-
+        search_query = request.GET.get("search", "")  # Default to newest
+        products=None
+        if search!="":
+            products = Product.objects.filter(
+            product_name__icontains=search_query
+        ) | Product.objects.filter(
+            description__icontains=search_query
+        )
+            products = products.filter(created_by=request.user).order_by(sort_option)
+        else:
+            products = Product.objects.filter(created_by=request.user).order_by(sort_option)
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -116,9 +125,15 @@ def my_listing(request):
                     {"products": page_obj.object_list},
                     request=request,
                 ),
+            pagination_context={
+                'page_obj':page_obj,
+                'search':search_query,
+                'sort':sort_option
+
+            }
             pagination_data=render_to_string(
-                "partials/pagination.html",
-                {'page_obj':page_obj},
+                "partials/pagination_mylist.html",
+                pagination_context,
                 request=request
             )
             print(pagination_data)
@@ -220,11 +235,24 @@ def something_wrong(request):
 def book_marks(request):
 
     book_marks = BookMark.objects.filter(user=request.user)
-
     # paginations added
-    paginator = Paginator(book_marks, 8)
+    paginator = Paginator(book_marks, 1)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+
+    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_bookmark.html",
+                    {"products": page_obj.object_list},
+                    request=request,
+                ),
+            pagination_data=render_to_string(
+                "partials/pagination.html",
+                {'page_obj':page_obj},
+                request=request
+            )
+            print(pagination_data)
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
     context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count}
 
     return render(request, "others/bookmarks.html", context)
