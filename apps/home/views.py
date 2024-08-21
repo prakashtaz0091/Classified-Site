@@ -136,7 +136,6 @@ def my_listing(request):
                 pagination_context,
                 request=request
             )
-            print(pagination_data)
             return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
 
         context = {
@@ -243,7 +242,7 @@ def book_marks(request):
     if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
             product_data = render_to_string(
                     "partials/product_list_bookmark.html",
-                    {"products": page_obj.object_list},
+                    {"book_marks": page_obj.object_list},
                     request=request,
                 ),
             pagination_data=render_to_string(
