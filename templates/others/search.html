@@ -31,7 +31,7 @@
         <div class="dashboard-content">		
 			<div class="container">			
 				<div class="bookmarks-content grid-view featured-slider">
-				    <div class="row align-items-center justify-content-center">
+				    <div id="productContainerWrapper" class="row align-items-center justify-content-center">
                         {% for product in products %}
 					    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
 							<div class="card flex-fill">
@@ -79,12 +79,11 @@
 											</div>
 											<div class="amount-details">
 												<div class="amount">
-													<span class="validrate">${{product.price}}</span>
+													<span class="validrate">AED {{product.price}}</span>
+													{% comment %}
 													<span>$450</span>
+													{% endcomment %}
 												</div>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>												
 											</div>	
 										</div>	
 									</div>			 
@@ -92,13 +91,14 @@
 							</div>
 						</div>
                         {% endfor %}
+					</div>
 						
 					
 						
 						<!--Pagination--> 
 						<div class="blog-pagination">
                             <nav>
-                                <ul class="pagination">
+                                <ul id='paginationClick' class="pagination">
                                     <li class="page-item previtem {% if not products.has_previous %}disabled{% endif %}">
                                         <a class="page-link" href="{% if products.has_previous %}?page={{ products.previous_page_number }}&category={{ category }}&location={{ location }}{% endif %}">
                                             <i class="fas fa-regular fa-arrow-left"></i> Prev
@@ -137,6 +137,7 @@
 			
 	    <!-- Footer -->
 		{% include 'includes/footer.html' %}
+		{% include 'includes/pagination_script.html' %}
 		<!-- /Footer -->
 		
 	</div>

@@ -423,21 +423,19 @@ def sub_category(request):
 
 
 def search(request):
-   
-    category_id = request.GET.get('category')
+    category_slug= request.GET.get('category')
     location = request.GET.get('location')
-
     products = Product.objects.all().order_by('-id')
 
-    if category_id:
-        products = products.filter(category_id=category_id)
-    
+    if category_slug:
+        products = products.filter(category__slug=category_slug)
     if location:
         products = products.filter(location__address__icontains=location)
         
     # Pagination logic
     page = request.GET.get('page', 1)
     paginator = Paginator(products, 1)  # Show 10 products per page
+    products=None
     
     try:
         products = paginator.page(page)
@@ -446,9 +444,25 @@ def search(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
     
+
+    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_search.html",
+                    {"products": products.object_list},
+                    request=request,
+                ),
+            pagination_data=render_to_string(
+                "partials/pagination_search.html",
+                {'page_obj':products,
+                 'category':category_slug,
+                 'location':location,},
+                request=request
+            )
+            print(pagination_data)
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
     context = {
         'products': products,
-        'category': category_id,
+        'category': category_slug,
         'location': location,
     }
 
