@@ -84,8 +84,7 @@ def how_it_works(request):
 def dashboard(request):
     try:
         book_marks=BookMark.objects.filter(user=request.user)
-        
-      
+        total_product=Product.objects.filter(created_by=request.user).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
         
        
@@ -93,7 +92,8 @@ def dashboard(request):
         context={
             'book_marks':book_marks,
             'count':count,
-            'reviews_list':reviews_list
+            'reviews_list':reviews_list,
+            'total_product':total_product
         }
         return render(request, "others/dashboard.html", context)
     except Exception as e:
@@ -134,14 +134,15 @@ def edit_my_listing(request, id):
         features = Feature.objects.all()
         categories = Category.objects.all()
         product_images = ProductImages.objects.filter(product=product)
-        selected_categories = product.category.all().values_list("id", flat=True)
+        selected_category=[]
+        selected_categories = selected_category.append(product.category.id)
         selected_features = product.features.all().values_list("id", flat=True)
 
         context = {
             "product": product,
             "categories": categories,
             "product_images": product_images,
-            "selected_categories": selected_categories,
+            "selected_categories": selected_category,
             "selected_features": selected_features,
             "features": features,
             "id": id,

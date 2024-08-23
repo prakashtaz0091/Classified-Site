@@ -58,10 +58,10 @@
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">	
 												</div>
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> Vehicles</span></a>
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{mark.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
-													<span><img src="{% static 'assets/img/eye.svg' %}" alt="electronics">4000</span>
+													<span><img src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.view_coutn}}</span>
 												</div>
 											</div> 
 											<h6><a href="service-details.html">{{mark.product.product_name}}</a></h6>																	 
