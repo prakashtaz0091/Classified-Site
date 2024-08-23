@@ -41,7 +41,7 @@
 							<div class="card aos aos-init aos-animate" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="service-details.html">
+										<a href="{% url 'service_detail' mark.product.slug %}">
 											<img src="{{mark.product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
 										<div class="fav-item">
@@ -55,28 +55,37 @@
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">	
+													{% if mark.product.created_by.profile.profile_photo %}
+													<img src="{{mark.product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
 												</div>
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{mark.category.category_name}}</span></a>
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{mark.product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
-													<span><img src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.view_coutn}}</span>
+													<span><img src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.product.view_count}}</span>
 												</div>
 											</div> 
-											<h6><a href="service-details.html">{{mark.product.product_name}}</a></h6>																	 
+											<h6><a href="{% url 'service_detail' mark.product.slug %}">{{mark.product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
-													<i class="feather-map-pin"></i> Los Angeles
+													{% if mark.product.location.address %}
+													<i class="feather-map-pin"></i>{{mark.product.location.address}}
+													{% else %}
+													<i class="feather-map-pin"></i> Dubai
+
+													{% endif %}
 												</div>
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i>{{mark.product.created_date}}
+													<i class="fa-solid fa-calendar-days"></i>{{ mark.product.created_date|date:"F j, Y" }}
 												</div>
 											</div>
 											<div class="amount-details">
 												<div class="amount">
 													<span class="validrate">AED {{mark.product.price}}</span>
-													<span>$450</span>
+													<span>AED 450</span>
 												</div>
 												<div class="ratings">
 													<span>4.7</span> (50)
