@@ -33,7 +33,12 @@ def Login(request):
             # except:
             messages.success(request, f"You are now logged {user.full_name}.")
             return redirect("home")
+        else:
+            messages.error(request, "some credentials are incorrect! ")
+        
+             
     else:
+        
         return render(request, "accounts/login.html")
     return render(request, "accounts/login.html")
 
