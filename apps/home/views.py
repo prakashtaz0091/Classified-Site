@@ -386,6 +386,7 @@ def all_ads(request):
 
 
 def sub_category(request):
+   print('hello its sub category')
    return render(request,'others/sub_categories.html')
 
 

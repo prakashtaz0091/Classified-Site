@@ -5,6 +5,8 @@ from django.template.loader import render_to_string
 
 from apps.category.models import Category,SubCategory
 from apps.store.models import Product,Feature
+from django.db.models import Count
+
 
 # Create your views here.
 # def category_view(request):
@@ -224,10 +226,12 @@ def category(request):
 
 def sub_category_list(request, slug):
     try:
+        print('sub cateagory list')
         category = get_object_or_404(Category, slug=slug)
     
-        subcategories = SubCategory.objects.filter(parent=category)
-     
+        subcategories = SubCategory.objects.filter(parent=category).annotate(product_count=Count('products'))
+
+        print(subcategories,'sub')     
         
         
 
