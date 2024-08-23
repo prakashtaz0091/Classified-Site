@@ -44,12 +44,34 @@
 										<a href="{% url 'service_detail' mark.product.slug %}">
 											<img src="{{mark.product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
-										<div class="fav-item">
+										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+												<i class="feather-heart" 
+												   style="
+												    {% if mark.product.id in book_mark %}
+													  width: 35px!important;
+													   height: 35px!important;
+													   color: #ffffff!important;
+													   border-radius: 50%!important;
+													   background: #c10037!important;
+													   display: flex!important;
+													   align-items: center!important;
+													   justify-content: center!important; 
+													{% else %}
+													 
+													  
+														   
+														   color: #ffffff!important;
+													{% endif %}
+												   ">
+												</i>
+											</a>     
+										</div>
+										
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
@@ -164,5 +186,43 @@
 	</div>
 	<!-- scrollToTop end -->
 	
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.fav-icon').forEach(function(icon) {
+				icon.addEventListener('click', function() {
+					var itemId = this.closest('.fav-item').getAttribute('data-id');
+					var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		
+					fetch('/ad/toggle-bookmark/', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-CSRFToken': csrftoken 
+						},
+						body: JSON.stringify({ id: itemId })
+					})
+					.then(response => {
+						if (response.redirected) {
+							// If the response is redirected, navigate to the login page
+							window.location.href = response.url;
+						} else {
+							return response.json();
+						}
+					})
+					.then(data => {
+						console.log(data, 'data');
+						if (data.success) {
+							this.querySelector('i').classList.toggle('favorited');  // Change icon state
+						} else {
+							console.error('Failed to favorite item.');
+						}
+					})
+					.catch(error => console.error('Error:', error));
+				});
+			});
+		});
+		
+	</script>
 	
 	{% endblock %}

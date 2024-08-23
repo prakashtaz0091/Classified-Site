@@ -216,13 +216,22 @@ def something_wrong(request):
 
 def book_marks(request):
 
-    book_marks = BookMark.objects.filter(user=request.user)
+    book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
+    if request.user.is_authenticated:
+        bookmarked_product_ids = BookMark.objects.filter(
+            user=request.user
+        ).values_list("product_id", flat=True)
+    else:
+        bookmarked_product_ids = []
+        
+        
+    print(bookmarked_product_ids,'id')    
 
     # paginations added
     paginator = Paginator(book_marks, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count}
+    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
 
     return render(request, "others/bookmarks.html", context)
 
