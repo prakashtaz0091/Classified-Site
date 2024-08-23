@@ -24,18 +24,18 @@
 								</h1>
 								<p class="paragraph">Finding a Job Shouldn’t Be a Full-time Job. 1,50,334 Jobs Listed Here! Your Dream Job is Waiting.</p>
 								<div class="search-box">
-									<form action="listing-grid-sidebar.html" class="d-flex">
+									<form action="{% url 'search_job' %}" class="d-flex">
 										<div class="search-input line">
 											<div class="form-group">
 												<div class="group-img">
-													<input type="text" class="form-control" placeholder="Type your skill or other">
+													<input type="text" class="form-control" name='skills' placeholder="Type your skill or other">
 												</div>
 											</div>
 										</div>
 										<div class="search-input">
 											<div class="form-group">
 												<div class="group-img">
-													<input type="text" class="form-control" placeholder="Place you want?">
+													<input type="text" class="form-control" placeholder="Place you want?" name='location'>
 												</div>
 											</div>
 										</div>
@@ -145,141 +145,24 @@
 				</div>
 				<div class="category-details">
 					<div class="row">
+
+						{% for category in job_category %}
 						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
+							<a href='{% url "job_category_listing" category.slug %}' class="category-inner flex-fill">
 								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-1.png' %}" class="img-fluid" alt="no-img">
+									<img src="{{category.image.url}}" class="img-fluid" alt="no-img">
 								</div>
 								<div class="category-content">
-									<h4>UI/UX Design</h4>
-									<p>43 Jobs Available</p>
+									<h4>{{category.name}}</h4>
+									<p>{{ category.num_jobs }}  Jobs Available</p>
 								</div>
-							</div>
+							</a>
 						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-2.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Digital Marketing</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-3.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Content Writing</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-4.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>HR Management</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-5.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Account Finance</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-6.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Sales</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-7.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Project Management</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-8.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Customer Support Care</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-9.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Business & Consulting</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-10.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Web Developer</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-11.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Construction</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
-							<div class="category-inner flex-fill">
-								<div class="category-img-two">
-									<img src="{% static 'assets/img/icons/icons-12.png' %}" class="img-fluid" alt="no-img">
-								</div>
-								<div class="category-content">
-									<h4>Health and Care</h4>
-									<p>43 Jobs Available</p>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
+						
 					</div>
 					<div class="align-items-center justify-content-center d-flex">
-						<a href="listing-grid-sidebar.html" class="category-btn">View All Category</a>
+						<a href="{% url  'job_category' %}" class="category-btn">View All Category</a>
 					</div>
 				</div>
 			</div>
@@ -300,34 +183,37 @@
 				</div>
 				<div class="vacancies-details">
 					<div class="row">
+						{% for job in job_vacancy %}
 						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
 							<div class="vacancies-box">
 								<div class="vacancies-top">
-									<span class="topic">Support</span>
+									<span class="topic">{{job.category.name}}</span>
 									<a href="javascript:void(0);" class="fav-icon-top">
 										<i class="fa-regular fa-bookmark"></i>
 									</a>
 								</div>
 								<div class="vacancies-inner">
 									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-1.png' %}" class="img-fluid" alt="arrow">
+										<img src="{{job.image.url}}" class="img-fluid" alt="arrow">
 									</div>
 									<div class="vacancies-content">
-										<h4><a href="categories.html">Technical Support Engineer</a></h4>
+										<h4><a href="categories.html">{{job.title}}</a></h4>
 										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>San Diego, CA</p>
+											<p class="light-color">{{job.company_name}}</p>
+											<p><i class="fas fa-light fa-location-dot"></i>{{job.location}}</p>
 										</div>
 									</div>
 								</div>
 								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+									<p>{{job.description|truncatechars:200}}</p>
 								</div>
 								<div class="vaca-footer">
 									<div class="time">
 										<p>
-											<i class="feather-briefcase"></i>Full Time
-											<span class="p-rate">$30k - $45k</span>
+											<i class="feather-briefcase"></i>{{job.job_type}}
+											<span class="p-rate">AED{{job.salary_min|floatformat:0}}-{{job.salary_max|floatformat:0}}K Mo..</span>
+
+											
 										</p>
 									</div>
 									<div class="footer-btn">
@@ -336,187 +222,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
-							<div class="vacancies-box">
-								<div class="vacancies-top">
-									<span class="topic">Development</span>
-									<a href="javascript:void(0);" class="fav-icon-top">
-										<i class="fa-regular fa-bookmark"></i>
-									</a>
-								</div>
-								<div class="vacancies-inner">
-									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-2.png' %}" class="img-fluid" alt="arrow">
-									</div>
-									<div class="vacancies-content">
-										<h4><a href="categories.html">Android Developer</a></h4>
-										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>New York</p>
-										</div>
-									</div>
-								</div>
-								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
-								</div>
-								<div class="vaca-footer">
-									<div class="time">
-										<p>
-											<i class="feather-briefcase"></i>Full Time
-											<span class="p-rate"> <i class="feather-dollar-sign"></i>$40k - $80k</span>
-										</p>
-									</div>
-									<div class="footer-btn">
-										<a href="categories.html" class="btn-view">Apply Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
-							<div class="vacancies-box">
-								<div class="vacancies-top">
-									<span class="topic">Design</span>
-									<a href="javascript:void(0);" class="fav-icon-top">
-										<i class="fa-regular fa-bookmark"></i>
-									</a>
-								</div>
-								<div class="vacancies-inner">
-									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-3.png' %}" class="img-fluid" alt="arrow">
-									</div>
-									<div class="vacancies-content">
-										<h4><a href="categories.html">Junior Graphic Designer</a></h4>
-										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>California</p>
-										</div>
-									</div>
-								</div>
-								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
-								</div>
-								<div class="vaca-footer">
-									<div class="time">
-										<p>
-											<i class="feather-briefcase"></i>Full Time
-											<span class="p-rate">$20k - $50k</span>
-										</p>
-									</div>
-									<div class="footer-btn">
-										<a href="categories.html" class="btn-view">Apply Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
-							<div class="vacancies-box">
-								<div class="vacancies-top">
-									<span class="topic">Sales</span>
-									<a href="javascript:void(0);" class="fav-icon-top">
-										<i class="fa-regular fa-bookmark"></i>
-									</a>
-								</div>
-								<div class="vacancies-inner">
-									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-4.png' %}" class="img-fluid" alt="arrow">
-									</div>
-									<div class="vacancies-content">
-										<h4><a href="categories.html">Product Sales Specialist</a></h4>
-										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>Montreal, Quebec</p>
-										</div>
-									</div>
-								</div>
-								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
-								</div>
-								<div class="vaca-footer">
-									<div class="time">
-										<p>
-											<i class="feather-briefcase"></i>Full Time
-											<span class="p-rate">$1L - $3L</span>
-										</p>
-									</div>
-									<div class="footer-btn">
-										<a href="categories.html" class="btn-view">Apply Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
-							<div class="vacancies-box">
-								<div class="vacancies-top">
-									<span class="topic">Account</span>
-									<a href="javascript:void(0);" class="fav-icon-top">
-										<i class="fa-regular fa-bookmark"></i>
-									</a>
-								</div>
-								<div class="vacancies-inner">
-									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-5.png' %}" class="img-fluid" alt="arrow">
-									</div>
-									<div class="vacancies-content">
-										<h4><a href="categories.html">General Ledger Accountant</a></h4>
-										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>Boston</p>
-										</div>
-									</div>
-								</div>
-								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
-								</div>
-								<div class="vaca-footer">
-									<div class="time">
-										<p><i class="feather-briefcase"></i>Full Time
-											<span class="p-rate">$60k - $80k</span>
-										</p>
-									</div>
-									<div class="footer-btn">
-										<a href="categories.html" class="btn-view">Apply Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
-							<div class="vacancies-box">
-								<div class="vacancies-top">
-									<span class="topic">Marketing</span>
-									<a href="javascript:void(0);" class="fav-icon-top">
-										<i class="fa-regular fa-bookmark"></i>
-									</a>
-								</div>
-								<div class="vacancies-inner">
-									<div class="vaca-img">
-										<img src="{% static 'assets/img/icons/Logomark-6.png' %}" class="img-fluid" alt="arrow">
-									</div>
-									<div class="vacancies-content">
-										<h4><a href="categories.html">Technical Support Engineer</a></h4>
-										<div class="vaca-location">
-											<p class="light-color">Company Name</p>
-											<p><i class="fas fa-light fa-location-dot"></i>San Diego, CA</p>
-										</div>
-									</div>
-								</div>
-								<div class="vaca-details">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
-								</div>
-								<div class="vaca-footer">
-									<div class="time">
-										<p><i class="feather-briefcase"></i>Full Time
-											<span class="p-rate">$10k - $55k</span>
-										</p>
-									</div>
-									<div class="footer-btn">
-										<a href="categories.html" class="btn-view">Apply Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
+						
 					</div>
 					<div class="align-items-center justify-content-center d-flex aos" data-aos="fade-up">
-						<a href="categories.html" class="category-btn">View All Category</a>
+						<a href="{% url 'all_jobs' %}" class="category-btn">View All Jobs</a>
 					</div>
 				</div>
 
@@ -889,7 +599,7 @@
 						</div>
 					</div>
 					<div class="align-items-center justify-content-center d-flex aos" data-aos="fade-up">
-						<a href="categories.html" class="category-btn">View All Category</a>
+						<a href="categories.html" class="category-btn">View All Job</a>
 					</div>
 				</div>
 

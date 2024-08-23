@@ -12,7 +12,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('apps.accounts.urls')),
     path('', include('apps.home.urls')),
+    path('', include('apps.job.urls')),
     path('category/', include('apps.category.urls')),
     path('ad/', include('apps.store.urls')),
-
+    path('', include('apps.contact.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -31,7 +31,7 @@ def Login(request):
             #         nextPage = params['next']
             #         return redirect(nextPage)
             # except:
-            messages.success(request, "You are now logged in.")
+            messages.success(request, f"You are now logged {user.full_name}.")
             return redirect("home")
     else:
         return render(request, "accounts/login.html")
@@ -213,12 +213,12 @@ def update_profile(request):
 
             # Save the profile instance
             profile.save()
+            messages.success(request, "Profile hass been updated.")
 
             return redirect("profile")
 
         except:
 
-            print("i am bad")
             return redirect("profile")
 
 

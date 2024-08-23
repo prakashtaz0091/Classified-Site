@@ -1,8 +1,7 @@
-
-
 {% extends 'base.html' %}
-
 {% load static %}
+
+
 {% block content %}
 
 	
@@ -19,11 +18,11 @@
 			<div class="container">
 				<div class="row align-items-center text-center">
 		    		<div class="col-md-12 col-12">
-			    	    <h2 class="breadcrumb-title">Listings-Sub Categories</h2>
+			    	    <h2 class="breadcrumb-title">Jobs by popular categories</h2>
 				    	<nav aria-label="breadcrumb" class="page-breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Sub Categories</li>
+								<li class="breadcrumb-item active" aria-current="page">Categories</li>
 							</ol>
 						</nav>							
 					</div>
@@ -33,30 +32,33 @@
 		<!-- /Breadscrumb Section -->
 		
 		<!-- Categories Section -->
-		<div class="categorieslist-section listing-section ">
-            <div class="container">
-		        <div class="row" style='margin:10px 0 0  0'>
+		
 
-                {% for sub_category in subcategories %}
-			       <div class="col-lg-3 col-md-4">
-				
-				    	<div class="categories-content">
-							<a href="{% url 'listing' sub_category.slug %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
-		    				   
-								<img src="{{sub_category.image.url}}" alt="car1">
-							   <h6>{{sub_category.category_name}}</h6>
-							   <span class="ads">{{ sub_category.product_count }}</span>
-							   <span>{{sub_category.description}}</span>
-							</a>								   
-					   </div>
-				   </div>
-                {% endfor %}
-			       
-					  
-					
-				</div>
-			</div>
-		</div>
+
+        <div class="categorieslist-section listing-section ">
+            <div class="container">
+                <div class="row" style="margin:15px 0 0 0;">
+                    <div class="row">
+
+						{% for category in job_category %}
+						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
+							<div class="category-inner flex-fill">
+								<div class="category-img-two">
+									<img src="{{category.image.url}}" class="img-fluid" alt="no-img">
+								</div>
+								<div class="category-content">
+									<h4>{{category.name}}</h4>
+									<p>{{category.available_jobs}} Jobs Available</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						
+					</div>
+                </div>
+            </div>
+        </div>
+        
 		<!-- /Categories Section -->
 		
 		<!-- Footer -->
@@ -73,6 +75,4 @@
 	</div>
 	<!-- scrollToTop end -->
 	
-	
-	<!-- jQuery -->
 {% endblock %}

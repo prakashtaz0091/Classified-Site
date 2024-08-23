@@ -42,42 +42,70 @@
 							<div class="card aos aos-init aos-animate" data-aos="fade-up">
 								<div class="blog-widget">
 									<div class="blog-img">
-										<a href="service-details.html">
+										<a href="{% url 'service_detail' mark.product.slug %}">
 											<img src="{{mark.product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
-										<div class="fav-item">
+										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
 											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart"></i>
-											</a>										
-										</div>	
+												<i class="feather-heart" 
+												   style="
+												    {% if mark.product.id in book_mark %}
+													  width: 35px!important;
+													   height: 35px!important;
+													   color: #ffffff!important;
+													   border-radius: 50%!important;
+													   background: #c10037!important;
+													   display: flex!important;
+													   align-items: center!important;
+													   justify-content: center!important; 
+													{% else %}
+													 
+													  
+														   
+														   color: #ffffff!important;
+													{% endif %}
+												   ">
+												</i>
+											</a>     
+										</div>
+										
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
 											<div class="blogfeaturelink">
 												<div class="grid-author">
-													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">	
+													{% if mark.product.created_by.profile.profile_photo %}
+													<img src="{{mark.product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
 												</div>
 												<div class="blog-features">
                                                     <a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> {{mark.product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
                                                     <span><img style="width:20px;"src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.product.view_count}}</span>
+
 												</div>
 											</div> 
-											<h6><a href="service-details.html">{{mark.product.product_name}}</a></h6>																	 
+											<h6><a href="{% url 'service_detail' mark.product.slug %}">{{mark.product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
                                                     <i class="feather-map-pin"></i> {{mark.product.location}}
 												</div>
 												<div class="location-info">
 													<i class="fa-solid fa-calendar-days"></i>{{mark.product.created_date|date}}
+
 												</div>
 											</div>
 											<div class="amount-details">
 												<div class="amount">
 													<span class="validrate">AED {{mark.product.price}}</span>
-													<span>$450</span>
+													<span>AED 450</span>
 												</div>
 											</div>	
 										</div>	
@@ -155,5 +183,43 @@
 	</div>
 	<!-- scrollToTop end -->
 	
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.fav-icon').forEach(function(icon) {
+				icon.addEventListener('click', function() {
+					var itemId = this.closest('.fav-item').getAttribute('data-id');
+					var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		
+					fetch('/ad/toggle-bookmark/', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-CSRFToken': csrftoken 
+						},
+						body: JSON.stringify({ id: itemId })
+					})
+					.then(response => {
+						if (response.redirected) {
+							// If the response is redirected, navigate to the login page
+							window.location.href = response.url;
+						} else {
+							return response.json();
+						}
+					})
+					.then(data => {
+						console.log(data, 'data');
+						if (data.success) {
+							this.querySelector('i').classList.toggle('favorited');  // Change icon state
+						} else {
+							console.error('Failed to favorite item.');
+						}
+					})
+					.catch(error => console.error('Error:', error));
+				});
+			});
+		});
+		
+	</script>
 	
 	{% endblock %}

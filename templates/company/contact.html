@@ -74,7 +74,10 @@
 				<div class="contact-info">
 					<h2>Contact <span>Us</span></h2> 
 					<p>We are here to help you</p>
-				</div>               
+					<p>{% include 'includes/alert.html' %}</p>  
+					
+				</div>    
+				         
 				<div class="row align-items-center">
 					<div class="col-lg-5 col-md-5">
 						<div class="contactform-img">
@@ -83,18 +86,19 @@
 					</div>
 					<div class="col-lg-7 col-md-7">
 						<div class="contactus-form">
-							<form>
+							<form method="POST" action="{% url 'contact' %}"  >
+								{% csrf_token %}
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Name*" required>
+									<input type="text" class="form-control" placeholder="Name*" name="name" required>
 								</div>
 								<div class="form-group me-0">
-									<input type="email" class="form-control" placeholder="Email*" required>
+									<input type="email" class="form-control" placeholder="Email*" name="email" required>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Subject">
+									<input type="text" class="form-control" placeholder="Subject" name="subject">
 								</div>
 								<div class="form-group">
-									<textarea rows="4" class="form-control" placeholder="Write a Message*" required></textarea>
+									<textarea rows="4" class="form-control" placeholder="Write a Message*" name="message" required></textarea>
 								</div>
 								<div class="submit-section">
 									<button class="btn btn-primary submit-btn" type="submit"> Submit </button>
