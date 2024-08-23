@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from . models import Contact
+from django.contrib import auth, messages
+
 # Create your views here.
 
 
@@ -19,6 +21,9 @@ def contact(request):
                                 email=email,
                                 subject=subject,
                                 message=message)
+            messages.success(
+                request, "Form has been submited sucessfully."
+            )
         except:
             pass    
         
