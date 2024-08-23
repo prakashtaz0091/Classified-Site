@@ -3,9 +3,9 @@ from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
-
+from django.contrib import messages
 from apps.accounts.models import Account
-from apps.category.models import Category
+from apps.category.models import Category,SubCategory
 from apps.home.models import Reviews
 from apps.store.models import (BookMark, ContactInformation, Feature, Location,
                                Product, ProductImages)
@@ -389,7 +389,7 @@ def add_listing(request):
         for image in gallery_images:
             ProductImages.objects.create(product=product, image=image)
         print("Gallery images uploaded")
-
+        messages.success(request, "Ads added sucsesfully.")
         return redirect("add_listing")
 
     else:    
@@ -402,7 +402,23 @@ def add_listing(request):
         return render(request,'listing/add-listing.html',context)
 
 
+def get_subcategories(request):
+    if request.method == "GET":
+        category_id = request.GET.get('category_id')
+        subcategories = SubCategory.objects.filter(parent_id=category_id)
+        print(subcategories,'sub')
 
+        subcategory_list = [
+            {
+                "id": sub.id,
+                "category_name": sub.category_name,
+            }
+            for sub in subcategories
+        ]
+        return JsonResponse({"subcategories": subcategory_list})
+    
+    
+    
 def all_ads(request):
     product_list=Product.objects.all().order_by('-created_date')
     if request.user.is_authenticated:    

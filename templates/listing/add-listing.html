@@ -11,6 +11,7 @@
 			{% include 'includes/header.html' %}
 		</header>
 		<!-- /Header -->
+		{% include 'includes/alert.html' %}
 		
 		<!-- Breadscrumb Section -->
 		<div class="breadcrumb-bar">
@@ -62,21 +63,36 @@
 										<div class="row category-listing">
 											{% for category in categories %}
 												{% if forloop.counter0|divisibleby:4 %}
-												<div class="col-lg-4">
-													<ul>
+													<div class="col-lg-4">
+														<ul>
 												{% endif %}
 														<li>
 															<label class="custom_check">
-																<input type="checkbox" name="categories" value="{{ category.id }}">
+																<input type="checkbox" name="categories" value="{{ category.id }}" onclick="loadSubcategories(this)">
 																<span class="checkmark"></span> {{ category.category_name }}
 															</label>
 														</li>
 												{% if forloop.counter|divisibleby:4 or forloop.last %}
-													</ul>
-												</div>
+														</ul>
+													</div>
 												{% endif %}
 											{% endfor %}
 										</div>
+										
+										<div class="subcategory-wrapper">
+											<!-- Subcategory heading will be inserted here -->
+											<div class="row subcategory-listing">
+												<!-- Subcategories will be loaded here dynamically -->
+											</div>
+										</div>
+
+										<div class="brand-wrapper">
+											<!-- Brand heading and listing will be inserted here -->
+											<div class="row brand-listing">
+												<!-- Brands will be loaded here dynamically -->
+											</div>
+										</div>
+										
 										
 									</div>
 									
@@ -95,36 +111,7 @@
 										<label class="col-form-label">Price Range</label>								    
 										<input type="text"  class="form-control pass-input" placeholder="enter a price" name='price'>									   
 									</div>
-									{% comment %} <div class="row">
-										<div class="col-lg-6 col-md-6">
-											<div class="form-group formlast-input">
-												<label class="col-form-label">Price From</label>
-												<select class="form-control select">
-													<option>65</option>
-													<option>75</option>
-													<option>85</option>
-													<option>95</option>
-													<option>105</option>
-													<option>110</option>
-													<option>115</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="form-group formlast-input formlast-input-inner">
-												<label class="col-form-label">Price To</label>
-												<select class="form-control select">
-													<option>120</option>
-													<option>130</option>
-													<option>140</option>
-													<option>150</option>
-													<option>160</option>
-													<option>170</option>
-													<option>190</option>
-												</select>	
-											</div>
-										</div>											
-									</div> {% endcomment %}
+									
 								</div>
 							</div>	
 							<div class="card">
@@ -203,54 +190,7 @@
 									</div>								
 								</div>
 							</div>
-							{% comment %} <div class="card">
-								<div class="card-header">
-									<h4>Social Information </h4>							
-								</div>
-								<div class="card-body">
-									<div class="row social-info">
-										<div class="col-lg-6 col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Facebook</label>
-												<div class="pass-group group-img">
-													<span class="lock-icon"><i class="fab fa-facebook-f"></i></span>
-													<input type="text" class="form-control" value="http://facebook.com">												
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-										<div class="form-group">
-												<label class="col-form-label">Twitter</label>
-												<div class="pass-group group-img">
-													<span class="lock-icon"><i class="fab fa-twitter"></i></span>
-													<input type="text" class="form-control" value="http://twitter.com">												
-												</div>
-											</div>
-										</div>											
-									</div>	
-									<div class="row social-info">
-										<div class="col-lg-6 col-md-6">
-											<div class="form-group formlast-input lat-input">
-												<label class="col-form-label">Google+</label>
-												<div class="pass-group group-img">
-													<span class="lock-icon"><i class="fa-brands fa-google-plus-g"></i></span>
-													<input type="text" class="form-control" value="http://google.com">												
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="form-group formlast-input">
-												<label class="col-form-label">Instagram</label>
-												<div class="pass-group group-img">
-													<span class="lock-icon"><i class="fab fa-instagram"></i></span>
-													<input type="text" class="form-control" value="http://instagram.com">												
-												</div>
-											</div>
-										</div>											
-									</div>								
-								</div>
-							</div>					 {% endcomment %}
-						
+							
 
 
 							<div class="card media-section">
@@ -269,16 +209,7 @@
 												<label for="file" class="file-upload">Upload File</label>
 											</div>
 										</div>
-										{% comment %} <div class="col-lg-6 col-md-6 featured-img2">
-											<h6 class="media-title">Logo</h6>
-											<div class="media-image">
-												<img src="{% static 'assets/img/mediaimg-1.jpg' %}" alt="Logo">
-											</div>
-											<div class="settings-upload-btn">
-												<input type="file" accept="image/*" name="logo" class="hide-input image-upload" id="file1">
-												<label for="file1" class="file-upload">Upload File</label>
-											</div>
-										</div> {% endcomment %}
+									
 									</div>
 									<div class="gallery-media">
 										<h6 class="media-title">Gallery</h6>
@@ -397,6 +328,176 @@
 		
 		
 	</script>
+
+<script>
+	function loadSubcategories(checkbox) {
+		let categoryId = checkbox.value;
+		let subcategoryListing = document.querySelector('.subcategory-listing');
+		let subcategoryHeading = document.querySelector('.subcategory-heading');
+	
+		if (checkbox.checked) {
+			// Display subcategory heading if not already present
+			if (!subcategoryHeading) {
+				subcategoryHeading = document.createElement('div');
+				subcategoryHeading.classList.add('subcategory-heading');
+				subcategoryHeading.innerHTML = '<h3>Subcategories</h3>';
+				subcategoryListing.parentNode.insertBefore(subcategoryHeading, subcategoryListing);
+			}
+	
+			// Fetch and display subcategories
+			fetch(`/get_subcategories/?category_id=${categoryId}`)
+			.then(response => response.json())
+			.then(data => {
+				data.subcategories.forEach(subcategory => {
+					let subcategoryHtml = `
+						<div class="col-lg-4 subcategory-item" data-category-id="${categoryId}" data-subcategory-id="${subcategory.id}">
+							<ul>
+								<li>
+									<label class="custom_check">
+										<input type="checkbox" name="subcategories" value="${subcategory.id}">
+										<span class="checkmark"></span> ${subcategory.category_name}
+									</label>
+								</li>
+							</ul>
+						</div>`;
+					subcategoryListing.insertAdjacentHTML('beforeend', subcategoryHtml);
+				});
+	
+				// Attach click event listeners to the subcategory checkboxes
+				let subcategoryCheckboxes = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"] input[type="checkbox"]`);
+				subcategoryCheckboxes.forEach(subcategoryCheckbox => {
+					subcategoryCheckbox.addEventListener('click', function() {
+						loadMoreData(this);
+					});
+				});
+			});
+		} else {
+			// Remove subcategories when checkbox is unchecked
+			let subcategoryItems = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"]`);
+			subcategoryItems.forEach(item => item.remove());
+	
+			// Remove subcategory heading if no subcategories are present
+			if (subcategoryListing.children.length === 0) {
+				if (subcategoryHeading) {
+					subcategoryHeading.remove();
+				}
+			}
+		}
+	}
+	
+	function loadSubcategories(checkbox) {
+		let categoryId = checkbox.value;
+		let subcategoryListing = document.querySelector('.subcategory-listing');
+		let subcategoryHeading = document.querySelector('.subcategory-heading');
+	
+		if (checkbox.checked) {
+			// Display subcategory heading if not already present
+			if (!subcategoryHeading) {
+				subcategoryHeading = document.createElement('div');
+				subcategoryHeading.classList.add('subcategory-heading');
+				subcategoryHeading.innerHTML = '<h3>Subcategories</h3>';
+				subcategoryListing.parentNode.insertBefore(subcategoryHeading, subcategoryListing);
+			}
+	
+			// Fetch and display subcategories
+			fetch(`/get_subcategories/?category_id=${categoryId}`)
+			.then(response => response.json())
+			.then(data => {
+				data.subcategories.forEach(subcategory => {
+					let subcategoryHtml = `
+						<div class="col-lg-4 subcategory-item" data-category-id="${categoryId}" data-subcategory-id="${subcategory.id}">
+							<ul>
+								<li>
+									<label class="custom_check">
+										<input type="checkbox" name="subcategories" value="${subcategory.id}" onclick="loadBrands(this)">
+										<span class="checkmark"></span> ${subcategory.category_name}
+									</label>
+								</li>
+							</ul>
+						</div>`;
+					subcategoryListing.insertAdjacentHTML('beforeend', subcategoryHtml);
+				});
+			});
+		} else {
+			// Remove subcategories when checkbox is unchecked
+			let subcategoryItems = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"]`);
+			subcategoryItems.forEach(item => item.remove());
+	
+			// Remove subcategory heading if no subcategories are present
+			if (subcategoryListing.children.length === 0) {
+				if (subcategoryHeading) {
+					subcategoryHeading.remove();
+				}
+			}
+	
+			// Clear any brand data if a category is unchecked
+			clearBrands();
+		}
+	}
+	
+	function loadBrands(subcategoryCheckbox) {
+		let subcategoryId = subcategoryCheckbox.value;
+		let brandListing = document.querySelector('.brand-listing');
+		let brandHeading = document.querySelector('.brand-heading');
+	
+		if (subcategoryCheckbox.checked) {
+			// Display "Select Brand" heading if not already present
+			if (!brandHeading) {
+				brandHeading = document.createElement('div');
+				brandHeading.classList.add('brand-heading');
+				brandHeading.innerHTML = '<h4>Select Brand</h4>';
+				brandListing.parentNode.insertBefore(brandHeading, brandListing);
+			}
+	
+			// Simulate fetching data for the clicked subcategory
+			let data = {
+				1: ['Pulsar', 'Bajaj', 'Yamaha'],
+				2: ['Honda', 'Suzuki', 'Kawasaki'],
+				3: ['Royal Enfield', 'Harley Davidson', 'Ducati']
+			};
+	
+			let moreData = data[subcategoryId] || [];
+	
+			moreData.forEach(item => {
+				let moreDataHtml = `
+					<div class="col-lg-4 brand-item" data-subcategory-id="${subcategoryId}" data-brand="${item}">
+						<ul>
+							<li>
+								<label class="custom_check">
+									<input type="checkbox" name="brands" value="${item}">
+									<span class="checkmark"></span> ${item}
+								</label>
+							</li>
+						</ul>
+					</div>`;
+				brandListing.insertAdjacentHTML('beforeend', moreDataHtml);
+			});
+		} else {
+			// Remove the corresponding brands when the subcategory checkbox is unchecked
+			let itemsToRemove = document.querySelectorAll(`.brand-item[data-subcategory-id="${subcategoryId}"]`);
+			itemsToRemove.forEach(item => item.remove());
+	
+			// Remove "Select Brand" heading if no more brands are present
+			if (brandListing.querySelectorAll('.brand-item').length === 0) {
+				if (brandHeading) {
+					brandHeading.remove();
+				}
+			}
+		}
+	}
+	
+	function clearBrands() {
+		// Remove all brand items and the brand heading
+		let brandItems = document.querySelectorAll('.brand-item');
+		brandItems.forEach(item => item.remove());
+	
+		let brandHeading = document.querySelector('.brand-heading');
+		if (brandHeading) {
+			brandHeading.remove();
+		}
+	}
+		
+</script>	
 	
 	
 	{% endblock %}
