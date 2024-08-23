@@ -36,7 +36,7 @@
 												<select class="form-control select category-select" name='category'>													
 													<option value="">Choose Category</option>
 													{% for category in categories %}
-													<option value="{{category.id}}">{{ category.category_name|slice:":16" }}
+													<option value="{{category.slug}}">{{ category.category_name|slice:":16" }}
 													</option>
 													{% endfor %}
 												</select>

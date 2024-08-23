@@ -1,0 +1,52 @@
+{% load static %}
+	{% for mark in book_marks %}
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="card aos aos-init aos-animate" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{{mark.product.cover_image.url}}" class="img-fluid" alt="blog-img">
+										</a>
+										<div class="fav-item">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon">
+												<i class="feather-heart"></i>
+											</a>										
+										</div>	
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">	
+												</div>
+												<div class="blog-features">
+                                                    <a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> {{mark.product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span><img style="width:20px"src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">{{mark.product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												<div class="location-info">
+                                                    <i class="feather-map-pin"></i> {{mark.product.location}}
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i>{{mark.product.created_date|date}}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED {{mark.product.price}}</span>
+													<span>$450</span>
+												</div>
+											</div>	
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+
+						{% endfor %}
+

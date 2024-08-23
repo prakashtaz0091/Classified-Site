@@ -35,8 +35,9 @@
 			<div class="container">
 				{% include 'includes/dashboard.html' %}
 				<div class="bookmarks-content grid-view featured-slider">
-					<div class="row">
-						{% for mark in book_marks %}
+
+					<div id="productContainerWrapper" class="row">
+					{% for mark in book_marks %}
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="card aos aos-init aos-animate" data-aos="fade-up">
 								<div class="blog-widget">
@@ -84,24 +85,21 @@
 													{% endif %}
 												</div>
 												<div class="blog-features">
-													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{mark.product.category.category_name}}</span></a>
+                                                    <a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i> {{mark.product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
-													<span><img src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.product.view_count}}</span>
+                                                    <span><img style="width:20px;"src="{% static 'assets/img/eye.svg' %}" alt="electronics">{{mark.product.view_count}}</span>
+
 												</div>
 											</div> 
 											<h6><a href="{% url 'service_detail' mark.product.slug %}">{{mark.product.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 												<div class="location-info">
-													{% if mark.product.location.address %}
-													<i class="feather-map-pin"></i>{{mark.product.location.address}}
-													{% else %}
-													<i class="feather-map-pin"></i> Dubai
-
-													{% endif %}
+                                                    <i class="feather-map-pin"></i> {{mark.product.location}}
 												</div>
 												<div class="location-info">
-													<i class="fa-solid fa-calendar-days"></i>{{ mark.product.created_date|date:"F j, Y" }}
+													<i class="fa-solid fa-calendar-days"></i>{{mark.product.created_date|date}}
+
 												</div>
 											</div>
 											<div class="amount-details">
@@ -109,9 +107,6 @@
 													<span class="validrate">AED {{mark.product.price}}</span>
 													<span>AED 450</span>
 												</div>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>												
 											</div>	
 										</div>	
 									</div>			 
@@ -120,12 +115,13 @@
 						</div>
 
 						{% endfor %}
+	
 						
 					</div>
 					<!--Pagination--> 
 					<div class="blog-pagination">
 						<nav>
-							<ul class="pagination">
+							<ul id="paginationClick" class="pagination">
 								<!-- Previous button: disable if on the first page -->
 								<li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
 									<a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
@@ -174,6 +170,7 @@
 			
 		<!-- Footer -->
 		{% include 'includes/footer.html' %}
+		{% include 'includes/pagination_script.html' %}
 		<!-- /Footer -->
 		
 	</div>

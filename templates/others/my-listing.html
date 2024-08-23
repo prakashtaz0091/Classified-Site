@@ -46,7 +46,7 @@
 							<div class="listing-search">
 								<div class="filter-content form-group">
 									<div class="group-img">
-									  <input type="text" class="form-control" placeholder="Search...">
+										<input type="text" class="form-control" id='productSearch' oninput="searchProducts()" placeholder="Search...">
 									  <i class="feather-search"></i>
 									</div>
 								</div>
@@ -74,7 +74,7 @@
 									    <th class="no-sort">Action</th>										 
 									 </tr>	
                                      </thead>
-                                     <tbody id="productContainer">	
+                                     <tbody id="productContainerWrapper">	
 										
 									{% for item in products %}
                                      <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
@@ -110,7 +110,6 @@
 										 </td>
                                      </tr> 
 									 {% endfor %}
-                                   
 									
                                      </tbody>									 
 							    </table>				
@@ -119,7 +118,7 @@
 								<!-- Pagination Controls -->
 <div class="blog-pagination">
     <nav>
-        <ul class="pagination">
+        <ul id="paginationClick" class="pagination">
             <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
                 <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
                     <i class="fas fa-regular fa-arrow-left"></i> Prev
@@ -175,21 +174,43 @@
 			}
 
 			function sortProducts(selectElement) {
+				var searchQuery = document.getElementById('productSearch').value.toLowerCase();
 				var sortValue = selectElement.value;
 				$.ajax({
 					url: window.location.href,
 					data: {
 						sort: sortValue,
+						search:searchQuery
 					},
 					success: function (data) {
-						$('#productContainer').html(data.products_html);
+						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
 					}
 				});
 			}
 			
-		
+		function searchProducts() {
+    // Get the search input value
+    var searchQuery = document.getElementById('productSearch').value.toLowerCase();
+    // Get the product rows
+				var sortValue = document.getElementById('sortSelect').value;
+				$.ajax({
+					url: window.location.href,
+					data: {
+						sort: sortValue,
+						search:searchQuery
+					},
+					success: function (data) {
+						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
+					}
+				});
+
+}
+
 	</script>
 	
+	{% include 'includes/pagination_script.html' %}
 
 
 {% endblock %}
