@@ -8,7 +8,6 @@ urlpatterns = [
     path("something_wrong/", views.something_wrong, name="error"),
     path("freq_question/", views.freq_question, name="freq_question"),
     path("terms/", views.terms, name="terms"),
-    path("contact/", views.contact, name="contact"),
     path("how_it_works/", views.how_it_works, name="how_it_works"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("my_listing/", views.my_listing, name="my_listing"),
@@ -29,7 +28,7 @@ urlpatterns = [
 
     path('freq_question/',views.freq_question,name='freq_question'),
     path('terms/',views.terms,name='terms'),
-    path('contact/',views.contact,name='contact'),
+  
     path('search/',views.search,name='search'),
     path('how_it_works/',views.how_it_works,name='how_it_works'),
     path('dashboard/',views.dashboard,name='dashboard'),

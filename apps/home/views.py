@@ -73,8 +73,8 @@ def terms(request):
     return render(request, "company/terms-condition.html")
 
 
-def contact(request):
-    return render(request, "company/contact.html")
+# def contact(request):
+#     return render(request, "company/contact.html")
 
 
 def how_it_works(request):

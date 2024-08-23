@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'apps.home.apps.HomeConfig',
     'apps.store.apps.StoreConfig',
     'apps.category.apps.CategoryConfig',
-    'apps.job.apps.JobConfig'
+    'apps.job.apps.JobConfig',
+    'apps.contact.apps.ContactConfig',
 
 ]
 
