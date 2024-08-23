@@ -1,0 +1,61 @@
+{% load static %}
+                        {% for product in products %}
+					    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="card flex-fill">
+				    			<div class="blog-widget">
+									<div class="blog-img">
+										<a href="service-details.html">
+											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
+										</a>
+					    				<div class="fav-item">
+											<span class="featured-text">Featured</span>
+												<a href="javascript:void(0)" class="fav-icon">
+							    					<i class="feather-heart"></i>
+						    					</a>										
+										</div>	
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+											    <div class="grid-author">
+                                                    {% if product.created_by.profile.profile_photo %}
+													<img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
+                                                </div>
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>{{product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span> <i class="feather-eye"></i>{{product.view_count}}  </span>
+												</div>
+											</div> 
+											<h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												<div class="location-info">
+                                                    {% if product.location.address %}
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+                                                   {% else %}
+                                                   <i class="feather-map-pin"></i>Dubai
+                                                   {% endif %}
+												</div>
+												<div class="location-info">
+													<i class="fa-solid fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED {{product.price}}</span>
+													{% comment %}
+													<span>$450</span>
+													{% endcomment %}
+												</div>
+											</div>	
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+                        {% endfor %}
+

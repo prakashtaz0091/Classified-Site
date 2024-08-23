@@ -25,7 +25,8 @@
 					'X-Requested-With': 'FETCH'
 				},
 			})   .then(response=>response.json()).then(data=>{
-                console.log(data.product_data)
+                console.log(data.pagination_data)
+				console.log(data.product_data)
 				document.getElementById('productContainerWrapper').innerHTML=data.product_data
 				element.innerHTML=data.pagination_data
 			        })

@@ -104,21 +104,39 @@ def dashboard(request):
 def my_listing(request):
     if request.method == "GET":
         sort_option = request.GET.get("sort", "-created_date")  # Default to newest
-        products = Product.objects.filter(created_by=request.user).order_by(sort_option)
-
+        search_query = request.GET.get("search", "")  # Default to newest
+        products=None
+        if search!="":
+            products = Product.objects.filter(
+            product_name__icontains=search_query
+        ) | Product.objects.filter(
+            description__icontains=search_query
+        )
+            products = products.filter(created_by=request.user).order_by(sort_option)
+        else:
+            products = Product.objects.filter(created_by=request.user).order_by(sort_option)
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
-        if request.headers.get("x-requested-with") == "XMLHttpRequest":
-            data = {
-                "products_html": render_to_string(
-                    "partials/product_list.html",
+        if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_mylist.html",
                     {"products": page_obj.object_list},
                     request=request,
                 ),
+            pagination_context={
+                'page_obj':page_obj,
+                'search':search_query,
+                'sort':sort_option
+
             }
-            return JsonResponse(data)
+            pagination_data=render_to_string(
+                "partials/pagination_mylist.html",
+                pagination_context,
+                request=request
+            )
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
 
         context = {
             "page_obj": page_obj,
@@ -228,9 +246,23 @@ def book_marks(request):
     print(bookmarked_product_ids,'id')    
 
     # paginations added
-    paginator = Paginator(book_marks, 8)
+    paginator = Paginator(book_marks, 1)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+
+    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_bookmark.html",
+                    {"book_marks": page_obj.object_list},
+                    request=request,
+                ),
+            pagination_data=render_to_string(
+                "partials/pagination.html",
+                {'page_obj':page_obj},
+                request=request
+            )
+            print(pagination_data)
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
     context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
 
     return render(request, "others/bookmarks.html", context)
@@ -403,21 +435,19 @@ def sub_category(request):
 
 
 def search(request):
-   
-    category_id = request.GET.get('category')
+    category_slug= request.GET.get('category')
     location = request.GET.get('location')
-
     products = Product.objects.all().order_by('-id')
 
-    if category_id:
-        products = products.filter(category_id=category_id)
-    
+    if category_slug:
+        products = products.filter(category__slug=category_slug)
     if location:
         products = products.filter(location__address__icontains=location)
         
     # Pagination logic
     page = request.GET.get('page', 1)
     paginator = Paginator(products, 1)  # Show 10 products per page
+    products=None
     
     try:
         products = paginator.page(page)
@@ -426,9 +456,25 @@ def search(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
     
+
+    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            product_data = render_to_string(
+                    "partials/product_list_search.html",
+                    {"products": products.object_list},
+                    request=request,
+                ),
+            pagination_data=render_to_string(
+                "partials/pagination_search.html",
+                {'page_obj':products,
+                 'category':category_slug,
+                 'location':location,},
+                request=request
+            )
+            print(pagination_data)
+            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
     context = {
         'products': products,
-        'category': category_id,
+        'category': category_slug,
         'location': location,
     }
 
