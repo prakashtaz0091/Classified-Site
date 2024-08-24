@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from apps.category.models import Category,SubCategory
 from apps.store.models import Product,Feature
 
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 # def category_view(request):
 #     categories = Category.objects.prefetch_related('sub_categories').all()
@@ -238,18 +239,22 @@ def sub_category_list(request, slug):
         return HttpResponse(
             "An error occurred while processing your request.", status=500
         )
-
+@csrf_exempt
 def create_category_info(request):
     try:
         if request.method=="POST":
+            print(request.POST)
             data=request.POST
+            print(data)
             content_titles=data.getlist('content_title')
             content_types=data.getlist('content_type')
             category=data.get('category')
+            for i in range(0,len(content_titles)):
+                print(content_titles[i],"is of input type",content_types[i])
             print(content_titles,content_types,category)
         else:
             raise Exception("Only post method is allowed for this endpoint")
     except Exception as e:
         print(e)
         # will later redirect to error pages 
-        return e
+        return JsonResponse({'error':str(e)},status=400)
