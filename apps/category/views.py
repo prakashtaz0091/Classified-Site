@@ -227,10 +227,6 @@ def sub_category_list(request, slug):
         category = get_object_or_404(Category, slug=slug)
     
         subcategories = SubCategory.objects.filter(parent=category)
-     
-        
-        
-
         context = {
             "category": category,
             "subcategories": subcategories,
@@ -242,3 +238,18 @@ def sub_category_list(request, slug):
         return HttpResponse(
             "An error occurred while processing your request.", status=500
         )
+
+def create_category_info(request):
+    try:
+        if request.method=="POST":
+            data=request.POST
+            content_titles=data.getlist('content_title')
+            content_types=data.getlist('content_type')
+            category=data.get('category')
+            print(content_titles,content_types,category)
+        else:
+            raise Exception("Only post method is allowed for this endpoint")
+    except Exception as e:
+        print(e)
+        # will later redirect to error pages 
+        return e

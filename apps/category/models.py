@@ -3,8 +3,6 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
-
-
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
@@ -34,3 +32,11 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.category_name
+
+class SubCategoryInfo(models.Model):
+    #Content titles and content type are used to specify the details that will be used in categories
+    content_titles=models.JSONField(blank=True,null=True)
+    content_types=models.JSONField(blank=True,null=True)
+    category=models.OneToOneField(SubCategory,on_delete=models.CASCADE)
+
+
