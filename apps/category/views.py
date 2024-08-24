@@ -249,8 +249,9 @@ def create_category_info(request):
             content_titles=data.getlist('content_title')
             content_types=data.getlist('content_type')
             category=data.get('category')
+            content_datas=data.getlist('content_data')
             for i in range(0,len(content_titles)):
-                print(content_titles[i],"is of input type",content_types[i])
+                print(content_titles[i],"is of input type",content_types[i] ,'of data',content_datas[i])
             print(content_titles,content_types,category)
         else:
             raise Exception("Only post method is allowed for this endpoint")
