@@ -73,8 +73,8 @@ def terms(request):
     return render(request, "company/terms-condition.html")
 
 
-def contact(request):
-    return render(request, "company/contact.html")
+# def contact(request):
+#     return render(request, "company/contact.html")
 
 
 def how_it_works(request):
@@ -84,8 +84,7 @@ def how_it_works(request):
 def dashboard(request):
     try:
         book_marks=BookMark.objects.filter(user=request.user)
-        
-      
+        total_product=Product.objects.filter(created_by=request.user).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
         
        
@@ -93,7 +92,8 @@ def dashboard(request):
         context={
             'book_marks':book_marks,
             'count':count,
-            'reviews_list':reviews_list
+            'reviews_list':reviews_list,
+            'total_product':total_product
         }
         return render(request, "others/dashboard.html", context)
     except Exception as e:
@@ -152,14 +152,15 @@ def edit_my_listing(request, id):
         features = Feature.objects.all()
         categories = Category.objects.all()
         product_images = ProductImages.objects.filter(product=product)
-        selected_categories = product.category.all().values_list("id", flat=True)
+        selected_category=[]
+        selected_categories = selected_category.append(product.category.id)
         selected_features = product.features.all().values_list("id", flat=True)
 
         context = {
             "product": product,
             "categories": categories,
             "product_images": product_images,
-            "selected_categories": selected_categories,
+            "selected_categories": selected_category,
             "selected_features": selected_features,
             "features": features,
             "id": id,
@@ -233,7 +234,17 @@ def something_wrong(request):
 
 def book_marks(request):
 
-    book_marks = BookMark.objects.filter(user=request.user)
+    book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
+    if request.user.is_authenticated:
+        bookmarked_product_ids = BookMark.objects.filter(
+            user=request.user
+        ).values_list("product_id", flat=True)
+    else:
+        bookmarked_product_ids = []
+        
+        
+    print(bookmarked_product_ids,'id')    
+
     # paginations added
     paginator = Paginator(book_marks, 1)
     page_number = request.GET.get("page")
@@ -252,7 +263,7 @@ def book_marks(request):
             )
             print(pagination_data)
             return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
-    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count}
+    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
 
     return render(request, "others/bookmarks.html", context)
 
@@ -416,6 +427,7 @@ def all_ads(request):
 
 
 def sub_category(request):
+   print('hello its sub category')
    return render(request,'others/sub_categories.html')
 
 

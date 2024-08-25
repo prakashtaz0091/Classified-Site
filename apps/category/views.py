@@ -3,8 +3,10 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
-from apps.category.models import Category,SubCategory, SubCategoryInfo
-from apps.store.models import Product,Feature
+from apps.category.models import Category,SubCategory
+from apps.store.models import Product,Feature,BookMark
+from django.db.models import Count
+
 
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -67,12 +69,19 @@ def viewall_listing_view(request, subcategory_slug):
         products = Product.objects.filter(category=category).order_by("-id")
         print(products)
 
-        # For pagination
+        if request.user.is_authenticated:
+            bookmarked_product_ids = BookMark.objects.filter(
+                user=request.user
+            ).values_list("product_id", flat=True)
+        else:
+            bookmarked_product_ids = []
         paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page",1)
         page_obj = paginator.get_page(page_number)
         
-        feature=Feature.objects.all()    
+        feature=Feature.objects.all() 
+        
+        print(bookmarked_product_ids,'ids')   
 
         context = {
             'products': page_obj,
@@ -80,7 +89,8 @@ def viewall_listing_view(request, subcategory_slug):
             'page_obj': page_obj,
             'category':category,
             'current_page_product_count': len(page_obj.object_list),
-            'features':feature
+            'features':feature,
+            'book_mark':bookmarked_product_ids
         }
 
         if request.headers.get("x-requested-with") == "FETCH":
@@ -225,9 +235,15 @@ def category(request):
 
 def sub_category_list(request, slug):
     try:
+        print('sub cateagory list')
         category = get_object_or_404(Category, slug=slug)
     
-        subcategories = SubCategory.objects.filter(parent=category)
+        subcategories = SubCategory.objects.filter(parent=category).annotate(product_count=Count('products'))
+
+        print(subcategories,'sub')     
+        
+        
+
         context = {
             "category": category,
             "subcategories": subcategories,

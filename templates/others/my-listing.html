@@ -83,7 +83,7 @@
 										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
 										 </td>
 									     <td>
-										     <h6><a href="service-details.html">{{item.product_name}}</a></h6>
+										     <h6><a href="{% url 'service_detail' item.slug %}">{{item.product_name}}</a></h6>
 											 <div class="listingtable-rate">
 												<a href="javascript:void(0)" class="cat-icon">
 													<i class="fa-regular fa-circle-stop"></i>
@@ -91,8 +91,8 @@
 														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
 													{% endfor %}
 												</a> 
-												<span class="discount-amt">$350000.00</span>
-												<span class="fixed-amt">${{ item.price }}</span>
+												<span class="discount-amt">AED 3500</span>
+												<span class="fixed-amt">AED{{ item.price }}</span>
 											</div>
 											<p>{{item.description}}</p>
 										 </td>
@@ -100,7 +100,7 @@
 									     <td><Span class="views-count">{{item.view_count}}</span></td>
 									     <td>
 										    <div class="action">
-        										<a href="javascript:void(0)" class="action-btn btn-view"><i class="feather-eye"></i></a>
+        										<a href="{% url 'service_detail' item.slug %}" class="action-btn btn-view"><i class="feather-eye"></i></a>
 											    <a href="{% url 'edit_my_listing' item.id %}" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
 												<a href="{% url 'delete_my_listing' item.id %}" class="action-btn btn-trash" onclick="return confirmDelete();">
 													<i class="feather-trash-2"></i>

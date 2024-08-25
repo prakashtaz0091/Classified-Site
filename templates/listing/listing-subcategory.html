@@ -259,6 +259,47 @@
              });
          });
       </script>
+
+
+      <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.fav-icon').forEach(function(icon) {
+               icon.addEventListener('click', function() {
+                  console.log('i am clicked')
+                  var itemId = this.closest('.fav-item').getAttribute('data-id');
+                  var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+         
+                  fetch('/ad/toggle-bookmark/', {
+                     method: 'POST',
+                     headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken 
+                     },
+                     body: JSON.stringify({ id: itemId })
+                  })
+                  .then(response => {
+                     if (response.redirected) {
+                        // If the response is redirected, navigate to the login page
+                        window.location.href = response.url;
+                     } else {
+                        return response.json();
+                     }
+                  })
+                  .then(data => {
+                     console.log(data, 'data');
+                     if (data.success) {
+                        this.querySelector('i').classList.toggle('favorited');  // Change icon state
+                     } else {
+                        console.error('Failed to favorite item.');
+                     }
+                  })
+                  .catch(error => console.error('Error:', error));
+               });
+            });
+         });
+         
+      </script>	
+         
       <!-- jQuery -->
       <script src="{% static 'assets/js/jquery-3.7.0.min.js' %}"></script>
       <!-- Bootstrap Core JS -->
