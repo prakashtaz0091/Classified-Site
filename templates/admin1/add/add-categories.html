@@ -22,21 +22,222 @@
                         </div>
                         <form action="categories.html">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Category Name <span>(English)</span></label>
+                                        <label>Category Name* <span>(English)</span></label>
                                         <input type="text" class="form-control" placeholder="Category Name">
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Category Slug <span>(Ex:test-slug)</span></label>
-                                        <input type="text" class="form-control" placeholder="Category Slug">
+                                        <label>Menu Text*</label>
+                                        <input type="text" class="form-control" placeholder="Menu Text">
                                     </div>
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Order</label>
+                                        <input type="number" class="form-control" placeholder="Order">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="order-select">Type*</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="order-select" class="form-control custom-select-arrow">
+                                                <option value="">Classified</option>
+                                                <option value="1">Real State</option>
+                                                <option value="2">Posting Job</option>
+                                                <option value="3">Searching Job</option>
+                                                <option value="4">Vechicle</option>  
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Menu Item ?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>NO</option>
+                                                <option value="2">Yes</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Popular Item ?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>NO</option>
+                                                <option value="2">Yes</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Featured Item ?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>NO</option>
+                                                <option value="2">Yes</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Latest Item ?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>NO</option>
+                                                <option value="2">Yes</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Is industry category?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>NO</option>
+                                                <option value="2">Yes</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="media-select">Media Type</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1" selected>Image</option>
+                                                <option value="2">Document</option>
+                                                <option value="3">None</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+
+                                <!--description-->
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Descriptions <span class="mandatory">*</span></label>
+                                        <textarea class="form-control" placeholder="Add a Descriptions....."></textarea>
+                                    </div>
+                                </div>
+
+
+                                <!--end descriptions-->
+
+
+                                <!--short descriptions-->
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Short Descriptions <span class="mandatory">*</span></label>
+                                        <textarea class="form-control" placeholder="Add a Short Descriptions....."></textarea>
+                                    </div>
+                                </div>
+
+
+                                <!--short end-->
+
+
+                                <!--status-->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="media-select">Status?</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="media-select" class="form-control custom-select-arrow">
+                                                <option value="1">Pending</option>
+                                                <option value="2" selected>Active</option>
+                                                <option value="3">Blocked</option>
+                                                <option value="4">Deleted</option>
+                                            </select>
+                                            <span class="custom-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!--endstatus -->
+
+
+                                <!--default meta for country only -->
+
+                                <h1 style="margin-bottom: 10px; font-weight: bold; font-size: 16px;">Default Meta for country only</h1>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Title </label>
+                                        <input type="text" class="form-control" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <input type="text" class="form-control" placeholder="Descriptions">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Keywords</label>
+                                        <input type="text" class="form-control" placeholder="Keywords">
+                                    </div>
+                                </div>
+
+                                <!--end default meta -->
+
+                                <!-- meta for country and city -->
+
+
+                                <h1 style="margin-bottom: 10px; font-weight: bold; font-size: 16px;">Default Meta for country and city </h1>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Title </label>
+                                        <input type="text" class="form-control" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <input type="text" class="form-control" placeholder="Descriptions">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Keywords</label>
+                                        <input type="text" class="form-control" placeholder="Keywords">
+                                    </div>
+                                </div>
+
+                                <!--end default meta -->
+
+
+                                
+                               <!--media -->
+
+                                <h1 style="margin-bottom: 10px; font-weight: bold; font-size: 16px;">Media </h1>
+
                                 <div class="col-lg-12">
                                     <div class="form-group mb-0">
-                                        <label>Category Image</label>
+                                        <label>Icon Image</label>
                                     </div>
                                     <div class="form-uploads mb-4">
                                         <div class="form-uploads-path">
@@ -44,65 +245,94 @@
                                             <div class="file-browse">
                                                 <h6>Drag & drop image or </h6>
                                                 <div class="file-browse-path">
-                                                    <input type="file">
+                                                    <input type="file" id="imgInp1" class="form-control">
                                                     <a href="javascript:void(0);"> Browse</a>
                                                 </div>
                                             </div>
-                                            <h5>Supported formates: JPEG, PNG</h5>
+                                            <h5>Supported formats: JPEG, PNG</h5>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-12">
                                     <div class="upload-div mb-0">
                                         <div class="upload-sets">
                                             <div class="upload-sets-btn form-group">
-                                                <label>Icon <span>(Display in the home page)</span></label>
-                                                <input type="file" id="imgInp" class="form-control">
+                                                <label>Icon <span>(Display on the home page)</span></label>
+                                                <input type="file" id="imgInp1" class="form-control">
                                                 <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
                                                 <p>Recommended Icon Size is 48*48</p>
                                             </div>
                                         </div>
                                         <div class="upload-img">
                                             <div class="upload-imgset">	
-                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="blah">
+                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="blah1">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Seo Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter SEO Title">
+                                    <div class="form-group mb-0">
+                                        <label>Secondary Icon Image</label>
+                                    </div>
+                                    <div class="form-uploads mb-4">
+                                        <div class="form-uploads-path">
+                                            <img src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
+                                            <div class="file-browse">
+                                                <h6>Drag & drop image or </h6>
+                                                <div class="file-browse-path">
+                                                    <input type="file" id="imgInp2" class="form-control">
+                                                    <a href="javascript:void(0);"> Browse</a>
+                                                </div>
+                                            </div>
+                                            <h5>Supported formats: JPEG, PNG</h5>
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Meta Description <span class="mandatory">*</span></label>
-                                        <textarea class="form-control" placeholder="Add a Short Bio....."></textarea>
+                                    <div class="upload-div mb-0">
+                                        <div class="upload-sets">
+                                            <div class="upload-sets-btn form-group">
+                                                <label>Secondary Icon <span>(Display on the home page)</span></label>
+                                                <input type="file" id="imgInp2" class="form-control">
+                                                <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
+                                                <p>Recommended Icon Size is 48*48</p>
+                                            </div>
+                                        </div>
+                                        <div class="upload-img">
+                                            <div class="upload-imgset">	
+                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="blah2">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Is Featured?</label>
-                                        <ul class="custom-radiosbtn">
-                                            <li>
-                                                <label class="radiossets">
-                                                    yes
-                                                    <input type="radio" checked="checked" name="radio">
-                                                    <span class="checkmark-radio"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="radiossets">
-                                                    No
-                                                    <input type="radio" checked="checked" name="radio">
-                                                    <span class="checkmark-radio"></span>
-                                                </label>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
+                                
+                                <!-- JavaScript for Image Preview -->
+                                <script>
+                                function readURL(input, imgElementId) {
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById(imgElementId).src = e.target.result;
+                                        }
+                                        reader.readAsDataURL(input.files[0]); // convert to base64 string
+                                    }
+                                }
+                                
+                                document.getElementById("imgInp1").addEventListener("change", function() {
+                                    readURL(this, 'blah1');
+                                });
+                                
+                                document.getElementById("imgInp2").addEventListener("change", function() {
+                                    readURL(this, 'blah2');
+                                });
+                                </script>
+                                
+                                
+                                <!--end of media -->
+                            
                                 <div class="col-lg-12">
                                     <div class="btn-path">                                    
                                         <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
@@ -116,5 +346,8 @@
             </div>
         </div> 
     </div>
+
+
+   
 
   {% endblock %}
