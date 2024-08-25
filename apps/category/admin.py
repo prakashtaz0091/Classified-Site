@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, SubCategory
+from .models import Category, SubCategory, SubCategoryInfo
 
 
 # Register your models here.
@@ -23,3 +23,4 @@ class subcategory(admin.ModelAdmin):
 
 admin.site.register(Category, category_admin)
 admin.site.register(SubCategory, subcategory)
+admin.site.register(SubCategoryInfo)

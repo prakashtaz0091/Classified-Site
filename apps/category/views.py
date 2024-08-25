@@ -8,6 +8,7 @@ from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
 
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 # def category_view(request):
 #     categories = Category.objects.prefetch_related('sub_categories').all()
@@ -254,3 +255,27 @@ def sub_category_list(request, slug):
         return HttpResponse(
             "An error occurred while processing your request.", status=500
         )
+@csrf_exempt
+def create_category_info(request):
+    try:
+        if request.method=="POST":
+            print(request.POST)
+            data=request.POST
+            print(data)
+            content_titles=data.getlist('content_title')
+            content_types=data.getlist('content_type')
+            category=data.get('category')
+            content_datas=data.getlist('content_data')
+            for i in range(0,len(content_titles)):
+                print(content_titles[i],"is of input type",content_types[i] ,'of data',content_datas[i])
+            print(content_titles,content_types,category)
+            subcategory_instance=SubCategory.objects.filter(id=category).first()
+            if subcategory_instance is None:
+                raise Exception("Subcategory of that id not found")
+            SubCategoryInfo.objects.create(category=subcategory_instance,content_datas=content_datas,content_titles=content_titles,content_types=content_types)
+        else:
+            raise Exception("Only post method is allowed for this endpoint")
+    except Exception as e:
+        print(e)
+        # will later redirect to error pages 
+        return JsonResponse({'error':str(e)},status=400)
