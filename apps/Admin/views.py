@@ -14,3 +14,7 @@ def admin_category(request):
 
 def add_category(request):
     return render(request,'admin1/add/add-categories.html')
+
+
+def fields(request):
+    return render(request,'admin1/add/fields.html')
