@@ -20,37 +20,38 @@
                         <div class="content-page-header">
                             <h5>Add Categories</h5>
                         </div>
-                        <form action="categories.html">
+                        <form method="POST" action="{% url 'create_category' %}">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Category Name* <span>(English)</span></label>
-                                        <input type="text" class="form-control" placeholder="Category Name">
+                                        <input type="text" name='category_name' class="form-control" placeholder="Category Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Menu Text*</label>
-                                        <input type="text" class="form-control" placeholder="Menu Text">
+                                        <input type="text" class="form-control" name='menu_text' placeholder="Menu Text">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Order</label>
-                                        <input type="number" class="form-control" placeholder="Order">
+                                        <input type="number" class="form-control" name='order' placeholder="Order">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="order-select">Type*</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="order-select" class="form-control custom-select-arrow">
-                                                <option value="">Classified</option>
-                                                <option value="1">Real State</option>
-                                                <option value="2">Posting Job</option>
-                                                <option value="3">Searching Job</option>
-                                                <option value="4">Vechicle</option>  
+                                            <select id="order-select" name='type' class="form-control custom-select-arrow">
+                                                <option value="Classified">Classified</option>
+                                                <option value="Real Estate">Real Estate</option>
+                                                <option value="Posting Job">Posting Job</option>
+                                                <option value="Searching Job">Searching Job</option>
+                                                <option value="Vechile">Vechile</option>  
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -61,9 +62,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Menu Item ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='menu_item' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>

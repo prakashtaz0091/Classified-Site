@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
-from apps.category.models import Category,SubCategory
+from apps.category.models import Category,SubCategory, SubCategoryInfo
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
@@ -226,13 +226,8 @@ def sub_category_list(request, slug):
     try:
         print('sub cateagory list')
         category = get_object_or_404(Category, slug=slug)
-    
         subcategories = SubCategory.objects.filter(parent=category).annotate(product_count=Count('products'))
-
         print(subcategories,'sub')     
-        
-        
-
         context = {
             "category": category,
             "subcategories": subcategories,
