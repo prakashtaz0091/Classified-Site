@@ -74,9 +74,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Popular Item ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='popular_item' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -86,9 +86,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Featured Item ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='featured_item' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -99,9 +99,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Latest Item ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='latest_item' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -112,9 +112,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Is industry category?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='industry_category' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -124,10 +124,10 @@
                                     <div class="form-group">
                                         <label for="media-select">Media Type</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>Image</option>
-                                                <option value="2">Document</option>
-                                                <option value="3">None</option>
+                                            <select id="media-select" name='media_type' class="form-control custom-select-arrow">
+                                                <option value="Image" selected>Image</option>
+                                                <option value="Document">Document</option>
+                                                <option value="None">None</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -140,7 +140,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Descriptions <span class="mandatory">*</span></label>
-                                        <textarea class="form-control" placeholder="Add a Descriptions....."></textarea>
+                                        <textarea name='long_description' class="form-control" placeholder="Add a Descriptions....."></textarea>
                                     </div>
                                 </div>
 
@@ -152,7 +152,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Short Descriptions <span class="mandatory">*</span></label>
-                                        <textarea class="form-control" placeholder="Add a Short Descriptions....."></textarea>
+                                        <textarea name='short_description'  class="form-control" placeholder="Add a Short Descriptions....."></textarea>
                                     </div>
                                 </div>
 
@@ -165,11 +165,11 @@
                                     <div class="form-group">
                                         <label for="media-select">Status?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1">Pending</option>
-                                                <option value="2" selected>Active</option>
-                                                <option value="3">Blocked</option>
-                                                <option value="4">Deleted</option>
+                                            <select id="media-select" name='status' class="form-control custom-select-arrow">
+                                                <option value="PENDING">Pending</option>
+                                                <option value="ACTIVE" selected>Active</option>
+                                                <option value="BLOCKED">Blocked</option>
+                                                <option value="DELETED">Deleted</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -186,19 +186,19 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Title </label>
-                                        <input type="text" class="form-control" placeholder="Title">
+                                        <input name='meta_title_country' type="text" class="form-control" placeholder="Title">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <input type="text" class="form-control" placeholder="Descriptions">
+                                        <input type="text" name='meta_description_country' class="form-control" placeholder="Descriptions">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Keywords</label>
-                                        <input type="text" class="form-control" placeholder="Keywords">
+                                        <input type="text" name='meta_keywords_country' class="form-control" placeholder="Keywords">
                                     </div>
                                 </div>
 
@@ -212,19 +212,19 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Title </label>
-                                        <input type="text" class="form-control" placeholder="Title">
+                                        <input type="text" class="form-control" name='meta_title_city' placeholder="Title">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <input type="text" class="form-control" placeholder="Descriptions">
+                                        <input type="text" class="form-control" name='meta_description_city' placeholder="Descriptions">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Keywords</label>
-                                        <input type="text" class="form-control" placeholder="Keywords">
+                                        <input type="text" class="form-control" name='meta_keywords_city' placeholder="Keywords">
                                     </div>
                                 </div>
 
@@ -246,7 +246,7 @@
                                             <div class="file-browse">
                                                 <h6>Drag & drop image or </h6>
                                                 <div class="file-browse-path">
-                                                    <input type="file" id="imgInp1" class="form-control">
+                                                    <input type="file" name='icon_image' id="imgInp1" class="form-control">
                                                     <a href="javascript:void(0);"> Browse</a>
                                                 </div>
                                             </div>
@@ -260,7 +260,7 @@
                                         <div class="upload-sets">
                                             <div class="upload-sets-btn form-group">
                                                 <label>Icon <span>(Display on the home page)</span></label>
-                                                <input type="file" id="imgInp1" class="form-control">
+                                                <input type="file" id="imgInp1" name='thumbnail_image' class="form-control">
                                                 <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
                                                 <p>Recommended Icon Size is 48*48</p>
                                             </div>
