@@ -5,8 +5,22 @@ from django.urls import reverse
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
+    menu_text=models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
     descriptions = models.TextField(max_length=255, blank=True)
+    order=models.IntegerField()
+    
+    #either classified or job listing like that(choices are not used because it will be posted from limited place)
+    category_type=models.CharField()
+    menu_item=models.BooleanField(default=False)
+    popular_item=models.BooleanField(default=False)
+    featured_item=models.BooleanField(default=False)
+    latest_item=models.BooleanField(default=False)
+    industry_standard=models.BooleanField(default=False)
+
+    # determine the type of media to be used
+    media_type=models.CharField(max_length=20)
+    long_description=models.TextField()
     category_image = models.FileField(
         upload_to="category/",
         blank=True,
@@ -32,6 +46,7 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.category_name
+
 
 class SubCategoryInfo(models.Model):
     #Content titles and content type are used to specify the details that will be used in categories

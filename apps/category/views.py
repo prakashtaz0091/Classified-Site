@@ -9,18 +9,6 @@ from django.db.models import Count
 
 
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
-# def category_view(request):
-#     categories = Category.objects.prefetch_related('sub_categories').all()
-
-#     context = {
-#         'categories': categories,
-#     }
-
-#     print(context)
-
-
-#     return render(request, 'home/index.html', context)
 
 # For subcategory
 def listing_view(request, subcategory_slug):
@@ -61,6 +49,7 @@ def listing_view(request, subcategory_slug):
         return render(request, "listing/listing-subcategory.html", context)
     except Exception as e:
         print(e)
+
 
 #For vieweign directly in category
 def viewall_listing_view(request, subcategory_slug):
@@ -255,6 +244,19 @@ def sub_category_list(request, slug):
         return HttpResponse(
             "An error occurred while processing your request.", status=500
         )
+
+def create_category(request):
+    try:
+        if request.method=="POST":
+            print(request.POST)
+            data=request.POST
+        else:
+            raise Exception("ONly post method is supported for this endpoitn")
+    except Exception as e:
+        print(e)
+        return (str(e))
+
+# Will probably changed in configuration
 @csrf_exempt
 def create_category_info(request):
     try:
