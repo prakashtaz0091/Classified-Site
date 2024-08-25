@@ -335,103 +335,70 @@
 		let subcategoryListing = document.querySelector('.subcategory-listing');
 		let subcategoryHeading = document.querySelector('.subcategory-heading');
 	
-		if (checkbox.checked) {
-			// Display subcategory heading if not already present
-			if (!subcategoryHeading) {
-				subcategoryHeading = document.createElement('div');
-				subcategoryHeading.classList.add('subcategory-heading');
-				subcategoryHeading.innerHTML = '<h3>Subcategories</h3>';
-				subcategoryListing.parentNode.insertBefore(subcategoryHeading, subcategoryListing);
-			}
+		// Uncheck all other checkboxes in categories
+		document.querySelectorAll('.category-listing input[type="checkbox"]').forEach(cb => {
+			if (cb !== checkbox) cb.checked = false;
+		});
 	
+		// Clear subcategories and brands if a new category is selected
+		clearSubcategories();
+		clearBrands();
+	
+		if (checkbox.checked) {
 			// Fetch and display subcategories
 			fetch(`/get_subcategories/?category_id=${categoryId}`)
 			.then(response => response.json())
 			.then(data => {
-				data.subcategories.forEach(subcategory => {
-					let subcategoryHtml = `
-						<div class="col-lg-4 subcategory-item" data-category-id="${categoryId}" data-subcategory-id="${subcategory.id}">
-							<ul>
-								<li>
-									<label class="custom_check">
-										<input type="checkbox" name="subcategories" value="${subcategory.id}">
-										<span class="checkmark"></span> ${subcategory.category_name}
-									</label>
-								</li>
-							</ul>
-						</div>`;
-					subcategoryListing.insertAdjacentHTML('beforeend', subcategoryHtml);
-				});
+				if (data.subcategories.length > 0) {
+					// Display subcategory heading if not already present
+					if (!subcategoryHeading) {
+						subcategoryHeading = document.createElement('div');
+						subcategoryHeading.classList.add('subcategory-heading');
+						subcategoryHeading.innerHTML = '<h3>Subcategories</h3>';
+						subcategoryListing.parentNode.insertBefore(subcategoryHeading, subcategoryListing);
+					} else {
+						subcategoryHeading.style.display = 'block';
+					}
 	
-				// Attach click event listeners to the subcategory checkboxes
-				let subcategoryCheckboxes = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"] input[type="checkbox"]`);
-				subcategoryCheckboxes.forEach(subcategoryCheckbox => {
-					subcategoryCheckbox.addEventListener('click', function() {
-						loadMoreData(this);
+					// Display subcategories
+					data.subcategories.forEach(subcategory => {
+						let subcategoryHtml = `
+							<div class="col-lg-4 subcategory-item" data-category-id="${categoryId}" data-subcategory-id="${subcategory.id}">
+								<ul>
+									<li>
+										<label class="custom_check">
+											<input type="checkbox" name="subcategories" value="${subcategory.id}" onclick="selectSingleSubcategory(this)">
+											<span class="checkmark"></span> ${subcategory.category_name}
+										</label>
+									</li>
+								</ul>
+							</div>`;
+						subcategoryListing.insertAdjacentHTML('beforeend', subcategoryHtml);
 					});
-				});
+				} else {
+					// If no subcategories, hide the heading and section
+					if (subcategoryHeading) {
+						subcategoryHeading.style.display = 'none';
+					}
+					subcategoryListing.innerHTML = '';
+				}
 			});
 		} else {
-			// Remove subcategories when checkbox is unchecked
-			let subcategoryItems = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"]`);
-			subcategoryItems.forEach(item => item.remove());
-	
-			// Remove subcategory heading if no subcategories are present
-			if (subcategoryListing.children.length === 0) {
-				if (subcategoryHeading) {
-					subcategoryHeading.remove();
-				}
-			}
+			// Clear subcategories if the category is unchecked
+			clearSubcategories();
 		}
 	}
 	
-	function loadSubcategories(checkbox) {
-		let categoryId = checkbox.value;
-		let subcategoryListing = document.querySelector('.subcategory-listing');
-		let subcategoryHeading = document.querySelector('.subcategory-heading');
+	function selectSingleSubcategory(subcategoryCheckbox) {
+		// Uncheck all other subcategory checkboxes
+		document.querySelectorAll('.subcategory-listing input[type="checkbox"]').forEach(cb => {
+			if (cb !== subcategoryCheckbox) cb.checked = false;
+		});
 	
-		if (checkbox.checked) {
-			// Display subcategory heading if not already present
-			if (!subcategoryHeading) {
-				subcategoryHeading = document.createElement('div');
-				subcategoryHeading.classList.add('subcategory-heading');
-				subcategoryHeading.innerHTML = '<h3>Subcategories</h3>';
-				subcategoryListing.parentNode.insertBefore(subcategoryHeading, subcategoryListing);
-			}
+		clearBrands();
 	
-			// Fetch and display subcategories
-			fetch(`/get_subcategories/?category_id=${categoryId}`)
-			.then(response => response.json())
-			.then(data => {
-				data.subcategories.forEach(subcategory => {
-					let subcategoryHtml = `
-						<div class="col-lg-4 subcategory-item" data-category-id="${categoryId}" data-subcategory-id="${subcategory.id}">
-							<ul>
-								<li>
-									<label class="custom_check">
-										<input type="checkbox" name="subcategories" value="${subcategory.id}" onclick="loadBrands(this)">
-										<span class="checkmark"></span> ${subcategory.category_name}
-									</label>
-								</li>
-							</ul>
-						</div>`;
-					subcategoryListing.insertAdjacentHTML('beforeend', subcategoryHtml);
-				});
-			});
-		} else {
-			// Remove subcategories when checkbox is unchecked
-			let subcategoryItems = document.querySelectorAll(`.subcategory-item[data-category-id="${categoryId}"]`);
-			subcategoryItems.forEach(item => item.remove());
-	
-			// Remove subcategory heading if no subcategories are present
-			if (subcategoryListing.children.length === 0) {
-				if (subcategoryHeading) {
-					subcategoryHeading.remove();
-				}
-			}
-	
-			// Clear any brand data if a category is unchecked
-			clearBrands();
+		if (subcategoryCheckbox.checked) {
+			loadBrands(subcategoryCheckbox);
 		}
 	}
 	
@@ -440,63 +407,79 @@
 		let brandListing = document.querySelector('.brand-listing');
 		let brandHeading = document.querySelector('.brand-heading');
 	
-		if (subcategoryCheckbox.checked) {
+		// Static data for brands
+		let data = {
+			1: ['Pulsar', 'Bajaj', 'Yamaha'],
+			2: ['Honda', 'Suzuki', 'Kawasaki'],
+			3: ['Royal Enfield', 'Harley Davidson', 'Ducati']
+		};
+	
+		let moreData = data[subcategoryId] || [];
+	
+		if (moreData.length > 0) {
 			// Display "Select Brand" heading if not already present
 			if (!brandHeading) {
 				brandHeading = document.createElement('div');
 				brandHeading.classList.add('brand-heading');
 				brandHeading.innerHTML = '<h4>Select Brand</h4>';
 				brandListing.parentNode.insertBefore(brandHeading, brandListing);
+			} else {
+				brandHeading.style.display = 'block';
 			}
 	
-			// Simulate fetching data for the clicked subcategory
-			let data = {
-				1: ['Pulsar', 'Bajaj', 'Yamaha'],
-				2: ['Honda', 'Suzuki', 'Kawasaki'],
-				3: ['Royal Enfield', 'Harley Davidson', 'Ducati']
-			};
-	
-			let moreData = data[subcategoryId] || [];
-	
+			// Display brands
 			moreData.forEach(item => {
-				let moreDataHtml = `
+				let brandHtml = `
 					<div class="col-lg-4 brand-item" data-subcategory-id="${subcategoryId}" data-brand="${item}">
 						<ul>
 							<li>
 								<label class="custom_check">
-									<input type="checkbox" name="brands" value="${item}">
+									<input type="checkbox" name="brands" value="${item}" onclick="selectSingleBrand(this)">
 									<span class="checkmark"></span> ${item}
 								</label>
 							</li>
 						</ul>
 					</div>`;
-				brandListing.insertAdjacentHTML('beforeend', moreDataHtml);
+				brandListing.insertAdjacentHTML('beforeend', brandHtml);
 			});
 		} else {
-			// Remove the corresponding brands when the subcategory checkbox is unchecked
-			let itemsToRemove = document.querySelectorAll(`.brand-item[data-subcategory-id="${subcategoryId}"]`);
-			itemsToRemove.forEach(item => item.remove());
-	
-			// Remove "Select Brand" heading if no more brands are present
-			if (brandListing.querySelectorAll('.brand-item').length === 0) {
-				if (brandHeading) {
-					brandHeading.remove();
-				}
+			// If no brands, hide the heading and section
+			if (brandHeading) {
+				brandHeading.style.display = 'none';
 			}
+			brandListing.innerHTML = '';
+		}
+	}
+	
+	function selectSingleBrand(brandCheckbox) {
+		// Uncheck all other brand checkboxes
+		document.querySelectorAll('.brand-listing input[type="checkbox"]').forEach(cb => {
+			if (cb !== brandCheckbox) cb.checked = false;
+		});
+	}
+	
+	function clearSubcategories() {
+		// Remove all subcategory items and hide the subcategory heading
+		let subcategoryItems = document.querySelectorAll('.subcategory-item');
+		subcategoryItems.forEach(item => item.remove());
+	
+		let subcategoryHeading = document.querySelector('.subcategory-heading');
+		if (subcategoryHeading) {
+			subcategoryHeading.style.display = 'none';
 		}
 	}
 	
 	function clearBrands() {
-		// Remove all brand items and the brand heading
+		// Remove all brand items and hide the brand heading
 		let brandItems = document.querySelectorAll('.brand-item');
 		brandItems.forEach(item => item.remove());
 	
 		let brandHeading = document.querySelector('.brand-heading');
 		if (brandHeading) {
-			brandHeading.remove();
+			brandHeading.style.display = 'none';
 		}
 	}
-		
+	
 </script>	
 	
 	

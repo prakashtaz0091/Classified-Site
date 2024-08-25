@@ -1,0 +1,93 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Adjeem | Template</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'admin/assets/img/favicon.png' %}">
+    
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/select2.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/fontawesome/css/all.min.css' %}">
+
+    <!-- Map CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css' %}">
+
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/dataTables.bootstrap4.min.css' %}">
+
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/feather/feather.css' %}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/style.css' %}">
+
+</head>
+
+
+<body>
+    {% block content %}
+
+
+   
+    {% endblock %}
+
+    <div id="overlayer">
+        <span class="loader">
+        <span class="loader-inner"></span>
+        </span>
+    </div>
+    <!-- jQuery -->
+    <script src="{% static 'admin/assets/js/jquery-3.6.4.min.js' %}"></script>
+    
+    <!-- Select 2 JS-->
+    <script src="{% static 'admin/assets/js/select2.min.js' %}"></script>
+
+    <!-- Chart JS -->
+    <script src="{% static 'admin/assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/apexchart/chart-data.js' %}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+     <!-- Feather Icon JS -->
+     <script src="{% static 'admin/assets/js/feather.min.js' %}"></script>
+
+    <!-- Datatable JS -->
+    <script src="{% static 'admin/assets/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'admin/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{% static 'admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+    <!-- Map JS -->
+    <script src="{% static 'admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-world-mill.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-ru-mill.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-us-aea.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-uk_countries-mill.js' %}"></script>        
+    <script src="{% static 'admin/assets/plugins/jvectormap/jquery-jvectormap-in-mill.js' %}"></script>
+    <script src="{% static 'admin/assets/js/jvectormap.js' %}"></script>
+
+ <!-- Sweetalert 2 -->
+    <script src="{% static 'admin/assets/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/sweetalert/sweetalerts.min.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'admin/assets/js/admin.js' %}"></script>
+
+</body>
+
+</html>

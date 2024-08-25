@@ -16,5 +16,6 @@ urlpatterns = [
     path('category/', include('apps.category.urls')),
     path('ad/', include('apps.store.urls')),
     path('', include('apps.contact.urls')),
+    path('admins/', include('apps.Admin.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

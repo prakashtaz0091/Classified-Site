@@ -173,18 +173,7 @@
                 </li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
 
-                {% if user.is_authenticated %}
-                <li class="has-submenu">
-                    <a href="#">Account <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                        <li><a href="">MY Ads</a></li>
-                        <li><a href="">Business listing</a></li>									
-                        <li><a href="{% url 'logout' %}">Log Out</a></li>									
-                        															
-                    </ul>
-                </li>
-                {% endif %}
+              
                 {% if user.is_authenticated %}
                 <li class="login-link">
                     <a href="{% url 'logout' %}">Log Out</a>
@@ -208,7 +197,7 @@
         {% if user.is_authenticated %}
         <ul class="nav header-navbar-rht">
             <li class="nav-item">
-                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
+                <a class="nav-link add-listing" href="{% url 'admin_index' %}"><span><i class="fa-solid fa-plus"></i></span>Admin</a>
             </li>
             <li class="nav-item dropdown has-arrow logged-item">
                 <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -229,12 +218,12 @@
         {% else %}
         <ul class="nav header-navbar-rht">
 
-            {% if user.is_authenticated %}
+     {% if user.is_authenticated %}
        <li class="nav-item">
            <a class="nav-link header-login" href="{% url 'logout' %}"> Log Out</a>
        </li>
        <li class="nav-item">
-           <a class="nav-link add-listing" href="add-listing.html"><i class="fa-solid fa-plus"></i>Add Listing</a>
+           <a class="nav-link add-listing" href="{% url 'admin_index' %}"><i class="fa-solid fa-plus"></i>Admin</a>
        </li>
        {% else %}
 
