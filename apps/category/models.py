@@ -38,5 +38,6 @@ class SubCategoryInfo(models.Model):
     content_titles=models.JSONField(blank=True,null=True)
     content_types=models.JSONField(blank=True,null=True)
     category=models.OneToOneField(SubCategory,on_delete=models.CASCADE)
+    content_datas=models.JSONField(blank=True,null=True)
 
 

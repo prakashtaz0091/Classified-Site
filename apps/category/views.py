@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
-from apps.category.models import Category,SubCategory
+from apps.category.models import Category,SubCategory, SubCategoryInfo
 from apps.store.models import Product,Feature
 
 from django.views.decorators.csrf import csrf_exempt
@@ -253,6 +253,10 @@ def create_category_info(request):
             for i in range(0,len(content_titles)):
                 print(content_titles[i],"is of input type",content_types[i] ,'of data',content_datas[i])
             print(content_titles,content_types,category)
+            subcategory_instance=SubCategory.objects.filter(id=category).first()
+            if subcategory_instance is None:
+                raise Exception("Subcategory of that id not found")
+            SubCategoryInfo.objects.create(category=subcategory_instance,content_datas=content_datas,content_titles=content_titles,content_types=content_types)
         else:
             raise Exception("Only post method is allowed for this endpoint")
     except Exception as e:
