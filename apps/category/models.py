@@ -11,7 +11,7 @@ class Category(models.Model):
     order=models.IntegerField()
     
     #either classified or job listing like that(choices are not used because it will be posted from limited place)
-    category_type=models.CharField()
+    category_type=models.CharField(max_length=20)
     menu_item=models.BooleanField(default=False)
     popular_item=models.BooleanField(default=False)
     featured_item=models.BooleanField(default=False)
@@ -21,12 +21,27 @@ class Category(models.Model):
     # determine the type of media to be used
     media_type=models.CharField(max_length=20)
     long_description=models.TextField()
-    category_image = models.FileField(
-        upload_to="category/",
+    short_description=models.TextField()
+    #will later add choices to this status
+    status=models.CharField(max_length=20,default="ACTIVE")
+
+    meta_title_country=models.CharField(max_length=100)
+    meta_description_country=models.TextField()
+    meta_keywords_country=models.CharField(max_length=500)
+
+    #Here let city represents both city and country 
+    meta_title_city=models.CharField(max_length=100)
+    meta_description_city=models.TextField()
+    meta_keywords_city=models.CharField(max_length=500)
+
+
+    category_icon_image = models.FileField(
+        upload_to="category/icon/",
         blank=True,
         null=True,
         default="/path/to/default/image.jpg",
     )
+    category_thumbnail_image=models.FileField(upload_to='category/thumbnail/',blank=True,null=True)
 
     class Meta:
         verbose_name_plural = "categories"
