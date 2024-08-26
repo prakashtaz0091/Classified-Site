@@ -298,7 +298,7 @@ def create_category(request):
         print(e)
         return (str(e))
 
-def create_fields(request):
+def create_field(request):
     try:
         if request.method=='POST':
             data=request.POST
@@ -310,10 +310,15 @@ def create_fields(request):
             featured_style=data.get('featured_style')
             hint=data.get('hint')
             admin_hint=data.get('admin_hint')
-            icon=data.get('field_icon')
+            icon=request.FILES.get('field_icon')
 
-            field_instance=Field.objects.create(field_name=field_name,field_type=field_type)
+            category_instance=Category.objects.filter(category_name=hint).first()
+            if category_instance is None:
+                raise Exception("The provided hint doesnot have a respective category")
+            field_instance=Field.objects.create(field_name=field_name,field_type=field_type,mandatory=mandatory,searchable=searchable,
+                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon,linked_to=category_instance)
 
+            return redirect(reverse('admin_fields'))
         else:
             raise Exception("Only post method supported for this endpoint")
     except Exception as e:

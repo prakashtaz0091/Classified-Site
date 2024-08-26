@@ -21,7 +21,7 @@
                             <h5>Create Field</h5>
                         </div>
                         <h1 style="margin-bottom: 15px; font-weight: bold; font-size: 16px;">General </h1>
-                        <form action="categories.html" method="POST" enctype="multipart/form-data">
+                        <form action="{% url 'create_field' %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
