@@ -51,6 +51,7 @@ class Category(models.Model):
         default="/path/to/default/image.jpg",
     )
     category_thumbnail_image=models.FileField(upload_to='category/thumbnail/',blank=True,null=True)
+    created_at=models.DateField(auto_now_add=True)
 
 
     def save(self, *args, **kwargs):
@@ -64,7 +65,22 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+#Named after its name in admin page (Anyway directly points to category)
+class Field(models.Model):
+    name=models.CharField(max_length=255)
+    fields_type=models.CharField(max_length=40)
+    mandatory=models.BooleanField()
+    searchable=models.BooleanField()
+    featured_style=models.CharField(max_length=30)
+    #should have been foreign key but stored in char in adjeem
+    hint=models.CharField(max_length=500)
+    #Just for showing to admin no actual purpose other than that
+    admin_hint=models.CharField(max_length=500)
+    icon_image=models.FileField(upload_to='category/fields/icon/',null=True,blank=True)
+    created_at=models.DateField(auto_now_add=True)
 
+
+## Will later remove these models only keeping it now temporarily
 class SubCategory(models.Model):
     category_name = models.CharField(max_length=1000, unique=True)
     parent = models.ForeignKey(
