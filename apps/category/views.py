@@ -245,6 +245,41 @@ def create_category(request):
         if request.method=="POST":
             print(request.POST)
             data=request.POST
+            category_name=data.get('category_name')
+            menu_text=data.get('menu_text')
+            order=data.get('order')
+            type=data.get('type')
+            menu_item=data.get('menu_item') in ('yes')
+            popular_item=data.get('popular_item') in ('yes')
+            featured_item=data.get('featured_item') in ('yes')
+            latest_item=data.get('latest_item') in ('yes')
+            industry_category=data.get('industry_category') in ('yes')
+            media_type=data.get('media_type')
+            long_description=data.get('long_description')
+            short_description=data.get('short_description')
+            status=data.get('status')
+            meta_title_country=data.get('meta_title_country')
+            meta_description_country=data.get('meta_description_country')
+            meta_keywords_country=data.get('meta_keywords_country')
+            meta_title_city=data.get('meta_title_city')
+            meta_description_city=data.get('meta_description_city')
+            meta_keywords_city=data.get('meta_keywords_city')
+            
+            category_icon_image=request.FILES.get('icon_image')
+            category_thumbnail_image=request.FILES.get('icon_thumbnail_image')
+
+            category_instance=Category.objects.create(category_name=category_name,menu_text=menu_text,order=order,
+                                category_type=type,menu_item=menu_item,popular_item=popular_item,featured_item=featured_item,latest_item=latest_item,
+                                industry_category=industry_category,media_type=media_type,long_description=long_description,short_description=short_description,
+                                status=status,meta_title_country=meta_title_country,meta_description_country=meta_description_country,meta_keywords_country=meta_keywords_country,meta_title_city=meta_title_city,meta_description_city=meta_description_city,meta_keywords_city=meta_keywords_city,
+                                category_icon_image=category_icon_image,category_thumbnail_image=category_thumbnail_image)
+
+            print(category_instance)
+            context={
+                'message':'Category added Success'
+            }
+            return render(request,'admin1/add/add-categories.html',context)
+            print(menu_item)
         else:
             raise Exception("ONly post method is supported for this endpoitn")
     except Exception as e:
