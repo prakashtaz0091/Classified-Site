@@ -270,7 +270,7 @@ def create_category(request):
 
             category_instance=Category.objects.create(category_name=category_name,menu_text=menu_text,order=order,
                                 category_type=type,menu_item=menu_item,popular_item=popular_item,featured_item=featured_item,latest_item=latest_item,
-                                industry_category=industry_category,media_type=media_type,long_description=long_description,short_description=short_description,
+                                industry_standard=industry_category,media_type=media_type,long_description=long_description,short_description=short_description,
                                 status=status,meta_title_country=meta_title_country,meta_description_country=meta_description_country,meta_keywords_country=meta_keywords_country,meta_title_city=meta_title_city,meta_description_city=meta_description_city,meta_keywords_city=meta_keywords_city,
                                 category_icon_image=category_icon_image,category_thumbnail_image=category_thumbnail_image)
 
