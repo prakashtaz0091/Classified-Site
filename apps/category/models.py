@@ -76,7 +76,7 @@ class Field(models.Model):
     hint=models.CharField(max_length=500)
     #Just for showing to admin no actual purpose other than that
     admin_hint=models.CharField(max_length=500)
-    icon_image=models.FileField(upload_to='category/fields/icon/',null=True,blank=True)
+    icon=models.FileField(upload_to='category/fields/icon/',null=True,blank=True)
     linked_to=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) #wont be null but still during create it may give issues so
     created_at=models.DateField(auto_now_add=True)
 
