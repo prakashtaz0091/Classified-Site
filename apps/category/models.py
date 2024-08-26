@@ -67,8 +67,8 @@ class Category(models.Model):
 
 #Named after its name in admin page (Anyway directly points to category)
 class Field(models.Model):
-    name=models.CharField(max_length=255)
-    fields_type=models.CharField(max_length=40)
+    field_name=models.CharField(max_length=255)
+    field_type=models.CharField(max_length=40)
     mandatory=models.BooleanField()
     searchable=models.BooleanField()
     featured_style=models.CharField(max_length=30)

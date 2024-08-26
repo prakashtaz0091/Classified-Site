@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from apps.category.models import Category,SubCategory, SubCategoryInfo
+from apps.category.models import Category, Field,SubCategory, SubCategoryInfo
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
@@ -297,6 +297,28 @@ def create_category(request):
     except Exception as e:
         print(e)
         return (str(e))
+
+def create_fields(request):
+    try:
+        if request.method=='POST':
+            data=request.POST
+            print(data)
+            field_name=data.get('field_name')
+            field_type=data.get('field_type')
+            mandatory=data.get('mandatory') in ('yes')
+            searchable=data.get('searchable') in ('yes')
+            featured_style=data.get('featured_style')
+            hint=data.get('hint')
+            admin_hint=data.get('admin_hint')
+            icon=data.get('field_icon')
+
+            field_instance=Field.objects.create(field_name=field_name,field_type=field_type)
+
+        else:
+            raise Exception("Only post method supported for this endpoint")
+    except Exception as e:
+        print(e)
+        return JsonResponse({'error':str(e)},status=400)
 
 # Will probably changed in configuration
 @csrf_exempt
