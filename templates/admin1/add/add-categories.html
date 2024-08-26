@@ -20,33 +20,33 @@
                         <div class="content-page-header">
                             <h5>Add Categories</h5>
                         </div>
-                        <form method="POST" action="{% url 'create_category' %}">
+                        <form method="POST" action="{% url 'create_category' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Category Name* <span>(English)</span></label>
-                                        <input type="text" name='category_name' class="form-control" placeholder="Category Name">
+                                        <input type="text" required name='category_name' class="form-control" placeholder="Category Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Menu Text*</label>
-                                        <input type="text" class="form-control" name='menu_text' placeholder="Menu Text">
+                                        <input type="text" required class="form-control" name='menu_text' placeholder="Menu Text">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Order</label>
-                                        <input type="number" class="form-control" name='order' placeholder="Order">
+                                        <input type="number" required class="form-control" name='order' placeholder="Order">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="order-select">Type*</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="order-select" name='type' class="form-control custom-select-arrow">
+                                            <select id="order-select"  name='type' class="form-control custom-select-arrow">
                                                 <option value="Classified">Classified</option>
                                                 <option value="Real Estate">Real Estate</option>
                                                 <option value="Posting Job">Posting Job</option>
@@ -140,7 +140,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Descriptions <span class="mandatory">*</span></label>
-                                        <textarea name='long_description' class="form-control" placeholder="Add a Descriptions....."></textarea>
+                                        <textarea required name='long_description' class="form-control" placeholder="Add a Descriptions....."></textarea>
                                     </div>
                                 </div>
 
@@ -152,7 +152,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Short Descriptions <span class="mandatory">*</span></label>
-                                        <textarea name='short_description'  class="form-control" placeholder="Add a Short Descriptions....."></textarea>
+                                        <textarea required name='short_description'  class="form-control" placeholder="Add a Short Descriptions....."></textarea>
                                     </div>
                                 </div>
 
@@ -186,7 +186,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Title </label>
-                                        <input name='meta_title_country' type="text" class="form-control" placeholder="Title">
+                                        <input  name='meta_title_country' type="text" class="form-control" placeholder="Title">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -260,14 +260,14 @@
                                         <div class="upload-sets">
                                             <div class="upload-sets-btn form-group">
                                                 <label>Icon <span>(Display on the home page)</span></label>
-                                                <input type="file" id="imgInp1" name='thumbnail_image' class="form-control">
+                                                <input type="file" id="icon_image_input" name='icon_image' class="form-control">
                                                 <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
                                                 <p>Recommended Icon Size is 48*48</p>
                                             </div>
                                         </div>
                                         <div class="upload-img">
                                             <div class="upload-imgset">	
-                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="blah1">
+                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="icon_img">
                                             </div>
                                         </div>
                                     </div>
@@ -283,7 +283,7 @@
                                             <div class="file-browse">
                                                 <h6>Drag & drop image or </h6>
                                                 <div class="file-browse-path">
-                                                    <input type="file" id="imgInp2" class="form-control">
+                                                    <input type="file" id="imgInp2" name='thumbnail_image' class="form-control">
                                                     <a href="javascript:void(0);"> Browse</a>
                                                 </div>
                                             </div>
@@ -297,14 +297,14 @@
                                         <div class="upload-sets">
                                             <div class="upload-sets-btn form-group">
                                                 <label>Secondary Icon <span>(Display on the home page)</span></label>
-                                                <input type="file" id="imgInp2" class="form-control">
+                                                <input type="file" id="thumbnail_image_input" name='thumbnail_image' class="form-control">
                                                 <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
                                                 <p>Recommended Icon Size is 48*48</p>
                                             </div>
                                         </div>
                                         <div class="upload-img">
                                             <div class="upload-imgset">	
-                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="blah2">
+                                                <img src="{% static 'admin/assets/img/icons/gallery.svg' %}" alt="img" id="thumb_img">
                                             </div>
                                         </div>
                                     </div>
@@ -323,12 +323,21 @@
                                 }
                                 
                                 document.getElementById("imgInp1").addEventListener("change", function() {
-                                    readURL(this, 'blah1');
+                                    readURL(this, 'icon_img');
                                 });
                                 
                                 document.getElementById("imgInp2").addEventListener("change", function() {
-                                    readURL(this, 'blah2');
+                                    readURL(this, 'thumb_img');
                                 });
+ 
+                                document.getElementById("icon_image_input").addEventListener("change", function() {
+                                    readURL(this, 'icon_img');
+                                });
+                                
+                                document.getElementById("thumbnail_image_input").addEventListener("change", function() {
+                                    readURL(this, 'thumb_img');
+                                });
+
                                 </script>
                                 
                                 

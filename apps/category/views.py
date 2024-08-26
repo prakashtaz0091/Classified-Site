@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
+from django.urls import reverse
 
 from apps.category.models import Category,SubCategory, SubCategoryInfo
 from apps.store.models import Product,Feature,BookMark
@@ -266,7 +267,8 @@ def create_category(request):
             meta_keywords_city=data.get('meta_keywords_city')
             
             category_icon_image=request.FILES.get('icon_image')
-            category_thumbnail_image=request.FILES.get('icon_thumbnail_image')
+            category_thumbnail_image=request.FILES.get('thumbnail_image')
+            print(category_icon_image,category_thumbnail_image)
 
             category_instance=Category.objects.create(category_name=category_name,menu_text=menu_text,order=order,
                                 category_type=type,menu_item=menu_item,popular_item=popular_item,featured_item=featured_item,latest_item=latest_item,
@@ -278,8 +280,8 @@ def create_category(request):
             context={
                 'message':'Category added Success'
             }
-            return render(request,'admin1/add/add-categories.html',context)
-            print(menu_item)
+            print('tryu')
+            return redirect(reverse("add_admin_category"))
         else:
             raise Exception("ONly post method is supported for this endpoitn")
     except Exception as e:
