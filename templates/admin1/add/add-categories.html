@@ -20,7 +20,16 @@
                         <div class="content-page-header">
                             <h5>Add Categories</h5>
                         </div>
+                        {% comment %}
+                        Meaning if there is a category name which is case for subcategory
+                        {% endcomment %}
+                        {% if category_slug %}
+                        <form method="POST" action="{% url 'create_sub_category' %}" enctype="multipart/form-data">
+                            <input type='hidden' name='category_slug' value="{{category_slug}}" />
+                        {% else %}
                         <form method="POST" action="{% url 'create_category' %}" enctype="multipart/form-data">
+                            {% endif %}
+
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">

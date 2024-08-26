@@ -1,4 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import render
+
+from apps.category.models import Category
 
 # Create your views here.
 
@@ -14,6 +17,17 @@ def admin_category(request):
 
 def add_category(request):
     return render(request,'admin1/add/add-categories.html')
+
+def add_sub_category(request,category_slug):
+    try:
+        category_instance=Category.objects.filter(slug=category_slug).first()
+        if category_instance is None:
+            raise Exception("The category u provided is not found")
+        context={'category_slug':category_slug}
+        return render(request,'admin1/add/add-categories.html',context)
+    except Exception as e:
+        print(e)
+        return JsonResponse({'error':f"unexpected error occured {str(e)}"},status=400)
 
 
 def fields(request):
