@@ -34,6 +34,15 @@ class Category(models.Model):
     meta_description_city=models.TextField()
     meta_keywords_city=models.CharField(max_length=500)
 
+    #determines whether it is category or not
+    parent_id = models.ForeignKey(
+        'self', 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True, 
+        related_name='subcategories'
+    )
+
 
     category_icon_image = models.FileField(
         upload_to="category/icon/",
