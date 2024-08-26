@@ -34,7 +34,7 @@ class Category(models.Model):
     meta_description_city=models.TextField()
     meta_keywords_city=models.CharField(max_length=500)
 
-    #determines whether it is category or not
+    #determines whether it is category or not says id but points to entire category just naming 
     parent_id = models.ForeignKey(
         'self', 
         on_delete=models.CASCADE, 

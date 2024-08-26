@@ -270,11 +270,21 @@ def create_category(request):
             category_thumbnail_image=request.FILES.get('thumbnail_image')
             print(category_icon_image,category_thumbnail_image)
 
+            # For subcategory
+            parent_category_slug=data.get('category_slug',None)
+            print(parent_category_slug)
+
+            
             category_instance=Category.objects.create(category_name=category_name,menu_text=menu_text,order=order,
                                 category_type=type,menu_item=menu_item,popular_item=popular_item,featured_item=featured_item,latest_item=latest_item,
                                 industry_standard=industry_category,media_type=media_type,long_description=long_description,short_description=short_description,
                                 status=status,meta_title_country=meta_title_country,meta_description_country=meta_description_country,meta_keywords_country=meta_keywords_country,meta_title_city=meta_title_city,meta_description_city=meta_description_city,meta_keywords_city=meta_keywords_city,
                                 category_icon_image=category_icon_image,category_thumbnail_image=category_thumbnail_image)
+
+            if parent_category_slug is not None:
+                parent_category=Category.objects.filter(slug=parent_category_slug).first()
+                category_instance.parent_id=parent_category
+                category_instance.save()
 
             print(category_instance)
             context={

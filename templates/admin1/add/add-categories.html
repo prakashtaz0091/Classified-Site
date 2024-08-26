@@ -23,15 +23,14 @@
                         {% comment %}
                         Meaning if there is a category name which is case for subcategory
                         {% endcomment %}
+                       <form method="POST" action="{% url 'create_category' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
                         {% if category_slug %}
-                        <form method="POST" action="{% url 'create_sub_category' %}" enctype="multipart/form-data">
                             <input type='hidden' name='category_slug' value="{{category_slug}}" />
-                        {% else %}
-                        <form method="POST" action="{% url 'create_category' %}" enctype="multipart/form-data">
                             {% endif %}
 
-                            {% csrf_token %}
                             <div class="row">
+
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Category Name* <span>(English)</span></label>
