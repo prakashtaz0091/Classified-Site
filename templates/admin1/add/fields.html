@@ -21,26 +21,27 @@
                             <h5>Create Field</h5>
                         </div>
                         <h1 style="margin-bottom: 15px; font-weight: bold; font-size: 16px;">General </h1>
-                        <form action="categories.html">
+                        <form action="{% url 'create_field' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Name* </label>
-                                        <input type="text" class="form-control" placeholder="Name">
+                                        <input required name='field_name' type="text" class="form-control" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="order-select">Fields Type*</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="order-select" class="form-control custom-select-arrow">
-                                                <option value="">Text</option>
-                                                <option value="1">Text Area</option>
-                                                <option value="2">Select Multiple</option>
-                                                <option value="3">Text Editor</option>
-                                                <option value="4">Select</option>  
-                                                <option value="5">Radio</option>  
-                                                <option value="6">File</option>  
+                                            <select id="order-select" name='field_type' class="form-control custom-select-arrow">
+                                                <option value="text">Text</option>
+                                                <option value="text_area">Text Area</option>
+                                                <option value="select_multiple">Select Multiple</option>
+                                                <option value="text_editor">Text Editor</option>
+                                                <option value="select">Select</option>  
+                                                <option value="radio">Radio</option>  
+                                                <option value="file">File</option>  
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -56,9 +57,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Mandatory ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='mandatory' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -70,9 +71,9 @@
                                     <div class="form-group">
                                         <label for="media-select">Searchable ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>NO</option>
-                                                <option value="2">Yes</option>
+                                            <select id="media-select" name='searchable' class="form-control custom-select-arrow">
+                                                <option value="no" selected>NO</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -84,10 +85,10 @@
                                     <div class="form-group">
                                         <label for="media-select">Featured Style ?</label>
                                         <div class="custom-select-wrapper">
-                                            <select id="media-select" class="form-control custom-select-arrow">
-                                                <option value="1" selected>Normal</option>
-                                                <option value="2">Highlight</option>
-                                                <option value="3">None</option>
+                                            <select id="media-select" name='featured_style' class="form-control custom-select-arrow">
+                                                <option value="normal" selected>Normal</option>
+                                                <option value="highlight">Highlight</option>
+                                                <option value="none">None</option>
                                             </select>
                                             <span class="custom-arrow"></span>
                                         </div>
@@ -101,13 +102,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Hint * </label>
-                                        <input type="text" class="form-control" placeholder="Hint ">
+                                        <input type="text" name='hint' required class="form-control" placeholder="Hint ">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Admin Hint * </label>
-                                        <input type="text" class="form-control" placeholder="Admin Hint">
+                                        <input type="text" class="form-control" name='admin_hint'  placeholder="Admin Hint">
                                     </div>
                                 </div>
 
@@ -119,7 +120,7 @@
                                         <div class="upload-sets">
                                             <div class="upload-sets-btn form-group">
                                                 <label>Secondary Icon <span>(Display on the home page)</span></label>
-                                                <input type="file" id="imgInp2" class="form-control" onchange="previewImage(event)">
+                                                <input type="file" id="imgInp2" name='field_icon' class="form-control" onchange="previewImage(event)">
                                                 <a href="javascript:void(0);" class="btn btn-upload">Upload File</a>
                                                 <p>Recommended Icon Size is 48*48</p>
                                             </div>
