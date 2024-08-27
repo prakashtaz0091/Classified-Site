@@ -80,6 +80,24 @@ class Field(models.Model):
     linked_to=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) #wont be null but still during create it may give issues so
     created_at=models.DateField(auto_now_add=True)
 
+class FieldOptions(models.Model):
+    field_value=models.CharField(max_length=255)
+    order=models.IntegerField(blank=True,null=True)
+    required=models.BooleanField(default=False)
+    linked_to=models.ForeignKey(Field,on_delete=models.CASCADE,blank=True,null=True)
+
+class FieldExtra(models.Model):
+    menu_text=models.CharField(max_length=255)
+    mandatory=models.BooleanField()
+    disabled=models.BooleanField()
+    linked_to=models.ForeignKey(FieldOptions,on_delete=models.CASCADE,blank=True,null=True)
+
+class FieldExtraContent(models.Model):
+    name=models.CharField(max_length=255)
+    order=models.IntegerField(blank=True,null=True,default=1)
+    linked_to=models.ForeignKey(FieldExtra,on_delete=models.CASCADE,blank=True,null=True)
+
+
 
 ## Will later remove these models only keeping it now temporarily
 class SubCategory(models.Model):
