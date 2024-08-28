@@ -394,7 +394,7 @@ def add_listing(request):
         for image in gallery_images:
             ProductImages.objects.create(product=product, image=image)
         print("Gallery images uploaded")
-        return redirect("add_listing")
+        return JsonResponse({'status':True,'message':"ad added success"},status=200)
 
     else:    
         category=Category.objects.filter(parent_id=None)
