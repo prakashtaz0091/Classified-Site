@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from apps.category.models import Category, Field, FieldExtra, FieldOptions,SubCategory, SubCategoryInfo
+from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions,SubCategory, SubCategoryInfo
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
@@ -357,6 +357,27 @@ def create_field_options_extra(request):
             if field_options_instance is None:
                 raise Exception("The provided hint doesnot have a respective category")
             field_options_extra_instance=FieldExtra.objects.create(menu_text=menu_text,linked_to=field_options_instance)
+
+            return redirect(reverse('add_options'))
+        else:
+            raise Exception("Only post method supported for this endpoint")
+    except Exception as e:
+        print(e)
+        return JsonResponse({'error':str(e)},status=400)
+
+
+def create_field_options_extra_content(request):
+    try:
+        if request.method=='POST':
+            data=request.POST
+            print(data)
+            field_extra_id=1
+            name=data.get('name')
+
+            field_extra_instance=FieldExtra.objects.filter(id=field_extra_id).first()
+            if field_extra_instance is None:
+                raise Exception("The provided hint doesnot have a respective category")
+            field_options_extra_instance=FieldExtraContent.objects.create(name=name,linked_to=field_extra_instance)
 
             return redirect(reverse('add_options'))
         else:

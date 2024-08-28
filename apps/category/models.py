@@ -91,8 +91,8 @@ class FieldOptions(models.Model):
 
 class FieldExtra(models.Model):
     menu_text=models.CharField(max_length=255)
-    mandatory=models.BooleanField()
-    disabled=models.BooleanField()
+    mandatory=models.BooleanField(default=False)
+    disabled=models.BooleanField(default=False)
     linked_to=models.ForeignKey(FieldOptions,related_name='field_extras',on_delete=models.CASCADE,blank=True,null=True)
 
 class FieldExtraContent(models.Model):
