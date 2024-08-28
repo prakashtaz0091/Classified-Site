@@ -312,11 +312,8 @@ def create_field(request):
             admin_hint=data.get('admin_hint')
             icon=request.FILES.get('field_icon')
 
-            category_instance=Category.objects.filter(category_name=hint).first()
-            if category_instance is None:
-                raise Exception("The provided hint doesnot have a respective category")
             field_instance=Field.objects.create(field_name=field_name,field_type=field_type,mandatory=mandatory,searchable=searchable,
-                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon,linked_to=category_instance)
+                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon)
 
             return redirect(reverse('admin_fields'))
         else:
