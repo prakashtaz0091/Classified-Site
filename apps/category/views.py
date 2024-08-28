@@ -312,8 +312,11 @@ def create_field(request):
             admin_hint=data.get('admin_hint')
             icon=request.FILES.get('field_icon')
 
+            category_instance=Category.objects.filter(category_name=hint).first()
+            if category_instance is None:
+                raise Exception("The provided hint doesnot have a respective category")
             field_instance=Field.objects.create(field_name=field_name,field_type=field_type,mandatory=mandatory,searchable=searchable,
-                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon)
+                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon,linked_to=category_instance)
 
             return redirect(reverse('admin_fields'))
         else:
@@ -384,12 +387,16 @@ def create_field_options_extra_content(request):
         return JsonResponse({'error':str(e)},status=400)
 
 
+from django.http import JsonResponse
 
 def get_category_options(request):
     try:
-        category_id=request.GET.get('subcategory_id')
+        category_id = request.GET.get('subcategory_id')
         # Retrieve the category by ID
         category = Category.objects.filter(id=category_id).first()
+        
+        if not category:
+            return JsonResponse({'error': 'Category not found'}, status=404)
         
         # Get all fields related to the category
         fields = Field.objects.filter(hint=category.category_name)
@@ -412,17 +419,41 @@ def get_category_options(request):
             # If the field type is 'select', include the options
             if field.field_type == 'select':
                 options = FieldOptions.objects.filter(linked_to=field).order_by('order')
-                field_data['options'] = [{'value': option.field_value} for option in options]
+                field_data['options'] = []
+                
+                for option in options:
+                    option_data = {'value': option.field_value}
+                    
+                    # Check if there are FieldExtras linked to this option
+                    extras = FieldExtra.objects.filter(linked_to=option).order_by('menu_text')
+                    if extras.exists():
+                        option_data['extras'] = []
+                        for extra in extras:
+                            extra_data = {
+                                'menu_text': extra.menu_text,
+                                'mandatory': extra.mandatory,
+                                'disabled': extra.disabled
+                            }
+                            
+                            # Include FieldExtraContent if exists
+                            contents = FieldExtraContent.objects.filter(linked_to=extra).order_by('order')
+                            if contents.exists():
+                                extra_data['content'] = [{'name': content.name} for content in contents]
+                            
+                            option_data['extras'].append(extra_data)
+                    
+                    field_data['options'].append(option_data)
             
             fields_data.append(field_data)
-        print(fields_data)
         
-        return JsonResponse({'fields':fields_data}, safe=False)
+        return JsonResponse({'fields': fields_data}, safe=False)
     
     except Category.DoesNotExist:
         return JsonResponse({'error': 'Category not found'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
 
 # Will probably changed in configuration
 @csrf_exempt

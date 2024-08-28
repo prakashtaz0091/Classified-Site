@@ -444,25 +444,36 @@ data.fields.forEach(field => {
     </div>`;
 
     } else if (field.field_type === 'select') {
-        // For select dropdown
-		fieldHtml = `
-    <div class="field-item mb-3" data-subcategory-id="${subcategoryId}">
-        <ul class="list-unstyled">
-            <li>
-                <label class="d-block mb-1">
-                    <span style="font-weight:600;font-size:1.1rem;" class="field-label">${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}</span>
-                    <div class="dropdown">
-                        <select name="${field.field_name}" ${field.mandatory ? 'required' : ''} class="form-select">
-						                <option value="">Select ${field.field_name}</option>
-                            ${field.options.map(option => `
-                                <option value="${option.value}">${option.value}</option>
-                            `).join('')}
-                        </select>
-                    </div>
-                </label>
-            </li>
-        </ul>
-    </div>`;
+fieldHtml += `
+    <div class="field-item">
+        <div class="dropdown">
+            <select name="${field.field_name}" ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)" class="form-select main-select">
+                <option value="">Select ${field.field_name}</option>
+                ${field.options.map(option => `
+                    <option value="${option.value}">${option.value}</option>
+                `).join('')}
+            </select>
+        </div>`;
+
+        fieldHtml += `<div class="extras-container" style="display: none;">`;
+        field.options.forEach(option => {
+            if (option.extras) {
+                option.extras.forEach(extra => {
+                    fieldHtml += `
+                        <div class="dropdown mt-2 extra-dropdown" data-parent-value="${option.value}">
+                            <label>${extra.menu_text}</label>
+                            <select name="${extra.menu_text.toLowerCase()}" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''} class="form-select">
+                                <option value="">Select ${extra.menu_text}</option>
+                                ${extra.content.map(content => `
+                                    <option value="${content.name}">${content.name}</option>
+                                `).join('')}
+                            </select>
+                        </div>`;
+                });
+            }
+        });
+        fieldHtml += `</div></div>`;  // Close extras container and field-item
+
 
     }    
 
@@ -508,6 +519,40 @@ data.fields.forEach(field => {
 	}
 	
 </script>	
+		<script>
+function onChangeOption(selectElement) {
+    const selectedValue = selectElement.value;
+    console.log("Selected Value:", selectedValue);
+    
+    // Find the closest field-item container
+    const fieldContainer = selectElement.closest('.field-item');
+    if (!fieldContainer) {
+        console.error("Field container not found.");
+        return;
+    }
+    
+    const extrasContainer = fieldContainer.querySelector('.extras-container');
+    if (!extrasContainer) {
+        console.error("Extras container not found.");
+        return;
+    }
+
+    // Hide all extra dropdowns
+    extrasContainer.querySelectorAll('.extra-dropdown').forEach(dropdown => {
+        dropdown.style.display = 'none';
+    });
+
+    // Show the related extra dropdown based on the selected value
+    const relatedExtraDropdowns = extrasContainer.querySelectorAll(`.extra-dropdown[data-parent-value="${selectedValue}"]`);
+    relatedExtraDropdowns.forEach(dropdown => {
+        dropdown.style.display = 'block';
+    });
+
+    // Show or hide the extras container itself
+    extrasContainer.style.display = relatedExtraDropdowns.length > 0 ? 'block' : 'none';
+}
+</script>
+
 	
 	
 	{% endblock %}
