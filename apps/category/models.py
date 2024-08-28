@@ -78,7 +78,6 @@ class Field(models.Model):
     #Just for showing to admin no actual purpose other than that
     admin_hint=models.CharField(max_length=500)
     icon=models.FileField(upload_to='category/fields/icon/',null=True,blank=True)
-    linked_to=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) #wont be null but still during create it may give issues so
     # Used to determine if any select types have other fields dependent upon it
     sub_type=models.CharField(null=True,blank=True,max_length=20)
     created_at=models.DateField(auto_now_add=True)

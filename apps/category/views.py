@@ -312,11 +312,8 @@ def create_field(request):
             admin_hint=data.get('admin_hint')
             icon=request.FILES.get('field_icon')
 
-            category_instance=Category.objects.filter(category_name=hint).first()
-            if category_instance is None:
-                raise Exception("The provided hint doesnot have a respective category")
             field_instance=Field.objects.create(field_name=field_name,field_type=field_type,mandatory=mandatory,searchable=searchable,
-                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon,linked_to=category_instance)
+                                                featured_style=featured_style,hint=hint,admin_hint=admin_hint,icon=icon)
 
             return redirect(reverse('admin_fields'))
         else:
@@ -387,45 +384,45 @@ def create_field_options_extra_content(request):
         return JsonResponse({'error':str(e)},status=400)
 
 
-from django.http import JsonResponse
-from .models import Category, Field
 
 def get_category_options(request):
     try:
-        subcategory_id = request.GET.get('subcategory_id')
+        category_id=request.GET.get('subcategory_id')
+        # Retrieve the category by ID
+        category = Category.objects.filter(id=category_id).first()
         
-        # Retrieve the category based on the provided subcategory_id
-        category = Category.objects.filter(id=subcategory_id).first()
+        # Get all fields related to the category
+        fields = Field.objects.filter(hint=category.category_name)
+        
+        # Prepare the response data
+        fields_data = []
 
-        # If the category is found, retrieve all linked fields
-        if category:
-            fields = Field.objects.filter(linked_to=category)
-            fields_data = []
-
-            # Prepare the data in the required format
-            for field in fields:
-                fields_data.append({
-                    'field_name': field.field_name,
-                    'field_type': field.field_type,
-                    'mandatory': field.mandatory,
-                    'searchable': field.searchable,
-                    'featured_style': field.featured_style,
-                    'sub_type': field.sub_type,
-                    'icon': field.icon.url if field.icon else None
-                })
-
-            print(fields_data)
-            return JsonResponse({'fields': fields_data})
-
-        else:
-            return JsonResponse({'error': 'Category not found'}, status=404)
-
+        for field in fields:
+            # Prepare field data
+            field_data = {
+                'field_name': field.field_name,
+                'field_type': field.field_type,
+                'mandatory': field.mandatory,
+                'searchable': field.searchable,
+                'featured_style': field.featured_style,
+                'sub_type': field.sub_type,
+                'icon': field.icon.url if field.icon else None
+            }
+            
+            # If the field type is 'select', include the options
+            if field.field_type == 'select':
+                options = FieldOptions.objects.filter(linked_to=field).order_by('order')
+                field_data['options'] = [{'value': option.field_value} for option in options]
+            
+            fields_data.append(field_data)
+        print(fields_data)
+        
+        return JsonResponse({'fields':fields_data}, safe=False)
+    
+    except Category.DoesNotExist:
+        return JsonResponse({'error': 'Category not found'}, status=404)
     except Exception as e:
-        # Log the error or handle it appropriately
-        print(f"Error fetching fields: {str(e)}")
-        return JsonResponse({'error': 'An error occurred while fetching fields.'}, status=500)
-
-
+        return JsonResponse({'error': str(e)}, status=500)
 
 # Will probably changed in configuration
 @csrf_exempt
