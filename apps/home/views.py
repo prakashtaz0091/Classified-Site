@@ -405,7 +405,7 @@ def add_listing(request):
 def get_subcategories(request):
     if request.method == "GET":
         category_id = request.GET.get('category_id')
-        subcategories = SubCategory.objects.filter(parent_id=category_id)
+        subcategories = Category.objects.filter(parent_id=category_id)
         print(subcategories,'sub')
 
         subcategory_list = [
