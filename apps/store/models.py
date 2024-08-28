@@ -40,6 +40,7 @@ class Product(models.Model):
     tagline = models.TextField(max_length=550, blank=True, null=True)
     price = models.IntegerField()
     is_available = models.BooleanField(default=True)
+    featured_data=models.JSONField(blank=True,null=True)
     features = models.ManyToManyField(Feature, related_name="stores")
     category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
     location = models.ForeignKey(

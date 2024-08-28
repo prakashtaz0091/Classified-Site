@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -328,8 +329,8 @@ def add_listing(request):
         tagline = request.POST.get("tagline")
         selected_categories = request.POST.get("categories")
         selected_features = request.POST.getlist("features")
-        features_data=request.POST.get('form_data')
-        print(features_data)
+        featured_data_json=request.POST.get('form_data')
+        featured_data=json.loads(featured_data_json)
         
         # Retrieve location data
         location_name = request.POST.get("location")
@@ -369,6 +370,7 @@ def add_listing(request):
             contact_information=contact_information,
             is_available=True,
             created_by=request.user,
+            featured_data=featured_data,
         )
 
 
