@@ -39,11 +39,21 @@
                         <span>Categories</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{% url 'admin_fields' %}" class="active"><i class="fe fe-file-text"></i> 
+                <li class="submenu">
+                    <a href="javascript:void(0);"><i class="fe fe-star"></i> 
                         <span>Fields</span>
+                        <span class="menu-arrow"><i class="fe fe-chevron-right"></i></span>
                     </a>
+                    <ul>
+                        <li>
+                            <a href="{% url 'admin_fields' %}">Add Fields</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'admin_list_fields' %}">List Fields</a>
+                        </li>
+                    </ul>
                 </li>
+             
                 <li>
                     <a href="sub-categories.html"><i class="fe fe-clipboard"></i> <span>Sub Categories</span></a>
                 </li>

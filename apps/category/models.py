@@ -2,16 +2,17 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from datetime import date
 
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
-    menu_text=models.CharField(max_length=50)
+    menu_text=models.CharField(max_length=50,blank=True,null=True)
     slug = models.SlugField(max_length=100, unique=True)
-    order=models.IntegerField()
+    order=models.IntegerField(blank=True,null=True)
     
     #either classified or job listing like that(choices are not used because it will be posted from limited place)
-    category_type=models.CharField(max_length=20)
+    category_type=models.CharField(max_length=20,blank=True,null=True)
     menu_item=models.BooleanField(default=False)
     popular_item=models.BooleanField(default=False)
     featured_item=models.BooleanField(default=False)
@@ -19,20 +20,20 @@ class Category(models.Model):
     industry_standard=models.BooleanField(default=False)
 
     # determine the type of media to be used
-    media_type=models.CharField(max_length=20)
-    long_description=models.TextField()
-    short_description=models.TextField()
+    media_type=models.CharField(max_length=20,blank=True,null=True)
+    long_description=models.TextField(blank=True,null=True)
+    short_description=models.TextField(blank=True,null=True)
     #will later add choices to this status
     status=models.CharField(max_length=20,default="ACTIVE")
 
-    meta_title_country=models.CharField(max_length=100)
-    meta_description_country=models.TextField()
-    meta_keywords_country=models.CharField(max_length=500)
+    meta_title_country=models.CharField(max_length=100,blank=True,null=True)
+    meta_description_country=models.TextField(blank=True,null=True)
+    meta_keywords_country=models.CharField(max_length=500,blank=True,null=True)
 
     #Here let city represents both city and country 
-    meta_title_city=models.CharField(max_length=100)
-    meta_description_city=models.TextField()
-    meta_keywords_city=models.CharField(max_length=500)
+    meta_title_city=models.CharField(max_length=100,blank=True,null=True)
+    meta_description_city=models.TextField(blank=True,null=True)
+    meta_keywords_city=models.CharField(max_length=500,blank=True,null=True)
 
     #determines whether it is category or not says id but points to entire category just naming 
     parent_id = models.ForeignKey(
@@ -51,7 +52,7 @@ class Category(models.Model):
         default="/path/to/default/image.jpg",
     )
     category_thumbnail_image=models.FileField(upload_to='category/thumbnail/',blank=True,null=True)
-    created_at=models.DateField(auto_now_add=True)
+    created_at=models.DateField(auto_now_add=True,blank=True,null=True)
 
 
     def save(self, *args, **kwargs):

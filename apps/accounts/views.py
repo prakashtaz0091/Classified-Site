@@ -31,7 +31,7 @@ def Login(request):
             #         nextPage = params['next']
             #         return redirect(nextPage)
             # except:
-            messages.success(request, f"You are now logged {user.full_name}.")
+            messages.success(request, f"You are now login as {user.full_name}.")
             return redirect("home")
         else:
             messages.error(request, "some credentials are incorrect! ")
