@@ -387,6 +387,44 @@ def create_field_options_extra_content(request):
         return JsonResponse({'error':str(e)},status=400)
 
 
+from django.http import JsonResponse
+from .models import Category, Field
+
+def get_category_options(request):
+    try:
+        subcategory_id = request.GET.get('subcategory_id')
+        
+        # Retrieve the category based on the provided subcategory_id
+        category = Category.objects.filter(id=subcategory_id).first()
+
+        # If the category is found, retrieve all linked fields
+        if category:
+            fields = Field.objects.filter(linked_to=category)
+            fields_data = []
+
+            # Prepare the data in the required format
+            for field in fields:
+                fields_data.append({
+                    'field_name': field.field_name,
+                    'field_type': field.field_type,
+                    'mandatory': field.mandatory,
+                    'searchable': field.searchable,
+                    'featured_style': field.featured_style,
+                    'sub_type': field.sub_type,
+                    'icon': field.icon.url if field.icon else None
+                })
+
+            print(fields_data)
+            return JsonResponse({'fields': fields_data})
+
+        else:
+            return JsonResponse({'error': 'Category not found'}, status=404)
+
+    except Exception as e:
+        # Log the error or handle it appropriately
+        print(f"Error fetching fields: {str(e)}")
+        return JsonResponse({'error': 'An error occurred while fetching fields.'}, status=500)
+
 
 
 # Will probably changed in configuration

@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     # path('category/', views.category_view, name='category'),
+    path('get_category_options',views.get_category_options,name='get_category_options'),
     path('create_new/',views.create_category,name='create_category'),
     path('create_field/',views.create_field,name='create_field'),
     path('create_field_options/',views.create_field_options,name='create_field_options'),
