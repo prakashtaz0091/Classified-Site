@@ -453,10 +453,10 @@ data.fields.forEach(field => {
                     <span style="font-weight:600;font-size:1.1rem;" class="field-label">${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}</span>
                     <div class="dropdown">
                         <select name="${field.field_name}" ${field.mandatory ? 'required' : ''} class="form-select">
-                            <option value="">Select ${field.field_name}</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+						                <option value="">Select ${field.field_name}</option>
+                            ${field.options.map(option => `
+                                <option value="${option.value}">${option.value}</option>
+                            `).join('')}
                         </select>
                     </div>
                 </label>
