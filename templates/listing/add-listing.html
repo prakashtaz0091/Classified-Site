@@ -68,7 +68,7 @@
 												{% endif %}
 														<li>
 															<label class="custom_check">
-																<input type="checkbox" name="categories" value="{{ category.id }}" onclick="loadSubcategories(this)">
+																<input type="radio" name="categories" value="{{ category.id }}" onclick="loadSubcategories(this)">
 																<span class="checkmark"></span> {{ category.category_name }}
 															</label>
 														</li>
@@ -336,10 +336,6 @@
 		let subcategoryHeading = document.querySelector('.subcategory-heading');
 	
 		// Uncheck all other checkboxes in categories
-		document.querySelectorAll('.category-listing input[type="checkbox"]').forEach(cb => {
-			if (cb !== checkbox) cb.checked = false;
-		});
-	
 		// Clear subcategories and brands if a new category is selected
 		clearSubcategories();
 		clearBrands();
@@ -367,7 +363,7 @@
 								<ul>
 									<li>
 										<label class="custom_check">
-											<input type="checkbox" name="subcategories" value="${subcategory.id}" onclick="selectSingleSubcategory(this)">
+											<input type="radio" name="subcategories" value="${subcategory.id}" onclick="selectSingleSubcategory(this)">
 											<span class="checkmark"></span> ${subcategory.category_name}
 										</label>
 									</li>
@@ -391,19 +387,14 @@
 	
 	function selectSingleSubcategory(subcategoryCheckbox) {
 		// Uncheck all other subcategory checkboxes
-		document.querySelectorAll('.subcategory-listing input[type="checkbox"]').forEach(cb => {
-			if (cb !== subcategoryCheckbox) cb.checked = false;
-		});
-	
 		clearBrands();
-	
-		if (subcategoryCheckbox.checked) {
-			loadBrands(subcategoryCheckbox);
-		}
+		loadBrands(subcategoryCheckbox);
 	}
 	
 	function loadBrands(subcategoryCheckbox) {
+		
 		let subcategoryId = subcategoryCheckbox.value;
+		alert(subcategoryId)
 		let brandListing = document.querySelector('.brand-listing');
 		let brandHeading = document.querySelector('.brand-heading');
 	
