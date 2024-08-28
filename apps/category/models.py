@@ -79,24 +79,26 @@ class Field(models.Model):
     admin_hint=models.CharField(max_length=500)
     icon=models.FileField(upload_to='category/fields/icon/',null=True,blank=True)
     linked_to=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) #wont be null but still during create it may give issues so
+    # Used to determine if any select types have other fields dependent upon it
+    sub_type=models.CharField(null=True,blank=True,max_length=20)
     created_at=models.DateField(auto_now_add=True)
 
 class FieldOptions(models.Model):
     field_value=models.CharField(max_length=255)
     order=models.IntegerField(blank=True,null=True)
     required=models.BooleanField(default=False)
-    linked_to=models.ForeignKey(Field,on_delete=models.CASCADE,blank=True,null=True)
+    linked_to=models.ForeignKey(Field,related_name='field_options',on_delete=models.CASCADE,blank=True,null=True)
 
 class FieldExtra(models.Model):
     menu_text=models.CharField(max_length=255)
     mandatory=models.BooleanField()
     disabled=models.BooleanField()
-    linked_to=models.ForeignKey(FieldOptions,on_delete=models.CASCADE,blank=True,null=True)
+    linked_to=models.ForeignKey(FieldOptions,related_name='field_extras',on_delete=models.CASCADE,blank=True,null=True)
 
 class FieldExtraContent(models.Model):
     name=models.CharField(max_length=255)
     order=models.IntegerField(blank=True,null=True,default=1)
-    linked_to=models.ForeignKey(FieldExtra,on_delete=models.CASCADE,blank=True,null=True)
+    linked_to=models.ForeignKey(FieldExtra,related_name='field_extras_content',on_delete=models.CASCADE,blank=True,null=True)
 
 
 
