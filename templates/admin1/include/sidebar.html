@@ -34,25 +34,32 @@
                         <span>Listings</span>
                     </a>
                 </li>
+                
+
+
+
                 <li>
-                    <a href="{% url 'admin_category' %}" class="active"><i class="fe fe-file-text"></i> 
+                    <a href="{% url 'admin_category' %}" class="{% if request.path == '/admin/categories/' %}active{% endif %}">
+                        <i class="fe fe-file-text"></i> 
                         <span>Categories</span>
                     </a>
                 </li>
-                <li class="submenu">
-                    <a href="javascript:void(0);"><i class="fe fe-star"></i> 
+                <li class="submenu ">
+                    <a href="javascript:void(0);" class="">
+                        <i class="fe fe-star"></i> 
                         <span>Fields</span>
                         <span class="menu-arrow"><i class="fe fe-chevron-right"></i></span>
                     </a>
                     <ul>
                         <li>
-                            <a href="{% url 'admin_fields' %}">Add Fields</a>
+                            <a href="{% url 'admin_fields' %}" class="{% if request.path == '/admins/fields/' %}active{% endif %}">Add Fields</a>
                         </li>
                         <li>
-                            <a href="{% url 'admin_list_fields' %}">List Fields</a>
+                            <a href="{% url 'admin_list_fields' %}" class="{% if request.path == '/admins/list_fields/' %}active{% endif %}">List Fields</a>
                         </li>
                     </ul>
                 </li>
+                
              
                 <li>
                     <a href="sub-categories.html"><i class="fe fe-clipboard"></i> <span>Sub Categories</span></a>
