@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.contrib import messages
 from apps.accounts.models import Account
-from apps.category.models import Category,SubCategory
+from apps.category.models import Category
 from apps.home.models import Reviews
 from apps.store.models import (BookMark, ContactInformation, Feature, Location,
                                Product, ProductImages)
@@ -320,14 +320,17 @@ def feedback(request, hashed_user_id):
 @login_required(login_url="/account/login/")
 def add_listing(request):
     if request.method == "POST":
+        print(request.POST)
 
         product_name = request.POST.get("product_name")
         description = request.POST.get("description")
         price = request.POST.get("price")
         tagline = request.POST.get("tagline")
-        selected_categories = request.POST.getlist("categories")
+        selected_categories = request.POST.get("categories")
         selected_features = request.POST.getlist("features")
-
+        features_data=request.POST.get('form_data')
+        print(features_data)
+        
         # Retrieve location data
         location_name = request.POST.get("location")
         address = request.POST.get("address")
@@ -368,10 +371,10 @@ def add_listing(request):
             created_by=request.user,
         )
 
+
         # Add selected categories to the product
-        for category_id in selected_categories:
-            category = Category.objects.get(id=category_id)
-            product.category.add(category)
+        category = Category.objects.filter(id=selected_categories).first()
+        product.category=category
 
         for feature_id in selected_features:
             feature = Feature.objects.get(id=feature_id)
@@ -389,7 +392,6 @@ def add_listing(request):
         for image in gallery_images:
             ProductImages.objects.create(product=product, image=image)
         print("Gallery images uploaded")
-        messages.success(request, "Ads added sucsesfully.")
         return redirect("add_listing")
 
     else:    
@@ -406,8 +408,6 @@ def get_subcategories(request):
     if request.method == "GET":
         category_id = request.GET.get('category_id')
         subcategories = Category.objects.filter(parent_id=category_id)
-        print(subcategories,'sub')
-
         subcategory_list = [
             {
                 "id": sub.id,

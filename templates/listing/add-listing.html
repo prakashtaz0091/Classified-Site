@@ -39,7 +39,7 @@
 				<div class="profile-content">
 				    <div class="messages-form">
 
-						<form action='{% url "add_listing" %}' method="POST" enctype="multipart/form-data">
+						<form action='{% url "add_listing" %}' id="myForm" method="POST" enctype="multipart/form-data">
 								{% csrf_token %}
 
 							<div class="card">
@@ -437,8 +437,9 @@ data.fields.forEach(field => {
                 </label>
                 <input type="text" 
                        class="form-control" 
-                       name="${field.field_name}" 
+                       name="data" 
 					   placeholder="${field.field_name}"
+					    data-name="${field.field_name}"
                        ${field.mandatory ? 'required' : ''} />
             </li>
         </ul>
@@ -451,7 +452,7 @@ fieldHtml += `
 		 <label style="font-weight:600;font-size:1.1rem;" class="d-block mb-1">
                     ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
                 </label>
-            <select name="${field.field_name}" ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)" class="form-select main-select">
+			<select name="data" data-name='${field.field_name}' ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)" class="form-select main-select">
                 <option value="">Select ${field.field_name}</option>
                 ${field.options.map(option => `
                     <option value="${option.value}">${option.value}</option>
@@ -466,7 +467,7 @@ fieldHtml += `
                     fieldHtml += `
                         <div class="dropdown mt-2 extra-dropdown" data-parent-value="${option.value}">
                             <label style='font-weight:600;font-size:1.1rem'>${extra.menu_text}</label>
-                            <select name="${extra.menu_text.toLowerCase()}" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''} class="form-select">
+							<select data-name="${extra.menu_text}" name="data" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''} class="form-select">
                                 <option value="">Select ${extra.menu_text}</option>
                                 ${extra.content.map(content => `
                                     <option value="${content.name}">${content.name}</option>
@@ -556,6 +557,44 @@ function onChangeOption(selectElement) {
     extrasContainer.style.display = relatedExtraDropdowns.length > 0 ? 'block' : 'none';
 }
 </script>
+	<script>
+document.getElementById('myForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const formElements = document.querySelectorAll('[name="data"]');
+    const formData = [];
+
+    formElements.forEach(el => {
+        const fieldName = el.getAttribute('data-name');
+        const value = el.value;
+
+        if (fieldName && value) {
+            // Format as "field_name:value" and add to the list
+            formData.push(`${fieldName}:${value}`);
+        }
+    }); 
+	    const jsonData = JSON.stringify(formData);
+
+    // Create a FormData object to include the JSON data
+    const formDataObject = new FormData(this);
+    formDataObject.append('form_data', jsonData);
+    // Convert the form data to JSON
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formDataObject,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name="csrfmiddlewaretoken"]').value // Add CSRF token if needed
+        }
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Form submitted successfully', data);
+      }).catch(error => {
+          console.error('Error submitting form', error);
+      });
+});
+	</script>
+
 
 	
 	

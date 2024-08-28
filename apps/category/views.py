@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions,SubCategory, SubCategoryInfo
+from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 def listing_view(request, subcategory_slug):
     try:
         print(subcategory_slug)
-        sub_category = SubCategory.objects.get(slug=subcategory_slug)
+        sub_category = Category.objects.get(slug=subcategory_slug)
         products = Product.objects.filter(sub_category=sub_category).order_by("-id")
         # For pagination
         paginator = Paginator(products, 10)  # Adjust the number for items per page
@@ -166,7 +166,7 @@ def filter_sub_category(request):
         min_price = request.GET.get("min_price", None)
         max_price = request.GET.get("max_price", None)
 
-        products = Product.objects.filter(sub_category=category).order_by('-id')
+        products = Product.objects.filter(category=category).order_by('-id')
 
         if query!="":
             products = products.filter(product_name__icontains=query)
@@ -227,7 +227,7 @@ def sub_category_list(request, slug):
     try:
         print('sub cateagory list')
         category = get_object_or_404(Category, slug=slug)
-        subcategories = SubCategory.objects.filter(parent=category).annotate(product_count=Count('products'))
+        subcategories =Category.objects.filter(parent_id=category).annotate(product_count=Count('products'))
         print(subcategories,'sub')     
         context = {
             "category": category,
@@ -450,32 +450,5 @@ def get_category_options(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-
-
-# Will probably changed in configuration
-@csrf_exempt
-def create_category_info(request):
-    try:
-        if request.method=="POST":
-            print(request.POST)
-            data=request.POST
-            print(data)
-            content_titles=data.getlist('content_title')
-            content_types=data.getlist('content_type')
-            category=data.get('category')
-            content_datas=data.getlist('content_data')
-            for i in range(0,len(content_titles)):
-                print(content_titles[i],"is of input type",content_types[i] ,'of data',content_datas[i])
-            print(content_titles,content_types,category)
-            subcategory_instance=SubCategory.objects.filter(id=category).first()
-            if subcategory_instance is None:
-                raise Exception("Subcategory of that id not found")
-            SubCategoryInfo.objects.create(category=subcategory_instance,content_datas=content_datas,content_titles=content_titles,content_types=content_types)
-        else:
-            raise Exception("Only post method is allowed for this endpoint")
-    except Exception as e:
-        print(e)
-        # will later redirect to error pages 
-        return JsonResponse({'error':str(e)},status=400)
 
 
