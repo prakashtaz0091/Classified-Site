@@ -393,7 +393,7 @@ def add_listing(request):
         return redirect("add_listing")
 
     else:    
-        category=Category.objects.all()
+        category=Category.objects.filter(parent_id=None)
         features=Feature.objects.all()
         context={
             'categories':category,
