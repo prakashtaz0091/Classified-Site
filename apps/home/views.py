@@ -396,6 +396,7 @@ def add_listing(request):
         gallery_images = request.FILES.getlist("gallery_images")
         for image in gallery_images:
             ProductImages.objects.create(product=product, image=image)
+        product.save()
         print("Gallery images uploaded")
         return JsonResponse({'status':True,'message':"ad added success"},status=200)
 
