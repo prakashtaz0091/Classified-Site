@@ -61,246 +61,47 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category</th>
-                                        <th>Category Slug</th>
-                                        <th>Date</th>
-                                        <th>Featured</th>
+                                        <th>Category Name</th>
+                                        <th>Order</th>
+                                        <th>Status</th>
+                                        <th>Is Industry</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for category in categories %}
                                     <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                <span>Computer Repair</span>
-                                            </div>
-                                        </td>
-                                        <td>Computer</td>
-                                        <td>28 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                       
+                                        <td>{{category.category_name}}</td>
+                                        <td>{{category.order}}</td>
+                                        <td>{{category.status}}</td>
+                                        {% if  category.industry_standard %}
+                                        <td>Yes</td>
+                                        {% else %}
+                                        <td>No</td>
+                                        {% endif %}
+                                       
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
+                                                <a class="delete-table me-2" href="#" >
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-submit dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                      Actions
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                      <li><a class="dropdown-item" href="{% url 'sub_category' category.id %}">Subcategories</a></li>
+                                                    
+                                                    </ul>
+                                                  </div>
+                                                                                                 
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                <span>Car Repair Services</span>
-                                            </div>
-                                        </td>
-                                        <td>Automobile</td>
-                                        <td>17 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                <span> Car Wash</span>
-                                            </div>
-                                        </td>
-                                        <td>Car Wash</td>
-                                        <td>13 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>House Cleaning </span>
-                                            </div>
-                                        </td>
-                                        <td>Cleaning</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-08.jpg' %}" class="me-2" alt="img">
-                                                <span>Building Construction</span>
-                                            </div>
-                                        </td>
-                                        <td>Cleaning</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-07.jpg' %}" class="me-2" alt="img">
-                                                <span>Interior Designing</span>
-                                            </div>
-                                        </td>
-                                        <td>Interior</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>Commercial Painting </span>
-                                            </div>
-                                        </td>
-                                        <td>Painting</td>
-                                        <td>22 Aug 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-12.jpg' %}" class="me-2" alt="img">
-                                                <span>Plumbing Services</span>
-                                            </div>
-                                        </td>
-                                        <td>Plumbing</td>
-                                        <td>15 Aug 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
+                               
                                 </tbody>
                             </table>
                         </div>

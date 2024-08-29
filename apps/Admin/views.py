@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from apps.category.models import Category
+from apps.category.models import Category,Field
 
 # Create your views here.
 
@@ -12,7 +12,16 @@ def admin_index(request):
 
 
 def admin_category(request):
-    return render(request,'admin1/others/categories.html')
+    categories=Category.objects.all().order_by('-id')
+    context={
+        'categories':categories
+    }
+    return render(request,'admin1/others/categories.html',context)
+
+def sub_category(request,id):
+    
+    return render(request,'admin1/others/sub_category.html')
+
 
 
 def add_category(request):
@@ -36,11 +45,15 @@ def fields(request):
 
 
 def list_fields(request):
-    return render(request,'admin1/list_fields.html')
+    fields=Field.objects.all().order_by('-id')
+    context={
+        'fields':fields
+    }
+    return render(request,'admin1/list_fields.html',context)
 
 
 
-def add_options(request):
+def add_options(request,id):
     return render(request,'admin1/add/add-option.html')
 
 
