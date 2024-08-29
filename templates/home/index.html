@@ -126,7 +126,10 @@
 								<div class="blog-widget">
 									<div class="blog-img">
 										<a href="{% url 'service_details' %}">
+
+											{% if product.cover_image %}
 											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
+											{% endif %}
 										</a>
 										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>

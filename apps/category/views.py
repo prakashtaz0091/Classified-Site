@@ -16,7 +16,7 @@ def listing_view(request, subcategory_slug):
     try:
         print(subcategory_slug)
         sub_category = Category.objects.get(slug=subcategory_slug)
-        products = Product.objects.filter(sub_category=sub_category).order_by("-id")
+        products = Product.objects.filter(subcategory=sub_category).order_by("-id")
         # For pagination
         paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page")
@@ -166,7 +166,7 @@ def filter_sub_category(request):
         min_price = request.GET.get("min_price", None)
         max_price = request.GET.get("max_price", None)
 
-        products = Product.objects.filter(category=category).order_by('-id')
+        products = Product.objects.filter(subcategory=category).order_by('-id')
 
         if query!="":
             products = products.filter(product_name__icontains=query)

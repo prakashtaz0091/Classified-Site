@@ -42,7 +42,8 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True)
     featured_data=models.JSONField(blank=True,null=True)
     features = models.ManyToManyField(Feature, related_name="stores")
-    category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
+    category=models.ForeignKey(Category,related_name='category_products',on_delete=models.CASCADE,blank=True,null=True)
+    subcategory=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True,related_name='products')
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
