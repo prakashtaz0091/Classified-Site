@@ -74,7 +74,12 @@
                                         <td>{{forloop.counter}}</td>
                                        
                                         <td>{{category.category_name}}</td>
+                                        {% if category.order %}
                                         <td>{{category.order}}</td>
+
+                                        {% else %}
+                                        <td>0</td>
+                                        {% endif %}
                                         <td>{{category.status}}</td>
                                         {% if  category.industry_standard %}
                                         <td>Yes</td>

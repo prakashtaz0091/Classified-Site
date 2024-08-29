@@ -11,7 +11,7 @@ urlpatterns = [
     path('fields/',views.fields,name='admin_fields'),
     path('list_fields/',views.list_fields,name='admin_list_fields'),
     path('add_options/<int:id>/',views.add_options,name='add_options'),
-    path('extra_information/',views.extra_information,name='extra_information'),
+    path('extra_information/<int:id>/',views.extra_information,name='extra_information'),
     
     path('list/sub_category/<int:id>/',views.sub_category,name='sub_category'),
     
