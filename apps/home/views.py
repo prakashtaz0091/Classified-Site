@@ -328,6 +328,7 @@ def add_listing(request):
         price = request.POST.get("price")
         tagline = request.POST.get("tagline")
         selected_categories = request.POST.get("categories")
+        selected_sub_categories = request.POST.get("subcategories")
         selected_features = request.POST.getlist("features")
         featured_data_json=request.POST.get('form_data')
         featured_data=json.loads(featured_data_json)
@@ -376,7 +377,9 @@ def add_listing(request):
 
         # Add selected categories to the product
         category = Category.objects.filter(id=selected_categories).first()
+        subcategory = Category.objects.filter(id=selected_sub_categories).first()
         product.category=category
+        product.subcategory=subcategory
 
         for feature_id in selected_features:
             feature = Feature.objects.get(id=feature_id)
