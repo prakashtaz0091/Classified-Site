@@ -436,12 +436,13 @@ def get_category_options(request):
                             contents = FieldExtraContent.objects.filter(linked_to=extra).order_by('order')
                             if contents.exists():
                                 extra_data['content'] = [{'name': content.name} for content in contents]
+                                option_data['extras'].append(extra_data)
                             
-                            option_data['extras'].append(extra_data)
                     
                     field_data['options'].append(option_data)
             
             fields_data.append(field_data)
+            print(fields_data)
         
         return JsonResponse({'fields': fields_data}, safe=False)
     

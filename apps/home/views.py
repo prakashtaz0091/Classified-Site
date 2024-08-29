@@ -234,7 +234,6 @@ def something_wrong(request):
 
 
 def book_marks(request):
-
     book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
     if request.user.is_authenticated:
         bookmarked_product_ids = BookMark.objects.filter(
@@ -322,7 +321,6 @@ def feedback(request, hashed_user_id):
 def add_listing(request):
     if request.method == "POST":
         print(request.POST)
-
         product_name = request.POST.get("product_name")
         description = request.POST.get("description")
         price = request.POST.get("price")
