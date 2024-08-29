@@ -200,42 +200,12 @@
     </div>
     <div class="card-body">
         <ul class="listing-features">
-            <li class="feature-item">
-                <span class="feature-title">Registered</span>
-                <span class="feature-value">Yes</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Condition</span>
-                <span class="feature-value">Used</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Body</span>
-                <span class="feature-value">SEDAN</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Exchange Possible</span>
-                <span class="feature-value">No</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Colour</span>
-                <span class="feature-value">Green</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Fuel</span>
-                <span class="feature-value">Petrol</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Year of Manufacture</span>
-                <span class="feature-value">2016</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Make</span>
-                <span class="feature-value">Lexus</span>
-            </li>
-            <li class="feature-item">
-                <span class="feature-title">Mileage (km)</span>
-                <span class="feature-value">100,000 - 109,999</span>
-            </li>
+			 {% for feature in featured_data %}
+        <li class="feature-item">
+            <span class="feature-title">{{ feature.title|capfirst }}</span>
+            <span class="feature-value">{{ feature.value }}</span>
+        </li>
+    {% endfor %}
         </ul>
     </div>
 </div>

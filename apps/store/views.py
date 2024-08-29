@@ -20,16 +20,30 @@ def service_details(request, product_slug):
             raise Exception("Product with the provided slug is not found")
         product_images = ProductImages.objects.filter(product=product_instance)
         bookmarked_product_ids = None
+        processed_featured_data = []
+        if product_instance.featured_data:
+            for item in product_instance.featured_data:
+                if ":" in item:
+                    key, value = item.split(":", 1)
+                    processed_featured_data.append({'title': key.strip(), 'value': value.strip()})
+                else:
+                    processed_featured_data.append({'title': item.strip(), 'value': ''})
+        print(processed_featured_data)
+
+
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
                 user=request.user
             ).values_list("product_id", flat=True)
+
+            print(product_instance.featured_data)
         else:
             bookmarked_product_ids = []
         context = {
             "product": product_instance,
             "product_images": product_images,
             "book_mark": bookmarked_product_ids,
+            'featured_data':processed_featured_data
         }
         return render(request, "home/service-details.html", context)
     except Exception as e:
