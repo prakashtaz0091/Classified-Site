@@ -64,7 +64,8 @@ def list_fields(request):
 
 
 def add_options(request,id):
-    field_options=FieldOptions.objects.all().order_by('-id')
+    linked_to=Field.objects.filter(id=id).first()
+    field_options=FieldOptions.objects.filter(linked_to=linked_to).order_by('-id')
     context={
         'options':field_options,
         'id':id
