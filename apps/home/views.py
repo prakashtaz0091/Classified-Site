@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+
+from django.db.models import Sum
 from django.template.loader import render_to_string
 from django.contrib import messages
 from apps.accounts.models import Account
@@ -82,19 +84,24 @@ def how_it_works(request):
     return render(request, "company/howitworks.html")
 
 
+
 def dashboard(request):
     try:
         book_marks=BookMark.objects.filter(user=request.user)
         total_product=Product.objects.filter(created_by=request.user).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
+        reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
+        total_views = Product.objects.filter(created_by=request.user).aggregate(total_views=Sum('view_count'))['total_views']
         
        
-        count=book_marks.count()
+        bookmarks_count=book_marks.count()
         context={
             'book_marks':book_marks,
-            'count':count,
+            'bookmarks_count':bookmarks_count,
             'reviews_list':reviews_list,
-            'total_product':total_product
+            'total_product':total_product,
+            'reviews_count':reviews_count,
+            'total_views':total_views
         }
         return render(request, "others/dashboard.html", context)
     except Exception as e:
