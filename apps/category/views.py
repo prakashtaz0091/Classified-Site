@@ -117,6 +117,12 @@ def filter_category(request):
 
         if query!="":
             products = products.filter(product_name__icontains=query)
+        if location!="":
+            print("hello")
+            print(products)
+            products=products.filter(location__address__icontains=location)
+            print("again")
+            print(products)
         if min_price:
             products = products.filter(price__gte=min_price)
         if max_price:
