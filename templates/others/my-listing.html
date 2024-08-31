@@ -78,9 +78,10 @@
 										
 									{% for item in products %}
                                      <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
-										
 									     <td>
+											 {% if item.cover_image %}
 										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
+											{% endif %}
 										 </td>
 									     <td>
 										     <h6><a href="{% url 'service_detail' item.slug %}">{{item.product_name}}</a></h6>
