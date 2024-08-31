@@ -7,12 +7,15 @@
 										<a href="service-details.html">
 											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
-					    				<div class="fav-item">
+
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+							<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
-												<a href="javascript:void(0)" class="fav-icon">
-							    					<i class="feather-heart"></i>
-						    					</a>										
-										</div>	
+											<a href="javascript:void(0)" onclick="ToggleFavourites(this,{{product.id}})" class="fav-icon">
+												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+											</a>	
+										</div>
+
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">

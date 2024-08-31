@@ -40,12 +40,13 @@
 										<a href="service-details.html">
 											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
-					    				<div class="fav-item">
+										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
-												<a href="javascript:void(0)" class="fav-icon">
-							    					<i class="feather-heart"></i>
-						    					</a>										
-										</div>	
+											<a onclick="ToggleFavourites(this,{{product.id}})"  class="fav-icon">
+												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+											</a>	
+										</div>
+
 									</div>
 									<div class="bloglist-content">
 										<div class="card-body">
@@ -149,7 +150,39 @@
 		</svg>
 	</div>
 	<!-- scrollToTop end -->
+	<script>
+		function ToggleFavourites(elem,itemId){
+				var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 	
+				fetch('/ad/toggle-bookmark/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRFToken': csrftoken 
+					},
+					body: JSON.stringify({ id: itemId })
+				})
+				.then(response => {
+					if (response.redirected) {
+						// If the response is redirected, navigate to the login page
+						window.location.href = response.url;
+					} else {
+						return response.json();
+					}
+				})
+				.then(data => {
+					console.log(data, 'data');
+					if (data.success) {
+						elem.querySelector('i').classList.toggle('fav');  // Change icon state
+					} else {
+						console.error('Failed to favorite item.');
+					}
+				})
+				.catch(error => console.error('Error:', error));
+		}	
+</script>	
+							
 	
 {% endblock %}
-							
+
+

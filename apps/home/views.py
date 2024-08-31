@@ -459,6 +459,15 @@ def search(request):
     location = request.GET.get('location')
     products = Product.objects.all().order_by('-id')
 
+    bookmarked_product_ids=[]
+    if request.user.is_authenticated:
+                bookmarked_product_ids = BookMark.objects.filter(
+                    user=request.user
+                ).values_list("product_id", flat=True)
+    else:
+                bookmarked_product_ids = []
+
+    print(bookmarked_product_ids)
     if category_slug:
         products = products.filter(category__slug=category_slug)
     if location:
@@ -480,14 +489,17 @@ def search(request):
     if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
             product_data = render_to_string(
                     "partials/product_list_search.html",
-                    {"products": products.object_list},
+                    {"products": products.object_list,
+                        'book_mark':bookmarked_product_ids
+                     },
                     request=request,
                 ),
             pagination_data=render_to_string(
                 "partials/pagination_search.html",
                 {'page_obj':products,
                  'category':category_slug,
-                 'location':location,},
+                 'location':location,
+                 },
                 request=request
             )
             print(pagination_data)
@@ -496,6 +508,7 @@ def search(request):
         'products': products,
         'category': category_slug,
         'location': location,
+        'book_mark':bookmarked_product_ids
     }
 
     return render(request, 'others/search.html', context)
