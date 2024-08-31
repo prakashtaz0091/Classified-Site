@@ -8,13 +8,13 @@ from apps.category.models import Category, Field, FieldExtra, FieldExtraContent,
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
 
-
+ 
 from django.views.decorators.csrf import csrf_exempt
 
 # For subcategory
 def listing_view(request, subcategory_slug):
     try:
-        print(subcategory_slug)
+        print(subcategory_slug,'car')
         sub_category = Category.objects.get(slug=subcategory_slug)
         products = Product.objects.filter(subcategory=sub_category).order_by("-id")
         # For pagination
@@ -54,6 +54,7 @@ def listing_view(request, subcategory_slug):
 
 #For vieweign directly in category
 def viewall_listing_view(request, subcategory_slug):
+   
     try:
         category = Category.objects.get(slug=subcategory_slug)
         products = Product.objects.filter(category=category).order_by("-id")

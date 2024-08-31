@@ -43,7 +43,7 @@
 				    	<div class="categories-content">
 							<a href="{% url 'listing' sub_category.slug %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
 		    				   
-								<img src="{{sub_category.image.url}}" alt="car1">
+								<img src="{{sub_category.category_icon_image.url}}" alt="car1" style='width:156px;height:156px;'>
 							   <h6>{{sub_category.category_name}}</h6>
 							   <span class="ads">{{ sub_category.product_count }}</span>
 							   <span>{{sub_category.description}}</span>
