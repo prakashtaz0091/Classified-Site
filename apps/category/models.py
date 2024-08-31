@@ -9,7 +9,7 @@ class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
     menu_text=models.CharField(max_length=50,blank=True,null=True)
     slug = models.SlugField(max_length=100, unique=True)
-    order=models.IntegerField(blank=True,null=True)
+    order=models.IntegerField(blank=True,null=True,default=0)
     
     #either classified or job listing like that(choices are not used because it will be posted from limited place)
     category_type=models.CharField(max_length=20,blank=True,null=True)

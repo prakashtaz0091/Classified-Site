@@ -15,7 +15,7 @@
 
         <div class="page-wrapper page-settings">
             <div class="content" style='margin-top:16px;'>
-                <form action="{% url 'create_field_options_extra' %}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'create_field_options_extra' id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-8">
@@ -38,16 +38,13 @@
                             <table class="table datatable">
                                
                                 <tbody>
+                                    {% for extra in extras %}
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{extra.menu_text}}</td>
+                                        
                                         <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                <span>Computer Repair</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button  data-bs-toggle="modal" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
+                                            <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
                                             <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
                                         
                                         </td>
@@ -82,307 +79,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                <span>Car Repair Services</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                               
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                <span> Car Wash</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>House Cleaning </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-08.jpg' %}" class="me-2" alt="img">
-                                                <span>Building Construction</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-07.jpg' %}" class="me-2" alt="img">
-                                                <span>Interior Designing</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                               
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>Commercial Painting </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-12.jpg' %}" class="me-2" alt="img">
-                                                <span>Plumbing Services</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
-                                            <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="active-switch">
-                                                Mandatory
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                              
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
+                                 
+                                     
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -419,7 +119,6 @@
 	</div>
 
 
-
     <div class="modal fade" id="add-data-modal" tabindex="-1" aria-labelledby="addDataLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -429,7 +128,7 @@
                         <i class="fe fe-x"></i>
                     </button>
                 </div>
-                <form action="{% url 'create_field_options_extra_content' %}" method="post">
+                <form action="" method="post"> 
                     {% csrf_token %}
                     <div class="modal-body">
                         <div class="mb-3">
@@ -450,4 +149,25 @@
         </div>
     </div>
     
+    
+
+
+  
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var addButton = document.querySelectorAll('[data-bs-toggle="modal"]');
+                
+                addButton.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        var id = this.getAttribute('data-id');
+                        var form = document.querySelector('#add-data-modal form');
+                        var action = "{% url 'create_field_options_extra_content' 0 %}".replace("0", id);
+                        form.setAttribute('action', action);
+                    });
+                });
+            });
+    
+        
+    </script>
  {% endblock %}

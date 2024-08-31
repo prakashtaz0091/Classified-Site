@@ -18,7 +18,7 @@
         <div class="page-wrapper page-settings">
             <div class="content">
                 <div class="content-page-header content-page-headersplit mb-0">
-                    <h5>Fields</h5>
+                    <h5>Sub Categories</h5>
                     <div class="list-btn">
                         <ul>
                             <li>
@@ -49,7 +49,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="btn btn-primary" href="{% url 'admin_fields' %}"><i class="fa fa-plus me-2"></i>Add Fields </a>
+                                <a class="btn btn-primary" href="{% url 'add_admin_category' %}"><i class="fa fa-plus me-2"></i>Add Categories </a>
                             </li>
                         </ul>
                     </div>
@@ -61,37 +61,47 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>type</th>
-                                        <th>Hints</th>
+                                        <th>Category Name</th>
+                                        <th>Order</th>
+                                        <th>Status</th>
+                                        <th>Is Industry</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for item in fields %}
+                                    {% for category in sub_category %}
                                     <tr>
                                         <td>{{forloop.counter}}</td>
-                                        <td>{{item.field_name}}</td>
                                        
-                                        <td>{{item.field_type}}</td>
-                                        <td>{{item.hint}}</td>
-                                      
+                                        <td>{{category.category_name}}</td>
+                                        <td>{{category.order}}</td>
+                                        <td>{{category.status}}</td>
+                                        {% if  category.industry_standard %}
+                                        <td>Yes</td>
+                                        {% else %}
+                                        <td>No</td>
+                                        {% endif %}
+                                       
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
+                                                <a class="delete-table me-2" href="#" >
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
-                                                {% if item.field_type == 'select' %}
- 
-                                                <a href='{% url "add_options" item.id %}' class='btn btn-submit' style='margin-left:18px; color: #212529;background-color: #e1e6fa;border-color: #e1e6fa;'>
-                                                    options
-                                                </a>
-                                                {% endif %}
+                                                <div class="dropdown">
+                                                    <button class="btn btn-submit dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                      Actions
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                      <li><a class="dropdown-item" href="">Fields</a></li>
+                                                    
+                                                    </ul>
+                                                  </div>
+                                                                                                 
                                             </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
-                                   
+                               
                                 </tbody>
                             </table>
                         </div>

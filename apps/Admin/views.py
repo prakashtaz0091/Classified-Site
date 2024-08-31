@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from apps.category.models import Category
+from apps.category.models import Category,Field,FieldOptions,FieldExtra
 
 # Create your views here.
 
@@ -12,7 +12,26 @@ def admin_index(request):
 
 
 def admin_category(request):
-    return render(request,'admin1/others/categories.html')
+    categories=Category.objects.all().order_by('-id')
+    context={
+        'categories':categories
+    }
+    return render(request,'admin1/others/categories.html',context)
+
+def sub_category(request,id):
+    try:
+        category_instance=Category.objects.filter(parent_id=id)
+    
+    except:
+        pass
+    
+    context={
+        'sub_category':category_instance
+    }    
+    
+    
+    return render(request,'admin1/others/sub_category.html',context)
+
 
 
 def add_category(request):
@@ -36,13 +55,32 @@ def fields(request):
 
 
 def list_fields(request):
-    return render(request,'admin1/list_fields.html')
+    fields=Field.objects.all().order_by('-id')
+    context={
+        'fields':fields
+    }
+    return render(request,'admin1/list_fields.html',context)
 
 
 
-def add_options(request):
-    return render(request,'admin1/add/add-option.html')
+def add_options(request,id):
+    field_options=FieldOptions.objects.all().order_by('-id')
+    context={
+        'options':field_options,
+        'id':id
+        
+    }
+   
+    return render(request,'admin1/add/add-option.html',context)
 
 
-def extra_information(request):
-    return render(request,'admin1/add/extra_information.html')
+def extra_information(request,id):
+    extras=FieldExtra.objects.all().order_by('-id')
+    
+    context={
+        'id':id,
+        'extras':extras
+    }
+    return render(request,'admin1/add/extra_information.html',context)
+
+

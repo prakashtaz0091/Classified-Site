@@ -17,7 +17,7 @@
 
         <div class="page-wrapper page-settings">
             <div class="content" style='margin-top:16px;'>
-                <form action="{% url 'create_field_options' %}" method="POST">
+                <form action="{% url 'create_field_options' id%}" method="POST">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-4">
@@ -52,32 +52,48 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category</th>
-                                        <th>Category Slug</th>
-                                        <th>Date</th>
-                                        <th>Featured</th>
+                                        <th>Value</th>
+                                        <th>Order</th>
+                                        <th>Require Input Fields</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for option in options %}
+
+
                                     <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                <span>Computer Repair</span>
-                                            </div>
-                                        </td>
-                                        <td>Computer</td>
-                                        <td>28 Sep 2022</td>
+                                        <td>{{forloop.counter}}</td>
+                                       
+                                          
+                                       
+                                        <td>{{option.field_value}}</td>
+                                        <td>{{option.order}}</td>
+                                        {% if option.required %}
+                                       
                                         <td>
                                             <div class="active-switch">
                                                 <label class="switch">
-                                                    <input type="checkbox" checked="">
+                                                    <input type="checkbox" checked="True">
                                                     <span class="sliders round"></span>
                                                 </label>
                                             </div>
                                         </td>
+                                        {% else %}
+                                       
+                                        <td>
+                                           
+                                            <div class="active-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="sliders round"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        
+                                        
+
+                                        {% endif %}
                                         <td>
                                             <div class="table-actions d-flex">
                                                 <a class="delete-table me-2" href="edit-categories.html" >
@@ -87,236 +103,17 @@
                                                     <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
                                                 </a>
                                                 
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
+                                                <a href='{% url "extra_information" option.id %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
                                                     Manage extras
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                <span>Car Repair Services</span>
-                                            </div>
-                                        </td>
-                                        <td>Automobile</td>
-                                        <td>17 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                <span> Car Wash</span>
-                                            </div>
-                                        </td>
-                                        <td>Car Wash</td>
-                                        <td>13 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>House Cleaning </span>
-                                            </div>
-                                        </td>
-                                        <td>Cleaning</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-08.jpg' %}" class="me-2" alt="img">
-                                                <span>Building Construction</span>
-                                            </div>
-                                        </td>
-                                        <td>Cleaning</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-07.jpg' %}" class="me-2" alt="img">
-                                                <span>Interior Designing</span>
-                                            </div>
-                                        </td>
-                                        <td>Interior</td>
-                                        <td>07 Sep 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                <span>Commercial Painting </span>
-                                            </div>
-                                        </td>
-                                        <td>Painting</td>
-                                        <td>22 Aug 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" checked="">
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>
-                                            <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-12.jpg' %}" class="me-2" alt="img">
-                                                <span>Plumbing Services</span>
-                                            </div>
-                                        </td>
-                                        <td>Plumbing</td>
-                                        <td>15 Aug 2022</td>
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" >
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                <a href='{% url "extra_information" %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+
+                                    {% endfor %}
+
+
+                                    
                                 </tbody>
                             </table>
                         </div>

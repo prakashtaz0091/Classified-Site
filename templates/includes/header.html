@@ -196,7 +196,7 @@
 
         {% if user.is_authenticated %}
         <ul class="nav header-navbar-rht">
-            {% if user.is_admin %}
+            {% if user.is_superadmin %}
             <li class="nav-item">
                 <a class="nav-link add-listing" href="{% url 'admin_index' %}"><span><i class="fa-solid fa-plus"></i></span>Admin</a>
             </li>
