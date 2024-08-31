@@ -5,7 +5,7 @@
     <div class="blog-widget">
         <div class="blog-img">
             <a href="{% url 'service_detail' product.slug %}">
-                {% if product.dover_image %}
+                {% if product.cover_image %}
                 <img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
                 {% endif %}
             </a>
@@ -39,10 +39,10 @@
                  <div class="blogfeaturelink">
                     <div class="blog-features">
                        <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>
-                         {% for sub_category in product.sub_category.all %}
+                     
                         
-                        {{ sub_category.category_name }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}</span></a>
+                        {{ product.subcategory.category_name }}
+                        </span></a>
                     </div>																	  
                     <div class="blog-author">
                         {% if product.created_by.profile.profile_photo %} 
@@ -61,10 +61,14 @@
                       <a href="javascript:void(0);">{{product.created_by.full_name}}</a>
                     </div>
                 </div> 
-                <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
+                <h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
                 <div class="blog-location-details">
                     <div class="location-info">
+                        {% if product.location.address %}
                         <i class="feather-map-pin"></i>{{product.location.address}}
+                        {% else %}
+                        <i class="feather-map-pin"></i>Dubai  
+                        {% endif %}
                     </div>
                  
                     <div class="location-info">
