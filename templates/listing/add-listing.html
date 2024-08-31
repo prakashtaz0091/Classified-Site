@@ -414,7 +414,7 @@ function loadBrands(subcategoryCheckbox) {
                 if (!brandHeading) {
                     brandHeading = document.createElement('div');
                     brandHeading.classList.add('brand-heading');
-                    brandHeading.innerHTML = '<h4>Enter Features</h4>';
+                    brandHeading.innerHTML = '<h4 style="margin-bottom:1.2rem;">Enter Features</h4>';
                     brandListing.parentNode.insertBefore(brandHeading, brandListing);
                 } else {
                     brandHeading.style.display = 'block';
@@ -449,10 +449,10 @@ data.fields.forEach(field => {
 fieldHtml += `
     <div style="margin-bottom:20px;" class="field-item">
         <div class="dropdown">
-		 <label style="font-weight:600;font-size:1.1rem;" class="d-block mb-1">
+		 <label style="font-weight:600;font-size:1.1rem;margin-bottom:0.5rem;" class="d-block mb-1">
                     ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
                 </label>
-			<select name="data" data-name='${field.field_name}' ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)" class="form-select main-select">
+			<select name="data" data-name='${field.field_name}' ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)"  style="padding:1.2rem;" class="form-select main-select">
                 <option value="">Select ${field.field_name}</option>
                 ${field.options.map(option => `
                     <option value="${option.value}">${option.value}</option>
@@ -467,7 +467,7 @@ fieldHtml += `
                     fieldHtml += `
                         <div class="dropdown mt-2 extra-dropdown" data-parent-value="${option.value}">
                             <label style='font-weight:600;font-size:1.1rem'>${extra.menu_text}</label>
-							<select data-name="${extra.menu_text}" name="data" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''} class="form-select">
+							<select data-name="${extra.menu_text}" name="data" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''}  style="padding:1.2rem;" class="form-select">
                                 <option value="">Select ${extra.menu_text}</option>
                                 ${extra.content.map(content => `
                                     <option value="${content.name}">${content.name}</option>

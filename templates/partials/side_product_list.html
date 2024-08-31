@@ -61,7 +61,7 @@
                       <a href="javascript:void(0);">{{product.created_by.full_name}}</a>
                     </div>
                 </div> 
-                <h6><a href="service-details.html">{{product.product_name}}</a></h6>																	 
+                <h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
                 <div class="blog-location-details">
                     <div class="location-info">
                         {% if product.location.address %}
