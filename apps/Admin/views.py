@@ -76,8 +76,8 @@ def add_options(request,id):
 
 
 def extra_information(request,id):
-    extras=FieldExtra.objects.all().order_by('-id')
-    
+    linked_to=FieldOptions.objects.filter(id=id).first()
+    extras=FieldExtra.objects.filter(linked_to=linked_to).order_by('-id')
     context={
         'id':id,
         'extras':extras
