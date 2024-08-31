@@ -133,8 +133,9 @@
 										</a>
 										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+												<i class="feather-heart"></i>
 											</a>	
 											
 											
@@ -183,12 +184,8 @@
 											</div>
 											<div class="amount-details">
 												<div class="amount">
-													<span class="validrate">${{product.price}}</span>
-													<span>$450</span>
+													<span class="validrate">AED {{product.price}}</span>
 												</div>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>												
 											</div>	
 										</div>	
 									</div>			 
@@ -234,8 +231,9 @@
 										
 										<div class="fav-item" data-id="{{ product.id }}">
 											<span class="featured-text">Featured</span>
-											<a href="javascript:void(0)" class="fav-icon">
-												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
 											</a>	
 											
 											
@@ -285,11 +283,7 @@
 											<div class="amount-details">
 												<div class="amount">
 													<span class="validrate">AED{{product.price}}</span>
-													<span>$450</span>
 												</div>
-												<div class="ratings">
-													<span>4.7</span> (50)
-												</div>														
 											</div>	
 										</div>	
 									</div>			 
@@ -697,7 +691,14 @@
 				.then(data => {
 					console.log(data, 'data');
 					if (data.success) {
-						this.querySelector('i').classList.toggle('favorited');  // Change icon state
+						
+if (icon.classList.contains('fav')) {
+    icon.classList.remove('fav');  // Remove the 'fav' class
+    // Additional logic for when the icon is removed from favorites
+} else {
+    icon.classList.add('fav');  // Add the 'fav' class
+    // Additional logic for when the icon is added to favorites
+}						
 					} else {
 						console.error('Failed to favorite item.');
 					}
