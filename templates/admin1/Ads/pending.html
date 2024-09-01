@@ -78,16 +78,16 @@
                             <div class="tab-contents-sets">
                                 <ul>
                                     <li>
-                                        <a href="{% url 'ads' %}" class="{% if request.path == '/admins/ads/' %}active{% endif %}">All Listings</a>
+                                        <a href="{% url 'ads' %}" class="{% if request.path == '/admins/ads/' %}active{% endif %}">All Ads</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'pending' %}" class="{% if request.path == '/admins/ads/pending/' %}active{% endif %}">Pending Listings</a>
+                                        <a href="{% url 'pending' %}" class="{% if request.path == '/admins/ads/pending/' %}active{% endif %}">Pending Ads</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'approve' %}" class="{% if request.path == '/admins/ads/approve/' %}active{% endif %}">Approved Listings</a>
+                                        <a href="{% url 'approve' %}" class="{% if request.path == '/admins/ads/approve/' %}active{% endif %}">Approved Ads</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'reject' %}" class="{% if request.path == '/admins/ads/reject/' %}active{% endif %}">Rejected Listings</a>
+                                        <a href="{% url 'reject' %}" class="{% if request.path == '/admins/ads/reject/' %}active{% endif %}">Rejected Ads</a>
                                     </li>
                                 </ul>
                                 
