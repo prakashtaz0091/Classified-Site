@@ -119,7 +119,7 @@
                                     <tr>
                                         <td>{{ forloop.counter }}</td>
                                         <td>
-                                            <a href="{% url 'ads_details' %}" class="table-imgname">
+                                            <a href="{% url 'ads_details' ad.slug %}" class="table-imgname">
                                                 <img src="{{ ad.cover_image.url }}" class="me-2" alt="img">
                                                 <span>{{ ad.product_name|truncatechars:30 }}</span>
                                             </a>
@@ -149,7 +149,7 @@
                                         </td>
                                         <td>
                                             <div class="table-actions d-flex position-relative">
-                                                <a class="delete-table me-2" href="{% url 'ads_details' %}">
+                                                <a class="delete-table me-2" href="{% url 'ads_details' ad.slug %}">
                                                     <img src="{% static 'admin/assets/img/icons/eye.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table me-2 edit-btn" href="#">

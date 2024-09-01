@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render,redirect
 
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
-from apps.store.models import  Product
+from apps.store.models import  Product,ProductImages
 # Create your views here.
 
 
@@ -167,6 +167,12 @@ def reject(request):
     }
     return render(request,'admin1/Ads/reject.html',context)
 
-def ads_details(request):
-    return render(request,'admin1/Ads/ads_details.html')
+def ads_details(request,slug):
+    product=Product.objects.get(slug=slug)
+    product_images=ProductImages.objects.filter(product=product)
+    context={
+        'product':product,
+        'product_images':product_images
+    }
+    return render(request,'admin1/Ads/ads_details.html',context)
 

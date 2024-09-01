@@ -70,8 +70,16 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.product_name)
-        super(Product, self).save(*args, **kwargs)
+            # Create the initial slug
+            initial_slug = slugify(self.product_name)
+            # Save the object to generate the ID
+            super(Product, self).save(*args, **kwargs)
+            # Now that the ID is available, append it to the slug
+            self.slug = f"{initial_slug}-{self.id}"
+            # Save the object again with the updated slug
+            self.save(update_fields=['slug'])
+        else:
+            super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.product_name
