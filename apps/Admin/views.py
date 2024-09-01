@@ -1,8 +1,8 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
-
+from apps.store.models import  Product
 # Create your views here.
 
 
@@ -86,17 +86,83 @@ def extra_information(request,id):
 
 
 def ads(request):
-    return render(request,'admin1/Ads/ads.html')
+    ads=Product.objects.all().order_by('-id')
+    context={
+        'ads':ads
+    }
+    return render(request,'admin1/Ads/ads.html',context)
 
 
+
+def ads_delete(request,id):
+    try:
+        ads=Product.objects.get(id=id)
+        ads.delete()
+        return redirect('ads')
+    
+    except:
+        pass
+    
+    
+def approved_ads(request,id):
+    try:
+     
+            product=Product.objects.get(id=id)    
+            product.is_approved=True
+            product.is_available=True
+            product.save()
+            ads=Product.objects.all().order_by('-id')
+            context={
+                'ads':ads
+            }
+            return render(request,'admin1/Ads/ads.html',context)
+
+        
+    except:
+         pass
+     
+def reject_ads(request,id):
+    try:
+      
+     
+            product=Product.objects.get(id=id)    
+            product.is_rejected=True
+            product.save()
+            ads=Product.objects.all().order_by('-id')
+            context={
+                'ads':ads
+            }
+            return render(request,'admin1/Ads/ads.html',context)
+
+        
+    except:
+         pass
+     
+     
+        
 def pending(request):
-    return render(request,'admin1/Ads/pending.html')
+    product=Product.objects.filter(is_approved=False)
+    context={
+        'ads':product
+        
+    }
+    return render(request,'admin1/Ads/pending.html',context)
+
+
 
 def approve(request):
-    return render(request,'admin1/Ads/approve.html')
+    ads=Product.objects.filter(is_approved=True).order_by('-id')
+    context={
+        'ads':ads
+    }
+    return render(request,'admin1/Ads/approve.html',context)
 
 def reject(request):
-    return render(request,'admin1/Ads/reject.html')
+    reject_ads=Product.objects.filter(is_rejected=True).order_by('-id')
+    context={
+        'ads':reject_ads
+    }
+    return render(request,'admin1/Ads/reject.html',context)
 
 def ads_details(request):
     return render(request,'admin1/Ads/ads_details.html')

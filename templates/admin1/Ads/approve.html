@@ -114,22 +114,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for ad in ads %}
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{forloop.counter}}</td>
                                         <td>
                                             <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                <span>Steam Car Wash</span>
+                                                <img src="{{ad.cover_image.url}}" class="me-2" alt="img">
+                                                <span>{{ ad.product_name|truncatechars:30 }}
+                                            </span>
                                             </div>
                                         </td>
-                                        <td>Car Wash</td>
-                                        <td>Other</td>
-                                        <td>$14</td>
-                                        <td>13 Sep 2022</td>
+                                        <td>{{ad.category.category_name}}</td>
+                                        <td>{{ad.subcategory.category_name}}</td>
+                                        <td>AED{{ad.price}}</td>
+                                        <td>{{ad.created_date}}</td>
                                         <td><h6 class="badge-active">Approved</h6></td>
                                         <td>
                                             <a href="javascript:void(0);" class="table-profileimage">
-                                                <img src="{% static 'admin/assets/img/customer/user-06.jpg' %}" class="me-2" alt="img">
+                                                <img src="{{ad.created_by.profile.profile_photo.url}}" class="me-2" alt="img">
                                                 <span>Provider</span>
                                             </a>
                                         </td>
@@ -144,6 +146,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                     <!-- Additional rows go here -->
                                 </tbody>
                             </table>

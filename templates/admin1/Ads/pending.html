@@ -118,29 +118,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for ad in ads %}
                                     <tr>
-                                        <td>8</td>
+                                        <td>{{forloop.counter}}</td>
                                         <td>
                                             <div class="table-imgname">
-                                                <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                <span>Car Repair Services</span>
+                                                <img src="{{ad.cover_image.url}}" class="me-2" alt="img">
+                                                <span>{{ ad.product_name|truncatechars:30 }}
+                                            </span>
                                             </div>
                                         </td>
-                                        <td>Automobile</td>
-                                        <td>Other</td>
-                                        <td>$50</td>
-                                        <td>17 Sep 2022</td>
+                                        <td>{{ad.category.category_name}}</td>
+                                        <td>{{ad.subcategory.category_name}}</td>
+                                        <td>AED{{ad.price}}</td>
+                                        <td>{{ad.created_date}}</td>
                                         <td><h6 class="badge-pending">Pending</h6></td>
                                         <td>
                                             <a href="javascript:void(0);" class="table-profileimage">
-                                                <img src="{% static 'admin/assets/img/customer/user-02.jpg' %}" class="me-2" alt="img">
-                                                <span>Admin</span>
+                                                {% if ad.created_by.profile.profile_photo %}
+                                                <img src="{{ ad.created_by.profile.profile_photo.url }}" class="me-2" alt="img">
+                                                {% else %}
+                                                <img src="{% static 'admin/assets/img/customer/user-09.jpg' %}" class="me-2" alt="img">
+                                                {% endif %}
+                                                <span>Provider</span>
                                             </a>
                                         </td>
                                         <td>
                                             <div class="table-actions d-flex">
                                                 <a class="delete-table me-2" href="{% static 'admin/edit-listing.html' %}">
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
+                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-item">
                                                     <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
@@ -148,6 +154,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

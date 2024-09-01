@@ -22,11 +22,11 @@ def home(request):
             latest_products = []
             all_products = (
                 Product.objects.select_related()
-                .filter(is_available=True)
+                .filter(is_available=True,is_approved=True)
                 .order_by("-created_date")
             )
             
-            print(all_products,'all products ')
+            print(all_products,'all products =+++++++++++++++++++++++++++++++++++>')
 
             # Get the latest 5 products for each category
             for category in all_categories:

@@ -39,7 +39,7 @@ class Product(models.Model):
     cover_image = models.FileField(upload_to="photos/product_cover")
     tagline = models.TextField(max_length=550, blank=True, null=True)
     price = models.IntegerField()
-    is_available = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=False)
     featured_data=models.JSONField(blank=True,null=True)
     features = models.ManyToManyField(Feature, related_name="stores")
     category=models.ForeignKey(Category,related_name='category_products',on_delete=models.CASCADE,blank=True,null=True)
@@ -62,6 +62,8 @@ class Product(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(default=0)
+    is_approved=models.BooleanField(default=False)
+    is_rejected=models.BooleanField(default=False)
     created_by = models.ForeignKey(
         Account, on_delete=models.CASCADE, blank=True, null=True
     )
