@@ -128,6 +128,8 @@ def reject_ads(request,id):
      
             product=Product.objects.get(id=id)    
             product.is_rejected=True
+            product.is_approved=False
+            product.is_available=False
             product.save()
             ads=Product.objects.all().order_by('-id')
             context={
