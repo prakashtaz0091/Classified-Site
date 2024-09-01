@@ -85,3 +85,19 @@ def extra_information(request,id):
     return render(request,'admin1/add/extra_information.html',context)
 
 
+def ads(request):
+    return render(request,'admin1/Ads/ads.html')
+
+
+def pending(request):
+    return render(request,'admin1/Ads/pending.html')
+
+def approve(request):
+    return render(request,'admin1/Ads/approve.html')
+
+def reject(request):
+    return render(request,'admin1/Ads/reject.html')
+
+def ads_details(request):
+    return render(request,'admin1/Ads/ads_details.html')
+

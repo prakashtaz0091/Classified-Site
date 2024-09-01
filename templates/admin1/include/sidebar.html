@@ -24,7 +24,7 @@
                     <h6>Home</h6>
                 </li>
                 <li>
-                    <a href="{% url 'admin_index' %}" class=" {% if request.path == '/admins/index/' %}active{% endif %}"><i class="fe fe-grid"></i> <span>Dashboard</span></a>
+                    <a href="{% url 'admin_index' %}" class=" {% if request.path == '/admins/dashboard/' %}active{% endif %}"><i class="fe fe-grid"></i> <span>Dashboard</span></a>
                 </li>
                 <li class="menu-title">
                     <h6>Listing</h6>
@@ -42,7 +42,7 @@
                             <a href="{% url 'admin_fields' %}" class="{% if request.path == '/admins/fields/' %} active {% endif %}">Fields</a>
                         </li>
                         <li>
-                            <a href="review.html">Ads</a>
+                            <a href="{% url 'ads' %}" class="{% if request.path == '/admins/ads/' %} active {% endif %}">Ads</a>
                         </li>
                     </ul>
                 </li>
