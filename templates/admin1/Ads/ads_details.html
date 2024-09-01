@@ -192,16 +192,22 @@
                                     <div class="owl-nav mynav3"></div>
                                 </div>
                             </div>
-                            <div class="owl-carousel gallery-slider">    
-                                {% for image in product_images %}                            
-                                <div class="gallery-widget">
-                                    <a href="{{image.image.url}}" data-fancybox="gallery">
-                                        <img class="img-fluid" alt="Image" src="{{image.image.url}}">
-                                    </a>
-                                </div>   
-                                {% endfor %}                             
+                            {% if product_images %} 
+                            <div class="owl-carousel gallery-slider">   
+                               
+                                    {% for image in product_images %}                            
+                                    <div class="gallery-widget">
+                                        <a href="{{image.image.url}}" data-fancybox="gallery">
+                                            <img class="img-fluid" alt="Image" src="{{image.image.url}}">
+                                        </a>
+                                    </div>   
+                                    {% endfor %}     
+                                
                                
                             </div>
+                            {% else %}  
+                                <h5>No Gallary Has Been Added!</h5>
+                            {% endif %}
                         </div>
                     </div>
                     
