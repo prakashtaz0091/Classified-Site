@@ -176,3 +176,11 @@ def ads_details(request,slug):
     }
     return render(request,'admin1/Ads/ads_details.html',context)
 
+
+
+def edit_ads(request,id):
+    if request.method=="POST":
+        pass
+    
+    else:
+        return render(request,'admin1/Ads/edit_ads.html')

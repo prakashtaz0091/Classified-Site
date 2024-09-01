@@ -24,6 +24,7 @@ urlpatterns = [
     path('ads/delete/<int:id>/',views.ads_delete,name='ads_delete'),
     path('ads/approve/<int:id>/',views.approved_ads,name='approve_ads'),
     path('ads/reject/<int:id>/',views.reject_ads,name='reject_ads'),
+    path('ads/edit/<int:id>/',views.edit_ads,name='edit_ads'),
     
     
 ]

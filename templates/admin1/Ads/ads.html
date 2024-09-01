@@ -157,7 +157,7 @@
                                                 </a>
                                 
                                                 <div class="dropdown-menu edit-dropdown position-absolute" style="display: none;">
-                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="{% url 'edit_ads' ad.id %}">Edit</a>
                                                     <a class="dropdown-item" href="{% url 'approve_ads' ad.id %}">Active</a>
                                                     <a class="dropdown-item" href="{% url 'reject_ads' ad.id %}">Reject</a>
                                                 </div>
