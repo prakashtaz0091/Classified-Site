@@ -131,7 +131,11 @@
                                         <td><h6 class="badge-active">Approved</h6></td>
                                         <td>
                                             <a href="javascript:void(0);" class="table-profileimage">
-                                                <img src="{{ad.created_by.profile.profile_photo.url}}" class="me-2" alt="img">
+                                                {% if ad.created_by.profile.profile_photo %}
+                                                <img src="{{ ad.created_by.profile.profile_photo.url }}" class="me-2" alt="img">
+                                                {% else %}
+                                                <img src="{% static 'admin/assets/img/customer/user-09.jpg' %}" class="me-2" alt="img">
+                                                {% endif %}
                                                 <span>Provider</span>
                                             </a>
                                         </td>

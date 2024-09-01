@@ -110,6 +110,7 @@ def approved_ads(request,id):
             product=Product.objects.get(id=id)    
             product.is_approved=True
             product.is_available=True
+            product.is_rejected=False
             product.save()
             ads=Product.objects.all().order_by('-id')
             context={
