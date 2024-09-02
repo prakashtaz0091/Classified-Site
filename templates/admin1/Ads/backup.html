@@ -1,0 +1,389 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Listee | Template</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'admin/assets/img/favicon.png' %}">
+    
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/select2.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/fontawesome/css/all.min.css' %}">
+
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/dataTables.bootstrap4.min.css' %}">
+
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/plugins/feather/feather.css' %}">
+		
+	<!-- Owl carousel CSS -->
+	<link rel="stylesheet" href="{% static 'admin/assets/css/owl.carousel.min.css' %}">
+
+    <!-- Ck Editor -->
+	<link rel="stylesheet" href="{% static 'admin/assets/css/ckeditor.css' %}">
+    
+    <!-- Fancybox CSS -->
+	<link rel="stylesheet" href="{% static 'admin/assets/plugins/fancybox/jquery.fancybox.min.css' %}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/style.css' %}">
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+        {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+           {% include 'admin1/include/sidebar.html' %}
+            
+            
+        </div>
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    
+
+                    <div class="col-xl-8">
+                        <div class="serv-profile">
+                            <h2>{{product.product_name}}</h2>
+                            <ul>
+                                <li>                                    
+                                    <span class="badge">{{product.category.category_name}}</span>
+                                </li>
+                                {% if product.location.address %}
+                                <li class="service-map"><i class="fe fe-map-pin"></i>{{product.location.address}}</li>
+                                {% else %}
+                                <li class="service-map"><i class="fe fe-map-pin"></i> Dubai</li>
+
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="service-images big-gallery">
+                            <img src="{{product.cover_image.url}}" class="img-fluid" alt="img">
+                            <a href="{{product.cover_image.url}}" data-fancybox="gallery" class="btn btn-show"><i class="fe fe-image me-1"></i> Show all photos</a>
+                        </div>
+                        <div class="service-wrap">
+                            <h5>Service Details</h5>
+                            <p>{{product.description}}</p>
+                        </div>
+                        <div class="service-wrap provide-service">
+                            <h5>Service Provider</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="provide-box">  
+                                        {% if product.created_by.profile.profile_photo %}                                      
+                                        <img src="{{product.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img">   
+                                        {% else %}
+                                        <img src="{% static 'admin/assets/img/profiles/avatar-02.jpg' %}" class="img-fluid" alt="img">   
+
+                                        {% endif %}                                     
+                                        <div class="provide-info">
+                                            <h6>Member Since</h6>
+                                            <div class="serv-review"><i class="fa-solid fa-star"></i> <span>4.9 </span>(255 reviews)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="provide-box">
+                                        <span><i class="fe fe-user"></i></span>
+                                        <div class="provide-info">
+                                            <h6>Member Since</h6>
+                                            <p>{{product.created_by.date_joined}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="provide-box">
+                                        <span><i class="fe fe-map-pin"></i></span>
+                                        <div class="provide-info">
+                                            <h6>Address</h6>
+                                            {% if product.location.address %}
+                                            <p>{{product.location.address}}</p>
+                                            {% else %}
+                                            <p>UAE,Ajman</p>
+
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="provide-box">
+                                        <span><i class="fe fe-mail"></i></span>
+                                        <div class="provide-info">
+                                            <h6>Email</h6>
+                                            <p>{{product.created_by.email}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="provide-box">
+                                        <span><i class="fe fe-phone"></i></span>
+                                        <div class="provide-info">
+                                            <h6>Phone</h6>
+                                            {% if product.created_by.profile.phone_number %}
+                                            {{product.created_by.profile.phone_number}}
+                                            {% else %}
+                                            <p>+1 888 888 8888</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="social-icon provide-social">
+                                        <ul>
+                                            <li>
+                                                <a href="#" target="_blank"><i class="fe fe-instagram"></i> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank"><i class="fe fe-twitter"></i> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank"><i class="fe fe-instagram"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank"><i class="fe fe-linkedin"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-wrap">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Gallery</h5>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <div class="owl-nav mynav3"></div>
+                                </div>
+                            </div>
+                            <div class="owl-carousel gallery-slider">    
+                                {% for image in product_images %}                            
+                                <div class="gallery-widget">
+                                    <a href="{{image.image.url}}" data-fancybox="gallery">
+                                        <img class="img-fluid" alt="Image" src="{{image.image.url}}">
+                                    </a>
+                                </div>   
+                                {% endfor %}                             
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4">
+                        <div class="card card-provide">
+                            <div class="card-body">
+                                <div class="provide-widget">
+                                    <div class="service-amount">
+                                        <h5><span>AED{{product.price}}</span></h5>
+                                        <p class="serv-review"><i class="fa-solid fa-star"></i> <span>4.9 </span>(255 reviews)</p>
+                                    </div>
+                                    <div class="serv-proimg">
+                                        {% if product.created_by.profile.profile_photo %}
+                                        <img src="{{product.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img">
+                                        {% else %}
+                                        <img src="{% static 'admin/assets/img/profiles/avatar-02.jpg' %}" class="img-fluid" alt="img">
+                                        {% endif %}
+                                        <span><i class="fa-solid fa-circle-check"></i></span>
+                                    </div>
+                                </div>
+                                <div class="package-widget">
+                                    <h5>Available Service Packages</h5>
+                                    <ul>
+                                        <li>Full car wash and clean</li>
+                                        <li>Auto Electrical</li>
+                                        <li>Pre Purchase Inspection</li>
+                                        <li>Pre Purchase Inspection</li>
+                                    </ul>
+                                </div>
+                                <div class="package-widget pack-service">
+                                    <h5>Additional Service</h5>
+                                    <ul>
+                                        <li>
+                                            <div class="add-serving">
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="rememberme">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="add-serv-item">
+                                                    <div class="add-serv-img">
+                                                        <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" alt="">
+                                                    </div>
+                                                    <div class="add-serv-info">
+                                                        <h6>House Cleaning</h6>
+                                                        <p><i class="fe fe-map-pin"></i> Alabama, USA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add-serv-amt">
+                                                <h6>$500.75</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="add-serving">
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="rememberme">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="add-serv-item">
+                                                    <div class="add-serv-img">
+                                                        <img src="{% static 'admin/assets/img/services/service-16.jpg' %}" alt="">
+                                                    </div>
+                                                    <div class="add-serv-info">
+                                                        <h6>Air Conditioner Service</h6>
+                                                        <p><i class="fe fe-map-pin"></i> Illinois, USA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add-serv-amt">
+                                                <h6>$500.75</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="add-serving">
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="rememberme">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="add-serv-item">
+                                                    <div class="add-serv-img">
+                                                        <img src="{% static 'admin/assets/img/services/service-07.jpg' %}" alt="">
+                                                    </div>
+                                                    <div class="add-serv-info">
+                                                        <h6>Interior Designing</h6>
+                                                        <p><i class="fe fe-map-pin"></i> California, USA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add-serv-amt">
+                                                <h6>$500.75</h6>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="add-serving">
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="rememberme">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <div class="add-serv-item">
+                                                    <div class="add-serv-img">
+                                                        <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" alt="">
+                                                    </div>
+                                                    <div class="add-serv-info">
+                                                        <h6>Wooden Carpentry Work</h6>
+                                                        <p><i class="fe fe-map-pin"></i> Alabama, USA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add-serv-amt">
+                                                <h6>$354.45</h6>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card card-available">
+                                    <div class="card-body">
+                                        <div class="available-widget">
+                                            <div class="available-info">
+                                                <h5>Service Availability</h5>
+                                                <ul>
+                                                    <li>Monday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Tuesday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Wednesday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Thursday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Friday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Saturday <span>9:30 AM - 7:00 PM</span> </li>
+                                                    <li>Sunday <span class="text-danger">Closed</span> </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="map-grid">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509170.989457427!2d-123.80081967108484!3d37.192957227641294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1669181581381!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="contact-map"></iframe>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static 'admin/assets/js/jquery-3.6.4.min.js' %}"></script>
+    
+    <!-- Select 2 JS-->
+    <script src="{% static 'admin/assets/js/select2.min.js' %}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Bootstrap Tagsinput JS -->
+    <script src="{% static 'admin/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
+
+    <!-- Feather Icon JS -->
+    <script src="{% static 'admin/assets/js/feather.min.js' %}"></script>
+
+    <!-- Datatable JS -->
+    <script src="{% static 'admin/assets/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'admin/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Ck Editor JS -->
+	<script src="{% static 'admin/assets/js/ckeditor.js' %}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{% static 'admin/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+	<!-- Sweetalert 2 -->
+    <script src="{% static 'admin/assets/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/sweetalert/sweetalerts.min.js' %}"></script>
+		
+	<!-- Owl Carousel JS -->
+    <script src="{% static 'admin/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!-- Fancybox JS -->
+	<script src="{% static 'admin/assets/plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'admin/assets/js/admin.js' %}"></script>
+
+</body>
+
+</html>

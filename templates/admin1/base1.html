@@ -30,6 +30,12 @@
     <!-- Feather CSS -->
     <link rel="stylesheet" href="{% static 'admin/assets/plugins/feather/feather.css' %}">
 
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/bootstrap-datetimepicker.min.css' %}">
+
+    <!-- Ck Editor -->
+    <link rel="stylesheet" href="{% static 'admin/assets/css/ckeditor.css' %}">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'admin/assets/css/style.css' %}">
     
@@ -63,6 +69,68 @@
         
     </style>
 
+
+
+
+    <style>
+        .edit-dropdown {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .edit-dropdown .dropdown-item {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .edit-dropdown .dropdown-item:hover {
+            background-color:  #C10037;
+        }
+        
+    </style>
+
+    <style>
+        .file-preview ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .file-preview li {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        .file-preview img {
+            max-width: 100px;
+            height: auto;
+            display: block;
+        }
+        
+        .file-preview .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+    </style>
+
 </head>
 
 
@@ -87,6 +155,14 @@
     <!-- Chart JS -->
     <script src="{% static 'admin/assets/plugins/apexchart/apexcharts.min.js' %}"></script>
     <script src="{% static 'admin/assets/plugins/apexchart/chart-data.js' %}"></script>
+    <script src="{% static 'admin/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %} "></script>
+    <script src="{% static 'admin/assets/js/ckeditor.js' %}"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="{% static 'admin/assets/js/moment.min.js' %}"></script>
+    <script src="{% static 'admin/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+
+
 
     <!-- Bootstrap Core JS -->
     <script src="{% static 'admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

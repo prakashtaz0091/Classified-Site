@@ -39,11 +39,12 @@ class Product(models.Model):
     cover_image = models.FileField(upload_to="photos/product_cover")
     tagline = models.TextField(max_length=550, blank=True, null=True)
     price = models.IntegerField()
-    is_available = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=False)
     featured_data=models.JSONField(blank=True,null=True)
     features = models.ManyToManyField(Feature, related_name="stores")
     category=models.ForeignKey(Category,related_name='category_products',on_delete=models.CASCADE,blank=True,null=True)
     subcategory=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True,related_name='products')
+    negotiable=models.BooleanField(default=False)
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
@@ -62,14 +63,24 @@ class Product(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(default=0)
+    is_approved=models.BooleanField(default=False)
+    is_rejected=models.BooleanField(default=False)
     created_by = models.ForeignKey(
         Account, on_delete=models.CASCADE, blank=True, null=True
     )
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.product_name)
-        super(Product, self).save(*args, **kwargs)
+            # Create the initial slug
+            initial_slug = slugify(self.product_name)
+            # Save the object to generate the ID
+            super(Product, self).save(*args, **kwargs)
+            # Now that the ID is available, append it to the slug
+            self.slug = f"{initial_slug}-{self.id}"
+            # Save the object again with the updated slug
+            self.save(update_fields=['slug'])
+        else:
+            super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.product_name

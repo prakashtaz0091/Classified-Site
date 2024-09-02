@@ -1,8 +1,9 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.shortcuts import  get_object_or_404
 
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
-
+from apps.store.models import  Product,ProductImages
 # Create your views here.
 
 
@@ -85,3 +86,137 @@ def extra_information(request,id):
     return render(request,'admin1/add/extra_information.html',context)
 
 
+def ads(request):
+    ads=Product.objects.all().order_by('-id')
+    context={
+        'ads':ads
+    }
+    return render(request,'admin1/Ads/ads.html',context)
+
+
+
+def ads_delete(request,id):
+    try:
+        ads=Product.objects.get(id=id)
+        ads.delete()
+        return redirect('ads')
+    
+    except:
+        pass
+    
+    
+def approved_ads(request,id):
+    try:
+     
+            product=Product.objects.get(id=id)    
+            product.is_approved=True
+            product.is_available=True
+            product.is_rejected=False
+            product.save()
+            ads=Product.objects.all().order_by('-id')
+            context={
+                'ads':ads
+            }
+            return render(request,'admin1/Ads/ads.html',context)
+
+        
+    except:
+         pass
+     
+def reject_ads(request,id):
+    try:
+      
+     
+            product=Product.objects.get(id=id)    
+            product.is_rejected=True
+            product.is_approved=False
+            product.is_available=False
+            product.save()
+            ads=Product.objects.all().order_by('-id')
+            context={
+                'ads':ads
+            }
+            return render(request,'admin1/Ads/ads.html',context)
+
+        
+    except:
+         pass
+     
+     
+        
+def pending(request):
+    product=Product.objects.filter(is_approved=False)
+    context={
+        'ads':product
+        
+    }
+    return render(request,'admin1/Ads/pending.html',context)
+
+
+
+def approve(request):
+    ads=Product.objects.filter(is_approved=True).order_by('-id')
+    context={
+        'ads':ads
+    }
+    return render(request,'admin1/Ads/approve.html',context)
+
+def reject(request):
+    reject_ads=Product.objects.filter(is_rejected=True).order_by('-id')
+    context={
+        'ads':reject_ads
+    }
+    return render(request,'admin1/Ads/reject.html',context)
+
+def ads_details(request,slug):
+    product=Product.objects.get(slug=slug)
+    product_images=ProductImages.objects.filter(product=product)
+    context={
+        'product':product,
+        'product_images':product_images
+    }
+    return render(request,'admin1/Ads/ads_details.html',context)
+
+
+
+def edit_ads(request, id):
+    product = get_object_or_404(Product, id=id)
+
+    if request.method == "POST":
+        print(request.POST,'=======+++>')
+        product_name = request.POST.get('product_name')
+        subcategory = request.POST.get('subcategory')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        nego = request.POST.get('nego')
+        images = request.FILES.getlist('images')
+        category=Category.objects.get(id=category)
+        subcategory=Category.objects.get(id=subcategory)
+
+        # Update the product's existing fields
+        product.product_name = product_name
+        product.subcategory = subcategory
+        product.category =category
+        product.description = description
+        product.price = price
+        product.negotiable = True if nego == 'on' else False
+        
+        product.save()
+
+       
+        if images:
+          
+            for image in images:
+                ProductImages.objects.create(product=product, image=image)
+        
+        return redirect('ads')  
+
+    else:
+        category = Category.objects.all().order_by('-id')
+        context = {
+            'product': product,
+            'category': category,
+            'id': id
+        }
+        return render(request, 'admin1/Ads/edit_ads.html', context)
