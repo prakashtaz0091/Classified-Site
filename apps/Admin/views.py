@@ -324,7 +324,9 @@ def users_edit(request, id):
     
     if request.method == 'POST':
         # Extract data from the form
-        profile_photo = request.FILES.get('profile_photo') 
+        print(request.POST)
+        profile_photo = request.FILES.get('profile_photo')
+        print(profile_photo)
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -337,11 +339,10 @@ def users_edit(request, id):
         if password and password == new_password:
             account.password = make_password(password)
         elif password and password != new_password:
-            return render(request, 'admin1/user/edit_user.html', {
-                'account': account,
-                'id': id,
-                'error': 'Passwords do not match!'
-            })
+            pass
+        
+        
+        print('i am account bg')    
 
         # Update other account fields
         account.full_name = name
@@ -351,13 +352,16 @@ def users_edit(request, id):
         account.role = role
         account.is_active = status
         account.save()
+        print('i am account')
 
         # Update or create UserProfile
         profile, created = UserProfile.objects.get_or_create(user=account)
+        print(profile_photo)
         if profile_photo:
-            profile.profile_photo = profile_photo  # Update profile photo only if provided
-        profile.email_address = email
+            profile.profile_photo = profile_photo 
         profile.phone_number = phone_number
+        profile.full_name = name
+        print('i am saved')
         profile.save()
 
         return redirect('user_list')

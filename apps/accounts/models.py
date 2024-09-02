@@ -85,7 +85,7 @@ class UserProfile(models.Model):
     email_address = models.EmailField(unique=True)
     notes = models.TextField(blank=True, null=True)
     profile_photo = models.ImageField(
-        upload_to="profile_photos/", blank=True, null=True,default='admin/assets/profile.png'
+        upload_to="profile_photos/", blank=True, null=True,default="profile_photos/profile.png"
     )
     facebook = models.URLField(blank=True, null=True)
     twitter = models.URLField(blank=True, null=True)
@@ -95,7 +95,7 @@ class UserProfile(models.Model):
     def get_photo_url(self):
         if self.profile_photo:
             return self.profile_photo.url
-        return "/assets/img/profile-img.jpg"
+        return "admin/assets/profile.png"
 
     def __str__(self):
         return self.full_name

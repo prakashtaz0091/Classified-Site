@@ -65,7 +65,7 @@
                                         <td>{{ forloop.counter }}</td>
                                         <td class="table-namesplit">
                                             <a href="javascript:void(0);" class="table-profileimage">
-                                                {% if user_status.user.profile.profile_photo.url %}
+                                                {% if user_status.user.profile.profile_photo %}
                                                 <img src="{{ user_status.user.profile.profile_photo.url }}" class="me-2" alt="img">
                                                 {% else %}
                                                 <img src="{% static 'admin/assets/profile.png' %}" class="me-2" alt="img">

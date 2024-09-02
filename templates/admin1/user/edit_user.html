@@ -35,7 +35,7 @@
         
         <div class="page-wrapper">
             <div class="content">
-                <form action="{% url 'users_edit' id %}" method="POST">
+                <form action="{% url 'users_edit' id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-7 col-sm-12 m-auto">
@@ -95,7 +95,7 @@
                                     <div class="form-group">
                                         <label>Current Password</label>
                                         <div class="pass-group">
-                                            <input type="password" class="form-control pass-input"  name='password'>
+                                            <input type="password" class="form-control pass-input" value=""  name='password'>
                                             <span class="fas toggle-password fa-eye-slash"></span>
                                         </div>
                                     </div>
