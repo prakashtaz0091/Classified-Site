@@ -179,8 +179,14 @@ def ads_details(request,slug):
 
 
 def edit_ads(request,id):
+    product=Product.objects.get(id=id)
     if request.method=="POST":
         pass
     
     else:
-        return render(request,'admin1/Ads/edit_ads.html')
+        category=Category.objects.all().order_by('-id')
+        context={
+            'product':product,
+            'category':category
+        }
+        return render(request,'admin1/Ads/edit_ads.html',context)
