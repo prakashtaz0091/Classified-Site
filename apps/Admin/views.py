@@ -303,3 +303,15 @@ def add_user(request):
     else:
         # Render the form if not a POST request
         return render(request, 'admin1/user/add_user.html')
+    
+    
+    
+    
+def users_delete(request,id):
+    try:
+        account=Account.objects.get(id=id)
+        account.delete()
+        return redirect('user_list')
+    
+    except:
+        pass    
