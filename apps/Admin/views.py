@@ -389,9 +389,46 @@ def add_customer(requests):
 
 
 
-def customers_delete(request):
-    pass
+def customers_delete(request,id):
+    try:
+        account=Account.objects.get(id=id)
+        account.delete()
+        redirect('customers_list')
+        
+    except:
+        pass
+        
 
 
-def customers_edit(request):
-    pass
+def customers_edit(request,id):
+    account=get_object_or_404(Account,id=id)
+    if request.method=="POST":
+        print(request.POST)
+        profile_photo = request.FILES.get('profile_photo', None)  
+        full_name = request.POST.get('full_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        status = request.POST.get('status') == 'on' 
+        
+        account.full_name = full_name
+        account.username = username
+        account.email = email
+        account.phone_number = phone_number
+        account.is_active = status 
+        account.save()
+        profile, created = UserProfile.objects.get_or_create(user=account)
+        if profile_photo:
+            profile.profile_photo = profile_photo 
+        profile.phone_number = phone_number
+        profile.full_name = full_name
+        profile.save()
+        
+        return redirect('customers_list') 
+    else:
+        context={
+            'account':account,
+            'id':id
+        }
+       
+        return render(request,'admin1/user/edit_customer.html',context)
