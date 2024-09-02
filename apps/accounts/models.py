@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -41,6 +42,8 @@ class myaccountmanager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     full_name = models.CharField(max_length=50)
+    username = models.CharField(max_length=50,blank=True,null=True)
+    
     email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -49,6 +52,8 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
+    role=models.CharField(blank=True,null=True,max_length=100)
+    last_activity = models.DateTimeField(null=True, blank=True)  # New field
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
@@ -65,6 +70,10 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+    
+    def update_last_activity(self):
+        self.last_activity = timezone.now()
+        self.save(update_fields=['last_activity'])
 
 
 class UserProfile(models.Model):
@@ -76,7 +85,7 @@ class UserProfile(models.Model):
     email_address = models.EmailField(unique=True)
     notes = models.TextField(blank=True, null=True)
     profile_photo = models.ImageField(
-        upload_to="profile_photos/", blank=True, null=True
+        upload_to="profile_photos/", blank=True, null=True,default='admin/assets/profile.png'
     )
     facebook = models.URLField(blank=True, null=True)
     twitter = models.URLField(blank=True, null=True)

@@ -27,4 +27,11 @@ urlpatterns = [
     path('ads/edit/<int:id>/',views.edit_ads,name='edit_ads'),
     
     
+    
+    # for user 
+    
+    path('user_list',views.user_list,name='user_list'),
+    path('add_user',views.add_user,name='add_user'),
+
+    
 ]

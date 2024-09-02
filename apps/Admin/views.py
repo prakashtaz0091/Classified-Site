@@ -4,6 +4,10 @@ from django.shortcuts import  get_object_or_404
 
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
+from apps.accounts.models import Account,UserProfile
+from django.utils.timezone import now
+from datetime import timedelta
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 
 
@@ -220,3 +224,82 @@ def edit_ads(request, id):
             'id': id
         }
         return render(request, 'admin1/Ads/edit_ads.html', context)
+
+
+
+
+def user_list(request):
+    users = Account.objects.filter(is_superadmin=True)
+    user_statuses = []
+
+    for user in users:
+        # Calculate the time since the last login
+        if user.last_login:
+            time_since_login = now() - user.last_login
+        else:
+            time_since_login = None
+
+        if user.is_active and time_since_login and time_since_login < timedelta(minutes=5):
+            status = 'Online'
+        else:
+            status = 'Offline'
+
+        user_statuses.append({
+            'user': user,
+            'status': status,
+            'last_login': user.last_login,
+            'time_since_login': time_since_login
+        })
+
+    context = {
+        'user_statuses': user_statuses,
+    }
+    return render(request,'admin1/user/user_list.html',context)
+
+
+def add_user(request):
+    if request.method == "POST":
+        profile_photo = request.FILES.get('profile_photo')
+        if not profile_photo:
+            profile_photo = 'admin/assets/profile.png'  
+        
+        
+        name = request.POST.get('name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
+        repeat_password = request.POST.get('repeat_password')
+        active = request.POST.get('active') == 'on'
+        role = request.POST.get('role')
+
+        if password == repeat_password:
+            # Create the Account
+            account = Account.objects.create(
+                full_name=name,
+                email=email,
+                username=username,
+                phone_number=phone_number,
+                password=make_password(password),  
+                is_active=active,
+                role=role,
+                is_superadmin=True,
+            )
+           
+            # Create the UserProfile
+            UserProfile.objects.create(
+                full_name=name,
+                phone_number=phone_number,
+                profile_photo=profile_photo,
+                email_address=email,
+                user=account,
+            )
+            
+            return redirect('user_list')
+        else:
+            # Redirect back if passwords do not match
+            return redirect('add_user')
+            
+    else:
+        # Render the form if not a POST request
+        return render(request, 'admin1/user/add_user.html')

@@ -88,7 +88,7 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="user-list.html">New User</a>
+                            <a href="{% url 'user_list' %}">New User</a>
                         </li>
                         <li>
                             <a href="user-customers.html">Customers</a>
@@ -128,7 +128,7 @@
                 </li>
               
                 <li>
-                    <a href="signin.html"><i class="fe fe-log-out"></i> <span>Logout</span></a>
+                    <a href="{% url 'logout' %}"><i class="fe fe-log-out"></i> <span>Logout</span></a>
                 </li>
             </ul>
         </div>
