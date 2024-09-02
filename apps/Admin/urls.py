@@ -43,6 +43,20 @@ urlpatterns = [
     path('add_customer/',views.add_customer,name='customers_add'),
     path('customer/delete/<int:id>/',views.customers_delete,name='customers_delete'),
     path('customer/edit/<int:id>/',views.customers_edit,name='customers_edit'),
+    
+    
+    
+    # for active and suspend user
+    
+    path('active_customer/<int:id>/',views.active_suspend,name='active'),
+    path('suspend_customer/<int:id>/',views.suspend,name='suspend'),
+
+    
+     
+    
+    
+    
+    
 
     
     

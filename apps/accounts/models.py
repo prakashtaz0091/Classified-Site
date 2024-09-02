@@ -51,8 +51,9 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    is_suspended = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
+    is_suspended = models.BooleanField(default=False)
+    is_verify=models.BooleanField(default=False)
     role=models.CharField(blank=True,null=True,max_length=100)
     last_activity = models.DateTimeField(null=True, blank=True)  # New field
 
@@ -93,10 +94,6 @@ class UserProfile(models.Model):
     google_plus = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
 
-    def get_photo_url(self):
-        if self.profile_photo:
-            return self.profile_photo.url
-        return "admin/assets/profile.png"
-
+   
     def __str__(self):
         return self.full_name

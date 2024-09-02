@@ -91,7 +91,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Phone</label>
-                                            <input type="text" class="form-control" placeholder="Enter Phone Number" value="{{account.phone_number}}" name='phone_number'>
+                                            <input type="text" class="form-control" placeholder="Enter Phone Number" value="{{account.phone_number|default:''}}" name='phone_number'>
                                         </div>
                                     </div>
                                     <div class="col-12">
