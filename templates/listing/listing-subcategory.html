@@ -4,7 +4,31 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-      <title>{{subcategory.category_name}}</title>
+
+      {% if sub_category.meta_title_city %}
+      <title>{{sub_category.meta_title_city}}</title>
+      {% elif sub_category.meta_title_country %}
+      <title>{{sub_category.meta_title_country}}</title>
+      {% else %}
+      <title>{{sub_category.category_name}}</title>
+      {% endif %}
+
+
+      {% if sub_category.meta_description_city %}
+      <meta name='description' content="{{sub_category.meta_description_city}}">
+      {% elif sub_category.meta_description_country %}
+      <meta name='description' content="{{sub_category.meta_description_country}}">
+      {% else %}
+      <meta name='description' content="{{sub_category.category_name}}">
+      {% endif %}
+
+       {% if sub_category.meta_keywords_city %}
+      <meta name='keywords' content="{{sub_category.meta_keywords_city}}">
+      {% elif sub_category.meta_keywords_country %}
+      <meta name='keywords' content="{{sub_category.meta_keywords_country}}">
+      {% endif %}
+
+
       <!-- Favicon -->
       <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
       <!-- Bootstrap CSS -->
