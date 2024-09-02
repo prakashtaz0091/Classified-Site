@@ -6,7 +6,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-	<title>Listee | Template</title>
+
+      {% if meta_title %}
+      <title>{{meta_title}}</title>
+	  {% else %}
+	  <title>{{product.product_name}}</title>
+      {% endif %}
+      {% if meta_keywords %}
+      <meta name="keywords" content="{{meta_keywords}}">
+      {% endif %}
+
+
 
 	<!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
