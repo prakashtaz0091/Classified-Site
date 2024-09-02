@@ -145,7 +145,7 @@
                                                 <a class="delete-table me-2" href="{% url 'ads_details'  ad.slug %}">
                                                     <img src="{% static 'admin/assets/img/icons/eye.svg' %}" alt="svg">
                                                 </a>
-                                                <a class="delete-table me-2 edit-btn" href="#">
+                                                <a class="delete-table me-2 edit-btn" href="{% url 'edit_ads' ad.id %}">
                                                     <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="Edit">
                                                 </a>
                                 

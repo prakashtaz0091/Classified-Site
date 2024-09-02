@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
+from django.shortcuts import  get_object_or_404
 
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
@@ -178,15 +179,44 @@ def ads_details(request,slug):
 
 
 
-def edit_ads(request,id):
-    product=Product.objects.get(id=id)
-    if request.method=="POST":
-        pass
-    
+def edit_ads(request, id):
+    product = get_object_or_404(Product, id=id)
+
+    if request.method == "POST":
+        print(request.POST,'=======+++>')
+        product_name = request.POST.get('product_name')
+        subcategory = request.POST.get('subcategory')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        nego = request.POST.get('nego')
+        images = request.FILES.getlist('images')
+        category=Category.objects.get(id=category)
+        subcategory=Category.objects.get(id=subcategory)
+
+        # Update the product's existing fields
+        product.product_name = product_name
+        product.subcategory = subcategory
+        product.category =category
+        product.description = description
+        product.price = price
+        product.negotiable = True if nego == 'on' else False
+        
+        product.save()
+
+       
+        if images:
+          
+            for image in images:
+                ProductImages.objects.create(product=product, image=image)
+        
+        return redirect('ads')  
+
     else:
-        category=Category.objects.all().order_by('-id')
-        context={
-            'product':product,
-            'category':category
+        category = Category.objects.all().order_by('-id')
+        context = {
+            'product': product,
+            'category': category,
+            'id': id
         }
-        return render(request,'admin1/Ads/edit_ads.html',context)
+        return render(request, 'admin1/Ads/edit_ads.html', context)

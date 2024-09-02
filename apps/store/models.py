@@ -44,6 +44,7 @@ class Product(models.Model):
     features = models.ManyToManyField(Feature, related_name="stores")
     category=models.ForeignKey(Category,related_name='category_products',on_delete=models.CASCADE,blank=True,null=True)
     subcategory=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True,related_name='products')
+    negotiable=models.BooleanField(default=False)
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
