@@ -4,7 +4,11 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-      <title>Category List</title>
+      {% if category.meta_title %}
+      <title>Category Lis</title>
+      {% else %}
+      <title>{{category.category_name}}</title>
+      {% endif %}
       <!-- Favicon -->
       <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
       <!-- Bootstrap CSS -->

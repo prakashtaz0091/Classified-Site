@@ -5,7 +5,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	{% if title %}
+	<title>{{title}} </title>
+	{% else %}
 	<title>Adjeem </title>
+	{% endif %}
     {% comment %} <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Tailwind CSS CDN --> {% endcomment %}
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">

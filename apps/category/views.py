@@ -251,6 +251,7 @@ def sub_category_list(request, slug):
         context = {
             "category": category,
             "subcategories": subcategories,
+            'title':category.category_name
         }
         return render(request, "others/sub_categories.html", context)
 
