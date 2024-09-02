@@ -111,7 +111,7 @@
                                         
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="{% static 'admin/edit-user.html' %}">
+                                                <a class="delete-table me-2" href="{% url 'users_edit' user_status.user.id %}">
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ user_status.user.id }})">

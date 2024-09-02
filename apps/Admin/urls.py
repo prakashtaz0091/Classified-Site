@@ -33,6 +33,7 @@ urlpatterns = [
     path('user_list/',views.user_list,name='user_list'),
     path('add_user/',views.add_user,name='add_user'),
     path('user/delete/<int:id>/',views.users_delete,name='users_delete'),
+    path('user/edit/<int:id>/',views.users_edit,name='users_edit'),
 
     
 ]

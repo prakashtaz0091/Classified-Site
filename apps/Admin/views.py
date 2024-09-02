@@ -315,3 +315,56 @@ def users_delete(request,id):
     
     except:
         pass    
+    
+    
+
+
+def users_edit(request, id):
+    account = get_object_or_404(Account, id=id)
+    
+    if request.method == 'POST':
+        # Extract data from the form
+        profile_photo = request.FILES.get('profile_photo') 
+        name = request.POST.get('name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
+        new_password = request.POST.get('new_password')
+        role = request.POST.get('role')
+        status = request.POST.get('status') == 'on'
+        
+        if password and password == new_password:
+            account.password = make_password(password)
+        elif password and password != new_password:
+            return render(request, 'admin1/user/edit_user.html', {
+                'account': account,
+                'id': id,
+                'error': 'Passwords do not match!'
+            })
+
+        # Update other account fields
+        account.full_name = name
+        account.username = username
+        account.email = email
+        account.phone_number = phone_number
+        account.role = role
+        account.is_active = status
+        account.save()
+
+        # Update or create UserProfile
+        profile, created = UserProfile.objects.get_or_create(user=account)
+        if profile_photo:
+            profile.profile_photo = profile_photo  # Update profile photo only if provided
+        profile.email_address = email
+        profile.phone_number = phone_number
+        profile.save()
+
+        return redirect('user_list')
+
+    else:
+        context = {
+            'account': account,
+            'id': id,
+        }
+        return render(request, 'admin1/user/edit_user.html', context)
