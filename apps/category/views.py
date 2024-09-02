@@ -22,17 +22,27 @@ def listing_view(request, subcategory_slug):
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
+        bookmarked_product_ids=[]
+        if request.user.is_authenticated:
+                bookmarked_product_ids = BookMark.objects.filter(
+                    user=request.user
+                ).values_list("product_id", flat=True)
+        else:
+                bookmarked_product_ids = []
+        print(bookmarked_product_ids)
+
         # Apply sorting to the items on the current page only
                 
         feature=Feature.objects.all()    
 
         context = {
-            'products': page_obj,
+            'products': page_obj.object_list,
             'count': paginator.count,
             'sub_category':sub_category,
             'page_obj': page_obj,
             'current_page_product_count': len(page_obj.object_list),
-            'features':feature
+            'features':feature,
+            'book_mark':bookmarked_product_ids
         }
         if request.headers.get("x-requested-with") == "FETCH":
             product_list = render_to_string(

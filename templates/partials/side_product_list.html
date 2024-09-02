@@ -11,25 +11,13 @@
             </a>
 
 
-            <div class="fav-item" data-id="{{ product.id }}">
-                <span class="featured-text">Featured</span>
-                <a href="javascript:void(0)" class="fav-icon">
-                    <i class="feather-heart" 
-                       style="
-                          {% if product.id in book_mark %}
-                           width: 35px!important;
-                           height: 35px!important;
-                           color: #ffffff!important;
-                           border-radius: 50%!important;
-                           background: #c10037!important;
-                           display: flex !important;
-                           align-items: center !important;
-                           justify-content: center !important;
-                           {% endif %}
-                       ">
-                    </i>
-                </a>     
-            </div>
+	<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a onclick="ToggleFavourites(this,{{product.id}})"  class="fav-icon">
+												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+											</a>	
+										</div>
+
                 
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 												    
