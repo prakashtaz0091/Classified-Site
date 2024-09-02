@@ -43,7 +43,7 @@
                                         <div class="home-usercontents">
                                             <div class="home-usercontentcount">
                                                 <img src="{% static 'admin/assets/img/icons/arrow-up.svg' %}" alt="img" class="me-2">
-                                                <span class="counters" data-count="30">30</span>
+                                                <span class="counters" data-count="{{user_count}}">{{user_count}}</span>
                                             </div>
                                             <h5> Current Month</h5>
                                         </div>
@@ -121,7 +121,7 @@
                                         <div class="home-usercontents">
                                             <div class="home-usercontentcount">
                                                 <img src="{% static 'admin/assets/img/icons/arrow-up.svg' %}" alt="img" class="me-2">
-                                                <span class="counters" data-count="18">18</span>
+                                                <span class="counters" data-count="{{product_count}}">{{product_count}}</span>
                                             </div>
                                             <h5> Current Month</h5>
                                         </div>
@@ -317,7 +317,7 @@
                                 <div class="home-user">
                                     <div class="home-head-user home-graph-header">
                                         <h2>Top Services</h2>
-                                        <a href="listings.html" class="btn btn-viewall">View All<i class="fa-solid fa-arrow-right ms-2"></i></a>
+                                        <a href="{% url 'ads' %}" class="btn btn-viewall">View All<i class="fa-solid fa-arrow-right ms-2"></i></a>
                                     </div>
                                     <div class="table-responsive datatable-nofooter">
                                     <table class="table datatable">
@@ -330,61 +330,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for product in products %}
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{forloop.counter}}</td>
                                                 <td>
-                                                    <a href="view-service.html" class="table-imgname">
-                                                        <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                        <span>Computer Repair</span>
+                                                    <a href="{% url 'ads_details' product.slug %}" class="table-imgname">
+                                                        <img src="{{product.cover_image.url}}" class="me-2" alt="img">
+                                                        <span>{{product.product_name|truncatechars:20}}</span>
                                                     </a>
                                                 </td>
-                                                <td>Computer</td>
-                                                <td>$80</td>
+                                                <td>{{product.category.category_name}}</td>
+                                                <td>AED{{product.price}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    <a href="view-service.html" class="table-imgname">
-                                                        <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                        <span>Car Repair Services</span>
-                                                    </a>
-                                                </td>
-                                                <td>Automobile</td>
-                                                <td>$50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                    <a href="view-service.html" class="table-imgname">
-                                                        <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                        <span>Car Wash</span>
-                                                    </a>
-                                                </td>
-                                                <td>Automobile</td>
-                                                <td>$14</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                    <a href="view-service.html" class="table-imgname">
-                                                        <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                        <span>House Cleaning </span>
-                                                    </a>
-                                                </td>
-                                                <td>Cleaning</td>
-                                                <td>$100</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                    <a href="view-service.html" class="table-imgname">
-                                                        <img src="{% static 'admin/assets/img/services/service-10.jpg' %}" class="me-2" alt="img">
-                                                        <span>Interior </span>
-                                                    </a>
-                                                </td>
-                                                <td>Cleaning</td>
-                                                <td>$50</td>
-                                            </tr>
+                                            {% endfor %}
+                                           
                                         </tbody>
                                     </table>
                                     </div>
@@ -411,61 +370,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for user in accounts %}
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{forloop.counter}}</td>
                                                     <td>
                                                         <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-06.jpg' %}" class="me-2" alt="img">
-                                                            <span>Robert</span>
+                                                            <img src="{{user.profile.profile_photo.url}}" class="me-2" alt="img">
+                                                            <span>{{user.full_name}}</span>
                                                         </a>
                                                     </td>
-                                                    <td>robert@gmail.com</td>
-                                                    <td>+1 347-679-8275</td>
+                                                    <td>{{user.email}}</td>
+                                                    <td>{{user.phone_number|default:""}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-09.jpg' %}" class="me-2" alt="img">
-                                                            <span>Sharonda</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>sharonda@gmail.com</td>
-                                                    <td>+1 570-621-248</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" class="me-2" alt="img">
-                                                            <span>John Smith</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>johnsmith@gmail.com</td>
-                                                    <td>+1 646-957-0004</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-05.jpg' %}" class="me-2" alt="img">
-                                                            <span>Pricilla</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>pricilla@gmail.com</td>
-                                                    <td>+1 614-915-8101</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-09.jpg' %}" class="me-2" alt="img">
-                                                            <span>James</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>james@gmail.com</td>
-                                                    <td>+1 918-543-3702</td>
-                                                </tr>
+                                                {% endfor %}
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -552,7 +470,7 @@
                                 <div class="home-user">
                                     <div class="home-head-user home-graph-header">
                                         <h2>Booking Statistics</h2>
-                                        <a href="booking.html" class="btn btn-viewall">View All<i class="fa-solid fa-arrow-right ms-2"></i></a>
+                                        <a href="#" class="btn btn-viewall">View All<i class="fa-solid fa-arrow-right ms-2"></i></a>
                                     </div>
                                     <div class="chartgraph">
                                         <div class="row align-items-center">
@@ -584,163 +502,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 widget-path">
-                        <div class="card mb-0">
-                            <div class="card-body">
-                                <div class="home-user">
-                                    <div class="home-head-user home-graph-header">
-                                        <h2>Recent Booking</h2>
-                                        <a href="booking.html" class="btn btn-viewall">View All<i class="fa-solid fa-arrow-right ms-2"></i></a>
-                                    </div>
-                                    <div class="table-responsive datatable-nofooter">
-                                        <table class="table datatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Booking Time</th>
-                                                    <th>Provider</th>
-                                                    <th>User</th>
-                                                    <th>Service</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>28 Sep 2022</td>
-                                                    <td>10:00:00 - 11:00:00</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" class="me-2" alt="img">
-                                                            <span>John Smith</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-03.jpg' %}" class="me-2" alt="img">
-                                                            <span>Sharon</span>
-                                                        
-                                                    </a></td>
-                                                    <td>
-                                                        <a href="view-service.html" class="table-imgname">
-                                                            <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                            <span>Computer Repair</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>$80</td>
-                                                    <td><h6 class="badge-pending">Pending</h6></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>10 Sep 2022</td>
-                                                    <td>18:00:00 - 19:00:00	 </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-04.jpg' %}" class="me-2" alt="img">
-                                                            <span>Johnny</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-05.jpg' %}" class="me-2" alt="img">
-                                                            <span>Pricilla</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="view-service.html" class="table-imgname">
-                                                            <img src="{% static 'admin/assets/img/services/service-02.jpg' %}" class="me-2" alt="img">
-                                                            <span>Car Repair Services</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>$50</td>
-                                                    <td><h6 class="badge-active">Completed</h6></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>25 Sep 2022</td>
-                                                    <td>12:00:00 - 13:00:00</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-06.jpg' %}" class="me-2" alt="img">
-                                                            <span>Robert</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-02.jpg' %}" class="me-2" alt="img">
-                                                            <span>Amanda</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="view-service.html" class="table-imgname">
-                                                            <img src="{% static 'admin/assets/img/services/service-04.png' %}" class="me-2" alt="img">
-                                                            <span>Steam Car Wash</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>$50</td>
-                                                    <td><h6 class="badge-inactive">Inprogress</h6></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>08 Sep 2022</td>
-                                                    <td>07 Oct 2022 11:22:51</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-09.jpg' %}" class="me-2" alt="img">
-                                                            <span>Sharonda</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" class="me-2" alt="img">
-                                                            <span>James</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="view-service.html" class="table-imgname">
-                                                            <img src="{% static 'admin/assets/img/services/service-09.jpg' %}" class="me-2" alt="img">
-                                                            <span>House Cleaning </span>
-                                                        </a>
-                                                    </td>
-                                                    <td>$50</td>
-                                                    <td><h6 class="badge-delete">cancelled</h6></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>28 Sep 2022</td>
-                                                    <td>10:00:00 - 11:00:00</td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" class="me-2" alt="img">
-                                                            <span>John Smith</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="table-profileimage">
-                                                            <img src="{% static 'admin/assets/img/customer/user-03.jpg' %}" class="me-2" alt="img">
-                                                            <span>Sharon</span>
-                                                        
-                                                    </a></td>
-                                                    <td>
-                                                        <a href="view-service.html" class="table-imgname">
-                                                            <img src="{% static 'admin/assets/img/services/service-03.jpg' %}" class="me-2" alt="img">
-                                                            <span>Computer Repair</span>
-                                                        </a>
-                                                    </td>
-                                                    <td>$80</td>
-                                                    <td><h6 class="badge-pending">Pending</h6></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
         

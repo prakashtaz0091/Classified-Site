@@ -12,7 +12,18 @@ from django.contrib.auth.hashers import make_password
 
 
 def admin_index(request):
-    return render(request,'admin1/index.html')
+    products=Product.objects.all().order_by('-id')[:5]
+    accounts=Account.objects.all().order_by('-id')[:5]
+    user_count=accounts.count()
+    product_count=products.count()
+    print(products,'products')
+    context={
+        'products':products,
+        'accounts':accounts,
+        'user_count':user_count,
+        'product_count':product_count
+    }
+    return render(request,'admin1/index.html',context)
 
 
 
@@ -284,6 +295,7 @@ def add_user(request):
                 is_active=active,
                 role=role,
                 is_superadmin=True,
+                is_staff=True
             )
            
             # Create the UserProfile
