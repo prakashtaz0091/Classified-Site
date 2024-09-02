@@ -7,7 +7,7 @@ from .models import Account, UserProfile
 
 
 class Account_admin(admin.ModelAdmin):
-    list_display = ("email", "last_login", "is_active", "is_superadmin")
+    list_display = ("email", "last_login", "is_suspended","is_active", "is_superadmin")
     ordering = ("-date_joined",)
     readonly_fields = ("last_login", "date_joined")
     filter_horizontal = ()

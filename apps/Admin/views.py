@@ -393,7 +393,7 @@ def customers_delete(request,id):
     try:
         account=Account.objects.get(id=id)
         account.delete()
-        redirect('customers_list')
+        return redirect('customers_list')
         
     except:
         pass
@@ -410,12 +410,17 @@ def customers_edit(request,id):
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
         status = request.POST.get('status') == 'on' 
+       
         
         account.full_name = full_name
         account.username = username
         account.email = email
         account.phone_number = phone_number
-        account.is_active = status 
+        if status:
+            account.is_active = status 
+            account.is_suspended=False
+        else:
+            account.is_active=False    
         account.save()
         profile, created = UserProfile.objects.get_or_create(user=account)
         if profile_photo:
