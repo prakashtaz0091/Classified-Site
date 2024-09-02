@@ -342,7 +342,6 @@ def users_edit(request, id):
             pass
         
         
-        print('i am account bg')    
 
         # Update other account fields
         account.full_name = name
@@ -352,7 +351,6 @@ def users_edit(request, id):
         account.role = role
         account.is_active = status
         account.save()
-        print('i am account')
 
         # Update or create UserProfile
         profile, created = UserProfile.objects.get_or_create(user=account)
@@ -361,7 +359,7 @@ def users_edit(request, id):
             profile.profile_photo = profile_photo 
         profile.phone_number = phone_number
         profile.full_name = name
-        print('i am saved')
+
         profile.save()
 
         return redirect('user_list')
@@ -372,3 +370,28 @@ def users_edit(request, id):
             'id': id,
         }
         return render(request, 'admin1/user/edit_user.html', context)
+
+
+
+
+
+
+def customer_list(request):
+    accounts=Account.objects.filter(is_superadmin=False).order_by('-id')
+    context={
+        'accounts':accounts
+    }
+    return render(request,'admin1/user/customer.html',context)
+
+
+def add_customer(requests):
+    pass
+
+
+
+def customers_delete(request):
+    pass
+
+
+def customers_edit(request):
+    pass

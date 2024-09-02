@@ -51,6 +51,7 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
+    is_suspended = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     role=models.CharField(blank=True,null=True,max_length=100)
     last_activity = models.DateTimeField(null=True, blank=True)  # New field
