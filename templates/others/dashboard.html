@@ -35,12 +35,7 @@
 		<!-- Dashboard Content -->
         <div class="dashboard-content">        
 			<div class="container">
-	{% if type %}
-			{% include 'includes/dashboard.html' with user_to_view=user_to_view %}
-		{% else %}
-
 				{% include 'includes/dashboard.html' %}
-		{% endif %}
 
 				<div class="dashboard-details">
 					<div class="row">

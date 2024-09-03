@@ -137,6 +137,19 @@ def dashboard(request):
 
 def my_listing(request):
     if request.method == "GET":
+
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
+
+
         sort_option = request.GET.get("sort", "-created_date")  # Default to newest
         search_query = request.GET.get("search", "")  # Default to newest
         products=None
@@ -146,9 +159,12 @@ def my_listing(request):
         ) | Product.objects.filter(
             description__icontains=search_query
         )
-            products = products.filter(created_by=request.user).order_by(sort_option)
+            products = products.filter(created_by=user_to_view).order_by(sort_option)
         else:
-            products = Product.objects.filter(created_by=request.user).order_by(sort_option)
+            products = Product.objects.filter(created_by=user_to_view).order_by(sort_option)
+
+        if user is not None:
+            products=products.filter(is_approved=True)
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -176,6 +192,11 @@ def my_listing(request):
             "page_obj": page_obj,
             "products": page_obj.object_list,
         }
+        if  user is not None:
+            print("hello")
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
+
         return render(request, "others/my-listing.html", context)
 
 

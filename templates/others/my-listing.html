@@ -35,7 +35,10 @@
 		<!-- Dashboard Content -->
         <div class="dashboard-content listing-section " style='padding:0'>		
 			<div class="container">
-				{% include 'includes/dashboard.html' %}
+
+		{% include 'includes/dashboard.html' %}
+
+
 				<div class="dash-listingcontent dashboard-info">
 				    <div class="dash-cards card">
 					    <div class="card-header">
@@ -96,7 +99,13 @@
 											</div>
 											<p>{{item.description}}</p>
 										 </td>
+										 {% if item.is_approved %}
 									     <td><span class="status-text">Published</span></td>
+										 {% elif item.is_rejected %}
+									     <td><span class="status-text">Rejected</span></td>
+										 {% else %}
+									     <td><span class="status-text">Pending</span></td>
+										 {% endif %}
 									     <td><Span class="views-count">{{item.view_count}}</span></td>
 									     <td>
 										    <div class="action">
