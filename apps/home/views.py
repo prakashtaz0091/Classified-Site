@@ -13,6 +13,9 @@ from apps.home.models import Reviews
 from apps.store.models import (BookMark, ContactInformation, Feature, Location,
                                Product, ProductImages)
 
+from django.db.models import F, Value
+from django.db.models.functions import Substr
+
 
 def home(request):
     if request.method == "GET":
@@ -87,15 +90,24 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
-        type=request.GET.get('type')
-        book_marks=BookMark.objects.filter(user=request.user)
-        total_product=Product.objects.filter(created_by=request.user).count()
-        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
-        reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
-        total_views = Product.objects.filter(created_by=request.user).aggregate(total_views=Sum('view_count'))['total_views']
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+
+        book_marks=BookMark.objects.filter(user=user_to_view)
+        total_product=Product.objects.filter(created_by=user_to_view).count()
+        reviews_list=Reviews.objects.select_related().filter(reviewed_for=user_to_view).order_by('-id')[:5]
+        reviews_count=Reviews.objects.filter(reviewed_for=user_to_view).count()
+        total_views = Product.objects.filter(created_by=user_to_view).aggregate(total_views=Sum('view_count'))['total_views']
         bookmarks_count=book_marks.count()
 
-        if type=="viewing_access":
+        if user:
             context={
                 'book_marks':book_marks,
                 'bookmarks_count':bookmarks_count,
@@ -103,7 +115,8 @@ def dashboard(request):
                 'total_product':total_product,
                 'reviews_count':reviews_count,
                 'total_views':total_views,
-                'type':type,
+                'type':'viewing',
+                'user_to_view':user_to_view,
             }
         else:
             context={
