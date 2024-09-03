@@ -82,7 +82,7 @@
                 passwordStrength.classList.remove("poor-active");
                 passwordStrength.classList.add("strong-active");
                 passwordStrength.classList.remove("heavy-active");
-                passwordInfo.innerHTML = '<img src="' + smileEmoji + '" class="me-2">' + "Almost. Must contain special symbol";
+                passwordInfo.innerHTML = '<img src="' + smileEmoji + '" class="me-2">' + "Awesome! You have a secure password.";
                 passwordInfo.style.color = "#1D9CFD";
             } else {
                 strong.classList.remove("active");

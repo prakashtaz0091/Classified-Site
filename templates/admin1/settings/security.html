@@ -46,7 +46,8 @@
                                 </div>
                                 <div class="connectet-content">
                                     <h3>Password</h3>
-                                    <p>Last Changed <span> 22 Sep 2022, 10:30:55 AM</span></p>
+
+                                    <p>Last Changed <span> {{ user.last_password_change|date:"F d, Y H:i:s" }}</span></p>
                                 </div>
                             </div>
                             <div class="connectetappscontent">

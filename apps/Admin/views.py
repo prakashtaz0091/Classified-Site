@@ -1,7 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.shortcuts import  get_object_or_404
-
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
 from apps.accounts.models import Account,UserProfile
@@ -520,10 +523,35 @@ def account_settings(request):
     return render(request,'admin1/settings/account.html')
 
 def password_settings(request):
+    
     return render(request,'admin1/settings/security.html')
 
 
 def change_password(request):
+    if request.method == "POST":
+        print(request.POST,'data')
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        user = request.user
+        if not user.check_password(current_password):
+            messages.error(request, "Current password is incorrect.")
+            return redirect('change_password')
+        
+        
+        
+        if new_password != confirm_password:
+            messages.error(request, "New password and confirm password do not match.")
+            return redirect('change_password')
+        
+        
+        user.set_password(new_password)
+        user.save()
+        
+        update_session_auth_hash(request, user)
+        messages.success(request, "Your password has been updated successfully.")
+        return redirect('security_settings') 
+
     return render(request,'admin1/settings/change_password.html')
 
     
