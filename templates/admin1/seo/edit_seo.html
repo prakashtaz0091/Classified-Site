@@ -1,0 +1,132 @@
+{% extends 'admin1/base1.html' %}
+{% load static %}
+{% block content %}
+    <div class="main-wrapper">
+
+        <!-- Header -->
+       {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+           {% include 'admin1/include/sidebar.html' %}
+           
+        </div>
+        <!-- /Sidebar -->
+
+        <div class="page-wrapper ">
+
+            <div class="content w-100 ps-0 pt-0">
+                <div class="content-sidelink float-start">
+                    <div class="content-sidelinkheading">
+                        <h6>Settings</h6>
+                    </div>
+                    <div class="content-sidelinkmenu">
+                        <ul>
+                            <li><h5>General Settings</h5></li>
+                            <li><a class="active" href="{% url 'account_settings' %}">Account Settings </a></li>
+                            <li><a href="{% url 'security_settings' %}">Security</a></li>
+                           
+                        </ul>
+                       
+                        <ul>
+                            <li><h5><a class="active" href="{% url 'seo' %}">Seo Settings</a></h5></li>
+                        </ul>
+                    </div>
+                </div>
+
+				<!-- SEO Settings -->
+                <div class="row">
+                    <div class="content-table">
+                        <div class="content-page-header ">
+                            <h5>SEO Edit</h5>
+                        </div>
+                        <div class="tab-content pt-0">
+							<div class="tab-pane active" id="site">
+								<form action="{% url 'add_seo' %}" method="POST">
+                                    {% csrf_token %}
+
+                                    <div class="form-group">
+                                        <label for="page">Page</label>
+                                        <select class="form-control" name="page" id="page">
+                                            <option value="home" {% if seo.page == "home" %}selected{% endif %}>Home Page</option>
+                                            <option value="contact" {% if seo.page == "contact" %}selected{% endif %}>Contact Page</option>
+                                            <option value="registration" {% if seo.page == "registration" %}selected{% endif %}>Registration Page</option>
+                                            <option value="about" {% if seo.page == "about" %}selected{% endif %}>About Us Page</option>
+                                            <option value="services" {% if seo.page == "services" %}selected{% endif %}>Services Page</option>
+                                            <option value="blog" {% if seo.page == "blog" %}selected{% endif %}>Blog Page</option>
+                                            <option value="faq" {% if seo.page == "faq" %}selected{% endif %}>FAQ Page</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+                                        
+                                    </div>
+									<div class="form-group">
+										<label>Meta Title</label>
+										<input type="text" class="form-control" placeholder="Enter Meta Title" name='meta_title' value="{{seo.meta_title}}">
+									</div>
+									<div class="form-group">
+										<label>Site Description</label>
+										<textarea class="form-control" placeholder="Enter Site Description" name='site_description'>{{seo.site_description}}</textarea>
+									</div>
+									<div class="form-group">
+										<label>Keywords</label>
+										<input class="input-tags form-control" type="text" data-role="tagsinput"  name="keyword" value="{{seo.keywords}}" id="specialist">
+									</div>
+									<div class="col-lg-12">
+										<div class="btn-path">
+											<a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+											<button type="submit" class="btn btn-submit">Save</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="tab-pane fade" id="ogmeta">
+								<form action="{% url 'add_seo' %}" method="POST">
+                                    {% csrf_token %}
+									<div class="form-group">
+										<label>Meta Titles</label>
+										<input type="text" class="form-control" placeholder="Enter Meta Title" name='meta_title' value="{{seo.meta_title}}">
+									</div>
+									<div class="form-group">
+										<label>Site Description</label>
+										<textarea class="form-control" placeholder="Enter Site Description" name='site_description'>{{seo.site_description}}</textarea>
+									</div>
+									<div class="form-group">
+										<label>Keywords</label>
+										<input class="input-tags form-control" type="text" data-role="tagsinput"  name="keyword" value="{{seo.keywords}}" id="specialist">
+									</div>
+									<div class="col-lg-12">
+										<div class="btn-path">
+											<a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+											<button type="submit" class="btn btn-primary">Save Changes</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+                    </div>
+                </div>
+				<!-- /SEO Settings -->
+				
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

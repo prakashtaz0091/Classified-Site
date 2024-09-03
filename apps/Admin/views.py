@@ -8,6 +8,7 @@ from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
 from apps.accounts.models import Account,UserProfile
+from apps.Admin.models import SEOSettings
 from django.utils.timezone import now
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
@@ -592,6 +593,75 @@ def change_password(request):
         return redirect('security_settings') 
 
     return render(request,'admin1/settings/change_password.html')
+
+
+
+
+# for seo 
+
+
+def seo(request):
+    seo=SEOSettings.objects.all().order_by('-id')
+    context={
+        'seo':seo
+    }
+    return render(request,'admin1/seo/seo.html',context)
+
+
+
+
+def seo_delete(request,id):
+    try:
+        
+        seo=SEOSettings.objects.get(id=id)
+        seo.delete()
+        return redirect('seo')
+    
+    except:
+        pass
+
+
+
+def seo_edit(request,id):
+    seo=SEOSettings.objects.get(id=id)
+    if request.method=='POST':
+        meta_title=request.POST.get('meta_title')
+        site_description=request.POST.get('site_description')
+        keywords=request.POST.get('keywords')
+        
+        seo.meta_title=meta_title
+        seo.site_description=site_description
+        seo.keywords=keywords
+        
+        seo.save()
+        
+        return redirect('seo')
+        
+    else:
+        context={
+            'seo':seo
+        }
+        return render(request,'admin1/seo/edit_seo.html',context)    
+
+
+def add_seo(request):
+    if request.method=='POST':
+        print(request.POST)
+        page=request.POST.get('page')
+        meta_title=request.POST.get('meta_title')
+        site_description=request.POST.get('site_description')
+        keyword=request.POST.get('keyword')
+        
+        SEOSettings.objects.create(
+            page=page,
+            meta_title=meta_title,
+            site_description=site_description,
+            keywords=keyword
+        )
+        return redirect('seo')
+    return render(request,'admin1/seo/add_seo.html')
+
+
 
     
 

@@ -57,6 +57,18 @@ urlpatterns = [
     path('account/settings/',views.account_settings,name='account_settings'),
     path('password/settings/',views.password_settings,name='security_settings'),
     path('change_password/',views.change_password,name='change_password'),
+    
+    
+    # for SEO
+    
+    path('seo-page/',views.seo,name='seo'),
+    path('seo-delete/<int:id>/',views.seo_delete,name='seo_delete'),
+    path('seo-edit/<int:id>/',views.seo_edit,name='seo_edit'),
+    path('add_seo/',views.add_seo,name='add_seo'),
+
+    
+    
+    
 
     
      
