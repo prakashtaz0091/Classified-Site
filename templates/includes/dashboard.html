@@ -59,7 +59,7 @@
         {% else %}
 
         <li class="{% if request.path == '/reviews/' %}active{% endif %}">
-            <a href="{% url 'reviews' %}">
+            <a href="{% url 'reviews' %}?user={{user_to_view.prefix_email}}&id={{user_to_view.id}}">
                 <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
             </a>
         </li>

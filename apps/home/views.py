@@ -347,20 +347,36 @@ def messages(request):
 
 def reviews(request):
     try:
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
+
+
+
         visitor_reviews_list = (
             Reviews.objects.select_related()
-            .filter(reviewed_for=request.user)
+            .filter(reviewed_for=user_to_view)
             .order_by("-id")
         )
         your_reviews_list = (
             Reviews.objects.select_related()
-            .filter(created_by=request.user)
+            .filter(created_by=user_to_view)
             .order_by("-id")
         )
         context = {
             "visitor_reviews_list": visitor_reviews_list,
             "your_reviews_list": your_reviews_list,
         }
+        if user_id:
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
         return render(request, "others/reviews.html", context)
     except Exception as e:
         print(e)

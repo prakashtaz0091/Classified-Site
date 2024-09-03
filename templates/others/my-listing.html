@@ -20,7 +20,7 @@
 				<div class="row align-items-center text-center">
 		    		<div class="col-md-12 col-12">
 						<h2 class="breadcrumb-title">{{user_to_view.full_name}}  Listing</h2>
-						{% if user_to_view %}
+						{% if not user_to_view %}
 				    	<nav aria-label="breadcrumb" class="page-breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -45,7 +45,9 @@
 				    <div class="dash-cards card">
 					    <div class="card-header">
 						    <h4>My Listings</h4>
+							{% if not user_to_view %}
 							<a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>									
+							{% endif %}
 						</div>
                         <div class="card-body">
 							<div class="listing-search">
