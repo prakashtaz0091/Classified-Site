@@ -36,11 +36,20 @@
             </li>
         {% endif %}
 
+        {% if not user_to_view %}
         <li class="{% if request.path == '/book_marks/' %}active{% endif %}">
             <a href="{% url 'book_marks' %}">
                 <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>
             </a>
         </li>
+        {% else %}
+        <li class="{% if request.path == '/book_marks/' %}active{% endif %}">
+            <a href="{% url 'book_marks' %}?user={{user_to_view.prefix_email}}&id={{user_to_view.id}}">
+                <i class="fas fa-solid fa-heart"></i> <span>{{user_to_view.full_name}} Bookmarks</span>
+            </a>
+        </li>
+        {% endif %}
+
         <li class="{% if request.path == '/reviews/' %}active{% endif %}">
             <a href="{% url 'reviews' %}">
                 <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
