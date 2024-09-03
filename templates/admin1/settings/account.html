@@ -1,0 +1,154 @@
+{% extends 'admin1/base1.html' %}
+{% load static %}
+{% block content %}
+	<div class="main-wrapper">
+	
+		<!-- Header -->
+		{% include 'admin1/include/header.html' %}
+		<!-- /Header -->
+		
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+          
+
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+           {% include 'admin1/include/sidebar.html' %}
+        </div>
+        <!-- /Sidebar -->
+		
+		<div class="page-wrapper page-settings">
+			{% include 'admin1/include/settings.html' %}
+			<div class="content w-100">
+                <div class="content-page-header">
+                    <h5>Account Settings</h5>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-grouphead">
+                            <h2>Profile Picture</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="profile-upload">
+                            <div class="profile-upload-img">
+                                <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" alt="img" id="blah">
+                            </div>
+                            <div class="profile-upload-content">
+                                <div class="profile-upload-btn">
+                                    <div class="profile-upload-file">
+                                        <input type="file" id="imgInp">
+                                        <a href="javascript:void(0);" class="btn btn-load-one">Upload</a>
+                                    </div>
+                                    <a href="javascript:void(0);" class="btn btn-remove">Remove</a>
+                                </div>
+                                <div class="profile-upload-para">
+                                    <p>*image size should be at least 320px big,and less then 500kb. Allowed files .png and .jpg.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="form-grouphead">
+                            <h2>Profile</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your user name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="Enter your Email">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" placeholder="Enter your Number">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea class="form-control" placeholder="Add a Short Bio....."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-grouphead">
+                            <h2>Personal Information</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" placeholder="Enter your Address">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" class="form-control" placeholder="Enter your Country">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" placeholder="Enter your State">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-control" placeholder="Enter your City">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <input type="text" class="form-control" placeholder="Enter your Pincode">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Language</label>
+                            <input class="input-tags form-control" type="text" data-role="tagsinput"  name="specialist" value="English,French,Spanish" id="specialist">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="btn-path">
+                            <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                            <a href="javascript:void(0);" class="btn btn-submit">Submit</a>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div> 
+	</div>
+
+{% endblock %}

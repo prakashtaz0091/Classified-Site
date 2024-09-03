@@ -56,6 +56,8 @@ class Account(AbstractBaseUser):
     is_verify=models.BooleanField(default=False)
     role=models.CharField(blank=True,null=True,max_length=100)
     last_activity = models.DateTimeField(null=True, blank=True)  # New field
+    last_password_change = models.DateTimeField(null=True, blank=True)
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
@@ -76,11 +78,23 @@ class Account(AbstractBaseUser):
     def update_last_activity(self):
         self.last_activity = timezone.now()
         self.save(update_fields=['last_activity'])
+    
+    def set_password(self, raw_password):
+        super().set_password(raw_password)
+        self.last_password_change = timezone.now()
+        self.save(update_fields=['last_password_change'])    
 
 
 class UserProfile(models.Model):
     full_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
+    country=models.CharField(max_length=100,blank=True,null=True)
+    Address=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
+    city=models.CharField(max_length=100,blank=True,null=True)
+    pincode=models.CharField(max_length=100,blank=True,null=True)
+    language=models.CharField(max_length=100,blank=True,null=True)
+    description=models.TextField(blank=True,null=True)
     user = models.OneToOneField(
         Account, on_delete=models.CASCADE, related_name="profile"
     )

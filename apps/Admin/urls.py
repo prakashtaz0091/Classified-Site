@@ -50,6 +50,13 @@ urlpatterns = [
     
     path('active_customer/<int:id>/',views.active_suspend,name='active'),
     path('suspend_customer/<int:id>/',views.suspend,name='suspend'),
+    
+    
+    # for account admin settings 
+    
+    path('account/settings/',views.account_settings,name='account_settings'),
+    path('password/settings/',views.password_settings,name='security_settings'),
+    path('change_password/',views.change_password,name='change_password'),
 
     
      

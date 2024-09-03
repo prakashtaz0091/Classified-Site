@@ -513,6 +513,19 @@ def suspend(request,id):
     }
     return render(request,'admin1/user/customer.html',context)    
 
+
+
+
+def account_settings(request):
+    return render(request,'admin1/settings/account.html')
+
+def password_settings(request):
+    return render(request,'admin1/settings/security.html')
+
+
+def change_password(request):
+    return render(request,'admin1/settings/change_password.html')
+
     
 
 
