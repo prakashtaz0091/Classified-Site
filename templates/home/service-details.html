@@ -260,7 +260,14 @@
 					<div class="col-lg-4 theiaStickySidebar">
 						<div class="rightsidebar">
 							<div   class="card">
-								<a style="margin-left:auto;margin-right:auto;"><img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
+								<a style="margin-left:auto;margin-right:auto;">
+
+									{% if product.created_by.profile.profile_photo %}
+									<img src={{product.created_by.profile.profile_photo.url}} style="height:80px;width:80px;" />
+									{% else %}
+
+									<img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
+									{% endif %}
 									<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="{% url 'dashboard' %}?user={{prefix_email}}&id={{product.created_by.id}}">{{product.created_by.full_name}}</a>
 
                 <div style="margin-top:10px;padding:0;text-align:center;" class="alert alert-light" role="alert">
