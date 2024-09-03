@@ -193,7 +193,6 @@ def my_listing(request):
             "products": page_obj.object_list,
         }
         if  user is not None:
-            print("hello")
             context['type']='viewing'
             context['user_to_view']=user_to_view
 
@@ -288,39 +287,56 @@ def something_wrong(request):
 
 
 def book_marks(request):
-    book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
-    if request.user.is_authenticated:
-        bookmarked_product_ids = BookMark.objects.filter(
-            user=request.user
-        ).values_list("product_id", flat=True)
-    else:
-        bookmarked_product_ids = []
-        
-        
-    print(bookmarked_product_ids,'id')    
 
-    # paginations added
-    paginator = Paginator(book_marks, 1)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    try:
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
 
-    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
-            product_data = render_to_string(
-                    "partials/product_list_bookmark.html",
-                    {"book_marks": page_obj.object_list},
-                    request=request,
-                ),
-            pagination_data=render_to_string(
-                "partials/pagination.html",
-                {'page_obj':page_obj},
-                request=request
-            )
-            print(pagination_data)
-            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
-    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
 
-    return render(request, "others/bookmarks.html", context)
 
+        book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
+        if request.user.is_authenticated:
+            bookmarked_product_ids = BookMark.objects.filter(
+                user=request.user
+            ).values_list("product_id", flat=True)
+        else:
+            bookmarked_product_ids = []
+            
+            
+        print(bookmarked_product_ids,'id')    
+
+        # paginations added
+        paginator = Paginator(book_marks, 1)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
+        if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+                product_data = render_to_string(
+                        "partials/product_list_bookmark.html",
+                        {"book_marks": page_obj.object_list},
+                        request=request,
+                    ),
+                pagination_data=render_to_string(
+                    "partials/pagination.html",
+                    {'page_obj':page_obj},
+                    request=request
+                )
+                print(pagination_data)
+                return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
+        context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
+
+        return render(request, "others/bookmarks.html", context)
+
+    except Exception as e:
+        print(e)
+        # will do more things like 404 page later
 
 def messages(request):
     return render(request, "others/messages.html")
