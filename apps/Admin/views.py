@@ -520,7 +520,46 @@ def suspend(request,id):
 
 
 def account_settings(request):
-    return render(request,'admin1/settings/account.html')
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+
+
+    if request.method == "POST":
+      
+        
+        user.full_name = request.POST.get('name', user.full_name)
+        user.username = request.POST.get('username', user.username)
+        user.email = request.POST.get('email', user.email)
+        user.phone_number=request.POST.get('phone_number', user.phone_number)
+        user.save()
+        
+        
+        user_profile.phone_number = request.POST.get('phone_number', user_profile.phone_number)
+        user_profile.description = request.POST.get('bio', user_profile.description)
+        user_profile.Address = request.POST.get('address', user_profile.Address)
+        user_profile.country = request.POST.get('country', user_profile.country)
+        user_profile.state = request.POST.get('state', user_profile.state)
+        user_profile.city = request.POST.get('city', user_profile.city)
+        user_profile.pincode = request.POST.get('pincode', user_profile.pincode)
+        user_profile.language = request.POST.get('specialist', user_profile.language)
+        
+        if request.FILES.get('profile_photo'):
+            user_profile.profile_photo = request.FILES['profile_photo']
+            
+        user_profile.save()
+        print('saveed')
+        
+        return redirect('account_settings')
+    
+    
+    context={
+        
+        'user':user,
+        'userprofile':user_profile
+        
+    }
+        
+    return render(request,'admin1/settings/account.html',context)
 
 def password_settings(request):
     

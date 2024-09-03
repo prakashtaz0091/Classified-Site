@@ -38,6 +38,8 @@
                 <div class="content-page-header">
                     <h5>Account Settings</h5>
                 </div>
+                <form action='{% url 'account_settings' %}' method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-grouphead">
@@ -47,18 +49,24 @@
                     <div class="col-lg-12">
                         <div class="profile-upload">
                             <div class="profile-upload-img">
-                                <img src="{% static 'admin/assets/img/customer/user-01.jpg' %}" alt="img" id="blah">
+                                {% if userprofile.profile_photo.url %}
+                                <img src="{{userprofile.profile_photo.url}}" alt="img" id="blah">
+                                {% else %}
+                                <img src="{% static 'admin/assets/profile.png' %}" alt="img" id="blah">
+
+
+                                {% endif %}
                             </div>
                             <div class="profile-upload-content">
                                 <div class="profile-upload-btn">
                                     <div class="profile-upload-file">
-                                        <input type="file" id="imgInp">
+                                        <input type="file" id="imgInp" name="profile_photo">
                                         <a href="javascript:void(0);" class="btn btn-load-one">Upload</a>
                                     </div>
-                                    <a href="javascript:void(0);" class="btn btn-remove">Remove</a>
+                                    <a href="javascript:void(0);" id="removeBtn" class="btn btn-remove">Remove</a>
                                 </div>
                                 <div class="profile-upload-para">
-                                    <p>*image size should be at least 320px big,and less then 500kb. Allowed files .png and .jpg.</p>
+                                    <p>*image size should be at least 320px big,and less than 500kb. Allowed files: .png and .jpg.</p>
                                 </div>
                             </div>
                         </div>
@@ -72,31 +80,31 @@
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your name">
+                            <input type="text" class="form-control" placeholder="Enter your name" name='name' value="{{user.full_name}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>User Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your user name">
+                            <input type="text" class="form-control" placeholder="Enter your user name" name='username' value="{{user.username|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control" placeholder="Enter your Email">
+                            <input type="text" class="form-control" placeholder="Enter your Email" name='email' value="{{user.email}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>Mobile Number</label>
-                            <input type="text" class="form-control" placeholder="Enter your Number">
+                            <input type="text" class="form-control" placeholder="Enter your Number" name='phone_number' value="{{user.phone_number}}">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Bio</label>
-                            <textarea class="form-control" placeholder="Add a Short Bio....."></textarea>
+                            <textarea class="form-control" placeholder="Add a Short Bio....." name='bio'>{{userprofile.description|default:""}}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -107,48 +115,69 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Address</label>
-                            <input type="text" class="form-control" placeholder="Enter your Address">
+                            <input type="text" class="form-control" placeholder="Enter your Address" name='address' value="{{userprofile.Address|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>Country</label>
-                            <input type="text" class="form-control" placeholder="Enter your Country">
+                            <input type="text" class="form-control" placeholder="Enter your Country" name='country' value="{{userprofile.country|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>State</label>
-                            <input type="text" class="form-control" placeholder="Enter your State">
+                            <input type="text" class="form-control" placeholder="Enter your State" name='state' value="{{userprofile.state|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>City</label>
-                            <input type="text" class="form-control" placeholder="Enter your City">
+                            <input type="text" class="form-control" placeholder="Enter your City" name='city' value="{{userprofile.city|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-group">
                             <label>Pincode</label>
-                            <input type="text" class="form-control" placeholder="Enter your Pincode">
+                            <input type="text" class="form-control" placeholder="Enter your Pincode" name='pincode' value="{{userprofile.pincode|default:""}}">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Language</label>
-                            <input class="input-tags form-control" type="text" data-role="tagsinput"  name="specialist" value="English,French,Spanish" id="specialist">
+                            <input class="input-tags form-control" type="text" data-role="tagsinput"  name="specialist" value="{{userprofile.language|default:""}}" id="specialist" name='language'>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="btn-path">
-                            <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
-                            <a href="javascript:void(0);" class="btn btn-submit">Submit</a>
+                            <button type='submit' class="btn btn-cancel me-3">Cancel</button>
+                            <button type='submit' class="btn btn-submit">Submit</button>
                         </div>
                     </div>
                 </div>
 			</div>
 		</div> 
 	</div>
+
+
+    <script>
+        document.getElementById('imgInp').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById('blah').src = URL.createObjectURL(file);
+            }
+        });
+        
+        document.getElementById('removeBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+        
+            // Reset the image preview to the default image
+            document.getElementById('blah').src = "{% static 'admin/assets/profile.png' %}";
+        
+            // Clear the file input
+            document.getElementById('imgInp').value = "";
+        });
+        
+    </script>
 
 {% endblock %}
