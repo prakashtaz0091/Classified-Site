@@ -1,20 +1,41 @@
 <div class="">                    
     <ul class="dashborad-menus">
+
+        {% if not user_to_view %}
         <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
             <a href="{% url 'dashboard' %}">
                 <i class="feather-grid"></i> <span>Dashboard</span>
             </a>
         </li>
+        {% else %}
+        <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+            <a href="{% url 'dashboard' %}?user={{user_to_view.prefix_email}}&id={{user_to_view.id}}">
+                <i class="feather-grid"></i> <span>{{user_to_view.full_name}} Dashboard</span>
+            </a>
+        </li>
+        {% endif %}
+        {% if not user_to_view %}
         <li class="{% if request.path == '/account/profile/' %}active{% endif %}">
             <a href="{% url 'profile' %}">
                 <i class="fa-solid fa-user"></i> <span>Profile</span>
             </a>
         </li>
+        {% endif %}
+
+        {% if not user_to_view %}
         <li class="{% if request.path == '/my_listing/' %}active{% endif %}">
             <a href="{% url 'my_listing' %}">
                 <i class="feather-list"></i> <span>My Listing</span>
             </a>
         </li>
+        {% else %}
+<li class="{% if request.path == '/my_listing/' %}active{% endif %}">
+    <a href="{% url 'my_listing' %}?user={{user_to_view.prefix_email}}&id={{user_to_view.id}}">
+        <i class="feather-list"></i> <span>{{user_to_view.full_name}} Listing</span>
+            </a>
+            </li>
+        {% endif %}
+
         <li class="{% if request.path == '/book_marks/' %}active{% endif %}">
             <a href="{% url 'book_marks' %}">
                 <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>

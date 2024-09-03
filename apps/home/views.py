@@ -99,6 +99,7 @@ def dashboard(request):
         else:
             user_instance=Account.objects.filter(id=user_id).first()
             user_to_view=user_instance
+            user_to_view.prefix_email=user
 
         book_marks=BookMark.objects.filter(user=user_to_view)
         total_product=Product.objects.filter(created_by=user_to_view).count()
