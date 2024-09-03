@@ -107,7 +107,8 @@
                                 <div class="col-md-4">
                                     <div class="provide-box">  
                                         {% if product.created_by.profile.profile_photo %}                                      
-                                        <img src="{{product.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img">   
+                                        <img src="{{product.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img"> 
+                                        
                                         {% else %}
                                         <img src="{% static 'admin/assets/img/profiles/avatar-02.jpg' %}" class="img-fluid" alt="img">   
 
@@ -222,6 +223,7 @@
                                     <div class="serv-proimg">
                                         {% if product.created_by.profile.profile_photo %}
                                         <img src="{{product.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img">
+                                         
                                         {% else %}
                                         <img src="{% static 'admin/assets/img/profiles/avatar-02.jpg' %}" class="img-fluid" alt="img">
                                         {% endif %}
