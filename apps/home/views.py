@@ -301,10 +301,10 @@ def book_marks(request):
             user_to_view.prefix_email=user
 
 
-        book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
+        book_marks = BookMark.objects.filter(user=user_to_view).order_by('-id')
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
-                user=request.user
+                user=user_to_view
             ).values_list("product_id", flat=True)
         else:
             bookmarked_product_ids = []
@@ -331,6 +331,9 @@ def book_marks(request):
                 print(pagination_data)
                 return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
         context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
+        if user_id:
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
 
         return render(request, "others/bookmarks.html", context)
 
