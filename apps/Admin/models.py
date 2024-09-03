@@ -20,3 +20,22 @@ class SEOSettings(models.Model):
 
     def __str__(self):
         return self.meta_title
+    
+    
+
+
+
+class SiteSettings(models.Model):
+    profile_picture = models.ImageField(upload_to='images/profile_pictures/', blank=True, null=True)
+    product_image = models.ImageField(upload_to='images/product_images/', blank=True, null=True)
+    watermark_image = models.ImageField(upload_to='images/watermarks/', blank=True, null=True)
+    paypal_live_mode = models.BooleanField(default=False)
+    max_free_ads_expire_days = models.IntegerField(default=30, help_text="Maximum number of days before free ads expire.")
+    max_free_ads = models.IntegerField(default=5, help_text="Maximum number of free ads allowed.")
+    post_ttl = models.IntegerField(default=7, help_text="Time to live for a post, in days.")
+    max_promotional_mail = models.IntegerField(default=3, help_text="Maximum number of promotional emails that can be sent.")
+
+    def __str__(self):
+        return "Site Settings"
+    
+    
