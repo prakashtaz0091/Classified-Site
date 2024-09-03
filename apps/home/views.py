@@ -87,22 +87,34 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
+        type=request.GET.get('type')
         book_marks=BookMark.objects.filter(user=request.user)
         total_product=Product.objects.filter(created_by=request.user).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
         reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
         total_views = Product.objects.filter(created_by=request.user).aggregate(total_views=Sum('view_count'))['total_views']
-        
-       
         bookmarks_count=book_marks.count()
-        context={
-            'book_marks':book_marks,
-            'bookmarks_count':bookmarks_count,
-            'reviews_list':reviews_list,
-            'total_product':total_product,
-            'reviews_count':reviews_count,
-            'total_views':total_views
-        }
+
+        if type=="viewing_access":
+            context={
+                'book_marks':book_marks,
+                'bookmarks_count':bookmarks_count,
+                'reviews_list':reviews_list,
+                'total_product':total_product,
+                'reviews_count':reviews_count,
+                'total_views':total_views,
+                'type':type,
+            }
+        else:
+            context={
+                'book_marks':book_marks,
+                'bookmarks_count':bookmarks_count,
+                'reviews_list':reviews_list,
+                'total_product':total_product,
+                'reviews_count':reviews_count,
+                'total_views':total_views
+            }
+
         return render(request, "others/dashboard.html", context)
     except Exception as e:
         print(e)

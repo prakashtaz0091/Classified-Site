@@ -39,11 +39,15 @@ def service_details(request, product_slug):
             print(product_instance.featured_data)
         else:
             bookmarked_product_ids = []
+
+        #For showing total ads of that user
+        ads_count=Product.objects.filter(created_by=product_instance.created_by).count()
         context = {
             "product": product_instance,
             "product_images": product_images,
             "book_mark": bookmarked_product_ids,
-            'featured_data':processed_featured_data
+            'featured_data':processed_featured_data,
+            'ads_count':ads_count
         }
         return render(request, "home/service-details.html", context)
     except Exception as e:

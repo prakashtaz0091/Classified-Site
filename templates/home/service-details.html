@@ -261,10 +261,10 @@
 						<div class="rightsidebar">
 							<div   class="card">
 								<a style="margin-left:auto;margin-right:auto;"><img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
-								<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="#">{{product.created_by.full_name}}</a>
+									<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="{% url '' %}">{{product.created_by.full_name}}</a>
 
                 <div style="margin-top:10px;padding:0;text-align:center;" class="alert alert-light" role="alert">
-                    <a href="#"  style="margin-top:20px;"class="alert-link">21 Ads Available</a>
+					<a href="#"  style="margin-top:20px;"class="alert-link">{{ads_count}} Ads Available</a>
                 </div>
                 <button id="show_phone_number" class="btn btn-custom mb-3">
                     <i class="fa fa-phone"></i> Show Phone Number
