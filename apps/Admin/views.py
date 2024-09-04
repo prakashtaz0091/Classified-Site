@@ -153,7 +153,7 @@ def add_sub_category(request,category_slug):
 
 
 def fields(request):
-    return render(request,'admin1/add/fields.html')
+    return render(request,'admin1/fields/fields.html')
 
 
 
@@ -162,9 +162,41 @@ def list_fields(request):
     context={
         'fields':fields
     }
-    return render(request,'admin1/list_fields.html',context)
+    return render(request,'admin1/fields/list_fields.html',context)
 
 
+def edit_fields(request,id):
+    field=get_object_or_404(Field,id=id)
+    if request.method=='POST':
+        field_name = request.POST.get('field_name')
+        field_type = request.POST.get('field_type')
+        mandatory = request.POST.get('mandatory') == 'yes'
+        searchable = request.POST.get('searchable') == 'yes'
+        featured_style = request.POST.get('featured_style')
+        hint = request.POST.get('hint')
+        admin_hint = request.POST.get('admin_hint')
+        icon=request.FILES.get('field_icon')
+        
+        field.field_name=field_name
+        field.field_type=field_type
+        field.mandatory=mandatory
+        field.searchable=searchable
+        field.featured_style=featured_style
+        field.hint=hint
+        field.admin_hint=admin_hint
+        
+        if icon:
+            field.icon=icon
+        
+        field.save()
+        return redirect('admin_list_fields')    
+    
+    else:
+        context={
+            'field':field,
+            'id':id 
+        }
+        return render(request,'admin1/fields/edit_field.html',context)
 
 def delete_fields(request,id):
     field=get_object_or_404(Field,id=id)
