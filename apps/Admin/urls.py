@@ -5,9 +5,16 @@ from . import views
 urlpatterns = [
 
     path('dashboard/',views.admin_index,name='admin_index'),
+    
+    
+    # for category 
     path('categories/',views.admin_category,name='admin_category'),
     path('add/categories/',views.add_category,name='add_admin_category'),
-    path('add/subcategory/<category_slug>/',views.add_sub_category,name='add_subcategory'),
+    path('add/subcategory/<slug:category_slug>/',views.add_sub_category,name='add_subcategory'),
+    path('delete/category/<int:id>/',views.delete_category,name='delete_category'),
+    
+    
+    
     path('fields/',views.fields,name='admin_fields'),
     path('list_fields/',views.list_fields,name='admin_list_fields'),
     path('add_options/<int:id>/',views.add_options,name='add_options'),

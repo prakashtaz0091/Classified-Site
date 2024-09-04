@@ -38,6 +38,16 @@ def admin_category(request):
     }
     return render(request,'admin1/others/categories.html',context)
 
+
+
+def delete_category(request,id):
+    category=get_object_or_404(Category,id=id)
+    try:
+        category.delete()
+        return redirect('admin_category')
+    except:
+        pass
+    
 def sub_category(request,id):
     try:
         category_instance=Category.objects.filter(parent_id=id)
