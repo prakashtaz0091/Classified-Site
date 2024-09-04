@@ -39,3 +39,27 @@ class SiteSettings(models.Model):
         return "Site Settings"
     
     
+    
+    
+
+
+class Language(models.Model):
+    LANGUAGE_STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('inactive', 'Inactive'),
+    ]
+
+    name = models.CharField(max_length=100) 
+    code = models.CharField(max_length=10)
+    order = models.IntegerField() 
+    status = models.CharField(max_length=10, choices=LANGUAGE_STATUS_CHOICES, default='active') 
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Language'
+        verbose_name_plural = 'Languages'
+    
+    
+    
