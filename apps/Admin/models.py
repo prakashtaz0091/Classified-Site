@@ -53,6 +53,7 @@ class Language(models.Model):
     code = models.CharField(max_length=10)
     order = models.IntegerField() 
     status = models.CharField(max_length=10, choices=LANGUAGE_STATUS_CHOICES, default='active') 
+    created_date=models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

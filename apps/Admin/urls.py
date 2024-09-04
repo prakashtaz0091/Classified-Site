@@ -80,6 +80,12 @@ urlpatterns = [
     path('default_settings/',views.default_settings,name='default_settings'),
     path('default-edit/<int:id>/',views.default_edit,name='default_edit'),
 
+
+
+
+   # for languagae
+   
+   path('languages/',views.language,name='language')
     
     
     

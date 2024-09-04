@@ -8,7 +8,7 @@ from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
 from apps.accounts.models import Account,UserProfile
-from apps.Admin.models import SEOSettings,SiteSettings
+from apps.Admin.models import SEOSettings,SiteSettings,Language
 from django.utils.timezone import now
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
@@ -814,3 +814,12 @@ def default_edit(request,id):
     
 
 
+# for languages 
+
+
+def language(request):
+    language=Language.objects.all().order_by('-id')
+    context={
+        'languages':language
+    }
+    return render(request,'admin1/language/language.html',context)
