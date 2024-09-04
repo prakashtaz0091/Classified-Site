@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% block title %}
+<title>Add Listings</title>
+{% endblock %}
 {% block content %}
 <body>
 
@@ -425,9 +428,9 @@ data.fields.forEach(field => {
     let fieldHtml = '';
 
 	console.log(field.field_type)
+	alert(field.field_type)
     if (field.field_type === 'text') {
         // For text input
-
 		fieldHtml = `
     <div style="margin-bottom:20px" class="field-item mb-3" data-subcategory-id="${subcategoryId}">
         <ul class="list-unstyled">
@@ -480,7 +483,26 @@ fieldHtml += `
         fieldHtml += `</div></div>`;  // Close extras container and field-item
 
 
-    }    
+	}else if(field.field_type=='text_area') {
+
+	fieldHtml = `
+    <div style="margin-bottom:20px" class="field-item mb-3" data-subcategory-id="${subcategoryId}">
+        <ul class="list-unstyled">
+            <li>
+                <label style="font-weight:600;font-size:1.1rem;" class="d-block mb-1">
+                    ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
+                </label>
+                <textarea type="text" 
+                       class="form-control" 
+                       name="data" 
+					   placeholder="${field.field_name}"
+					    data-name="${field.field_name}"
+					   ${field.mandatory ? 'required' : ''} ></textarea>
+            </li>
+        </ul>
+    </div>`;
+
+	}  
 
     // Append the generated HTML to the appropriate container
     document.querySelector('.brand-listing').insertAdjacentHTML('beforeend', fieldHtml);

@@ -418,7 +418,9 @@ def get_category_options(request):
             return JsonResponse({'error': 'Category not found'}, status=404)
         
         # Get all fields related to the category
+        print(category.category_name)
         fields = Field.objects.filter(hint=category.category_name)
+        print(fields)
         
         # Prepare the response data
         fields_data = []
