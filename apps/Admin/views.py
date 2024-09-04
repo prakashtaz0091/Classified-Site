@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from apps.category.models import Category,Field,FieldOptions,FieldExtra
+from apps.category.models import Category,Field,FieldOptions,FieldExtra,FieldExtraContent
 from apps.store.models import  Product,ProductImages
 from apps.accounts.models import Account,UserProfile
 from apps.Admin.models import SEOSettings,SiteSettings,Language
@@ -226,6 +226,7 @@ def add_options(request,id):
 def extra_information(request,id):
     linked_to=FieldOptions.objects.filter(id=id).first()
     extras=FieldExtra.objects.filter(linked_to=linked_to).order_by('-id')
+    
     context={
         'id':id,
         'extras':extras

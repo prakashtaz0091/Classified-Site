@@ -44,9 +44,15 @@
                                         <td>{{extra.menu_text}}</td>
                                         
                                         <td>
+                                            {% if extra.field_extras_content.all %}
+                                            <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Show data</button>
+
                                             <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
                                             <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
-                                        
+                                             {% else %}
+                                             <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
+                                             <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
+                                             {% endif %} 
                                         </td>
 
 
@@ -203,6 +209,7 @@
                         }
                         modal.hide();
                         form.reset();
+                        window.location.reload()
     
                         // Optionally update page content
                     } else {
