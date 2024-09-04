@@ -823,3 +823,38 @@ def language(request):
         'languages':language
     }
     return render(request,'admin1/language/language.html',context)
+
+
+def delete_language(request,id):
+    try:
+        language=Language.objects.get(id=id)
+        language.delete()
+        return redirect('language')
+    
+    except:
+        pass
+
+
+
+def edit_language(request,id):
+    language=get_object_or_404(Language,id=id)
+    if request.method == "POST":
+        name=request.POST.get('name')
+        code=request.POST.get('code')
+        order=request.POST.get('order')
+        status=request.POST.get('status')
+        
+        language.name=name
+        language.code=code
+        language.order=order
+        language.status=status
+        language.save()
+        
+        return redirect('language')
+        
+    else:
+        context={
+            'language':language,
+            'id':id
+        }
+        return render(request,'admin1/language/edit_language.html',context)    

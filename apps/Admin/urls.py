@@ -85,7 +85,9 @@ urlpatterns = [
 
    # for languagae
    
-   path('languages/',views.language,name='language')
+   path('languages/',views.language,name='language'),   
+   path('languages/delete/<int:id>/',views.delete_language,name='delete_language'),
+   path('languages/edit/<int:id>/',views.edit_language,name='edit_language')
     
     
     

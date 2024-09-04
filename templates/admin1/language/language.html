@@ -52,7 +52,7 @@
 
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="" >
+                                                <a class="delete-table me-2" href="{% url 'edit_language' language.id %}" >
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ language.id }})">
@@ -106,7 +106,7 @@
     <script>
         function confirmDelete(roomId) {
             var form = document.getElementById('delete-room-form');
-            var actionUrl = "{% url 'delete_category' 0 %}".replace('0', roomId);
+            var actionUrl = "{% url 'delete_language' 0 %}".replace('0', roomId);
             form.action = actionUrl;
 
             var deleteModal = new bootstrap.Modal(document.getElementById('delete-item'));
