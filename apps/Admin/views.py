@@ -36,7 +36,7 @@ def admin_category(request):
     context={
         'categories':categories
     }
-    return render(request,'admin1/others/categories.html',context)
+    return render(request,'admin1/category/categories.html',context)
 
 
 
@@ -47,6 +47,79 @@ def delete_category(request,id):
         return redirect('admin_category')
     except:
         pass
+    
+    
+    
+def edit_category(request,id):
+    category=get_object_or_404(Category,id=id)
+    if request.method=='POST':
+        if request.method == 'POST':
+        # Extract data from the request
+            category_name = request.POST.get('category_name')
+            menu_text = request.POST.get('menu_text')
+            order = request.POST.get('order')
+            type = request.POST.get('type')
+            menu_item = request.POST.get('menu_item') == 'yes'
+            popular_item = request.POST.get('popular_item') == 'yes'
+            featured_item = request.POST.get('featured_item') == 'yes'
+            latest_item = request.POST.get('latest_item') == 'yes'
+            industry_category = request.POST.get('industry_category') == 'yes'
+            media_type = request.POST.get('media_type')
+            long_description = request.POST.get('long_description')
+            short_description = request.POST.get('short_description')
+            status = request.POST.get('status')
+            meta_title_country = request.POST.get('meta_title_country')
+            meta_description_country = request.POST.get('meta_description_country')
+            meta_keywords_country = request.POST.get('meta_keywords_country')
+            meta_title_city = request.POST.get('meta_title_city')
+            meta_description_city = request.POST.get('meta_description_city')
+            meta_keywords_city = request.POST.get('meta_keywords_city')
+
+            # Handling file uploads (icon_image and thumbnail_image)
+            icon_image = request.FILES.get('icon_image')
+            thumbnail_image = request.FILES.get('thumbnail_image')
+            
+            
+             # Update the category object with the extracted data
+            category.category_name = category_name
+            category.menu_text = menu_text
+            category.order = order
+            category.category_type = type
+            category.menu_item = menu_item
+            category.popular_item = popular_item
+            category.featured_item = featured_item
+            category.latest_item = latest_item
+            category.industry_standard = industry_category
+            category.media_type = media_type
+            category.long_description = long_description
+            category.short_description = short_description
+            category.status = status
+            category.meta_title_country = meta_title_country
+            category.meta_description_country = meta_description_country
+            category.meta_keywords_country = meta_keywords_country
+            category.meta_title_city = meta_title_city
+            category.meta_description_city = meta_description_city
+            category.meta_keywords_city = meta_keywords_city
+            
+             # Only update the images if new ones were uploaded
+            if icon_image:
+                category.category_icon_image = icon_image
+            if thumbnail_image:
+                category.category_thumbnail_image= thumbnail_image
+            
+            category.save()
+
+            # Redirect to a success page or back to the category list
+            return redirect('admin_category')    
+    else:
+        context={
+            'category':category,
+            'id':id
+        }
+        return render(request,'admin1/category/edit-category.html',context)    
+    
+    
+    
     
 def sub_category(request,id):
     try:
@@ -65,7 +138,7 @@ def sub_category(request,id):
 
 
 def add_category(request):
-    return render(request,'admin1/add/add-categories.html')
+    return render(request,'admin1/category/add-categories.html')
 
 def add_sub_category(request,category_slug):
     try:
@@ -73,7 +146,7 @@ def add_sub_category(request,category_slug):
         if category_instance is None:
             raise Exception("The category u provided is not found")
         context={'category_slug':category_slug}
-        return render(request,'admin1/add/add-categories.html',context)
+        return render(request,'admin1/category/add-categories.html',context)
     except Exception as e:
         print(e)
         return JsonResponse({'error':f"unexpected error occured {str(e)}"},status=400)
