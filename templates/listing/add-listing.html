@@ -73,7 +73,7 @@
 														<li>
 															<label class="custom_check">
 																<input type="radio" name="categories" value="{{ category.id }}" onclick="loadSubcategories(this)">
-																<span class="checkmark"></span> {{ category.category_name }}
+																<span style="height:30px;width:28px;padding-left:10px;"class="checkmark"></span> &nbsp; <span> {{ category.category_name }}</span>
 															</label>
 														</li>
 												{% if forloop.counter|divisibleby:4 or forloop.last %}
@@ -367,8 +367,10 @@
 								<ul>
 									<li>
 										<label class="custom_check">
+
 											<input type="radio" name="subcategories" value="${subcategory.id}" onclick="selectSingleSubcategory(this)">
-											<span class="checkmark"></span> ${subcategory.category_name}
+
+										<span style="height:30px;width:30px;padding-left:10px"class="checkmark"></span> &nbsp; <span> ${ subcategory.category_name }</span>
 										</label>
 									</li>
 								</ul>
