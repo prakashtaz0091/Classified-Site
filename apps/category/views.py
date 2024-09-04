@@ -438,7 +438,7 @@ def get_category_options(request):
             }
             
             # If the field type is 'select', include the options
-            if field.field_type == 'select':
+            if field.field_type == 'select' or field.field_type=='select_multiple':
                 options = FieldOptions.objects.filter(linked_to=field).order_by('order')
                 field_data['options'] = []
                 
