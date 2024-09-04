@@ -27,6 +27,9 @@ urlpatterns = [
     path('extra_information/<int:id>/',views.extra_information,name='extra_information'),
     path('list/sub_category/<int:id>/',views.sub_category,name='sub_category'),
     
+   #  for enable and disable adding extra and extra data
+    path('toggle-option/',views.toggle_option_view, name='toggle_option_view'),
+    
     # for ads 
     path('ads/',views.ads,name='ads'),
     path('ads/pending/',views.pending,name='pending'),
@@ -91,7 +94,13 @@ urlpatterns = [
    
    path('languages/',views.language,name='language'),   
    path('languages/delete/<int:id>/',views.delete_language,name='delete_language'),
-   path('languages/edit/<int:id>/',views.edit_language,name='edit_language')
+   path('languages/edit/<int:id>/',views.edit_language,name='edit_language'),
+   
+   
+   
+#    for toggle 
+   path('fields/required/',views.toggle_field_required, name='toggle-required'),
+   path('backup/',views.backup_templates, name='backup'),
     
     
     

@@ -44,24 +44,34 @@
                                         <td>{{extra.menu_text}}</td>
                                         
                                         <td>
-                                            <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
+                                            <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
                                             <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
                                         
                                         </td>
+
+
+                                        <!-- Disabled Toggle -->
                                         <td>
                                             <div class="active-switch">
                                                 Disabled
                                                 <label class="switch">
-                                                    <input type="checkbox" >
+                                                    <input type="checkbox" id="toggleDisabled_{{ extra.id }}" 
+                                                        onchange="toggleOption('{{ extra.id }}', 'disabled', this.checked)"
+                                                        {% if extra.disabled %}checked{% endif %} >
+
                                                     <span class="sliders round"></span>
                                                 </label>
                                             </div>
                                         </td>
+
+                                        <!-- Mandatory Toggle -->
                                         <td>
                                             <div class="active-switch">
                                                 Mandatory
                                                 <label class="switch">
-                                                    <input type="checkbox" checked="">
+                                                    <input type="checkbox" id="toggleMandatory_{{ extra.id }}" 
+                                                        onchange="toggleOption('{{ extra.id }}', 'mandatory', this.checked)" 
+                                                        {% if extra.mandatory %}checked{% endif %}>
                                                     <span class="sliders round"></span>
                                                 </label>
                                             </div>
@@ -128,12 +138,12 @@
                         <i class="fe fe-x"></i>
                     </button>
                 </div>
-                <form action="" method="post"> 
+                <form id="addDataForm"> 
                     {% csrf_token %}
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required placeholder="Like : model name...">
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Like: model name...">
                         </div>
                         <div class="mb-3">
                             <label for="order" class="form-label">Order</label>
@@ -142,32 +152,109 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" id="submitForm">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var addButton = document.querySelectorAll('[data-bs-toggle="modal"]');
+            var submitButton = document.getElementById('submitForm');
+    
+            var mainId, itemId;
+    
+            addButton.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    mainId = this.getAttribute('data-main-id');
+                    itemId = this.getAttribute('data-id');
+                });
+            });
+    
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+    
+                var form = document.getElementById('addDataForm');
+                var formData = new FormData(form);
+    
+                // Append additional data
+                formData.append('main_id', mainId);
+                formData.append('item_id', itemId);
+    
+                fetch("{% url 'create_field_options_extra_content' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': "{{ csrf_token }}",
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data, 'data');
+                    if (data.status === 'success') {
+                        console.log('I am in');
+                        // Handle success, e.g., close modal and update page
+                        var modalElement = document.getElementById('add-data-modal');
+                        var modal = bootstrap.Modal.getInstance(modalElement);
+                        if (!modal) {
+                            modal = new bootstrap.Modal(modalElement);
+                        }
+                        modal.hide();
+                        form.reset();
+    
+                        // Optionally update page content
+                    } else {
+                        // Handle error
+                        console.error('An error occurred:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+    
+    
     
 
 
   
     
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var addButton = document.querySelectorAll('[data-bs-toggle="modal"]');
-                
-                addButton.forEach(function(button) {
-                    button.addEventListener('click', function() {
-                        var id = this.getAttribute('data-id');
-                        var form = document.querySelector('#add-data-modal form');
-                        var action = "{% url 'create_field_options_extra_content' 0 %}".replace("0", id);
-                        form.setAttribute('action', action);
-                    });
-                });
+
+    <script>
+        function toggleOption(optionId, toggleType, isChecked) {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+    
+            // Configure it: POST-request to the provided URL
+            xhr.open("POST", "{% url 'toggle_option_view' %}", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // Add CSRF token for security
+    
+            // Prepare the data to send
+            var data = JSON.stringify({
+                'option_id': optionId,
+                'toggle_type': toggleType,
+                'is_checked': isChecked
             });
     
-        
+            // Set up a function to handle the response data
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Optionally handle success
+                        console.log(toggleType + ' state updated successfully');
+                    } else {
+                        // Optionally handle error
+                        console.error('An error occurred');
+                    }
+                }
+            };
+    
+            // Send the request with the data
+            xhr.send(data);
+        }
     </script>
+    
  {% endblock %}

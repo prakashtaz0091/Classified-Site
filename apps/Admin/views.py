@@ -4,6 +4,7 @@ from django.shortcuts import  get_object_or_404
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
@@ -11,6 +12,8 @@ from apps.accounts.models import Account,UserProfile
 from apps.Admin.models import SEOSettings,SiteSettings,Language
 from django.utils.timezone import now
 from datetime import timedelta
+from django.urls import reverse
+import json
 from django.contrib.auth.hashers import make_password
 # Create your views here.
 
@@ -900,3 +903,58 @@ def edit_language(request,id):
             'id':id
         }
         return render(request,'admin1/language/edit_language.html',context)    
+
+
+@csrf_exempt
+def toggle_field_required(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id=data.get('option_id')
+        is_required=data.get('is_required')
+        field_option=FieldOptions.objects.get(id=id)
+        field_option.required=is_required
+        field_option.save()
+      
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
+
+
+
+
+def backup_templates(request):
+    if request.method == "POST":
+        print(request.POST)
+    context={
+        'id':1
+    }
+    return render(request,'admin1/add/backup.html',context)
+
+
+
+
+
+# for disbale and mandtory in the extra extra informations 
+
+@csrf_exempt
+def toggle_option_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        option_id = data.get('option_id')
+        toggle_type = data.get('toggle_type')
+        is_checked = data.get('is_checked')
+        
+        print('data,data',data)
+
+        # Update the relevant option in the database
+        try:
+            option = FieldExtra.objects.get(id=option_id)
+            if toggle_type == 'disabled':
+                option.disabled= is_checked
+            elif toggle_type == 'mandatory':
+                option.mandatory = is_checked
+            option.save()
+            return JsonResponse({'status': 'success'})
+        except FieldExtra.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Option not found'}, status=404)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=400)
