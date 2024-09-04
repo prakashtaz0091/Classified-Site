@@ -166,6 +166,16 @@ def list_fields(request):
 
 
 
+def delete_fields(request,id):
+    field=get_object_or_404(Field,id=id)
+    try:
+        field.delete()
+        return redirect('admin_list_fields')
+    
+    except:
+        pass
+
+
 def add_options(request,id):
     linked_to=Field.objects.filter(id=id).first()
     field_options=FieldOptions.objects.filter(linked_to=linked_to).order_by('-id')
