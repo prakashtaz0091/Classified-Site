@@ -483,38 +483,23 @@ fieldHtml += `
 	}
 	else if (field.field_type=='select_multiple'){
 fieldHtml += `
-    <div style="margin-bottom:20px;" class="field-item">
-        <div class="dropdown">
-		 <label style="font-weight:600;font-size:1.1rem;margin-bottom:0.5rem;" class="d-block mb-1">
-                    ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
-                </label>
-			<select multiple name="data" data-name='${field.field_name}' ${field.mandatory ? 'required' : ''} onchange="onChangeOption(this)"  style="padding:1.2rem;" class="form-select main-select">
-                ${field.options.map(option => `
-                    <option value="${option.value}">${option.value}</option>
-                `).join('')}
-            </select>
-        </div>`;
+<div style="margin-bottom: 20px;" class="field-item">
+    <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;" class="d-block mb-1">
+        ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
+    </label>
+    <div class="checkbox-group" style="padding: 1.2rem; display: flex; flex-wrap: wrap;">
+        ${field.options.map((option, index) => `
+            <div class="form-check" style="margin-right: 20px; display: flex; align-items: center;">
+                <input type="checkbox" id="checkbox-${index}" name="data" value="${option.value}" data-name="${field.field_name}" ${field.mandatory ? 'required' : ''} 
+                style="width: 20px; height: 20px; margin-right: 10px;">
+                <label class="form-check-label" for="checkbox-${index}" style="margin: 0; cursor: pointer;">${option.value}</label>
+            </div>
+        `).join('')}
+    </div>
+</div>
 
-        fieldHtml += `<div class="extras-container" style="display: none;">`;
-        field.options.forEach(option => {
-            if (option.extras) {
-                option.extras.forEach(extra => {
-                    fieldHtml += `
-                        <div class="dropdown mt-2 extra-dropdown" data-parent-value="${option.value}">
-                            <label style='font-weight:600;font-size:1.1rem'>${extra.menu_text}</label>
-							<select  data-name="${extra.menu_text}" name="data" ${extra.mandatory ? 'required' : ''} ${extra.disabled ? 'disabled' : ''}  style="padding:1.2rem;" class="form-select">
-                                <option value="">Select ${extra.menu_text}</option>
-                                ${extra.content.map(content => `
-                                    <option value="${content.name}">${content.name}</option>
-                                `).join('')}
-                            </select>
-                        </div>`;
-                });
-            }
-        });
+        `;
         fieldHtml += `</div></div>`;  // Close extras container and field-item
-
-
 	}else if(field.field_type=='text_area') {
 
 	fieldHtml = `
