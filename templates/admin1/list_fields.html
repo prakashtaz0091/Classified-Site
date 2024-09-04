@@ -34,14 +34,16 @@
                                 <div class="filter-sorting">
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0);" class="filter-sets"><img src="{% static 'admin/assets/img/icons/filter1.svg' %}" class="me-2" alt="img">Filter</a>
+                                            <a href="javascript:void(0);" class="filter-sets">
+                                                <img src="{% static 'admin/assets/img/icons/filter1.svg' %}" class="me-2" alt="img">Filter
+                                            </a>
                                         </li>
                                         <li>
                                             <span><img src="{% static 'admin/assets/img/icons/sort.svg' %}" class="me-2" alt="img"></span>
                                             <div class="review-sort">
-                                                <select class="select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                    <option>Sort by A - Z</option>
-                                                    <option>Sort by A - Z</option>
+                                                <select class="select" id="sortOptions" onchange="sortTable()">
+                                                    <option value="asc">A - Z</option>
+                                                    <option value="desc">Z - A</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -55,14 +57,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 ">
-                        <div class="table-resposnive table-div">
+                    <div class="col-12">
+                        <div class="table-responsive table-div">
                             <table class="table datatable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>type</th>
+                                        <th>Type</th>
                                         <th>Hints</th>
                                         <th>Action</th>
                                     </tr>
@@ -70,36 +72,33 @@
                                 <tbody>
                                     {% for item in fields %}
                                     <tr>
-                                        <td>{{forloop.counter}}</td>
-                                        <td>{{item.field_name}}</td>
-                                       
-                                        <td>{{item.field_type}}</td>
-                                        <td>{{item.hint}}</td>
-                                      
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ item.field_name }}</td>
+                                        <td>{{ item.field_type }}</td>
+                                        <td>{{ item.hint }}</td>
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
+                                                <a class="delete-table me-2" href="edit-categories.html">
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ item.id }})">
                                                     <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
                                                 </a>
                                                 {% if item.field_type == 'select' %}
- 
                                                 <a href='{% url "add_options" item.id %}' class='btn btn-submit' style='margin-left:18px; color: #212529;background-color: #e1e6fa;border-color: #e1e6fa;'>
-                                                    options
+                                                    Options
                                                 </a>
                                                 {% endif %}
                                             </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
-                                   
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
         
@@ -145,6 +144,34 @@
         }
 
      
+        
+    </script>
+
+    <script>
+        // JavaScript sorting function as shown above
+        function sortTable() {
+            var table = document.querySelector(".datatable tbody");
+            var rows = Array.from(table.rows);
+            var sortOption = document.getElementById("sortOptions").value;
+        
+            rows.sort(function(a, b) {
+                // Extract the text content from the 'Name' column (2nd column, index 1)
+                var nameA = a.cells[1].textContent.trim().toLowerCase();
+                var nameB = b.cells[1].textContent.trim().toLowerCase();
+        
+                if (sortOption === "asc") {
+                    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+                } else if (sortOption === "desc") {
+                    return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
+                }
+            });
+        
+            // Re-append sorted rows to the table body
+            rows.forEach(function(row) {
+                table.appendChild(row);
+            });
+        }
+        
         
     </script>
 
