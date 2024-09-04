@@ -66,6 +66,16 @@ urlpatterns = [
     path('seo-edit/<int:id>/',views.seo_edit,name='seo_edit'),
     path('add_seo/',views.add_seo,name='add_seo'),
 
+
+
+    # for default settings 
+    path('default_settings/',views.default_settings,name='default_settings'),
+    path('default-edit/<int:id>/',views.default_edit,name='default_edit'),
+
+    
+    
+    
+    
     
     
     

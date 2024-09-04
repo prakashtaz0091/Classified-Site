@@ -8,7 +8,7 @@ from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra
 from apps.store.models import  Product,ProductImages
 from apps.accounts.models import Account,UserProfile
-from apps.Admin.models import SEOSettings
+from apps.Admin.models import SEOSettings,SiteSettings
 from django.utils.timezone import now
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
@@ -661,6 +661,71 @@ def add_seo(request):
         return redirect('seo')
     return render(request,'admin1/seo/add_seo.html')
 
+
+
+
+
+# for settings 
+
+def default_settings(request):
+    seo=SiteSettings.objects.all().order_by("-id")[:1]
+    seo
+    for seo in seo:
+        seo=seo
+        
+    context={
+        'seo':seo 
+    }
+    return render(request,'admin1/settings/default.html',context)
+    
+
+
+def default_edit(request,id):
+    default_settings=get_object_or_404(SiteSettings,id=id)
+    if request.method=='POST':
+        max_free_ads_expire_days = request.POST.get('max_free_ads_expire_days')
+        max_free_ads = request.POST.get('max_free_ads')
+        post_ttl = request.POST.get('post_ttl')
+        max_promotional_mail = request.POST.get('max_promotional_mail')
+        paypal_mode=request.POST.get('paypal_mode')
+
+        
+         # Extract image files from request.FILES
+        profile_image = request.FILES.get('profle')
+        print(profile_image,'profile image')
+        product_image = request.FILES.get('product')
+        watermark_image = request.FILES.get('watermark')
+        
+        
+        default_settings.max_free_ads=max_free_ads
+        default_settings.max_free_ads_expire_days=max_free_ads_expire_days
+        default_settings.post_ttl=post_ttl
+        default_settings.max_promotional_mail=max_promotional_mail
+        
+        if profile_image:   
+            default_settings.profile_picture=profile_image
+            
+        if product_image:    
+            default_settings.product_image=product_image
+        
+        if watermark_image:    
+            default_settings.watermark_image=watermark_image
+        
+        default_settings.paypal_live_mode=True if paypal_mode == 'on' else False
+        
+        
+        default_settings.save()
+        
+        return redirect('default_settings')
+        
+        
+    
+    else:
+        context={
+            'id':id,
+            'default_settings':default_settings
+        }
+        return render(request,'admin1/settings/edit_default.html',context)
 
 
     

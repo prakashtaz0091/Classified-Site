@@ -1,0 +1,184 @@
+{% extends 'admin1/base1.html' %}
+{% load static %}  
+{% block content %}
+
+<div class="main-wrapper">
+
+    <!-- Header -->
+    {% include 'admin1/include/header.html' %}
+    <!-- /Header -->
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <a href="index.html">
+                    <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                </a>
+                <a href="index.html">
+                    <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                </a>
+            </div>
+            <div class="siderbar-toggle">
+                <label class="switch" id="toggle_btn">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        
+     {% include 'admin1/include/sidebar.html' %}
+    </div>
+    <!-- /Sidebar -->
+    
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-7 col-sm-12 m-auto">
+                    <div class="content-page-header">
+                        <h5>Edit Default Settings</h5>
+                    </div>
+                    <form action="{% url 'default_edit' id %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                           
+                                                <!-- Profile Image Section -->
+                        <div class="col-lg-12">
+                        <div class="form-group mb-0">
+                            <label>Profile Image</label>
+                        </div>
+                        <div class="form-uploads mb-4">
+                            <div class="form-uploads-path">
+                                {% if default_settings.profile_picture %}
+                                <img id="profileImagePreview" src="{{ default_settings.profile_picture.url }}" alt="img">
+                                {% else %}
+                                <img id="profileImagePreview" src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
+                                {% endif %}
+                                <div class="file-browse">
+                                    <h6>Drag & drop image or </h6>
+                                    <div class="file-browse-path">
+                                        <input type="file" id="profileImageUpload" onchange="previewImage(event, 'profileImagePreview')" name="profile">
+                                        <a href="javascript:void(0);"> Browse</a>
+                                    </div>
+                                </div>
+                                <h5>Supported formats: JPEG, PNG</h5>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Product Image Section -->
+                        <div class="col-lg-12">
+                        <div class="form-group mb-0">
+                            <label>Product Image</label>
+                        </div>
+                        <div class="form-uploads mb-4">
+                            <div class="form-uploads-path">
+                                {% if default_settings.product_image %}
+                                <img id="productImagePreview" src="{{ default_settings.product_image.url }}" alt="img">
+                                {% else %}
+                                <img id="productImagePreview" src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
+                                {% endif %}
+                                <div class="file-browse">
+                                    <h6>Drag & drop image or </h6>
+                                    <div class="file-browse-path">
+                                        <input type="file" id="productImageUpload" onchange="previewImage(event, 'productImagePreview')" name="product">
+                                        <a href="javascript:void(0);"> Browse</a>
+                                    </div>
+                                </div>
+                                <h5>Supported formats: JPEG, PNG</h5>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- WaterMark Image Section -->
+                        <div class="col-lg-12">
+                        <div class="form-group mb-0">
+                            <label>WaterMark Image</label>
+                        </div>
+                        <div class="form-uploads mb-4">
+                            <div class="form-uploads-path">
+                                {% if default_settings.watermark_image %}
+                                <img id="watermarkImagePreview" src="{{ default_settings.watermark_image.url }}" alt="img">
+                                {% else %}
+                                <img id="watermarkImagePreview" src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
+                                {% endif %}
+                                <div class="file-browse">
+                                    <h6>Drag & drop image or </h6>
+                                    <div class="file-browse-path">
+                                        <input type="file" id="watermarkImageUpload" onchange="previewImage(event, 'watermarkImagePreview')" name="watermark">
+                                        <a href="javascript:void(0);"> Browse</a>
+                                    </div>
+                                </div>
+                                <h5>Supported formats: JPEG, PNG</h5>
+                            </div>
+                        </div>
+                        </div>
+
+                            
+
+                            <!-- Other Form Inputs -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Maximum free Ads expires In (days)</label>
+                                    <input type="text" name="max_free_ads_expire_days" value="{{default_settings.max_free_ads_expire_days}}" class="form-control" placeholder="Maximum free Ads expires In (days)">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Maximum free Ads</label>
+                                    <input type="text" name="max_free_ads"  value="{{default_settings.max_free_ads}}" class="form-control" placeholder="Maximum free Ads">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Time to live (Post)</label>
+                                    <input type="text" name="post_ttl" value="{{default_settings.post_ttl}}" class="form-control" placeholder="Time to live (Post)">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Maximum Promotional mail</label>
+                                    <input type="text" name="max_promotional_mail" class="form-control" value="{{default_settings.max_promotional_mail}}" placeholder="Maximum Promotional mail">
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>PayPal Mode?</label>
+                                    <ul class="custom-radiosbtn">
+                                        <div class="active-switch">
+                                            <label class="switch">
+                                                <input type="checkbox" name='paypal_mode' value='on' {% if default_settings.paypal_live_mode %} checked {% endif %}>
+                                                <span class="sliders round"></span>
+                                            </label>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="btn-path">                                    
+                                    <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                                    <button type="submit" class="btn btn-submit">Save Category</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<script>
+    function previewImage(event, previewId) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const output = document.getElementById(previewId);
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+
+{% endblock %}
