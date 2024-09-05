@@ -107,6 +107,8 @@ urlpatterns = [
    path('fields/show_data/',views.show_view, name='show_data'),
    path('fields/update_data/',views.update_view, name='update_data'),
    path('delete/show_data/',views.delete_show_data, name='delete_show_data'),
+   path('delete/extra_information/<int:id>/',views.delete_extra_information, name='delete_extra_information'),
+   
 
    
     

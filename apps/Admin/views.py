@@ -4,6 +4,7 @@ from django.shortcuts import  get_object_or_404
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra,FieldExtraContent
@@ -1004,5 +1005,23 @@ def delete_show_data(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
 
+
+
+
+
+def delete_extra_information(request, id):
+    if request.method == 'POST':
+        try:
+            main_id = request.POST.get('extra_data') 
+            field = FieldExtra.objects.get(id=id)
+            field.delete()
+            return redirect(reverse('extra_information', kwargs={'id': main_id}))
+        
+        except FieldExtra.DoesNotExist:
+            return HttpResponseBadRequest("FieldExtra not found.")
+        except Exception as e:
+            return HttpResponseBadRequest(f"An error occurred: {str(e)}")
+    else:
+        return HttpResponseBadRequest("Invalid request method.")
 
 
