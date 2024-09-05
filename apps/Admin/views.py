@@ -959,3 +959,50 @@ def toggle_option_view(request):
             return JsonResponse({'status': 'error', 'message': 'Option not found'}, status=404)
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=400)
+
+@csrf_exempt
+def show_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        field_extra=FieldExtra.objects.get(id=id)
+        field_extra_content=FieldExtraContent.objects.filter(linked_to=field_extra)
+        field_extra_content_list = list(field_extra_content.values()) 
+        print(field_extra_content_list)
+        return JsonResponse({'status': 'success','data':field_extra_content_list})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=400)
+    
+    
+@csrf_exempt
+def update_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print('data',data)
+        id=data.get('id')
+        
+        field_extra_content=FieldExtraContent.objects.get(id=id)
+        field_extra_content.name=data.get('name')
+        field_extra_content.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=400)
+
+def delete_show_data(request):
+    if request.method == 'DELETE':
+        try:
+            if request.body:
+                data = json.loads(request.body)
+                id=data.get('id')
+                field_extra=FieldExtraContent.objects.get(id=id)
+                field_extra.delete()
+                return JsonResponse({'status': 'success', 'message': 'Data deleted successfully.'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'No data provided in request body.'}, status=400)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON.'}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
+
+
+

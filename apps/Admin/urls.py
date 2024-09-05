@@ -101,6 +101,14 @@ urlpatterns = [
 #    for toggle 
    path('fields/required/',views.toggle_field_required, name='toggle-required'),
    path('backup/',views.backup_templates, name='backup'),
+   
+   
+   #for options extra content show model 
+   path('fields/show_data/',views.show_view, name='show_data'),
+   path('fields/update_data/',views.update_view, name='update_data'),
+   path('delete/show_data/',views.delete_show_data, name='delete_show_data'),
+
+   
     
     
     

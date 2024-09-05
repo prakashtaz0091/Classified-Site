@@ -44,9 +44,9 @@
                                         <td>{{extra.menu_text}}</td>
                                         
                                         <td>
-                                            {% if extra.field_extras_content.all %}
-                                            <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Show data</button>
-
+                                                                                        {% if extra.field_extras_content.all %}
+                                            <!-- Trigger Button for Show Data -->
+                                            <button data-bs-toggle="modal" data-id="{{ extra.id }}" data-main-id="{{ id }}" data-bs-target="#show-data-modal" class="btn btn-show-data" style="border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Show data</button>
                                             <button  data-bs-toggle="modal"  data-id="{{ extra.id }}" data-main-id="{{id}}" data-bs-target="#add-data-modal" style='border: 1px solid #02abfe;color: #fff;background-color: #02abfe;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;'>Add data</button>
                                             <button style="border: 1px solid  #e94437;color: #fff;background-color: #e94437;border-radius: .125rem;font-size: 11px;font-weight: 400;line-height: 1;padding: .375rem .5625rem;font-weight: 600;">Delete </button>
                                              {% else %}
@@ -164,7 +164,202 @@
             </div>
         </div>
     </div>
+
+<!-- Show Data Modal Structure -->
+<div class="modal fade" id="show-data-modal" tabindex="-1" aria-labelledby="showDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="padding: 20px; border-radius: 8px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showDataModalLabel">Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Rows will be dynamically inserted here -->
+                <div class="d-flex align-items-center mb-2">
+                    <input type="text" class="form-control me-2" value="Example Name" disabled>
+                    <button type="button" class="btn btn-primary me-2" >Edit</button>
+                    <button type="button" class="btn btn-danger" >Delete</button>
+                </div>
+                <!-- Repeat for each item -->
+            </div>
+            
+            <div class="modal-footer" style="border-top: none; justify-content: center;">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var showModal = document.getElementById('show-data-modal');
+    
+        showModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;  // Button that triggered the modal
+            var dataId = button.getAttribute('data-id');
+            var mainId = button.getAttribute('data-main-id');
+            
+            // Clear previous data in the modal
+            var modalBody = showModal.querySelector('.modal-body');
+            modalBody.innerHTML = '';  // Clear the modal body
+    
+            // Prepare the data to be sent via POST request
+            var requestData = {
+                id: dataId,
+                main_id: mainId
+            };
+    
+            // Fetch data from the backend using POST request
+            fetch(`/admins/fields/show_data/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': "{{ csrf_token }}",  // Include CSRF token
+                },
+                body: JSON.stringify(requestData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                data.data.forEach(function(item) {
+                    // Create a div for each item
+                    var itemRow = document.createElement('div');
+                    itemRow.classList.add('d-flex', 'align-items-center', 'mb-2');
+                
+                    // Create an input field to show the name
+                    var inputField = document.createElement('input');
+                    inputField.type = 'text';
+                    inputField.classList.add('form-control', 'me-2');
+                    inputField.value = item.name;
+                    inputField.disabled = true;  // Disable the input field for viewing
+                    inputField.setAttribute('data-id', item.id);  // Set the data-id attribute for targeting
+                
+                    // Create edit and delete buttons
+                    var editButton = document.createElement('button');
+                    editButton.type = 'button';
+                    editButton.classList.add('btn', 'btn-primary', 'me-2');
+                    editButton.textContent = 'Edit';
+                    editButton.setAttribute('data-edit-id', item.id);  // Set the data-edit-id attribute for targeting
+                    editButton.onclick = function() {
+                        handleEditShow(item.id, mainId);
+                    };
+                
+                    var deleteButton = document.createElement('button');
+                    deleteButton.type = 'button';
+                    deleteButton.classList.add('btn', 'btn-danger');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.onclick = function() {
+                        handleDeleteShow(item.id, mainId);
+                    };
+                
+                    // Append the input field and buttons to the row
+                    itemRow.appendChild(inputField);
+                    itemRow.appendChild(editButton);
+                    itemRow.appendChild(deleteButton);
+                
+                    // Append the row to the modal body
+                    modalBody.appendChild(itemRow);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                modalBody.innerHTML = '<p class="text-danger">Error loading data</p>';
+            });
+        });
+    });
+    
+    function handleEditShow(dataId, mainId) {
+        // Get the input field and the edit button for the specific row
+        var inputField = document.querySelector(`input[data-id='${dataId}']`);
+        var editButton = document.querySelector(`button[data-edit-id='${dataId}']`);
+    
+        // Enable the input field
+        inputField.disabled = false;
+    
+        // Change the "Edit" button to "Update"
+        editButton.textContent = 'Update';
+        editButton.classList.remove('btn-primary');
+        editButton.classList.add('btn-success');
+    
+        // Replace the click event to handle the update instead of edit
+        editButton.onclick = function() {
+            var updatedData = inputField.value; // Get the updated value from the input field
+    
+            if (updatedData !== "") {
+                // Make an AJAX request to update the data
+                fetch(`/admins/fields/update_data/`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: dataId,
+                        main_id: mainId,
+                        name: updatedData // Send the updated name
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': "{{ csrf_token }}",  // Include CSRF token
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        console.log('Data updated successfully');
+    
+                        // Optionally disable the input field and revert button after success
+                        inputField.disabled = true;
+                        editButton.textContent = 'Edit';
+                        editButton.classList.remove('btn-success');
+                        editButton.classList.add('btn-primary');
+    
+                        // Re-attach the original edit event handler
+                        editButton.onclick = function() {
+                            handleEditShow(dataId, mainId);
+                        };
+    
+                       
+                    } else {
+                        console.error('Error updating data:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        };
+    }
+
+    function handleDeleteShow(dataId, mainId) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            fetch(`/admins/delete/show_data/`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': "{{ csrf_token }}",  
+                },
+                body: JSON.stringify({ 
+                    id: dataId, 
+                    main_id: mainId 
+                }),  // Include the data in the request body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.reload();
+                } else {
+                    console.error('Error deleting data:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+    
+  
+    
+</script>
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var addButton = document.querySelectorAll('[data-bs-toggle="modal"]');
@@ -263,5 +458,24 @@
             xhr.send(data);
         }
     </script>
+
+    
+
+
+    <script>
+        function confirmDelete(roomId) {
+            var form = document.getElementById('delete-room-form');
+            var actionUrl = "".replace('0', roomId);
+            form.action = actionUrl;
+
+            var deleteModal = new bootstrap.Modal(document.getElementById('delete-item'));
+            deleteModal.show();
+        }
+
+     
+        
+    </script>
+
+
     
  {% endblock %}
