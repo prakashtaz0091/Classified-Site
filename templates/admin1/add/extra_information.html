@@ -84,9 +84,10 @@
                                         </td>
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
+                                                <a class="edit-table me-2" style='display:flex;' href="javascript:void(0);" data-id="{{ extra.id }}" onclick="openEditModal({{ extra.id }})">
+                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
+                                                 </a>
+                                                 
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{extra.id }},{{id}})">
                                                     <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
                                                 </a>
@@ -109,6 +110,35 @@
         
     </div>
 
+
+<!-- Modal Structure -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm">
+            <div class="mb-3">
+              <label for="categoryName" class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="categoryName" name="category_name">
+            </div>
+            <input type="hidden" id="categoryId" name="category_id">
+            <!-- Add other fields as necessary -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="updateBtn">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
    <!-- Delete Modal -->
 <!-- Delete Modal -->
 <div class="modal fade" id="delete-item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -199,7 +229,6 @@
 </div>
 
 
-    
 
 
 
@@ -490,6 +519,73 @@
         
     </script>
 
+
+    
+
+    <script>
+    
+        function openEditModal(id) {
+            // Fetch the existing data for the item to be edited via AJAX
+            fetch(`/admins/get-extra-data-url/${id}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(data)
+                    // Populate the modal with the fetched data
+                    document.getElementById('categoryId').value = data.category.id;
+                    document.getElementById('categoryName').value = data.category.name;
+                    // Populate other fields as necessary
+                } else {
+                    alert('Failed to fetch category data: ' + data.error);
+                }
+        
+                // Show the modal after data is fetched
+                var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                editModal.show();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+      
+        
+    </script>
+
+    <script>
+          // Handle the Update Button Click
+          document.getElementById('updateBtn').addEventListener('click', function() {
+            var formData = new FormData(document.getElementById('editForm'));
+            console.log('i am in ')
+            
+            fetch('/admins/update-category-url/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', 
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Extra information updated successfully!');
+                    window.location.reload()
+                    // Optionally, you can refresh the page or update the UI
+                } else {
+                    alert('An error occurred: ' + data.error);
+                }
+        
+                // Close the modal after successful update
+                var editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                editModal.hide();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        
+    </script>
 
     
  {% endblock %}

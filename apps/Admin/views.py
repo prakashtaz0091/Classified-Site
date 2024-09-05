@@ -1023,5 +1023,44 @@ def delete_extra_information(request, id):
             return HttpResponseBadRequest(f"An error occurred: {str(e)}")
     else:
         return HttpResponseBadRequest("Invalid request method.")
+    
+    
+    
+    
+def get_category_data(request, id):
+    try:
+        category = FieldExtra.objects.get(id=id)
+       
+        data = {
+            'success': True,
+            'category': {
+                'id': category.id,
+                'name': category.menu_text,
+            }
+            
+        }
+        
+        print(data)
+    except Category.DoesNotExist:
+        data = {'success': False, 'error': 'Category not found'}
+    
+    return JsonResponse(data)    
 
+@csrf_exempt
+def update_category(request):
+    if request.method == 'POST':
+        print(request.POST)
+        category_id = request.POST.get('category_id')
+        category_name = request.POST.get('category_name')
+        
+        try:
+            category = FieldExtra.objects.get(id=category_id)
+            category.menu_text = category_name
+            # Update other fields as necessary
+            category.save()
 
+            return JsonResponse({'success': True, 'message': 'extra information updated successfully!'})
+        except Category.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'extra not found'})
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})
