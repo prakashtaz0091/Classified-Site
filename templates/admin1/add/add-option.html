@@ -86,7 +86,7 @@
                                   
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="edit-categories.html" >
+                                                <a class="delete-table me-2" href="{% url 'edit_options' option.id %}" >
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ option.id }},{{id}})">
@@ -197,4 +197,55 @@
         
         
     </script>
+
+    {% comment %} for searching  {% endcomment %}
+
+    <script>
+
+        function searchTable() {
+            // Get the input value and convert it to lowercase
+            var input = document.getElementById("searchInput");
+            var filter = input.value.toLowerCase();
+            var table = document.querySelector(".datatable tbody");
+            var rows = table.getElementsByTagName("tr");
+            var noResultsRow = document.getElementById("no-results");  // Reference to the 'No results' row
+            var anyVisible = false;  // Flag to check if any row is visible
+        
+            // Loop through all table rows
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var shouldDisplay = false;
+        
+                // Loop through each cell in the current row
+                var cells = row.getElementsByTagName("td");
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = cells[j];
+                    if (cell) {
+                        // Check if the cell text contains the search query
+                        if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                            shouldDisplay = true;
+                            break;  // No need to check other cells if a match is found
+                        }
+                    }
+                }
+        
+                // Show or hide the row based on the search result
+                if (shouldDisplay) {
+                    row.style.display = "";
+                    anyVisible = true;  // Set the flag to true if any row is visible
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        
+            // Show or hide the 'No results found' row based on whether any row is visible
+            if (anyVisible) {
+                noResultsRow.style.display = "none";
+            } else {
+                noResultsRow.style.display = "";
+            }
+        }
+        
+    </script>
+
   {% endblock %}

@@ -1083,3 +1083,24 @@ def delete_field_options(request, id):
         print(f"An error occurred: {e}")
    
         
+        
+
+def edit_options(request,id):
+    option=get_object_or_404(FieldOptions,id=id)
+    if request.method == "POST":
+        print(request.POST)
+        field_value=request.POST.get('field_value')        
+        order=request.POST.get('order')
+        main_id=request.POST.get('main_id')
+        option.field_value=field_value
+        option.order=order
+        option.save()
+        return redirect(reverse('edit_options', kwargs={'id': main_id}))
+    
+    else:
+        context={
+            'option':option,
+            'id':id
+        }
+        
+        return render(request,'admin1/fields/edit_option.html',context)
