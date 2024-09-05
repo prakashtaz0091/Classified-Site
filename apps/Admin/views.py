@@ -1064,3 +1064,22 @@ def update_category(request):
             return JsonResponse({'success': False, 'error': 'extra not found'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+
+
+def delete_field_options(request, id):
+    try:
+        main_id = request.POST.get('main_id')
+        print(main_id)
+        field_options = get_object_or_404(FieldOptions, id=id)
+        field_options.delete()
+        return redirect(reverse('add_options', kwargs={'id': main_id}))
+    
+    except FieldOptions.DoesNotExist:
+        pass
+    
+    except Exception as e:    
+        print(f"An error occurred: {e}")
+   
+        
