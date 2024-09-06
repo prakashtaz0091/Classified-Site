@@ -420,6 +420,8 @@ def add_listing(request):
         featured_data_json=request.POST.get('form_data')
         featured_data=json.loads(featured_data_json)
         
+        data_file=request.FILES.get('data-file')
+        data_file_name=request.POST.get('data-file-name')
         # Retrieve location data
         location_name = request.POST.get("location")
         address = request.POST.get("address")

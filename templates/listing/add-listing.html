@@ -562,7 +562,7 @@ data.fields.forEach(field => {
             <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;" class="d-block mb-1">
                 ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
             </label>
-            <input type="file" id="file-${field.field_name}" name="${field.field_name}" ${field.mandatory ? 'required' : ''} 
+            <input type="file" id="data-file" name="data-file" ${field.mandatory ? 'required' : ''} 
                    style="margin-top: 0.5rem;">
         </div>`;
 }
@@ -677,14 +677,19 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
     });
 
 	    const jsonData = JSON.stringify(formData);
-	console.log(jsonData)
-	return
 
     // Create a FormData object to include the JSON data
     const formDataObject = new FormData(this);
+
+    const image_file = document.getElementById('data-file');
+	if (image_file){
+    formDataObject.append('data-file', image_file.files[0]);
+    formDataObject.append('data-file-name', image_file.name);
+	}
     formDataObject.append('form_data', jsonData);
     // Convert the form data to JSON
 
+	console.log(formDataObject)
     fetch(this.action, {
         method: 'POST',
         body: formDataObject,
