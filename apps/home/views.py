@@ -422,6 +422,7 @@ def add_listing(request):
         
         data_file=request.FILES.get('data-file')
         data_file_name=request.POST.get('data-file-name')
+        print(data_file)
         # Retrieve location data
         location_name = request.POST.get("location")
         address = request.POST.get("address")
