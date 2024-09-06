@@ -135,7 +135,12 @@
                     </span>
                     <span class="user-content">
                         <span class="user-name">{{user.full_name}}</span>
+                        {% if user.role %}
                         <span class="user-details">{{user.role}} User</span>
+                        {% else %}
+                        <span class="user-details">Admin User</span>
+                        {% endif %}
+                        
                     </span>
                 </a>
                 {% comment %} <div class="dropdown-menu menu-drop-user">
