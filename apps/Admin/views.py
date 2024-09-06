@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra,FieldExtraContent
 from apps.store.models import  Product,ProductImages
@@ -374,7 +375,7 @@ def edit_ads(request, id):
 
 
 def user_list(request):
-    users = Account.objects.filter(is_superadmin=True)
+    users = Account.objects.filter(Q(is_superadmin=True) | Q(is_staff=True)) 
     user_statuses = []
 
     for user in users:
@@ -420,18 +421,34 @@ def add_user(request):
 
         if password == repeat_password:
             # Create the Account
-            account = Account.objects.create(
-                full_name=name,
-                email=email,
-                username=username,
-                phone_number=phone_number,
-                password=make_password(password),  
-                is_active=active,
-                role=role,
-                is_superadmin=True,
-                is_staff=True
-            )
+            # account = Account.objects.create(
+            #     full_name=name,
+            #     email=email,
+            #     username=username,
+            #     phone_number=phone_number,
+            #     password=make_password(password),  
+            #     is_active=active,
+            #     role=role,
+            #     is_superadmin=True,
+            #     is_staff=True
+            # )
            
+            account=Account()
+            account.full_name=name
+            account.email=email
+            account.username=username
+            account.password=make_password(password)
+            account.is_active=active
+            account.role=role
+            if account.role == 'Admin' or account.role == "Super Admin":
+                print('i am in')
+                is_superadmin=True 
+            
+            else:
+                print('i am out')
+                is_staff=True  
+            
+            account.save()       
             # Create the UserProfile
             UserProfile.objects.create(
                 full_name=name,
@@ -523,7 +540,7 @@ def users_edit(request, id):
 
 
 def customer_list(request):
-    accounts=Account.objects.filter(is_superadmin=False).order_by('-id')
+    accounts = Account.objects.filter(Q(is_superadmin=False) | Q(is_staff=False))  
     context={
         'accounts':accounts
     }
@@ -553,6 +570,7 @@ def add_customer(request):
                 password=make_password(password),
                 is_active=is_active,
                 is_suspended=is_suspended,
+                is_verify=True
                 
             )
             profile, created = UserProfile.objects.get_or_create(user=account)
