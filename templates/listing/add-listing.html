@@ -539,7 +539,24 @@ data.fields.forEach(field => {
 				console.log(content.value)
             });
         })();`;
-    }
+	}else if(field.field_type=='radio'){
+  fieldHtml = `
+        <div style="margin-bottom: 20px;" class="field-ite">
+            <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;" class="d-block mb-1">
+                ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
+            </label>
+            <div class="" style="padding: 1.2rem; display: flex; flex-wrap: wrap;">
+                ${field.options.map((option, index) => `
+                    <div class="form-radio" style="margin-right: 20px; display: flex; align-items: center;">
+                        <input type="radio" id="radio-${index}" name="data" value="${option.value}" data-name="${field.field_name}" ${field.mandatory ? 'required' : ''} 
+                        style="width: 20px; height: 20px; margin-right: 10px;">
+                        <label class="form-chek-label" for="radio-${index}" style="margin: 0; cursor: pointer;">${option.value}</label>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+
+	}
 
     // Append the generated HTML to the appropriate container
     const container = document.querySelector('.brand-listing');
@@ -631,26 +648,28 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
         const fieldName = el.getAttribute('data-name');
 		console.log(fieldName)
 		
-		if (el.multiple) {
+		
+        if (el.type === 'radio' && el.checked) {
+            // Handle checked radio buttons
+            formData.push(`${fieldName}:${el.value}`);
+        } else if (el.type === 'checkbox' && el.checked) {
+            // Handle checked checkboxes
+            formData.push(`${fieldName}:${el.value}`);
+        } else if (el.type === 'select-multiple') {
             // Handle multiple select
             const selectedOptions = Array.from(el.selectedOptions).map(option => option.value);
             if (selectedOptions.length > 0) {
                 formData.push(`${fieldName}:${selectedOptions.join(',')}`);
             }
-		}
-		else {
-
-        	const value = el.value;
-			console.log(value,fieldName)
-			if(fieldName && value) {
-            // Format as "field_name:value" and add to the list
-            formData.push(`${fieldName}:${value}`);
-
-				
+        } else if (el.type !== 'radio' && el.type !== 'checkbox' && el.value) {
+            // Handle other input types
+            formData.push(`${fieldName}:${el.value}`);
         }
-		}}); 
+    });
+
 	    const jsonData = JSON.stringify(formData);
 	console.log(jsonData)
+	return
 
     // Create a FormData object to include the JSON data
     const formDataObject = new FormData(this);

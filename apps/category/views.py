@@ -310,7 +310,6 @@ def create_category(request):
             context={
                 'message':'Category added Success'
             }
-            print('tryu')
             return redirect(reverse("add_admin_category"))
         else:
             raise Exception("ONly post method is supported for this endpoitn")
@@ -438,7 +437,7 @@ def get_category_options(request):
             }
             
             # If the field type is 'select', include the options
-            if field.field_type == 'select' or field.field_type=='select_multiple':
+            if field.field_type == 'select' or field.field_type=='select_multiple' or field.field_type=='radio':
                 options = FieldOptions.objects.filter(linked_to=field).order_by('order')
                 field_data['options'] = []
                 
