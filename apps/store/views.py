@@ -28,7 +28,6 @@ def service_details(request, product_slug):
                     processed_featured_data.append({'title': key.strip(), 'value': value.strip()})
                 else:
                     processed_featured_data.append({'title': item.strip(), 'value': ''})
-        print(processed_featured_data)
 
 
         if request.user.is_authenticated:

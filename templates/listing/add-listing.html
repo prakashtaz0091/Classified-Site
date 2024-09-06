@@ -556,7 +556,16 @@ data.fields.forEach(field => {
             </div>
         </div>`;
 
-	}
+	}else if (field.field_type === 'file') {
+    fieldHtml = `
+        <div style="margin-bottom: 20px;" class="field-ite">
+            <label style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;" class="d-block mb-1">
+                ${field.field_name} ${field.mandatory ? '(*)' : '(optional)'}
+            </label>
+            <input type="file" id="file-${field.field_name}" name="${field.field_name}" ${field.mandatory ? 'required' : ''} 
+                   style="margin-top: 0.5rem;">
+        </div>`;
+}
 
     // Append the generated HTML to the appropriate container
     const container = document.querySelector('.brand-listing');
