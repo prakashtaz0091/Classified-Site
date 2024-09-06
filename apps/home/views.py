@@ -13,6 +13,9 @@ from apps.home.models import Reviews
 from apps.store.models import (BookMark, ContactInformation, Feature, Location,
                                Product, ProductImages)
 
+from django.db.models import F, Value
+from django.db.models.functions import Substr
+
 
 def home(request):
     if request.method == "GET":
@@ -87,22 +90,45 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
-        book_marks=BookMark.objects.filter(user=request.user)
-        total_product=Product.objects.filter(created_by=request.user).count()
-        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
-        reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
-        total_views = Product.objects.filter(created_by=request.user).aggregate(total_views=Sum('view_count'))['total_views']
-        
-       
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
+
+        book_marks=BookMark.objects.filter(user=user_to_view)
+        total_product=Product.objects.filter(created_by=user_to_view).count()
+        reviews_list=Reviews.objects.select_related().filter(reviewed_for=user_to_view).order_by('-id')[:5]
+        reviews_count=Reviews.objects.filter(reviewed_for=user_to_view).count()
+        total_views = Product.objects.filter(created_by=user_to_view).aggregate(total_views=Sum('view_count'))['total_views']
         bookmarks_count=book_marks.count()
-        context={
-            'book_marks':book_marks,
-            'bookmarks_count':bookmarks_count,
-            'reviews_list':reviews_list,
-            'total_product':total_product,
-            'reviews_count':reviews_count,
-            'total_views':total_views
-        }
+
+        if user:
+            context={
+                'book_marks':book_marks,
+                'bookmarks_count':bookmarks_count,
+                'reviews_list':reviews_list,
+                'total_product':total_product,
+                'reviews_count':reviews_count,
+                'total_views':total_views,
+                'type':'viewing',
+                'user_to_view':user_to_view,
+            }
+        else:
+            context={
+                'book_marks':book_marks,
+                'bookmarks_count':bookmarks_count,
+                'reviews_list':reviews_list,
+                'total_product':total_product,
+                'reviews_count':reviews_count,
+                'total_views':total_views
+            }
+
         return render(request, "others/dashboard.html", context)
     except Exception as e:
         print(e)
@@ -111,6 +137,19 @@ def dashboard(request):
 
 def my_listing(request):
     if request.method == "GET":
+
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
+
+
         sort_option = request.GET.get("sort", "-created_date")  # Default to newest
         search_query = request.GET.get("search", "")  # Default to newest
         products=None
@@ -120,9 +159,12 @@ def my_listing(request):
         ) | Product.objects.filter(
             description__icontains=search_query
         )
-            products = products.filter(created_by=request.user).order_by(sort_option)
+            products = products.filter(created_by=user_to_view).order_by(sort_option)
         else:
-            products = Product.objects.filter(created_by=request.user).order_by(sort_option)
+            products = Product.objects.filter(created_by=user_to_view).order_by(sort_option)
+
+        if user is not None:
+            products=products.filter(is_approved=True)
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -150,6 +192,10 @@ def my_listing(request):
             "page_obj": page_obj,
             "products": page_obj.object_list,
         }
+        if  user is not None:
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
+
         return render(request, "others/my-listing.html", context)
 
 
@@ -241,39 +287,59 @@ def something_wrong(request):
 
 
 def book_marks(request):
-    book_marks = BookMark.objects.filter(user=request.user).order_by('-id')
-    if request.user.is_authenticated:
-        bookmarked_product_ids = BookMark.objects.filter(
-            user=request.user
-        ).values_list("product_id", flat=True)
-    else:
-        bookmarked_product_ids = []
-        
-        
-    print(bookmarked_product_ids,'id')    
 
-    # paginations added
-    paginator = Paginator(book_marks, 1)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    try:
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
 
-    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
-            product_data = render_to_string(
-                    "partials/product_list_bookmark.html",
-                    {"book_marks": page_obj.object_list},
-                    request=request,
-                ),
-            pagination_data=render_to_string(
-                "partials/pagination.html",
-                {'page_obj':page_obj},
-                request=request
-            )
-            print(pagination_data)
-            return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
-    context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
 
-    return render(request, "others/bookmarks.html", context)
 
+        book_marks = BookMark.objects.filter(user=user_to_view).order_by('-id')
+        if request.user.is_authenticated:
+            bookmarked_product_ids = BookMark.objects.filter(
+                user=user_to_view
+            ).values_list("product_id", flat=True)
+        else:
+            bookmarked_product_ids = []
+            
+            
+        print(bookmarked_product_ids,'id')    
+
+        # paginations added
+        paginator = Paginator(book_marks, 1)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
+        if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+                product_data = render_to_string(
+                        "partials/product_list_bookmark.html",
+                        {"book_marks": page_obj.object_list},
+                        request=request,
+                    ),
+                pagination_data=render_to_string(
+                    "partials/pagination.html",
+                    {'page_obj':page_obj},
+                    request=request
+                )
+                print(pagination_data)
+                return JsonResponse({'product_data':product_data,'pagination_data':pagination_data})
+        context = {"book_marks": page_obj, "page_obj": page_obj, "count": paginator.count,'book_mark':bookmarked_product_ids}
+        if user_id:
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
+
+        return render(request, "others/bookmarks.html", context)
+
+    except Exception as e:
+        print(e)
+        # will do more things like 404 page later
 
 def messages(request):
     return render(request, "others/messages.html")
@@ -281,20 +347,36 @@ def messages(request):
 
 def reviews(request):
     try:
+        user=request.GET.get('user',None)
+        user_id=request.GET.get('id',None)
+
+        user_to_view=None
+        if user is None:
+            user_to_view=request.user
+        else:
+            user_instance=Account.objects.filter(id=user_id).first()
+            user_to_view=user_instance
+            user_to_view.prefix_email=user
+
+
+
         visitor_reviews_list = (
             Reviews.objects.select_related()
-            .filter(reviewed_for=request.user)
+            .filter(reviewed_for=user_to_view)
             .order_by("-id")
         )
         your_reviews_list = (
             Reviews.objects.select_related()
-            .filter(created_by=request.user)
+            .filter(created_by=user_to_view)
             .order_by("-id")
         )
         context = {
             "visitor_reviews_list": visitor_reviews_list,
             "your_reviews_list": your_reviews_list,
         }
+        if user_id:
+            context['type']='viewing'
+            context['user_to_view']=user_to_view
         return render(request, "others/reviews.html", context)
     except Exception as e:
         print(e)
@@ -338,6 +420,9 @@ def add_listing(request):
         featured_data_json=request.POST.get('form_data')
         featured_data=json.loads(featured_data_json)
         
+        data_file=request.FILES.get('data-file')
+        data_file_name=request.POST.get('data-file-name')
+        print(data_file)
         # Retrieve location data
         location_name = request.POST.get("location")
         address = request.POST.get("address")

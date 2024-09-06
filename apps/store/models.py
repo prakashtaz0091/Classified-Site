@@ -105,3 +105,38 @@ class BookMark(models.Model):
         return (
             f"{self.user.email} - {self.user.full_name} on {self.product.product_name}"
         )
+
+class FeatureDataImage(models.Model):
+    product=models.ForeignKey(Product,related_name='features_images',on_delete=models.CASCADE)
+    featured_data_image=models.FileField(blank=True,null=True)
+    feature_data_name=models.CharField(max_length=255)
+
+
+class BannerAds(models.Model):
+    POSITION_CHOICES = [
+        ('homepage_carousel', 'Homepage Carousel'),
+        ('category_page_top', 'Category Page Top Banner'),
+        ('homepage_top', 'Homepage Top Banner'),
+        ('homepage_bottom', 'Homepage Bottom Banner'),
+    ]
+    title=models.CharField(max_length=200)
+    link=models.URLField()
+    price=models.FloatField()
+    position = models.CharField(max_length=100, choices=POSITION_CHOICES)
+    city=models.CharField(max_length=100)
+
+
+class DefaultBannerAdsPricing(models.Model):
+    POSITION_CHOICES = [
+        ('homepage_carousel', 'Homepage Carousel'),
+        ('category_page_top', 'Category Page Top Banner'),
+        ('homepage_top', 'Homepage Top Banner'),
+        ('homepage_bottom', 'Homepage Bottom Banner'),
+    ]
+    
+    position = models.CharField(max_length=100, choices=POSITION_CHOICES, unique=True)
+    description=models.TextField()
+    price_per_day = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.position} - AED {self.price_per_day} per day'

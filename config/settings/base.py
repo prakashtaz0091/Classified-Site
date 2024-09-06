@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.job.apps.JobConfig',
     'apps.contact.apps.ContactConfig',
     'apps.Admin.apps.AdminConfig',
+    'apps.business_listing.apps.BusinessListingConfig',
     
 
 ]

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (BookMark, ContactInformation, Feature, Location, Product,
-                     ProductImages)
+                     ProductImages,FeatureDataImage,BannerAds,DefaultBannerAdsPricing)
 
 # Register your models here.
 
@@ -19,6 +19,9 @@ admin.site.register(ProductImages)
 admin.site.register(Location)
 admin.site.register(ContactInformation)
 admin.site.register(Feature)
+admin.site.register(FeatureDataImage)
 
+admin.site.register(BannerAds)
+admin.site.register(DefaultBannerAdsPricing)
 
 admin.site.register(BookMark)

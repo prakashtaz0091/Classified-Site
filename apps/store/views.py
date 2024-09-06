@@ -28,7 +28,6 @@ def service_details(request, product_slug):
                     processed_featured_data.append({'title': key.strip(), 'value': value.strip()})
                 else:
                     processed_featured_data.append({'title': item.strip(), 'value': ''})
-        print(processed_featured_data)
 
 
         if request.user.is_authenticated:
@@ -39,11 +38,18 @@ def service_details(request, product_slug):
             print(product_instance.featured_data)
         else:
             bookmarked_product_ids = []
+
+        #For showing total ads of that user
+        ads_count=Product.objects.filter(created_by=product_instance.created_by).count()
+        unique_email_prefix_part=product_instance.created_by.email.split('@')[0]
         context = {
             "product": product_instance,
             "product_images": product_images,
             "book_mark": bookmarked_product_ids,
-            'featured_data':processed_featured_data
+            'featured_data':processed_featured_data,
+            'ads_count':ads_count,
+            'prefix_email':unique_email_prefix_part
+
         }
         return render(request, "home/service-details.html", context)
     except Exception as e:
