@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+	
+	<div class="mainwrapper error-page">
+        <!-- Header -->
+		<header class="header">
+			{% include 'includes/header.html' %}
+		</header>
+		
+	   	<div class="content">
+			<div class="container">
+				<div class="row" style='margin-top:9rem;'>
+					<div class="col-lg-12 ">
+						<div class="container my-4">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <div class="text-center mb-3">
+                                        <h4 style='font-size: 1.05rem;margin-bottom: .525rem;font-weight: 600;line-height: 1.2;'>Choose a payment method  
+                                            <small style="font-size: .875em;font-weight: 400;">(Click on one of the options below)</small>
+                                        </h4>
+                                    </div>
+                                    <div class="p-4 border-0 rounded-0 shadow-sm card">
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <label id="visaLabel" class="p-2 Payment_payment_method_option__NyHN4" style="width: 224px; cursor: pointer;">
+                                                    <img class="mr-2" src="{% static './visa.png' %}" alt="Visa, Mastercard, Amex" style="width: 200px;">
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-6 text-center">
+                                                <label id="paypalLabel" class="p-2 Payment_payment_method_option__NyHN4" style="width: 224px; cursor: pointer;">
+                                                    <img class="mr-2" src="{% static './paypal.png' %}" alt="PayPal" style="width: 200px; height: 45px;">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <button id="continueBtn" type="button" class="btn btn-block btn-primary" disabled>Continue</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+        // Get the elements
+        const visaLabel = document.getElementById('visaLabel');
+        const paypalLabel = document.getElementById('paypalLabel');
+        const continueBtn = document.getElementById('continueBtn');
+
+        let selectedMethod = null;
+
+        // Function to select payment method
+        function selectPaymentMethod(label) {
+            // Remove red border from all labels
+            visaLabel.style.border = 'none';
+            paypalLabel.style.border = 'none';
+
+            // Add red border to the clicked label
+            label.style.border = '2px solid red';
+
+            // Enable the continue button
+            continueBtn.disabled = false;
+            selectedMethod = label.id;
+        }
+
+        // Add event listeners to labels
+        visaLabel.addEventListener('click', () => selectPaymentMethod(visaLabel));
+        paypalLabel.addEventListener('click', () => selectPaymentMethod(paypalLabel));
+
+        // Optionally, add an event listener to the continue button
+        continueBtn.addEventListener('click', function() {
+            if (selectedMethod) {
+                alert(`You have selected ${selectedMethod === 'visaLabel' ? 'Visa/Mastercard/Amex' : 'PayPal'}`);
+            }
+        });
+	</script>
+
+{% endblock %}
