@@ -25,7 +25,7 @@
                 <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
             </a>
         </li>
-        <li>
+        <li class="{% if request.path == '/banner/' %}active{% endif %}">
             <a href="{% url 'banner' %}">
                 <i class="fas fa-light fa-circle-arrow-left"></i> <span>Banner Ads</span>
             </a>

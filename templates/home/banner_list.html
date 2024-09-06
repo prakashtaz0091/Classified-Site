@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<body>
+
+	
+	<div class="main-wrapper innerpagebg">
+	
+		<!-- Header -->
+		<header class="header">
+			{% include 'includes/header.html' %}
+		</header>
+		<!-- /Header -->
+		
+		<!-- Breadscrumb Section -->
+		<div class="breadcrumb-bar">
+			<div class="container">
+				<div class="row align-items-center text-center">
+		    		<div class="col-md-12 col-12">
+			    	    <h2 class="breadcrumb-title">My Listing</h2>
+				    	<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">My Listing</li>
+							</ol>
+						</nav>							
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadscrumb Section -->
+		
+		<!-- Dashboard Content -->
+        <div class="dashboard-content listing-section " style='padding:0'>		
+			<div class="container">
+				{% include 'includes/dashboard.html' %}
+				<div class="dash-listingcontent dashboard-info">
+				    <div class="dash-cards card">
+					    <div class="card-header">
+						    <h4>My Banner Ads</h4>
+							<a class="btn btn-primary add-listing" href="{% url 'add_banner' %}"><span><i class="fa-solid fa-plus"></i></span>Add Banner</a>									
+						</div>
+                        <div class="card-body">
+							<div class="listing-search">
+								<div class="filter-content form-group">
+									<div class="group-img">
+										<input type="text" class="form-control" id='productSearch' oninput="searchProducts()" placeholder="Search...">
+									  <i class="feather-search"></i>
+									</div>
+								</div>
+								<div class="sorting-div">
+									 <div class="sortbyset">
+										<span class="sortbytitle">Sort by</span>
+										<div class="sorting-select">
+											<select class="form-control select" id="sortSelect" onchange="sortProducts(this)">
+												<option value="-created_date">Newest</option>
+												<option value="created_date">Oldest</option>
+											</select>
+											
+										</div>
+									</div>						
+								</div>																
+							</div>
+                            <div class="table-responsive">
+								<table class="listing-table datatable" id="listdata-table" >
+                                   <thead>								    
+									<tr>
+									    <th class="no-sort" >Title</th>										 
+									    <th class="no-sort">Image</th>		
+                                        <th class="no-sort">Cost</th>								 
+									    <th>Status</th>										 							 
+									    <th class="no-sort">Action</th>										 
+									 </tr>	
+                                     </thead>
+                                     <tbody id="productContainerWrapper">	
+										
+									{% for item in products %}
+                                     <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
+									     <td>
+											 {% if item.cover_image %}
+										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
+											{% endif %}
+										 </td>
+									     <td>
+										     <h6><a href="{% url 'service_detail' item.slug %}">{{item.product_name}}</a></h6>
+											 <div class="listingtable-rate">
+												<a href="javascript:void(0)" class="cat-icon">
+													<i class="fa-regular fa-circle-stop"></i>
+													{% for category in item.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}
+												</a> 
+												<span class="fixed-amt">AED{{ item.price }}</span>
+											</div>
+											<p>{{item.description}}</p>
+										 </td>
+									     <td><span class="status-text">Published</span></td>
+									     <td><Span class="views-count">{{item.view_count}}</span></td>
+									     <td>
+										    <div class="action">
+        										<a href="{% url 'service_detail' item.slug %}" class="action-btn btn-view"><i class="feather-eye"></i></a>
+											    <a href="{% url 'edit_my_listing' item.id %}" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
+												<a href="{% url 'delete_my_listing' item.id %}" class="action-btn btn-trash" onclick="return confirmDelete();">
+													<i class="feather-trash-2"></i>
+												</a>
+																							
+										    </div>
+										 </td>
+                                     </tr> 
+									 {% endfor %}
+									
+                                     </tbody>									 
+							    </table>				
+							</div>
+                            <div class="blog-pagination">
+								<!-- Pagination Controls -->
+<div class="blog-pagination">
+    <nav>
+        <ul id="paginationClick" class="pagination">
+            <li class="page-item previtem {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+                    <i class="fas fa-regular fa-arrow-left"></i> Prev
+                </a>
+            </li>
+            <li class="justify-content-center pagination-center"> 
+                <div class="pagelink">
+                    <ul>
+                        {% for num in page_obj.paginator.page_range %}
+                            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>                                                
+            </li>                                                
+            <li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
+                    Next <i class="fas fa-regular fa-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+							</div>										
+					    </div>							
+					</div>                  							
+				</div>							
+			</div>				
+		</div>			
+	    <!-- /Dashboard Content -->
+		
+			
+	    <!-- Footer -->
+		{% include 'includes/footer.html' %}
+		<!-- /Footer -->		
+		
+	</div>
+
+    <!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+		</svg>
+	</div>
+	<!-- scrollToTop end -->
+
+	
+
+	<script>
+		
+			function confirmDelete() {
+				return confirm("Do you really want to delete this item?");
+			}
+
+			function sortProducts(selectElement) {
+				var searchQuery = document.getElementById('productSearch').value.toLowerCase();
+				var sortValue = selectElement.value;
+				$.ajax({
+					url: window.location.href,
+					data: {
+						sort: sortValue,
+						search:searchQuery
+					},
+					success: function (data) {
+						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
+					}
+				});
+			}
+			
+		function searchProducts() {
+    // Get the search input value
+    var searchQuery = document.getElementById('productSearch').value.toLowerCase();
+    // Get the product rows
+				var sortValue = document.getElementById('sortSelect').value;
+				$.ajax({
+					url: window.location.href,
+					data: {
+						sort: sortValue,
+						search:searchQuery
+					},
+					success: function (data) {
+						$('#productContainerWrapper').html(data.product_data);
+						$('#paginationClick').html(data.pagination_data)
+					}
+				});
+
+}
+
+	</script>
+	
+	{% include 'includes/pagination_script.html' %}
+
+
+{% endblock %}
