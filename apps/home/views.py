@@ -523,4 +523,10 @@ def search(request):
 
 def job(request):
     return render(request,'home/index-8.html')
+
+
+
+
+def banner(request):
+    return render(request,'home/banner.html')
     

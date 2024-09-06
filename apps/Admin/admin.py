@@ -9,7 +9,6 @@ class SEOSettingsAdmin(admin.ModelAdmin):
 
 admin.site.register(SEOSettings,SEOSettingsAdmin)
 
-
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     list_display = ('paypal_live_mode', 'max_free_ads_expire_days', 'max_free_ads', 'post_ttl', 'max_promotional_mail')

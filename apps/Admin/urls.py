@@ -53,12 +53,11 @@ urlpatterns = [
     
     
     # for customers
-    
+
     path('customer_list/',views.customer_list,name='customers_list'),
     path('add_customer/',views.add_customer,name='customers_add'),
     path('customer/delete/<int:id>/',views.customers_delete,name='customers_delete'),
     path('customer/edit/<int:id>/',views.customers_edit,name='customers_edit'),
-    
     
     
     # for active and suspend user
