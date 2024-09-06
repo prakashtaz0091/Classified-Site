@@ -105,3 +105,9 @@ class BookMark(models.Model):
         return (
             f"{self.user.email} - {self.user.full_name} on {self.product.product_name}"
         )
+class FeatureDataImage(models.Model):
+
+    product=models.ForeignKey(Product,related_name='features_images',on_delete=models.CASCADE)
+    featured_data_image=models.FileField(blank=True,null=True)
+    feature_data_name=models.CharField(max_length=255)
+
