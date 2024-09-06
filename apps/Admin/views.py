@@ -1088,7 +1088,6 @@ def delete_field_options(request, id):
 def edit_options(request,id):
     option=get_object_or_404(FieldOptions,id=id)
     if request.method == "POST":
-        print(request.POST)
         field_value=request.POST.get('field_value')        
         order=request.POST.get('order')
         main_id=request.POST.get('main_id')

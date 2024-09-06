@@ -86,7 +86,12 @@
                                             No phone number provided
                                             {% endif %}
                                         </td>
+                                        {% if user_status.user.role %}
                                         <td>{{ user_status.user.role }}</td>
+                                        {% else %}
+                                        <td>Admin</td>
+                                        {% endif %}
+
                                         <td>
                                             {% if user_status.time_since_login %}
                                                 {{ user_status.user.last_login|timesince }} ago

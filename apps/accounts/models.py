@@ -4,25 +4,21 @@ from django.utils import timezone
 
 # Create your models here.
 
-
 class myaccountmanager(BaseUserManager):
     def create_user(self, full_name, email, password=None):
         if not email:
-            raise ValueError("user must have an email address")
+            raise ValueError("User must have an email address")
 
         if not full_name:
-            raise ValueError("user must have an full_name")
+            raise ValueError("User must have a full name")
 
         user = self.model(
             email=self.normalize_email(email),
             full_name=full_name,
         )
 
-        if password:
-            user.set_password(password)
-        else:
-            user.set_unusable_password()
-
+        user.set_password(password)
+        user.save(using=self._db)
         return user
 
     def create_superuser(self, full_name, email, password):
@@ -37,12 +33,20 @@ class myaccountmanager(BaseUserManager):
         user.is_staff = True
         user.is_superadmin = True
         user.save(using=self._db)
+
+        # Create associated UserProfile
+        UserProfile.objects.create(
+            user=user,
+            full_name=user.full_name,
+            email_address=user.email
+        )
+
         return user
 
 
 class Account(AbstractBaseUser):
     full_name = models.CharField(max_length=50)
-    username = models.CharField(max_length=50,blank=True,null=True)
+    username = models.CharField(max_length=50, blank=True, null=True)
     
     email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
@@ -53,16 +57,13 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     is_suspended = models.BooleanField(default=False)
-    is_verify=models.BooleanField(default=False)
-    role=models.CharField(blank=True,null=True,max_length=100)
-    last_activity = models.DateTimeField(null=True, blank=True)  # New field
+    is_verify = models.BooleanField(default=False)
+    role = models.CharField(blank=True, null=True, max_length=100,)
+    last_activity = models.DateTimeField(null=True, blank=True)
     last_password_change = models.DateTimeField(null=True, blank=True)
 
-
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
-        "full_name",
-    ]
+    REQUIRED_FIELDS = ["full_name"]
 
     objects = myaccountmanager()
 
@@ -81,33 +82,35 @@ class Account(AbstractBaseUser):
     
     def set_password(self, raw_password):
         super().set_password(raw_password)
+        if self.pk is None:
+            # Save the instance first to ensure it has a primary key
+            self.save()
         self.last_password_change = timezone.now()
-        self.save(update_fields=['last_password_change'])    
+        self.save(update_fields=['last_password_change'])
 
 
 class UserProfile(models.Model):
     full_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    country=models.CharField(max_length=100,blank=True,null=True)
-    Address=models.CharField(max_length=100,blank=True,null=True)
-    state=models.CharField(max_length=100,blank=True,null=True)
-    city=models.CharField(max_length=100,blank=True,null=True)
-    pincode=models.CharField(max_length=100,blank=True,null=True)
-    language=models.CharField(max_length=100,blank=True,null=True)
-    description=models.TextField(blank=True,null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    pincode = models.CharField(max_length=100, blank=True, null=True)
+    language = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     user = models.OneToOneField(
         Account, on_delete=models.CASCADE, related_name="profile"
     )
     email_address = models.EmailField(unique=True)
     notes = models.TextField(blank=True, null=True)
     profile_photo = models.ImageField(
-        upload_to="profile_photos/", blank=True, null=True,default="profile_photos/profile.png"
+        upload_to="profile_photos/", blank=True, null=True, default="profile_photos/profile.png"
     )
     facebook = models.URLField(blank=True, null=True)
     twitter = models.URLField(blank=True, null=True)
     google_plus = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
 
-   
     def __str__(self):
         return self.full_name

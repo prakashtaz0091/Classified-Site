@@ -59,36 +59,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for seo in seo %}
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td >
-                                           
-                                                <span>{{seo.page}}</span>
-                                         
-                                        </td>
-                                        <td>
-                                           {{seo.meta_title|truncatechars:30}}
-                                        </td>
-                                        <td>{{ seo.site_description|truncatechars:30 }}</td>
-                                        <td>
-                                          {{seo.keywords|truncatechars:30}}
-                                        </td>
-                                        <td>{{ seo.created_at|date:"d M Y" }}</td>
-                                       
+                                    {% if seo %}
+                                        {% for seo in seo %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td >
+                                            
+                                                    <span>{{seo.page}}</span>
+                                            
+                                            </td>
+                                            <td>
+                                            {{seo.meta_title|truncatechars:30}}
+                                            </td>
+                                            <td>{{ seo.site_description|truncatechars:30 }}</td>
+                                            <td>
+                                            {{seo.keywords|truncatechars:30}}
+                                            </td>
+                                            <td>{{ seo.created_at|date:"d M Y" }}</td>
                                         
-                                        <td>
-                                            <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="{% url 'seo_edit' seo.id %}">
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ seo.id }})">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
+                                            
+                                            <td>
+                                                <div class="table-actions d-flex">
+                                                     <a class="delete-table me-2" href="{% url 'seo_edit' seo.id %}">
+                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
+                                                    </a> 
+                                                    <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ seo.id }})">
+                                                        <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endif %}    
                                 </tbody>
                                 <tr id="no-results" style="display: none;">
                                     <td colspan="8" class="text-center">No results found</td>
