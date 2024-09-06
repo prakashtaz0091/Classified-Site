@@ -1,0 +1,60 @@
+{% extends 'admin1/base1.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+      {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        {% include 'admin1/include/sidebar.html' %}
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-7 col-sm-12 m-auto">
+                        <div class="content-page-header">
+                            <h5>Edit option</h5>
+                        </div>
+                      
+                        <form action="{% url 'edit_options' id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Name* </label>
+                                        <input required name='field_value' type="text" class="form-control" placeholder="Name" value="{{option.field_value}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Order* </label>
+                                        <input required name='order' type="text" class="form-control" placeholder="Order" value="{{option.order}}">
+                                    </div>
+                                </div>
+                                <input type='hidden' name='main_id' value="{{id}}">
+                              
+
+                            
+                                <div class="col-lg-12">
+                                    <div class="btn-path">                                    
+                                        <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                                        <button type="submit" class="btn btn-submit "> Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+   
+
+  {% endblock %}

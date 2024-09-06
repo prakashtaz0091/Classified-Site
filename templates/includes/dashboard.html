@@ -69,6 +69,9 @@
             {% if not user_to_view %}
             <a href="{% url 'logout' %}">
                 <i class="fas fa-light fa-circle-arrow-left"></i> <span>Logout</span>
+        <li class="{% if request.path == '/banner/' %}active{% endif %}">
+            <a href="{% url 'banner' %}">
+                <i class="fas fa-light fa-circle-arrow-left"></i> <span>Banner Ads</span>
             </a>
             {% endif %}
         </li>

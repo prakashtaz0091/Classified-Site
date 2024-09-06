@@ -210,7 +210,7 @@
             <li class="nav-item dropdown has-arrow logged-item">
                 <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">
                     {% if user_profile %}
-                    <img src="{{user_profile.get_photo_url}}" alt="NO image">
+                    <img src="{{user_profile.profile_photo.url}}" alt="NO image">
                     {% else %}
                     <img src="{% static 'assets/img/profile-img.jpg' %}" alt="NO image">
                     {% endif %}

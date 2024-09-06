@@ -56,9 +56,9 @@
                                         <li>
                                             <span><img src="{% static 'admin/assets/img/icons/sort.svg' %}" class="me-2" alt="img"></span>
                                             <div class="review-sort">
-                                                <select class="select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                    <option>Sort by A - Z</option>
-                                                    <option>Sort by Z - A</option>
+                                                <select class="select" id="sortOptions" onchange="sortTable()">
+                                                    <option value="asc">A - Z</option>
+                                                    <option value="desc">Z - A</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -118,12 +118,18 @@
                                     {% for ad in ads %}
                                     <tr>
                                         <td>{{ forloop.counter }}</td>
-                                        <td>
-                                            <a href="{% url 'ads_details' ad.slug %}" class="table-imgname">
+                                   
+
+                                        <td class="table-namesplit">
+                                            <a href="{% url 'ads_details' ad.slug %}" class="table-profileimage">
                                                 <img src="{{ ad.cover_image.url }}" class="me-2" alt="img">
+                                            </a>
+                                            <a href="{% url 'ads_details' ad.slug %}" class="table-name">
                                                 <span>{{ ad.product_name|truncatechars:30 }}</span>
                                             </a>
                                         </td>
+                                        
+                                        
                                         <td>{{ ad.category.category_name }}</td>
                                         <td>{{ ad.subcategory.category_name }}</td>
                                         <td>AED{{ ad.price }}</td>
@@ -169,7 +175,11 @@
                                         </td>
                                     </tr>
                                     {% endfor %}
+                                    
                                 </tbody>
+                                <tr id="no-results" style="display: none;">
+                                    <td colspan="8" class="text-center">No results found</td>
+                                </tr>
                                 
                             </table>
                         </div>
@@ -257,6 +267,85 @@
                 }
             });
         });
+        
+    </script>
+
+    <script>
+
+        function searchTable() {
+            // Get the input value and convert it to lowercase
+            var input = document.getElementById("searchInput");
+            var filter = input.value.toLowerCase();
+            var table = document.querySelector(".datatable tbody");
+            var rows = table.getElementsByTagName("tr");
+            var noResultsRow = document.getElementById("no-results");  // Reference to the 'No results' row
+            var anyVisible = false;  // Flag to check if any row is visible
+        
+            // Loop through all table rows
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var shouldDisplay = false;
+        
+                // Loop through each cell in the current row
+                var cells = row.getElementsByTagName("td");
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = cells[j];
+                    if (cell) {
+                        // Check if the cell text contains the search query
+                        if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                            shouldDisplay = true;
+                            break;  // No need to check other cells if a match is found
+                        }
+                    }
+                }
+        
+                // Show or hide the row based on the search result
+                if (shouldDisplay) {
+                    row.style.display = "";
+                    anyVisible = true;  // Set the flag to true if any row is visible
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        
+            // Show or hide the 'No results found' row based on whether any row is visible
+            if (anyVisible) {
+                noResultsRow.style.display = "none";
+            } else {
+                noResultsRow.style.display = "";
+            }
+        }
+        
+    </script>
+
+    <script>
+        // JavaScript sorting function as shown above
+        function sortTable() {
+            var table = document.querySelector(".datatable tbody");
+            var rows = Array.from(table.rows);
+            var sortOption = document.getElementById("sortOptions").value;
+        
+            rows.sort(function(a, b) {
+                // Extract the text content from the .table-name span
+                var nameA = a.querySelector(".table-name span");
+                var nameB = b.querySelector(".table-name span");
+        
+                // Handle potential null values
+                nameA = nameA ? nameA.textContent.toLowerCase() : '';
+                nameB = nameB ? nameB.textContent.toLowerCase() : '';
+        
+                if (sortOption === "asc") {
+                    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+                } else if (sortOption === "desc") {
+                    return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
+                }
+            });
+        
+            // Re-append sorted rows to the table body
+            rows.forEach(function(row) {
+                table.appendChild(row);
+            });
+        }
         
     </script>
 {% endblock %}

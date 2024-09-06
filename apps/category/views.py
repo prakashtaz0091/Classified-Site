@@ -367,7 +367,8 @@ def create_field_options_extra(request,id):
     try:
         if request.method=='POST':
             data=request.POST
-            print(data)
+            print(data,id)
+            print('helo world====================+++>')
             field_option_id=id
             menu_text=data.get('menu_text')
 
@@ -376,7 +377,7 @@ def create_field_options_extra(request,id):
                 raise Exception("The provided hint doesnot have a respective category")
             field_options_extra_instance=FieldExtra.objects.create(menu_text=menu_text,linked_to=field_options_instance)
 
-            return redirect(reverse('add_options',kwargs={'id': id}))
+            return redirect(reverse('extra_information',kwargs={'id': id}))
         else:
             raise Exception("Only post method supported for this endpoint")
     except Exception as e:
@@ -384,11 +385,13 @@ def create_field_options_extra(request,id):
         return JsonResponse({'error':str(e)},status=400)
 
 
-def create_field_options_extra_content(request,id):
+def create_field_options_extra_content(request):
     try:
         if request.method=='POST':
             data=request.POST
-            print(data)
+            print(data,'==============+++>')
+            id=data.get('item_id')
+            main_id=data.get('main_id')
             field_extra_id=id
             name=data.get('name')
 
@@ -397,7 +400,7 @@ def create_field_options_extra_content(request,id):
                 raise Exception("The provided hint doesnot have a respective category")
             field_options_extra_instance=FieldExtraContent.objects.create(name=name,linked_to=field_extra_instance)
 
-            return redirect(reverse('extra_information',kwargs={'id': id}))
+            return JsonResponse({'status': 'success'})
         else:
             raise Exception("Only post method supported for this endpoint")
     except Exception as e:

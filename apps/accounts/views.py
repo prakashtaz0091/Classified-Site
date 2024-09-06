@@ -19,6 +19,8 @@ def Login(request):
         email = request.POST["email"]
         password = request.POST["password"]
         user = auth.authenticate(email=email, password=password)
+        print(email,password)
+        print(user)
 
         if user is not None:
             auth.login(request, user)
@@ -64,7 +66,6 @@ def Register(request):
             profile.user = user
             profile.full_name = form.cleaned_data["full_name"]
             profile.email_address = form.cleaned_data["email"]
-            profile.profile_photo = "assets/img/profile-img.jpg"
             profile.save()
 
             # Send activation email
@@ -114,6 +115,7 @@ def activate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
+        user.is_verify=True
         user.save()
         messages.success(request, "Congratulations! Your account is activated.")
         return redirect("login")

@@ -48,6 +48,9 @@ urlpatterns = [
     # for subcategory 
     
     path('sub_category/',views.sub_category,name='sub_category'),
-    path('get_subcategories/', views.get_subcategories, name='get_subcategories')
-    
+    path('get_subcategories/', views.get_subcategories, name='get_subcategories'), 
+    path('banner/', views.banner, name='banner'),
+    path('add/banner/', views.add_banner, name='add_banner'),
+    path('payment/process/', views.payment_process, name='payment_process'),
+    path('backup/', views.backup, name='backup'),
 ]

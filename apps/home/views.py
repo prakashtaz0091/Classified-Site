@@ -608,4 +608,21 @@ def search(request):
 
 def job(request):
     return render(request,'home/index-8.html')
+
+
+
+
+def banner(request):
+    return render(request,'home/banner_list.html')
+
+def add_banner(request):
+    return render(request,'home/banner.html')
+
+def payment_process(request):
+    return render(request,'home/paymentselect.html')
+
+def backup(request):
+    return render(request,'home/backup.html')
+
+
     
