@@ -617,10 +617,17 @@ def banner(request):
 
 def add_banner(request):
     if request.method=='GET':
-        default_banner_instances=DefaultBannerAdsPricing.objects.all()
+        homepage_banner_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_carousel')
+        category_page_top=DefaultBannerAdsPricing.objects.filter(position='category_page_top')
+        homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top')
+        homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom')
         context={
-            'default_banner_data':default_banner_instances
+            'homepage_banner_instance':homepage_banner_instance,
+            'category_page_top':category_page_top,
+            'homepage_bottom_instance':homepage_bottom_instance,
+            'homepage_top_instance':homepage_top_instance
         }
+        print(context)
         return render(request,'home/banner.html',context)
     elif  request.method=="POST":
         print("hello")
