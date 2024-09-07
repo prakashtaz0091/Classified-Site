@@ -112,11 +112,11 @@
                                                     <select id="hometopbannerPlan" class="form-control" disabled 
                                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()" 
                                                             >
-                                                        <option value="268">10 days</option>
-                                                        <option value="491">20 days</option>
-                                                        <option value="736">30 days</option>
+                                                            <option value="{{homepage_top_instance.price_per_day|mul:10}}">10 days</option>
+                                                        <option value="{{homepage_top_instance.price_per_day|mul:20}}">20 days</option>
+                                                        <option value="{{homepage_top_instance.price_per_day|mul:30}}">30 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="hometopbannerPrice">268</span></p>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="hometopbannerPrice">{{homepage_top_instance.price_per_day|mul:10}}</span></p>
                                                 </div>
                                                 
                                                 <div class="row pl-2 pr-2">
@@ -136,17 +136,19 @@
                                                         <input type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
                                                         <label for="homebottombanner" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Bottom Banner - Promotion</label>
                                                     </div>
-                                                    <p>The Homepage Bottom Banner - Promotion area of Adjeem is a great location to advertise your business if you want to make it more visible to possible buyers.</p>
+                                                    <p>
+                                                        {{homepage_bottom_instance.description}}
+                                                    </p>
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="homebottombannerPlan" class="form-control" 
                                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
                                                              onchange="calculateTotal()">
-                                                        <option value="201">10 days</option>
-                                                        <option value="402">20 days</option>
-                                                        <option value="603">30 days</option>
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:10}}">10 days</option>
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:20}}">20 days</option>
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:30}}">30 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homebottombannerPrice">201</span></p>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homebottombannerPrice">{{homepage_bottom_instance.price_per_day|mul:10}}</span></p>
                                                 </div>
                                                 
                                                 <div class="row pl-2 pr-2">
