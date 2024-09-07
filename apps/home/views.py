@@ -621,12 +621,22 @@ def add_banner(request):
         category_page_top=DefaultBannerAdsPricing.objects.filter(position='category_page_top').first()
         homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top').first()
         homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom').first()
+        categories = Category.objects.filter(parent_id__isnull=True)
+    
+    # Create a dictionary to hold the categories and their subcategories
+        category_context = {}
+        for category in categories:
+        # Get subcategories for each parent category
+            subcategories = Category.objects.filter(parent_id=category)
+            category_context[category] = subcategories
+
         print(homepage_banner_instance.price_per_day)
         context={
             'homepage_banner_instance':homepage_banner_instance,
             'category_page_top':category_page_top,
             'homepage_bottom_instance':homepage_bottom_instance,
-            'homepage_top_instance':homepage_top_instance
+            'homepage_top_instance':homepage_top_instance,
+            'categories':category_context
         }
         print(context)
         return render(request,'home/banner.html',context)

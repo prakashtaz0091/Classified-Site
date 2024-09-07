@@ -175,22 +175,9 @@
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
                                             onchange="toggleSubCategory()">
                                             <option value="">Select</option>
-                                            <option value="Vehicles">Vehicles</option>
-                                            <option value="Properties">Properties</option>
-                                            <option value="Mobile Phones & Tablets">Mobile Phones & Tablets</option>
-                                            <option value="Electronics">Electronics</option>
-                                            <option value="Home Appliances & Furniture">Home Appliances & Furniture</option>
-                                            <option value="Fashion">Fashion</option>
-                                            <option value="Sports, Arts & Outdoors">Sports, Arts & Outdoors</option>
-                                            <option value="Health & Beauty">Health & Beauty</option>
-                                            <option value="Services">Services</option>
-                                            <option value="Babies & Kids">Babies & Kids</option>
-                                            <option value="Animals & Pets">Animals & Pets</option>
-                                            <option value="Agriculture & Food">Agriculture & Food</option>
-                                            <option value="Commercial Equipment & Tools">Commercial Equipment & Tools</option>
-                                            <option value="Repair & Construction">Repair & Construction</option>
-                                            <option value="Event centres, Venues & Workstations">Event centres, Venues & Workstations</option>
-                                            <option value="Insurance">Insurance</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endfor %}
                                         </select>
                                     </div>
                                 
@@ -200,14 +187,6 @@
                                         <select name="subcategory" id="exampleForm.ControlSelect2" class="form-control" 
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
                                             <option value="">All</option>
-                                            <option value="Cars">Cars</option>
-                                            <option value="Motorcycles & Scooters">Motorcycles & Scooters</option>
-                                            <option value="Buses & Microbuses">Buses & Microbuses</option>
-                                            <option value="Trucks & Trailers">Trucks & Trailers</option>
-                                            <option value="Heavy Equipment">Heavy Equipment</option>
-                                            <option value="Boats & Watercraft">Boats & Watercraft</option>
-                                            <option value="Vehicle Parts & Accessories">Vehicle Parts & Accessories</option>
-                                            <option value="Others">Others</option>
                                         </select>
                                     </div>
                                 </div>
@@ -345,11 +324,48 @@
             }
         }
 
-
-        // Register event listener for checkbox change
         document.getElementById('categorypage').addEventListener('change', toggleFieldsCategory);
-
-        // Register event listener for category change
-        
         </script>
+            <script>
+        // Embed the categories context variable as a JSON object
+        const categories = "{{ categories|safe }}";
+        console.log(categories)
+
+        function toggleSubCategory() {
+            const categorySelect = document.getElementById('exampleForm.ControlSelect1');
+            const selectedCategoryId = categorySelect.value;
+            const subcategorySelect = document.getElementById('exampleForm.ControlSelect2');
+            const selectedCategory = categorySelect.value;
+            alert(selectedCategory)
+
+            // Show or hide the subcategory field based on category selection
+            if (selectedCategory) {
+                document.getElementById('subcategoryField').style.display = 'block';
+                subcategorySelect.disabled = false;
+
+                // Populate the subcategory dropdown
+                subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+                console.log(selectedCategory)
+                fetch(`/get_subcategories/?category_id=${selectedCategoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+
+                        if (data.subcategories) {
+                            data.subcategories.forEach(subcategory => {
+                                const option = document.createElement('option');
+                                option.value = subcategory.id;
+                                option.textContent = subcategory.category_name;
+                                subcategorySelect.appendChild(option);
+                            });
+                        }
+                    })
+            } else {
+                document.getElementById('subcategoryField').style.display = 'none';
+                subcategorySelect.disabled = true;
+                subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+            }
+        }
+    </script>
+
 {% endblock %}
