@@ -10,7 +10,7 @@ from django.contrib import messages
 from apps.accounts.models import Account
 from apps.category.models import Category
 from apps.home.models import Reviews
-from apps.store.models import (BookMark, ContactInformation, Feature, Location,
+from apps.store.models import (BookMark, ContactInformation, DefaultBannerAdsPricing, Feature, Location,
                                Product, ProductImages)
 
 from django.db.models import F, Value
@@ -616,7 +616,14 @@ def banner(request):
     return render(request,'home/banner_list.html')
 
 def add_banner(request):
-    return render(request,'home/banner.html')
+    if request.method=='GET':
+        default_banner_instances=DefaultBannerAdsPricing.objects.all()
+        context={
+            'default_banner_data':default_banner_instances
+        }
+        return render(request,'home/banner.html',context)
+    elif  request.method=="POST":
+        print("hello")
 
 def payment_process(request):
     return render(request,'home/paymentselect.html')

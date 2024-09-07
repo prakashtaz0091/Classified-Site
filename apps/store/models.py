@@ -124,11 +124,11 @@ class BannerAds(models.Model):
     price=models.FloatField()
     position = models.CharField(max_length=100, choices=POSITION_CHOICES)
     city=models.CharField(max_length=100)
-    image=models.FileField(upload_to='/banner')
+    image=models.FileField(upload_to='banner/',null=True)
     
     # only for category banner ads
-    category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
-    sub_category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='banner_category',blank=True,null=True)
+    sub_category=models.ForeignKey(Category,related_name='banner_subcategory',on_delete=models.CASCADE,blank=True,null=True)
 
 
 class DefaultBannerAdsPricing(models.Model):
