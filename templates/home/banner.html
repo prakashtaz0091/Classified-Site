@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load mathfilters %}
 {% load static %}
 
 {% block content %}
@@ -49,15 +50,15 @@
                                                         <label for="homepage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Carousel</label>
                                                     </div>
                                                     <p>
-                                                        Boost your business visibility and reach potential customers effortlessly by advertising your company on Adjeem's Carousel Banner-Promotion Area. 
+                                                        {{homepage_banner_instance.description}}
                                                     </p>
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="homepagePlan" class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
-                                                        <option value="446">30 days</option>
-                                                        <option value="223">15 days</option>
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:30}}">30 days</option>
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:15}}">15 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homepagePrice">446</span></p>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homepagePrice">{{homepage_banner_instance.price_per_day|mul:30}}</span></p>
                                                 </div>
     
                                                 
@@ -78,13 +79,13 @@
                                                         <input type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
                                                         <label for="categorypage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Category page top banner</label>
                                                     </div>
-                                                    <p>Category page top banner</p>
+                                                    <p>{{category_page_top.description}}</p>
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="categorypagePlan" class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
-                                                        <option value="446">365 days</option>
+                                                        <option value="{{category_page_top.price_per_day|mul:365}}">365 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED 446</p>
+                                                    <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED {{category_page_top.price_per_day|mul:365}}</p>
                                                 </div>
                                                 <div class="row pl-2 pr-2">
                                                     <div class="col-12" id="categorypageUpload" style="display: none;">
@@ -104,7 +105,7 @@
                                                         <label for="hometopbanner" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Top Banner - Promotion</label>
                                                     </div>
                                                     <p>
-                                                        Your ad deserves to be on top - Place your ad in a prominent location to quickly increase your sales.
+                                                        {{homepage_top_instance.description}}
                                                     </p>
                                                 </div>
                                                 <div class="col-4">

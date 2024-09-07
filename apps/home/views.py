@@ -617,10 +617,11 @@ def banner(request):
 
 def add_banner(request):
     if request.method=='GET':
-        homepage_banner_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_carousel')
-        category_page_top=DefaultBannerAdsPricing.objects.filter(position='category_page_top')
-        homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top')
-        homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom')
+        homepage_banner_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_carousel').first()
+        category_page_top=DefaultBannerAdsPricing.objects.filter(position='category_page_top').first()
+        homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top').first()
+        homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom').first()
+        print(homepage_banner_instance.price_per_day)
         context={
             'homepage_banner_instance':homepage_banner_instance,
             'category_page_top':category_page_top,
