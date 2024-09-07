@@ -23,7 +23,8 @@
                             <button class="btn btn-primary" style='padding:0.5rem 1rem;margin-right:4rem;'>⬅ Go Back</button>
                             Promote your business
                         </h2>
-                        <form autocomplete="off" class="">
+                        <form autocomplete="off" class="" method="POST">
+                            {% csrf_token %}
                             <div class="oh p-4 card">
                                 <p class="mb-0" style='color: #7d7d7d;font-size: .875rem;font-weight: 400;line-height: 1.4;'>
                                     Promoting your business is a must if you want to stand apart from your competitors and out to your customers, so let's get started.
@@ -46,7 +47,7 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input type="checkbox" id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
+                                                        <input type="checkbox" name='homepage' id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
                                                         <label for="homepage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Carousel</label>
                                                     </div>
                                                     <p>
@@ -54,7 +55,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="col-4">
-                                                    <select id="homepagePlan" class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
+                                                    <select id="homepagePlan" name='homepage_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
                                                         <option value="{{homepage_banner_instance.price_per_day|mul:30}}">30 days</option>
                                                         <option value="{{homepage_banner_instance.price_per_day|mul:15}}">15 days</option>
                                                     </select>
@@ -65,7 +66,7 @@
                                                 <div class="row pl-2 pr-2">
                                                     <div class="col-12" id="homepageUpload" style="display: none;">
                                                         <label class="form-label" for="homepageImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
-                                                        <input type="file" id="homepageImage">
+                                                        <input type="file" name='homepage_image'  id="homepageImage">
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,7 +171,7 @@
                                     <!-- Category Page -->
                                     <div style="display:none" id="category_field" class="col-md-6 col-sm-12">
                                         <label class="form-label" for="exampleForm.ControlSelect1">Category Page</label>
-                                        <select name="parent" id="exampleForm.ControlSelect1" class="form-control"  
+                                        <select name="category" id="exampleForm.ControlSelect1" class="form-control"  
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
                                             onchange="toggleSubCategory()">
                                             <option value="">Select</option>
@@ -196,7 +197,7 @@
                                     <!-- Sub Category (Initially Disabled but in the Same Row) -->
                                     <div style="display:none;" class="col-md-6 col-sm-12" id="subcategoryField">
                                         <label class="form-label" for="exampleForm.ControlSelect2">Sub Category</label>
-                                        <select name="child" id="exampleForm.ControlSelect2" class="form-control" 
+                                        <select name="subcategory" id="exampleForm.ControlSelect2" class="form-control" 
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
                                             <option value="">All</option>
                                             <option value="Cars">Cars</option>
@@ -320,7 +321,7 @@
         }
     </script>
         <script>
-        function toggleFields() {
+        function toggleFieldsCategory() {
             const checkbox = document.getElementById('categorypage');
             const select = document.getElementById('categorypagePlan');
             const uploadDiv = document.getElementById('categorypageUpload');
@@ -346,7 +347,7 @@
 
 
         // Register event listener for checkbox change
-        document.getElementById('categorypage').addEventListener('change', toggleFields);
+        document.getElementById('categorypage').addEventListener('change', toggleFieldsCategory);
 
         // Register event listener for category change
         

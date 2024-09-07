@@ -631,6 +631,7 @@ def add_banner(request):
         print(context)
         return render(request,'home/banner.html',context)
     elif  request.method=="POST":
+        print(request.POST)
         print("hello")
 
 def payment_process(request):
