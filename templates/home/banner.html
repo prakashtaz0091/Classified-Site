@@ -168,7 +168,7 @@
 
                                 <div class="row form-group">
                                     <!-- Category Page -->
-                                    <div class="col-md-6 col-sm-12">
+                                    <div style="display:none" id="category_field" class="col-md-6 col-sm-12">
                                         <label class="form-label" for="exampleForm.ControlSelect1">Category Page</label>
                                         <select name="parent" id="exampleForm.ControlSelect1" class="form-control"  
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
@@ -194,7 +194,7 @@
                                     </div>
                                 
                                     <!-- Sub Category (Initially Disabled but in the Same Row) -->
-                                    <div class="col-md-6 col-sm-12" id="subcategoryField">
+                                    <div style="display:none;" class="col-md-6 col-sm-12" id="subcategoryField">
                                         <label class="form-label" for="exampleForm.ControlSelect2">Sub Category</label>
                                         <select name="child" id="exampleForm.ControlSelect2" class="form-control" 
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
@@ -319,6 +319,36 @@
             subCategorySelect.disabled = categorySelect.value === '';
         }
     </script>
-        
+        <script>
+        function toggleFields() {
+            const checkbox = document.getElementById('categorypage');
+            const select = document.getElementById('categorypagePlan');
+            const uploadDiv = document.getElementById('categorypageUpload');
+    
+            // Enable/Disable the select dropdown based on checkbox state
+            select.disabled = !checkbox.checked;
+            uploadDiv.style.display = checkbox.checked ? 'block' : 'none';
+    
+            // Recalculate total whenever a checkbox is toggled
+            calculateTotal();
 
+            var categoryField = document.getElementById('category_field');
+            var subCategoryField = document.getElementById('subcategoryField');
+            
+            if (checkbox.checked) {
+                categoryField.style.display = 'block';
+                subCategoryField.style.display = 'block';
+            } else {
+                categoryField.style.display = 'none';
+                subCategoryField.style.display = 'none';
+            }
+        }
+
+
+        // Register event listener for checkbox change
+        document.getElementById('categorypage').addEventListener('change', toggleFields);
+
+        // Register event listener for category change
+        
+        </script>
 {% endblock %}
