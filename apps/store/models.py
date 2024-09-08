@@ -131,7 +131,8 @@ class BannerAds(models.Model):
     position = models.CharField(max_length=100, choices=POSITION_CHOICES)
     city=models.CharField(max_length=100)
     image=models.FileField(upload_to='banner/',null=True)
-    
+    #To determine how long the banner will be there
+    days=models.IntegerField(blank=True,null=True)
     status=models.CharField(max_length=100,choices=STATUS_CHOICES,default="pending")
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
     # only for category banner ads
