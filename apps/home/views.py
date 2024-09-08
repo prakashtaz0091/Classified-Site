@@ -707,7 +707,7 @@ def add_banner(request):
             create_banner_ad('homepage_carousel', homepage_plan, homepage_image, title, link, category, subcategory, city, created_by)
 
         if category_plan:
-            create_banner_ad('homepage_carousel', category_plan, category_image, title, link, category, subcategory, city, created_by)
+            create_banner_ad('category_page_top', category_plan, category_image, title, link, category, subcategory, city, created_by)
 
         if hometopbanner_plan:
             create_banner_ad('homepage_top', hometopbanner_plan, hometopbanner_image, title, link, category, subcategory, city, created_by)
