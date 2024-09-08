@@ -657,8 +657,8 @@ def add_banner(request):
         homepage_plan = data.get('homepage_plan', None)
         homepage_image = request.FILES.get('homepage_image', None)
 
-        category_plan = data.get('category', None)
-        category_image = request.FILES.get('category', None)
+        category_plan = data.get('category_plan', None)
+        category_image = request.FILES.get('category_image', None)
 
         hometopbanner_plan = data.get('hometopbanner_plan', None)
         hometopbanner_image = request.FILES.get('hometopbanner_image', None)
