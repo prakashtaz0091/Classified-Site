@@ -119,6 +119,12 @@ class BannerAds(models.Model):
         ('homepage_top', 'Homepage Top Banner'),
         ('homepage_bottom', 'Homepage Bottom Banner'),
     ]
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
     title=models.CharField(max_length=200)
     link=models.URLField()
     price=models.FloatField()
@@ -126,6 +132,7 @@ class BannerAds(models.Model):
     city=models.CharField(max_length=100)
     image=models.FileField(upload_to='banner/',null=True)
     
+    status=models.CharField(max_length=100,choices=STATUS_CHOICES,default="pending")
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
     # only for category banner ads
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='banner_category',blank=True,null=True)
