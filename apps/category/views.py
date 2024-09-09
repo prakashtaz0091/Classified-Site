@@ -31,7 +31,19 @@ def listing_view(request, subcategory_slug):
                 bookmarked_product_ids = []
         print(bookmarked_product_ids)
 
-        # Apply sorting to the items on the current page only
+        fields = Field.objects.filter(field_type__in=['select', 'select-multiple'],hint=sub_category.category_name)
+        print(fields)
+
+        # Collecting the field options for each field
+        field_data = []
+        for field in fields:
+            options = FieldOptions.objects.filter(linked_to=field)
+            field_data.append({
+                'field_name': field.field_name,
+                'field_type': field.field_type,
+                'options': options  # A queryset of FieldOptions objects related to this field
+            })
+        print(field_data)
                 
         feature=Feature.objects.all()    
 
@@ -42,6 +54,7 @@ def listing_view(request, subcategory_slug):
             'page_obj': page_obj,
             'current_page_product_count': len(page_obj.object_list),
             'features':feature,
+            'field_data':field_data,
             'book_mark':bookmarked_product_ids
         }
         if request.headers.get("x-requested-with") == "FETCH":
