@@ -97,9 +97,9 @@
                               {% for field in field_data %}
     <div class="filter-content form-group ">
        <select class="form-control select region-select" name="fields_filter">
-            <option style="color:gray;" value="">{{ field.field_name }}</option>
+          <option style="color:gray;" value="">All {{field.field_name}}</option>
             {% for option in field.options %}
-                <option value="{{ field.id:option.id }}">{{ option.field_value }}</option>
+            <option value="{{ field.id}}:{{option.id }}">{{ option.field_value }}</option>
             {% endfor %}
         </select>
     </div>
