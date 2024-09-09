@@ -137,6 +137,7 @@ class BannerAds(models.Model):
     days=models.IntegerField(blank=True,null=True)
     status=models.CharField(max_length=100,choices=STATUS_CHOICES,default="pending")
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
+    created_at=models.DateField(auto_now_add=True,blank=True,null=True)
     # only for category banner ads
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='banner_category',blank=True,null=True)
     sub_category=models.ForeignKey(Category,related_name='banner_subcategory',on_delete=models.CASCADE,blank=True,null=True)

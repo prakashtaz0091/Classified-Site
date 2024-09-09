@@ -1126,7 +1126,7 @@ def edit_options(request,id):
 
 #For banner listing
 def list_banner_ads(request):
-    banner_ads_instance = BannerAds.objects.exclude(status='deleted')
+    banner_ads_instance = BannerAds.objects.all()
     context={
         'banner_ads':banner_ads_instance
     }

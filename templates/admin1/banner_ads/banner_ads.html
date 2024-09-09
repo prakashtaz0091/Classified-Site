@@ -81,20 +81,20 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Customer Name</th>
-                                        <th>Mobile</th>
-                                        <th>Reg Date</th>
-                                        <th>Plan</th>
+                                        <th>Date</th>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Position</th>
                                         <th>Status</th>
-                                        <th>Email Verified</th>
+                                        <th>Payment Status</th>
+                                        <th>Country</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for account in accounts %}
+                                    {% for banner_ad in banner_ads %}
                                     <tr>
-                                        <td>{{forloop.counter}}</td>
+                                        <td>{{banner_ad.created_at}}</td>
                                         <td class="table-namesplit">
                                             <a href="javascript:void(0);" class="table-profileimage">
                                                 <img src="{{account.profile.profile_photo.url}}" class="me-2" alt="img">
@@ -122,7 +122,7 @@
                                                     <span class="badge-active">Active</span>
                                                     <div class="dropdown-menu">
                                                         <ul>
-                                                            <li><a href="{% url 'suspend' account.id %}">Suspend Account</a></li> 
+                                                            <li><a href="">Suspend Account</a></li> 
                                                     </div>
                                               
                                                
@@ -130,7 +130,7 @@
                                                     <span class="badge-pending">Pending</span>
                                                     <div class="dropdown-menu">
                                                         <ul>
-                                                            <li><a href="{% url 'active' account.id %}">Activate Account</a></li> 
+                                                            <li><a href="">Activate Account</a></li> 
                                                         </ul>
                                                     </div>
                                                 {% endif %}
@@ -156,7 +156,7 @@
                                       
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="{% url 'customers_edit' account.id %}">
+                                                <a class="delete-table me-2" href="">
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ account.id }})">
@@ -207,20 +207,6 @@
 <!-- /Delete Modal -->
 
 
-
-    <script>
-        function confirmDelete(roomId) {
-            var form = document.getElementById('delete-room-form');
-            var actionUrl = "{% url 'customers_delete' 0 %}".replace('0', roomId);
-            form.action = actionUrl;
-
-            var deleteModal = new bootstrap.Modal(document.getElementById('delete-item'));
-            deleteModal.show();
-        }
-
-     
-        
-    </script>
 
     <script>
         document.querySelectorAll('.status-dropdown').forEach(function(dropdown) {
