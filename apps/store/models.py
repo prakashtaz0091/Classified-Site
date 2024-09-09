@@ -124,6 +124,7 @@ class BannerAds(models.Model):
         ('pending', 'Pending'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
+        ('deleted','Deleted'),
     ]
 
     title=models.CharField(max_length=200)

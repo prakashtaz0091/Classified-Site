@@ -1126,10 +1126,11 @@ def edit_options(request,id):
 
 #For banner listing
 def list_banner_ads(request):
-    banner_ads_instance = BannerAds.objects.all() 
+    banner_ads_instance = BannerAds.objects.exclude(status='deleted')
     context={
         'banner_ads':banner_ads_instance
     }
+    print(context)
     return render(request,'admin1/banner_ads/banner_ads.html',context)
 
 
