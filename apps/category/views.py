@@ -183,9 +183,11 @@ def filter_category(request):
         print(e)
         #later redirect to 404
 
+@csrf_exempt
 def filter_sub_category(request):
     try:
         print(request.POST)
+        print("hello")
 
         sort_by = request.POST.get("sort", "default")
         query = request.POST.get("query", "")

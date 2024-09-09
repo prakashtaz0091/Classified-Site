@@ -261,12 +261,12 @@
          const sortValue=document.getElementById('sortSelect').value
                  // Collect form values
                  const formData = new FormData(form);
-                 const queryParams = new URLSearchParams(formData).toString();
-         		console.log(queryParams)
+                console.log(formData)
                  // Make AJAX request
          		const url="{% url 'filter_sub_category' %}"
-         		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
+         		fetch(`${url}?&sort=${sortValue}`, {
                      method: 'POST',
+                   body:formData,
                      headers: {
                          'X-Requested-With': 'FETCH',
                      },
