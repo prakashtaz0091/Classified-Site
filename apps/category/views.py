@@ -185,15 +185,16 @@ def filter_category(request):
 
 def filter_sub_category(request):
     try:
-        print(request.GET)
+        print(request.POST)
 
-        sort_by = request.GET.get("sort", "default")
-        query = request.GET.get("query", "")
-        category = request.GET.get("category",None)
-        location = request.GET.get("location", "")
-        region = request.GET.get("region", "")
-        min_price = request.GET.get("min_price", None)
-        max_price = request.GET.get("max_price", None)
+        sort_by = request.POST.get("sort", "default")
+        query = request.POST.get("query", "")
+        category = request.POST.get("category",None)
+        location = request.POST.get("location", "")
+        region = request.POST.get("region", "")
+        min_price = request.POST.get("min_price", None)
+        max_price = request.POST.get("max_price", None)
+        fields_filter=request.POST.getlist('fields_filter',None)
 
         products = Product.objects.filter(subcategory=category).order_by('-id')
 

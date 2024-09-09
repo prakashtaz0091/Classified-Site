@@ -81,7 +81,7 @@
                      <div class="listings-sidebar">
                         <div class="card">
                            <h4><img  src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Filter</h4>
-                           <form id='filter-form'>
+                           <form id='filter-form' method=='POST'>
                               <div class="filter-content looking-input form-group">
                                  <input type="text" class="form-control" name='query' placeholder="What are you looking for?">
                               </div>
@@ -266,7 +266,7 @@
                  // Make AJAX request
          		const url="{% url 'filter_sub_category' %}"
          		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
-                     method: 'GET',
+                     method: 'POST',
                      headers: {
                          'X-Requested-With': 'FETCH',
                      },
