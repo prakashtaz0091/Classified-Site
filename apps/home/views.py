@@ -22,7 +22,7 @@ def home(request):
     if request.method == "GET":
         try:
             # Fetch all categories
-            all_categories = Category.objects.select_related().filter(parent_id=None).order_by("-id")
+            all_categories = Category.objects.select_related().filter(parent_id=None, status='ACTIVE').order_by("-id")
             latest_products = []
             all_products = (
                 Product.objects.select_related()
