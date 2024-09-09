@@ -481,7 +481,7 @@ def get_category_options(request):
                     option_data = {'value': option.field_value}
                     
                     # Check if there are FieldExtras linked to this option
-                    extras = FieldExtra.objects.filter(linked_to=option).order_by('menu_text')
+                    extras = FieldExtra.objects.filter(linked_to=option,disabled=False).order_by('menu_text')
                     if extras.exists():
                         option_data['extras'] = []
                         for extra in extras:
