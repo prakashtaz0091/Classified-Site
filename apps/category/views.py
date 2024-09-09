@@ -210,6 +210,14 @@ def filter_sub_category(request):
             products = products.filter(price__gte=min_price)
         if max_price:
             products = products.filter(price__lte=max_price)
+        if fields_filter is not None:
+            fields=[f for f in fields_filter]
+            for field in fields:
+                if field!="":
+                    field_name,field_value=field.split(":") 
+                    products=products.filter(featured_data__contains=f"{field_name}:{field_value}")
+                    print(field_name,field_value)
+            print(fields)
 
         paginator = Paginator(products, 10)  # Show 10 products per page
         page_number = request.GET.get('page', 1)
