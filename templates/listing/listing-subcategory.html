@@ -91,8 +91,21 @@
                                     <i class="feather-map-pin"></i>
                                  </div>
                               </div>
+
+
                               <input type="hidden" name="category" value="{{sub_category.id}}" />
+                              {% for field in field_data %}
+    <div class="filter-content form-group ">
+       <select class="form-control select region-select" name="fields_filter">
+            <option style="color:gray;" value="">{{ field.field_name }}</option>
+            {% for option in field.options %}
+                <option value="{{ field.id:option.id }}">{{ option.field_value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endfor %}
                               <div class="filter-content form-group region">
+
                                  <select class="form-control select region-select" name='region'>
                                     <option value="">Region</option>
                                     <option>Canada</option>

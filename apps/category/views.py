@@ -31,7 +31,7 @@ def listing_view(request, subcategory_slug):
                 bookmarked_product_ids = []
         print(bookmarked_product_ids)
 
-        fields = Field.objects.filter(field_type__in=['select', 'select-multiple'],hint=sub_category.category_name)
+        fields = Field.objects.filter(field_type__in=['select', 'select_multiple'],hint=sub_category.category_name)
         print(fields)
 
         # Collecting the field options for each field
@@ -39,6 +39,7 @@ def listing_view(request, subcategory_slug):
         for field in fields:
             options = FieldOptions.objects.filter(linked_to=field)
             field_data.append({
+                'id':field.id,
                 'field_name': field.field_name,
                 'field_type': field.field_type,
                 'options': options  # A queryset of FieldOptions objects related to this field
