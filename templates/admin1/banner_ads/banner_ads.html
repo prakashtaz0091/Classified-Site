@@ -116,8 +116,29 @@
                                             {{banner_ad.city}}
                                         </td>
                                         
-                                      
+                                        
                                         <td>
+
+                                            <select id="statusSelect" style="background-color:rgba(0, 0, 0, 0.87); color:white; padding:1rem; width:200px;cursor:pointer;padding-right:2rem">
+  <option value=""  selected>Change Status</option>
+  <option value="pending">Pending</option>
+  <option value="reject">Reject</option>
+  <option value="active">Active</option>
+  <option value="delete">Delete</option>
+</select>
+      <script>
+  document.getElementById('statusSelect').addEventListener('change', function() {
+    const selectedValue = this.value;
+    if (selectedValue !== "") {
+      const confirmation = window.confirm(`Are you sure you want to change the status to ${this.options[this.selectedIndex].text}?`);
+      if (!confirmation) {
+        // Reset back to "Change Status" if the user cancels
+        this.value = "";
+      }
+    }
+  });
+</script>
+
                                             <div class="table-actions d-flex">
                                                 <a class="delete-table me-2" href="">
                                                    <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
