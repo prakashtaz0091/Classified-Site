@@ -7,7 +7,7 @@ from django.urls import reverse
 from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions
 from apps.store.models import Product,Feature,BookMark
 from django.db.models import Count
-
+import json
  
 from django.views.decorators.csrf import csrf_exempt
 
@@ -210,14 +210,22 @@ def filter_sub_category(request):
             products = products.filter(price__gte=min_price)
         if max_price:
             products = products.filter(price__lte=max_price)
-        if fields_filter is not None:
-            fields=[f for f in fields_filter]
-            for field in fields:
-                if field!="":
-                    field_name,field_value=field.split(":") 
-                    products=products.filter(featured_data__contains=f"{field_name}:{field_value}")
-                    print(field_name,field_value)
-            print(fields)
+        if fields_filter:
+            filtered_products = []
+            criteria = [tuple(f.split(':')) for f in fields_filter if f!=""]
+
+            for product in products:
+                featured_data = product.featured_data  # Assuming this is a list of strings
+
+                # Check if the product meets all criteria
+                all_criteria_met = all(
+                    any(f"{field_name}:{field_value}" in item for item in featured_data)
+                    for field_name, field_value in criteria
+                )
+
+                if all_criteria_met:
+                    filtered_products.append(product)
+            products=filtered_products
 
         paginator = Paginator(products, 10)  # Show 10 products per page
         page_number = request.GET.get('page', 1)
