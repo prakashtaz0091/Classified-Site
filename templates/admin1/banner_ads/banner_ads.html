@@ -86,8 +86,8 @@
                                         <th>Title</th>
                                         <th>Position</th>
                                         <th>Status</th>
-                                        <th>Payment Status</th>
-                                        <th>Country</th>
+                                        <th>Payment<br /> Status</th>
+                                        <th>City</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -97,61 +97,24 @@
                                         <td>{{banner_ad.created_at}}</td>
                                         <td class="table-namesplit">
                                             <a href="javascript:void(0);" class="table-profileimage">
-                                                <img src="{{account.profile.profile_photo.url}}" class="me-2" alt="img">
-                                            </a>
-                                            <a href="javascript:void(0);" class="table-name">
-                                                <span>{{account.full_name}}</span>
-                                                <p>{{account.email}}</p>
+                                                {% if banner_ad.image %}
+                                                <img src="{{banner_ad.image.url}}" class="me-2" alt="img">
+                                                {% endif %}
                                             </a>
                                         </td>
                                         
-                                        {% if account.profile.phone_number %}
-                                        <td>{{account.profile.phone_number}}</td>
-                                        {% else %}
-                                        <td>
-                                            <span class="badge-active">Not Provided</span>
-                                        </td>
+                                        <td class="table-name"><span>{{banner_ad.title}}</span></td>
 
 
-                                        {% endif %}
-                                        <td>{{account.date_joined}}</td>
+                                        <td>{{banner_ad.get_position_display}}</td>
                                         <td>Basic</td>
                                         <td>
-                                            <div class="status-dropdown">
-                                                {% if account.is_active %}
-                                                    <span class="badge-active">Active</span>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="">Suspend Account</a></li> 
-                                                    </div>
-                                              
-                                               
-                                                {% else %}
-                                                    <span class="badge-pending">Pending</span>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="">Activate Account</a></li> 
-                                                        </ul>
-                                                    </div>
-                                                {% endif %}
-                                            </div>
+                                            {{banner_ad.status}}
                                         </td>
                                         <td>
-                                            <div class="status-dropdown">
-                                                {% if account.is_verify %}
-                                                    <span class="badge-active">Verfiy</span>
-                                                {% else %}
-                                                    <span class="badge-suspend">Pending</span>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="#">Verfiy Account</a></li> 
-                                                        </ul>
-                                                    </div>
-                                                {% endif %}
-                                            </div>
+
+                                            {{banner_ad.city}}
                                         </td>
-                                        
-                                        
                                         
                                       
                                         <td>
