@@ -112,6 +112,7 @@ class FeatureDataImage(models.Model):
     feature_data_name=models.CharField(max_length=255)
 
 
+#will be moved to separate file later since there are multiple views related to banner ads
 class BannerAds(models.Model):
     POSITION_CHOICES = [
         ('homepage_carousel', 'Homepage Carousel'),

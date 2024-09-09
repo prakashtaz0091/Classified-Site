@@ -720,6 +720,7 @@ def add_banner(request):
         return render(request,'home/banner.html',context)
 
 
+
 def payment_process(request):
     return render(request,'home/paymentselect.html')
 

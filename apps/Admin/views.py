@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra,FieldExtraContent
-from apps.store.models import  Product,ProductImages
+from apps.store.models import  BannerAds, Product,ProductImages
 from apps.accounts.models import Account,UserProfile
 from apps.Admin.models import SEOSettings,SiteSettings,Language
 from django.utils.timezone import now
@@ -1121,3 +1121,15 @@ def edit_options(request,id):
         }
         
         return render(request,'admin1/fields/edit_option.html',context)
+
+
+
+#For banner listing
+def list_banner_ads(request):
+    banner_ads_instance = BannerAds.objects.all() 
+    context={
+        'banner_ads':banner_ads_instance
+    }
+    return render(request,'admin1/banner_ads/banner_ads.html',context)
+
+

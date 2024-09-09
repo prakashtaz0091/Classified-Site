@@ -112,26 +112,7 @@ urlpatterns = [
    path('delete/field_options/<int:id>/',views.delete_field_options, name='delete_field_options'),
    path('edit/options/<int:id>/',views.edit_options, name='edit_options'),
    
+   #For banners   
+   path('banner_ads/listing/',views.list_banner_ads,name="list_banner_ads")
    
-
-   
-    
-    
-    
-    
-    
-    
-    
-
-    
-     
-    
-    
-    
-    
-
-    
-    
-
-    
 ]
