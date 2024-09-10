@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+
     <div class="main-wrapper">
     
         <!-- Header -->
@@ -133,26 +137,22 @@
         </div> 
     </div>
 
-    <!-- jQuery -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Choices for city select
+    const citySelect = new Choices('#city', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select City'
+    });
 
+    // Initialize Choices for user select
+    const userSelect = new Choices('#user', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select User'
+    });
+  });
+</script>
 
-    <script>
-        document.getElementById('imgInp').addEventListener('change', function(event) {
-            const [file] = event.target.files;
-            if (file) {
-                document.getElementById('blah').src = URL.createObjectURL(file);
-            }
-        });
-        
-        document.getElementById('removeBtn').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-        
-            // Reset the image preview to the default image
-            document.getElementById('blah').src = "{% static 'admin/assets/profile.png' %}";
-        
-            // Clear the file input
-            document.getElementById('imgInp').value = "";
-        });
-        
-    </script>
  {% endblock %}
