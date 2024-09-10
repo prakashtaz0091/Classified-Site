@@ -1175,8 +1175,87 @@ def create_banner_ads(request):
             print(context)
             return render(request,'admin1/banner_ads/add_banner_ads.html',context)
         else:
-            pass
+            data = request.POST
+            print(data)
+            title = data.get('name')
+
+            link = data.get('link')
+            category_id = data.get('category', None)
+            subcategory_id = data.get('subcategory', None)
+            city = data.get('city_id', None)
+            user_id=data.get('user_id',None)
+
+            # Getting the creator of the ad (e.g., the current logged-in user)
+            if user_id:
+                created_by =Account.objects.get(id=user_id)
+
+            # Extracting the individual banner plans and their respective images
+            homepage_plan = data.get('homepage_plan', None)
+            homepage_image = request.FILES.get('homepage_image', None)
+
+            category_plan = data.get('category_plan', None)
+            category_image = request.FILES.get('category_image', None)
+
+            hometopbanner_plan = data.get('hometopbanner_plan', None)
+            hometopbanner_image = request.FILES.get('hometopbanner_image', None)
+
+            homebottombanner_plan = data.get('homebottombanner_plan', None)
+            homebottombanner_image = request.FILES.get('homebottombanner_image', None)
+
+            # Category and subcategory objects
+            category = Category.objects.get(id=category_id) if category_id else None
+            subcategory = Category.objects.get(id=subcategory_id) if subcategory_id else None
+
+            # Function to create a banner ad
+            def create_banner_ad(position, plan, image, title, link, category, subcategory, city, created_by):
+                if plan:
+                    try:
+                        print(position)
+                        pricing = DefaultBannerAdsPricing.objects.get(position=position)
+                        price_per_day = pricing.price_per_day
+
+                        # Calculate the number of days using price/price_per_day
+                        days = float(plan) / float(price_per_day)
+                        print(float(plan))
+                        print(float(price_per_day))
+
+                    except DefaultBannerAdsPricing.DoesNotExist:
+                        # Handle the case where no pricing exists for the position
+                        return None
+                    print(image)
+                    banner_ad = BannerAds.objects.create(
+                        title=title,
+                        link=link,
+                        price=float(plan),
+                        position=position,
+                        city=city,
+                        image=image,
+                        category=category,
+                        days=days,
+                        sub_category=subcategory,
+                        created_by=created_by,
+                        status="pending"  # Default status is pending
+                    )
+                    return banner_ad
+
+            # Create the banner ad for each plan if it exists
+            if homepage_plan:
+                create_banner_ad('homepage_carousel', homepage_plan, homepage_image, title, link, category, subcategory, city, created_by)
+
+            if category_plan:
+                create_banner_ad('category_page_top', category_plan, category_image, title, link, category, subcategory, city, created_by)
+
+            if hometopbanner_plan:
+                create_banner_ad('homepage_top', hometopbanner_plan, hometopbanner_image, title, link, category, subcategory, city, created_by)
+
+            if homebottombanner_plan:
+                create_banner_ad('homepage_bottom', homebottombanner_plan, homebottombanner_image, title, link, category, subcategory, city, created_by)
+
+            context={'message':"Banner Ads Submitted Successfully"}
+            return redirect(reverse("create_banner_ads"))
+     
     except Exception as e:
+        print(e)
         return e
 def delete_banner_ad(request):
     try:
