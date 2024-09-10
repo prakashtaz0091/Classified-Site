@@ -250,8 +250,31 @@
                                             </div>
                                         </li>
                                     </div>
+                                    <div style="display:none" id="category_field" class="col-md-6 col-sm-12">
+                                        <label class="form-label" for="exampleForm.ControlSelect1">Category Page</label>
+                                        <select name="category" id="exampleForm.ControlSelect1" class="form-control"  
+                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
+                                            onchange="toggleSubCategory()">
+                                            <option value="">Select</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endfor %}
+                                        </select>
+                                    </div>
+                                
+                                    <!-- Sub Category (Initially Disabled but in the Same Row) -->
+                                    <div style="display:none;" class="col-md-6 col-sm-12" id="subcategoryField">
+                                        <label class="form-label" for="exampleForm.ControlSelect2">Sub Category</label>
+                                        <select name="subcategory" id="exampleForm.ControlSelect2" class="form-control" 
+                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
+                                            <option value="">All</option>
+                                        </select>
+                                    </div>
+
 
                                 <div class="col-lg-12">
+
+                            <h6 class="pt-3">Total - AED <span id="totalAmount">0.00</span></h6>
                                     <div class="btn-path">
                                         <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
                                         <button type="submit" class="btn btn-submit "> Submit</button>
@@ -373,7 +396,6 @@
             const selectedCategoryId = categorySelect.value;
             const subcategorySelect = document.getElementById('exampleForm.ControlSelect2');
             const selectedCategory = categorySelect.value;
-            alert(selectedCategory)
 
             // Show or hide the subcategory field based on category selection
             if (selectedCategory) {
