@@ -1,0 +1,431 @@
+
+{% extends 'admin1/base1.html' %}
+{% load mathfilters %}
+{% load static %}
+
+{% block title %}
+<title>Create New Banner Ads</title>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+       {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+            {% include 'admin1/include/sidebar.html' %}
+            
+           
+        </div>
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+                <form action="{% url 'create_banner_ads' %}" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-12 m-auto">
+                            <div class="content-page-header">
+                                <h5>Create New Banner Ads</h5>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Enter Name (*)</label>
+                                        <input type="text" required class="form-control" placeholder="Add Name" name='name'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Link(*)</label>
+                                        <input type="text" required class="form-control" placeholder="Enter User Name" name='link'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>City(*)</label>
+                                      <select  name="city_id" id="city" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                        <option selected disabled value="">Select City</option>
+                                        <option value="Abu Dhabi">Abu Dhabi</option>
+                                        <option value="Ajman">Ajman</option>
+                                        <option value="Al Ain">Al Ain</option>
+                                        <option value="Al Madam">Al Madam</option>
+                                        <option value="Ar-Rams">Ar-Rams</option>
+                                        <option value="Bateen Liwa">Bateen Liwa</option>
+                                        <option value="Dhaid">Dhaid</option>
+                                        <option value="Dibba Al-Fujairah">Dibba Al-Fujairah</option>
+                                        <option value="Dibba Al-Hisn">Dibba Al-Hisn</option>
+                                        <option value="Dubai">Dubai</option>
+                                        <option value="Fujairah">Fujairah</option>
+                                        <option value="Ghayathi">Ghayathi</option>
+                                        <option value="Hatta">Hatta</option>
+                                        <option value="Jebel Ali">Jebel Ali</option>
+                                        <option value="Kalba">Kalba</option>
+                                        <option value="Khor Fakkan">Khor Fakkan</option>
+                                        <option value="Ras Al Khaimah">Ras Al Khaimah</option>
+                                        <option value="Ruwais">Ruwais</option>
+                                        <option value="Sharjah">Sharjah</option>
+                                        <option value="Umm al-Quwain">Umm al-Quwain</option>
+                                        <option value="Zayed City">Zayed City</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>User (*)</label>
+
+                                      <select  name="user_id" id="user" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                          <option value="" disabled selected >Select User</option>
+                                          {% for user in users %}
+                                          <option value="{{user.id}}">{{user.email}}</option>
+                                                  {% endfor %}
+                                      </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Payment Method</label>
+                                        <ul class="custom-radiosbtn">
+                                            <li>
+                                                <label class="radiossets">Offline
+                                                    <input type="radio" checked="checked" name="active" value='online'>
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="radiossets">Online
+                                                    <input type="radio" name="active" value='online'>
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top:2rem">
+                                <li class='list-group-item'>
+                                <div class='row'>
+                                                <div class="col-8">
+                                                    <div class="my-1 mr-sm-2 custom-control custom-checkbox">
+                                                        <input style="transform:scale(1.2);width:20px;height:20px;"    type="checkbox"  id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
+                                                        <label for="homepage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Carousel</label>
+                                                    </div>
+                                                    <p style='margin-left:1rem'>
+                                                        {{homepage_banner_instance.description}}
+                                                    </p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select id="homepagePlan" name='homepage_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:30}}">30 days</option>
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:15}}">15 days</option>
+                                                    </select>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homepagePrice">{{homepage_banner_instance.price_per_day|mul:30}}</span></p>
+                                                </div>
+    
+                                                
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
+                                                    <div class="col-12" id="homepageUpload" style="display: none;">
+                                                        <label class="form-label" for="homepageImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
+                                                        <input type="file" name='homepage_image'  id="homepageImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Category Page Top Banner -->
+                                        <li style="margin-top:2rem"class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="my-1 mr-sm-2 custom-control custom-checkbox">
+                                                        <input style="transform:scale(1.2);width:20px;height:20px;" type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
+                                                        <label for="categorypage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Category page top banner</label>
+                                                    </div>
+                                                    <p style='margin-left:1rem'>
+                                                      {{category_page_top.description}}</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select id="categorypagePlan" name='category_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
+                                                        <option value="{{category_page_top.price_per_day|mul:365}}">365 days</option>
+                                                    </select>
+                                                    <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED {{category_page_top.price_per_day|mul:365}}</p>
+                                                </div>
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
+                                                    <div class="col-12" id="categorypageUpload" style="display: none;">
+                                                        <label class="form-label" for="categorypageImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
+                                                        <input type="file" name='category_image'  id="categorypageImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Homepage Top Banner -->
+                                        <li style="margin-top:2rem" class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="my-1 mr-sm-2 custom-control custom-checkbox">
+                                                        <input style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="hometopbanner" class="custom-control-input" onchange="toggleFields('hometopbanner', 'hometopbannerPlan', 'hometopbannerUpload')">
+                                                        <label for="hometopbanner"  name="homepage_top_plan" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Top Banner - Promotion</label>
+                                                    </div>
+                                                    
+                                                    <p style='margin-left:1rem'>
+
+                                                        {{homepage_top_instance.description}}
+                                                    </p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select id="hometopbannerPlan" name='hometopbanner_plan' class="form-control" disabled 
+                                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()" 
+                                                            >
+                                                            <option value="{{homepage_top_instance.price_per_day|mul:10}}">10 days</option>
+                                                        <option value="{{homepage_top_instance.price_per_day|mul:20}}">20 days</option>
+                                                        <option value="{{homepage_top_instance.price_per_day|mul:30}}">30 days</option>
+                                                    </select>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="hometopbannerPrice">{{homepage_top_instance.price_per_day|mul:10}}</span></p>
+                                                </div>
+                                                
+
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
+                                                    <div class="col-12" id="hometopbannerUpload" style="display: none;">
+                                                        <label class="form-label" for="hometopbannerImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
+                                                        <input type="file" name="hometopbanner_image" id="hometopbannerImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Homepage Bottom Banner -->
+                                        <li style="margin-top:2rem" class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="my-1 mr-sm-2 custom-control custom-checkbox">
+                                                        <input style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
+                                                        <label for="homebottombanner" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Bottom Banner - Promotion</label>
+                                                    </div>
+                                                    
+                                                    <p style='margin-left:1rem'>
+                                                        {{homepage_bottom_instance.description}}
+                                                    </p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select id="homebottombannerPlan" name="homebottombanner_plan" disabled class="form-control" 
+                                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
+                                                             onchange="calculateTotal()">
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:10}}">10 days</option>
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:20}}">20 days</option>
+                                                        <option value="{{homepage_bottom_instance.price_per_day|mul:30}}">30 days</option>
+                                                    </select>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homebottombannerPrice">{{homepage_bottom_instance.price_per_day|mul:10}}</span></p>
+                                                </div>
+                                                
+
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
+                                                    <div class="col-12" id="homebottombannerUpload" style="display: none;">
+                                                        <label class="form-label" for="homebottombannerImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
+                                                        <input type="file" name="homebottombanner_image" id="homebottombannerImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div style="display:none" id="category_field" class="col-md-6 col-sm-12">
+                                        <label class="form-label" for="exampleForm.ControlSelect1">Category Page</label>
+                                        <select name="category" id="exampleForm.ControlSelect1" class="form-control"  
+                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" 
+                                            onchange="toggleSubCategory()">
+                                            <option value="">Select</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endfor %}
+                                        </select>
+                                    </div>
+                                
+                                    <!-- Sub Category (Initially Disabled but in the Same Row) -->
+                                    <div style="display:none;" class="col-md-6 col-sm-12" id="subcategoryField">
+                                        <label class="form-label" for="exampleForm.ControlSelect2">Sub Category</label>
+                                        <select name="subcategory" id="exampleForm.ControlSelect2" class="form-control" 
+                                            style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
+                                            <option selected disable value="">All</option>
+                                        </select>
+                                    </div>
+
+
+                                <div class="col-lg-12">
+
+                            <h6 class="pt-3">Total - AED <span id="totalAmount">0.00</span></h6>
+                                    <div class="btn-path">
+                                        <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                                        <button type="submit" class="btn btn-submit "> Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Choices for city select
+    const citySelect = new Choices('#city', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select City'
+    });
+
+    // Initialize Choices for user select
+    const userSelect = new Choices('#user', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select User'
+    });
+  });
+</script>
+    <script>
+        function toggleFields(checkboxId, selectId, uploadId) {
+            const checkbox = document.getElementById(checkboxId);
+            const select = document.getElementById(selectId);
+            const uploadDiv = document.getElementById(uploadId);
+    
+            // Enable/Disable the select dropdown based on checkbox state
+            select.disabled = !checkbox.checked;
+            uploadDiv.style.display = checkbox.checked ? 'block' : 'none';
+    
+            // Recalculate total whenever a checkbox is toggled
+            calculateTotal();
+        }
+    
+        function calculateTotal() {
+            let total = 0;
+    
+            // List of plan and checkbox IDs
+            const plans = [
+                { planId: 'homepagePlan', checkboxId: 'homepage', priceId: 'homepagePrice' },
+                { planId: 'categorypagePlan', checkboxId: 'categorypage', priceId: '' },
+                { planId: 'hometopbannerPlan', checkboxId: 'hometopbanner', priceId: 'hometopbannerPrice' },
+                { planId: 'homebottombannerPlan', checkboxId: 'homebottombanner', priceId: 'homebottombannerPrice' }
+            ];
+    
+            // Loop through each plan and calculate the total based on selected value
+            plans.forEach(plan => {
+                const checkbox = document.getElementById(plan.checkboxId);
+                const select = document.getElementById(plan.planId);
+    
+                // If checkbox is checked, add the selected value (price) to total
+                if (checkbox.checked && !select.disabled) {
+                    const selectedPrice = parseFloat(select.value);  // Get the selected price from dropdown value
+                    total += selectedPrice;
+    
+                    // Update individual section price display if priceId is specified
+                    if (plan.priceId) {
+                        document.getElementById(plan.priceId).innerText = selectedPrice.toFixed(2);
+                    }
+                }
+            });
+    
+            // Update the total amount in the UI
+            document.getElementById('totalAmount').innerText = total.toFixed(2);
+        }
+    
+        function toggleSubCategory() {
+            const categorySelect = document.getElementById('exampleForm.ControlSelect1');
+            const subCategorySelect = document.getElementById('exampleForm.ControlSelect2');
+    
+            // If a category is selected, enable the subcategory field
+            subCategorySelect.disabled = categorySelect.value === '';
+        }
+    </script>
+        <script>
+        function toggleFieldsCategory() {
+            const checkbox = document.getElementById('categorypage');
+            const select = document.getElementById('categorypagePlan');
+            const uploadDiv = document.getElementById('categorypageUpload');
+    
+            // Enable/Disable the select dropdown based on checkbox state
+            select.disabled = !checkbox.checked;
+            uploadDiv.style.display = checkbox.checked ? 'block' : 'none';
+    
+            // Recalculate total whenever a checkbox is toggled
+            calculateTotal();
+
+            var categoryField = document.getElementById('category_field');
+            var subCategoryField = document.getElementById('subcategoryField');
+            
+            if (checkbox.checked) {
+                categoryField.style.display = 'block';
+                subCategoryField.style.display = 'block';
+            } else {
+                categoryField.style.display = 'none';
+                subCategoryField.style.display = 'none';
+            }
+        }
+
+        document.getElementById('categorypage').addEventListener('change', toggleFieldsCategory);
+        </script>
+            <script>
+        // Embed the categories context variable as a JSON object
+        const categories = "{{ categories|safe }}";
+        console.log(categories)
+
+        function toggleSubCategory() {
+            const categorySelect = document.getElementById('exampleForm.ControlSelect1');
+            const selectedCategoryId = categorySelect.value;
+            const subcategorySelect = document.getElementById('exampleForm.ControlSelect2');
+            const selectedCategory = categorySelect.value;
+
+            // Show or hide the subcategory field based on category selection
+            if (selectedCategory) {
+                document.getElementById('subcategoryField').style.display = 'block';
+                subcategorySelect.disabled = false;
+
+                // Populate the subcategory dropdown
+                subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+                console.log(selectedCategory)
+                fetch(`/get_subcategories/?category_id=${selectedCategoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+
+                        if (data.subcategories) {
+                            data.subcategories.forEach(subcategory => {
+                                const option = document.createElement('option');
+                                option.value = subcategory.id;
+                                option.textContent = subcategory.category_name;
+                                subcategorySelect.appendChild(option);
+                            });
+                        }
+                    })
+            } else {
+                document.getElementById('subcategoryField').style.display = 'none';
+                subcategorySelect.disabled = true;
+                subcategorySelect.innerHTML = '<option value="">All</option>'; // Reset options
+            }
+        }
+    </script>
+
+
+ {% endblock %}

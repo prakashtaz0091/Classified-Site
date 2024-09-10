@@ -168,7 +168,7 @@
   });
 </script>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="">
+                                                <a class="delete-table me-2" href="{% url 'edit_banner_ads' %}?banner_id={{banner_ad.id}}">
                                                    <img  style="width:20px;" src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
                                                 </a>
                                                 <a class="delete-table"  href="javascript:void(0);" onclick="confirmDelete({{ banner_ad.id }})">
