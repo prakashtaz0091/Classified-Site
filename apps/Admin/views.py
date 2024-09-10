@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django.contrib import messages
 from apps.category.models import Category,Field,FieldOptions,FieldExtra,FieldExtraContent
-from apps.store.models import  BannerAds, Product,ProductImages
+from apps.store.models import  BannerAds, DefaultBannerAdsPricing, Product,ProductImages
 from apps.accounts.models import Account,UserProfile
 from apps.Admin.models import SEOSettings,SiteSettings,Language
 from django.utils.timezone import now
@@ -1149,7 +1149,27 @@ def create_banner_ads(request):
     try:
         if request.method=='GET':
             users=Account.objects.all().values('email','id')
+
+            homepage_banner_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_carousel').first()
+            category_page_top=DefaultBannerAdsPricing.objects.filter(position='category_page_top').first()
+            homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top').first()
+            homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom').first()
+            categories = Category.objects.filter(parent_id__isnull=True)
+        
+        # Create a dictionary to hold the categories and their subcategories
+            category_context = {}
+            for category in categories:
+            # Get subcategories for each parent category
+                subcategories = Category.objects.filter(parent_id=category)
+                category_context[category] = subcategories
+
+            print(homepage_banner_instance.price_per_day)
             context={
+                'homepage_banner_instance':homepage_banner_instance,
+                'category_page_top':category_page_top,
+                'homepage_bottom_instance':homepage_bottom_instance,
+                'homepage_top_instance':homepage_top_instance,
+                'categories':category_context,
                 'users':users
             }
             print(context)
