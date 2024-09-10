@@ -1133,4 +1133,14 @@ def list_banner_ads(request):
     print(context)
     return render(request,'admin1/banner_ads/banner_ads.html',context)
 
-
+#For banner listing
+def change_banner_ads_status(request):
+    try:
+        banner_id=request.GET.get('banner_id')
+        status=request.GET.get('status')
+        banner_ads_instance = BannerAds.objects.filter(id=banner_id).first()
+        banner_ads_instance.status=status
+        banner_ads_instance.save()
+        return JsonResponse({'status':True,'message':"Status Changed successfully"})
+    except Exception as e:
+        return JsonResponse({'status':False,'error':f"unexpected error occured {str(e)}"},status=400)

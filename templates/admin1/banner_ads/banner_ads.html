@@ -127,15 +127,42 @@
   <option {% if banner_ad.status == 'deleted' %}selected {% endif %} value="deleted">Delete</option>
 </select>
       <script>
-          document.getElementById('statusSelect_{{banner_ad.id}}').addEventListener('change', function() {
+
+    document.getElementById('statusSelect_{{banner_ad.id}}').addEventListener('change', function() {
+
     const selectedValue = this.value;
     if (selectedValue !== "") {
       const confirmation = window.confirm(`Are you sure you want to change the status to ${this.options[this.selectedIndex].text}?`);
       if (!confirmation) {
         // Reset back to "Change Status" if the user cancels
-          this.value = "{{banner_ad.status}}"
+          this.value = ""
+          window.location.href=""
       }else{
-
+          const url=`{% url 'change_banner_ads_status' %}?status=${selectedValue}&banner_id={{banner_ad.id}}`
+          fetch(url, {
+                method: 'GET', // or 'POST' if your view requires a POST request
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include any other headers if needed
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the JSON response data
+                console.log(data);
+                alert(data.message)
+                intialValue=selectedValue
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('There was a problem with the fetch operation:', error);
+            });
+          
       }
     }
   });

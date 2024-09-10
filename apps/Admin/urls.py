@@ -113,6 +113,7 @@ urlpatterns = [
    path('edit/options/<int:id>/',views.edit_options, name='edit_options'),
    
    #For banners   
-   path('banner_ads/listing/',views.list_banner_ads,name="list_banner_ads")
+   path('banner_ads/listing/',views.list_banner_ads,name="list_banner_ads"),
+   path('banner_ads/change_status/',views.change_banner_ads_status,name="change_banner_ads_status"),
    
 ]
