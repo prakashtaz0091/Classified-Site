@@ -1155,6 +1155,7 @@ def create_banner_ads(request):
             homepage_top_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_top').first()
             homepage_bottom_instance=DefaultBannerAdsPricing.objects.filter(position='homepage_bottom').first()
             categories = Category.objects.filter(parent_id__isnull=True)
+            created=request.session.pop('banner_created',None)
         
         # Create a dictionary to hold the categories and their subcategories
             category_context = {}
@@ -1172,6 +1173,9 @@ def create_banner_ads(request):
                 'categories':category_context,
                 'users':users
             }
+            if created:
+                context['message']=created
+
             print(context)
             return render(request,'admin1/banner_ads/add_banner_ads.html',context)
         else:
@@ -1252,6 +1256,7 @@ def create_banner_ads(request):
                 create_banner_ad('homepage_bottom', homebottombanner_plan, homebottombanner_image, title, link, category, subcategory, city, created_by)
 
             context={'message':"Banner Ads Submitted Successfully"}
+            request.session['banner_created']="banner created successfully"
             return redirect(reverse("create_banner_ads"))
      
     except Exception as e:
