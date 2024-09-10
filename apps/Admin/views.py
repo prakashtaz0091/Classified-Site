@@ -1153,3 +1153,11 @@ def create_banner_ads(request):
             pass
     except Exception as e:
         return e
+def delete_banner_ad(request):
+    try:
+        banner_id=request.GET.get('banner_id')
+        banner_instance=BannerAds.objects.get(id=banner_id)
+        banner_instance.delete()
+        return JsonResponse({'status':True,'message':"Banner ad deleted succesfully"},status=200)
+    except Exception as e:
+        return JsonResponse({"status":False,message:f"Unexpeced error occured {str(e)}"},status=400)
