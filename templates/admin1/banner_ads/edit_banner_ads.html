@@ -57,40 +57,40 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Enter Name (*)</label>
-                                        <input type="text" required class="form-control" placeholder="Add Name" name='name'>
+                                        <input type="text" value="{{banner_ad.title}}" required class="form-control" placeholder="Add Name" name='name'>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Link(*)</label>
-                                        <input type="text" required class="form-control" placeholder="Enter User Name" name='link'>
+                                        <input type="text" required value={{banner_ad.link}} class="form-control" placeholder="Enter User Name" name='link'>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <label>City(*)</label>
                                       <select  name="city_id" id="city" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
-                                        <option selected disabled value="">Select City</option>
-                                        <option value="Abu Dhabi">Abu Dhabi</option>
-                                        <option value="Ajman">Ajman</option>
-                                        <option value="Al Ain">Al Ain</option>
-                                        <option value="Al Madam">Al Madam</option>
-                                        <option value="Ar-Rams">Ar-Rams</option>
-                                        <option value="Bateen Liwa">Bateen Liwa</option>
-                                        <option value="Dhaid">Dhaid</option>
-                                        <option value="Dibba Al-Fujairah">Dibba Al-Fujairah</option>
-                                        <option value="Dibba Al-Hisn">Dibba Al-Hisn</option>
-                                        <option value="Dubai">Dubai</option>
-                                        <option value="Fujairah">Fujairah</option>
-                                        <option value="Ghayathi">Ghayathi</option>
-                                        <option value="Hatta">Hatta</option>
-                                        <option value="Jebel Ali">Jebel Ali</option>
-                                        <option value="Kalba">Kalba</option>
-                                        <option value="Khor Fakkan">Khor Fakkan</option>
-                                        <option value="Ras Al Khaimah">Ras Al Khaimah</option>
-                                        <option value="Ruwais">Ruwais</option>
-                                        <option value="Sharjah">Sharjah</option>
-                                        <option value="Umm al-Quwain">Umm al-Quwain</option>
-                                        <option value="Zayed City">Zayed City</option>
+                                        <option  disabled value="">Select City</option>
+                                        <option {% if banner_ad.city == 'Abu Dhabi' %} selected {% endif %} value="Abu Dhabi">Abu Dhabi</option>
+                                        <option {% if banner_ad.city == 'Ajman' %} selected {% endif %}  value="Ajman">Ajman</option>
+                                        <option {% if banner_ad.city == 'Al Ain' %} selected {% endif %}  value="Al Ain">Al Ain</option>
+                                        <option {% if banner_ad.city == 'Al Madam' %} selected {% endif %}  value="Al Madam">Al Madam</option>
+                                        <option {% if banner_ad.city == 'Ar-Rams' %} selected {% endif %}  value="Ar-Rams">Ar-Rams</option>
+                                        <option {% if banner_ad.city == 'Bateen Liwa' %} selected {% endif %}  value="Bateen Liwa">Bateen Liwa</option>
+                                        <option {% if banner_ad.city == 'Dhaid' %} selected {% endif %}   value="Dhaid">Dhaid</option>
+                                        <option {% if banner_ad.city == 'Dibba Al-Fujairah' %} selected {% endif %}   value="Dibba Al-Fujairah">Dibba Al-Fujairah</option>
+                                        <option {% if banner_ad.city == 'Dibba Al-Hisn' %} selected {% endif %}   value="Dibba Al-Hisn">Dibba Al-Hisn</option>
+                                        <option {% if banner_ad.city == 'Dubai' %} selected {% endif %}   value="Dubai">Dubai</option>
+                                        <option {% if banner_ad.city == 'Fujairah' %} selected {% endif %}   value="Fujairah">Fujairah</option>
+                                        <option {% if banner_ad.city == 'Ghayathi' %} selected {% endif %}   value="Ghayathi">Ghayathi</option>
+                                        <option {% if banner_ad.city == 'Hatta' %} selected {% endif %}   value="Hatta">Hatta</option>
+                                        <option {% if banner_ad.city == 'Jebel Ali' %} selected {% endif %}   value="Jebel Ali">Jebel Ali</option>
+                                        <option {% if banner_ad.city == 'Kalba' %} selected {% endif %}   value="Kalba">Kalba</option>
+                                        <option {% if banner_ad.city == 'Khor Fakkan' %} selected {% endif %}   value="Khor Fakkan">Khor Fakkan</option>
+                                        <option {% if banner_ad.city == 'Ras Al Khaimah' %} selected {% endif %}   value="Ras Al Khaimah">Ras Al Khaimah</option>
+                                        <option {% if banner_ad.city == 'Ruwais' %} selected {% endif %}   value="Ruwais">Ruwais</option>
+                                        <option {% if banner_ad.city == 'Sharjah' %} selected {% endif %}   value="Sharjah">Sharjah</option>
+                                        <option {% if banner_ad.city == 'Umm al-Quwain' %} selected {% endif %}   value="Umm al-Quwain">Umm al-Quwain</option>
+                                        <option {% if banner_ad.city == 'Zayed City' %} selected {% endif %}   value="Zayed City">Zayed City</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-12">
@@ -100,7 +100,7 @@
                                       <select  name="user_id" id="user" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
                                           <option value="" disabled selected >Select User</option>
                                           {% for user in users %}
-                                          <option value="{{user.id}}">{{user.email}}</option>
+                                          <option {% if banner_ad.created_by.id == user.id %} selected {% endif %} value="{{user.id}}">{{user.email}}</option>
                                                   {% endfor %}
                                       </select>
                                     </div>
@@ -130,7 +130,8 @@
                                 <div class='row'>
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input style="transform:scale(1.2);width:20px;height:20px;"    type="checkbox"  id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
+                                                      {{banner_ad.position}}
+                                                      <input {% if banner_ad.position == 'homepage_carousel' %} checked {% endif %}  style="transform:scale(1.2);width:20px;height:20px;"    type="checkbox"  id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
                                                         <label for="homepage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Carousel</label>
                                                     </div>
                                                     <p style='margin-left:1rem'>
@@ -160,7 +161,7 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input style="transform:scale(1.2);width:20px;height:20px;" type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
+                                                        <input {% if banner_ad.position == 'category_page_top' %} checked {% endif %}  style="transform:scale(1.2);width:20px;height:20px;" type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
                                                         <label for="categorypage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Category page top banner</label>
                                                     </div>
                                                     <p style='margin-left:1rem'>
@@ -182,11 +183,12 @@
                                         </li>
 
                                         <!-- Homepage Top Banner -->
-                                        <li style="margin-top:2rem" class="list-group-item">
+                                      <li style="margin-top:2rem" class="list-group-item">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="hometopbanner" class="custom-control-input" onchange="toggleFields('hometopbanner', 'hometopbannerPlan', 'hometopbannerUpload')">
+                                                        <input  {% if banner_ad.position == 'homepage_top' %} checked {% endif %}style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="hometopbanner" class="custom-control-input" onchange="toggleFields('hometopbanner', 'hometopbannerPlan', 'hometopbannerUpload')">
+
                                                         <label for="hometopbanner"  name="homepage_top_plan" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Top Banner - Promotion</label>
                                                     </div>
                                                     
@@ -221,7 +223,7 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
+                                                        <input {% if banner_ad.position == 'homepage_bottom' %} checked {% endif %} style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
                                                         <label for="homebottombanner" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Bottom Banner - Promotion</label>
                                                     </div>
                                                     
@@ -427,5 +429,33 @@
         }
     </script>
 
+      <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Function to initialize checkbox states and call toggleFields
+    function initializeCheckboxStates() {
+        // Array of checkbox IDs and corresponding fields
+        const checkboxes = [
+            { checkboxId: 'homepage', selectId: 'homepagePlan', uploadId: 'homepageUpload' },
+            { checkboxId: 'hometopbanner', selectId: 'hometopbannerPlan', uploadId: 'hometopbannerUpload' },
+            { checkboxId: 'homebottombanner', selectId: 'homebottombannerPlan', uploadId: 'homebottombannerUpload' },
+            { checkboxId: 'categorypage', selectId: 'categorypagePlan', uploadId: 'categorypageUpload' },
+            // Add more checkboxes as needed
+        ];
+
+        checkboxes.forEach(({ checkboxId, selectId, uploadId }) => {
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox.checked) {
+              if(checkboxId='categorypage'){
+                toggleFieldsCategory()
+              }else{
+                toggleFields(checkboxId, selectId, uploadId);
+                
+            }
+            }});
+    }
+
+    initializeCheckboxStates()
+    })
+      </script>
 
  {% endblock %}

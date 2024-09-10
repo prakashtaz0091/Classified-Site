@@ -1126,7 +1126,7 @@ def edit_options(request,id):
 
 #For banner listing
 def list_banner_ads(request):
-    banner_ads_instance = BannerAds.objects.all()
+    banner_ads_instance = BannerAds.objects.all().order_by('-id')
     context={
         'banner_ads':banner_ads_instance
     }
