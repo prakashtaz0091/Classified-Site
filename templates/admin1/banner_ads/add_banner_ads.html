@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label>City(*)</label>
-                                      <select  name="city_id" id="ciy" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                      <select  name="city_id" id="city" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
                                         <option selected disabled value="">Select City</option>
                                         <option value="Abu Dhabi">Abu Dhabi</option>
                                         <option value="Ajman">Ajman</option>
@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         <label>User (*)</label>
 
-                                      <select  name="user_id" id="usr" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                      <select  name="user_id" id="user" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
                                           <option value="" disabled selected >Select User</option>
                                           {% for user in users %}
                                           <option value="{{user.id}}">{{user.email}}</option>
