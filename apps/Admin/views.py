@@ -1148,7 +1148,12 @@ def change_banner_ads_status(request):
 def create_banner_ads(request):
     try:
         if request.method=='GET':
-            return render(request,'admin1/banner_ads/add_banner_ads.html')
+            users=Account.objects.all().values('email','id')
+            context={
+                'users':users
+            }
+            print(context)
+            return render(request,'admin1/banner_ads/add_banner_ads.html',context)
         else:
             pass
     except Exception as e:
