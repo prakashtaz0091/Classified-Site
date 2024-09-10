@@ -1144,3 +1144,12 @@ def change_banner_ads_status(request):
         return JsonResponse({'status':True,'message':"Status Changed successfully"})
     except Exception as e:
         return JsonResponse({'status':False,'error':f"unexpected error occured {str(e)}"},status=400)
+
+def create_banner_ads(request):
+    try:
+        if request.method=='GET':
+            return render(request,'admin1/banner_ads/add_banner_ads.html')
+        else:
+            pass
+    except Exception as e:
+        return e
