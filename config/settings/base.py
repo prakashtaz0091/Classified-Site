@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mathfilters',
     'apps.accounts.apps.AccountsConfig',
     'apps.home.apps.HomeConfig',
     'apps.store.apps.StoreConfig',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'apps.job.apps.JobConfig',
     'apps.contact.apps.ContactConfig',
     'apps.Admin.apps.AdminConfig',
+    'apps.business_listing.apps.BusinessListingConfig',
     
 
 ]

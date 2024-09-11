@@ -54,10 +54,12 @@ class Category(models.Model):
     category_thumbnail_image=models.FileField(upload_to='category/thumbnail/',blank=True,null=True)
     created_at=models.DateField(auto_now_add=True,blank=True,null=True)
 
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.category_name)
+            slug_count = Category.objects.filter(slug=self.slug).count()
+            if slug_count > 0:
+                self.slug = f"{self.slug}-{slug_count + 1}"
         super(Category, self).save(*args, **kwargs)
 
     class Meta:
