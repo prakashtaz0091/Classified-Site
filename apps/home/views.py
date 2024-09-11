@@ -18,7 +18,7 @@ def home(request):
     if request.method == "GET":
         try:
             # Fetch all categories
-            all_categories = Category.objects.select_related().filter(parent_id=None).order_by("-id")
+            all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE').order_by("-id")
             latest_products = []
             all_products = (
                 Product.objects.select_related()
@@ -26,8 +26,7 @@ def home(request):
                 .order_by("-created_date")
             )
             
-            print(all_products,'all products =+++++++++++++++++++++++++++++++++++>')
-
+         
             # Get the latest 5 products for each category
             for category in all_categories:
 
@@ -88,10 +87,10 @@ def how_it_works(request):
 def dashboard(request):
     try:
         book_marks=BookMark.objects.filter(user=request.user)
-        total_product=Product.objects.filter(created_by=request.user).count()
+        total_product=Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
         reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
-        total_views = Product.objects.filter(created_by=request.user).aggregate(total_views=Sum('view_count'))['total_views']
+        total_views = Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).aggregate(total_views=Sum('view_count'))['total_views']
         
        
         bookmarks_count=book_marks.count()
@@ -116,13 +115,13 @@ def my_listing(request):
         products=None
         if search!="":
             products = Product.objects.filter(
-            product_name__icontains=search_query
+            product_name__icontains=search_query,is_available=True,is_approved=True
         ) | Product.objects.filter(
-            description__icontains=search_query
+            description__icontains=search_query,is_available=True,is_approved=True
         )
-            products = products.filter(created_by=request.user).order_by(sort_option)
+            products = products.filter(created_by=request.user,is_available=True,is_approved=True).order_by(sort_option)
         else:
-            products = Product.objects.filter(created_by=request.user).order_by(sort_option)
+            products = Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).order_by(sort_option)
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
@@ -158,7 +157,7 @@ def edit_my_listing(request, id):
     if request.method == "GET":
 
         features = Feature.objects.all()
-        categories = Category.objects.all()
+        categories = Category.objects.filter(status='ACTIVE')
         product_images = ProductImages.objects.filter(product=product)
         selected_category=[]
         selected_categories = selected_category.append(product.category.id)
@@ -381,8 +380,8 @@ def add_listing(request):
 
 
         # Add selected categories to the product
-        category = Category.objects.filter(id=selected_categories).first()
-        subcategory = Category.objects.filter(id=selected_sub_categories).first()
+        category = Category.objects.filter(id=selected_categories,status='ACTIVE').first()
+        subcategory = Category.objects.filter(id=selected_sub_categories,status='ACTIVE').first()
         product.category=category
         product.subcategory=subcategory
 
@@ -406,7 +405,7 @@ def add_listing(request):
         return JsonResponse({'status':True,'message':"ad added success"},status=200)
 
     else:    
-        category=Category.objects.filter(parent_id=None)
+        category=Category.objects.filter(parent_id=None,status='ACTIVE')
         features=Feature.objects.all()
         context={
             'categories':category,
@@ -418,7 +417,7 @@ def add_listing(request):
 def get_subcategories(request):
     if request.method == "GET":
         category_id = request.GET.get('category_id')
-        subcategories = Category.objects.filter(parent_id=category_id)
+        subcategories = Category.objects.filter(parent_id=category_id,status='ACTIVE')
         subcategory_list = [
             {
                 "id": sub.id,
@@ -431,7 +430,7 @@ def get_subcategories(request):
     
     
 def all_ads(request):
-    product_list=Product.objects.all().order_by('-created_date')
+    product_list=Product.objects.filter(is_available=True,is_approved=True).order_by('-created_date')
     if request.user.is_authenticated:    
         bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
     else: 
@@ -464,7 +463,7 @@ def sub_category(request):
 def search(request):
     category_slug= request.GET.get('category')
     location = request.GET.get('location')
-    products = Product.objects.all().order_by('-id')
+    products = Product.objects.filter(is_available=True,is_approved=True).order_by('-id')
 
     bookmarked_product_ids=[]
     if request.user.is_authenticated:
