@@ -29,6 +29,14 @@ def home(request):
                 .filter(is_available=True,is_approved=True)
                 .order_by("-created_date")
             )
+            carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
+            print('carousel banner',carousel_banner_ads)
+            #Onlyy one in top banner
+            homepage_top_banner_ads=BannerAds.objects.filter(position='homepage_top',status='approved').order_by('-id').first()
+            print(homepage_top_banner_ads,'homepage otp')
+             #Onlyy one in bottom banner
+            homepage_bottom_banner_ads=BannerAds.objects.filter(position='homepage_bottom',status='approved').order_by('-id').first()
+            print("homepagebottom",homepage_bottom_banner_ads)
             
             print(all_products,'all products =+++++++++++++++++++++++++++++++++++>')
 
