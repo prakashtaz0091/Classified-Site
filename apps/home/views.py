@@ -22,11 +22,8 @@ def home(request):
     if request.method == "GET":
         try:
             # Fetch all categories
-<<<<<<< HEAD
+
             all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE').order_by("-id")
-=======
-            all_categories = Category.objects.select_related().filter(parent_id=None, status='ACTIVE').order_by("-id")
->>>>>>> origin/master
             latest_products = []
             all_products = (
                 Product.objects.select_related()
@@ -42,11 +39,7 @@ def home(request):
             homepage_bottom_banner_ads=BannerAds.objects.filter(position='homepage_bottom',status='approved').order_by('-id').first()
             print("homepagebottom",homepage_bottom_banner_ads)
             
-<<<<<<< HEAD
-         
-=======
-          
->>>>>>> origin/master
+
             # Get the latest 5 products for each category
             for category in all_categories:
 
@@ -109,15 +102,7 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
-<<<<<<< HEAD
-        book_marks=BookMark.objects.filter(user=request.user)
-        total_product=Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).count()
-        reviews_list=Reviews.objects.select_related().filter(reviewed_for=request.user).order_by('-id')[:5]
-        reviews_count=Reviews.objects.filter(reviewed_for=request.user).count()
-        total_views = Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).aggregate(total_views=Sum('view_count'))['total_views']
-        
-       
-=======
+
         user=request.GET.get('user',None)
         user_id=request.GET.get('id',None)
 
@@ -134,7 +119,7 @@ def dashboard(request):
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=user_to_view).order_by('-id')[:5]
         reviews_count=Reviews.objects.filter(reviewed_for=user_to_view).count()
         total_views = Product.objects.filter(created_by=user_to_view).aggregate(total_views=Sum('view_count'))['total_views']
->>>>>>> origin/master
+
         bookmarks_count=book_marks.count()
 
         if user:
@@ -188,18 +173,14 @@ def my_listing(request):
         ) | Product.objects.filter(
             description__icontains=search_query,is_available=True,is_approved=True
         )
-<<<<<<< HEAD
-            products = products.filter(created_by=request.user,is_available=True,is_approved=True).order_by(sort_option)
-        else:
-            products = Product.objects.filter(created_by=request.user,is_available=True,is_approved=True).order_by(sort_option)
-=======
+
             products = products.filter(created_by=user_to_view).order_by(sort_option)
         else:
             products = Product.objects.filter(created_by=user_to_view).order_by(sort_option)
 
         if user is not None:
             products=products.filter(is_approved=True)
->>>>>>> origin/master
+
         paginator = Paginator(products, 3)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
