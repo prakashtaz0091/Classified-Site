@@ -1309,8 +1309,9 @@ def edit_banner_ad(request):
         else:
             data = request.POST
             print(data)
+            banner_id=request.GET.get('banner_id')
+            print("banner id",banner_id)
             title = data.get('name')
-
             link = data.get('link')
             category_id = data.get('category', None)
             subcategory_id = data.get('subcategory', None)
@@ -1324,7 +1325,6 @@ def edit_banner_ad(request):
             # Extracting the individual banner plans and their respective images
             homepage_plan = data.get('homepage_plan', None)
             homepage_image = request.FILES.get('homepage_image', None)
-
             category_plan = data.get('category_plan', None)
             category_image = request.FILES.get('category_image', None)
 
@@ -1333,6 +1333,23 @@ def edit_banner_ad(request):
 
             homebottombanner_plan = data.get('homebottombanner_plan', None)
             homebottombanner_image = request.FILES.get('homebottombanner_image', None)
+            
+            banner_instance=BannerAds.objects.filter(id=banner_id).first()
+
+            if homepage_image is None and banner_instance.position=="homepage_carousel":
+                homepage_image=banner_instance.image
+            if category_image is None and banner_instance.position=="category_page_top":
+                category_image=banner_instance.image
+            if hometopbanner_image is None and banner_instance.position=="homepage_top":
+                hometopbanner_image=banner_instance.image
+            if homebottombanner_image is None and banner_instance.position=="homepage_bottom":
+                homebottombanner_image=banner_instance.image
+ 
+            temp_status=banner_instance.status
+
+            #At the very less same data will come and this is the best way to handle this 
+            print('banner',banner_instance)
+            banner_instance.delete()
 
             # Category and subcategory objects
             category = Category.objects.get(id=category_id) if category_id else None
@@ -1342,6 +1359,7 @@ def edit_banner_ad(request):
             def create_banner_ad(position, plan, image, title, link, category, subcategory, city, created_by):
                 if plan:
                     try:
+
                         print(position)
                         pricing = DefaultBannerAdsPricing.objects.get(position=position)
                         price_per_day = pricing.price_per_day
@@ -1366,7 +1384,7 @@ def edit_banner_ad(request):
                         days=days,
                         sub_category=subcategory,
                         created_by=created_by,
-                        status="pending"  # Default status is pending
+                        status=temp_status  # Default status is pending
                     )
                     return banner_ad
 
