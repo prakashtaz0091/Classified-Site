@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions
-from apps.store.models import Product,Feature,BookMark
+from apps.store.models import BannerAds, Product,Feature,BookMark
 from django.db.models import Count
 import json
  
@@ -14,8 +14,10 @@ from django.views.decorators.csrf import csrf_exempt
 # For subcategory
 def listing_view(request, subcategory_slug):
     try:
-        print(subcategory_slug,'car')
         sub_category = Category.objects.get(slug=subcategory_slug)
+
+        category_banner=BannerAds.objects.filter(sub_category=sub_category).order_by('-id').first()
+        print('cateogyr banner',category_banner)
         products = Product.objects.filter(subcategory=sub_category).order_by("-id")
         # For pagination
         paginator = Paginator(products, 10)  # Adjust the number for items per page
@@ -29,10 +31,8 @@ def listing_view(request, subcategory_slug):
                 ).values_list("product_id", flat=True)
         else:
                 bookmarked_product_ids = []
-        print(bookmarked_product_ids)
 
         fields = Field.objects.filter(field_type__in=['select', 'select_multiple'],hint=sub_category.category_name)
-        print(fields)
 
         # Collecting the field options for each field
         field_data = []
@@ -43,6 +43,7 @@ def listing_view(request, subcategory_slug):
                 'field_name': field.field_name,
                 'field_type': field.field_type,
                 'options': options  # A queryset of FieldOptions objects related to this field
+
             })
         print(field_data)
                 
@@ -56,7 +57,8 @@ def listing_view(request, subcategory_slug):
             'current_page_product_count': len(page_obj.object_list),
             'features':feature,
             'field_data':field_data,
-            'book_mark':bookmarked_product_ids
+            'book_mark':bookmarked_product_ids,
+            'category_banner':category_banner,
         }
         if request.headers.get("x-requested-with") == "FETCH":
             product_list = render_to_string(

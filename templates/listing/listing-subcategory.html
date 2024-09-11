@@ -73,6 +73,15 @@
             </div>
          </div>
          <!-- /Breadscrumb Section -->
+		{% if category_banner %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{category_banner.link}}">
+		<img src="{{category_banner.image.url}}" />
+			</a>
+		</div>
+	   {% endif %}
+
+
          <!-- Main Content Section -->
          <div class="list-content">
             <div class="container">
