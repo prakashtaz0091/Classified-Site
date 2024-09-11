@@ -8,8 +8,13 @@
 		<!-- Header -->
 		<header class="header">
 			{% include 'includes/header.html' %}
-			
-		</header>
+			<!-- Glider.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+
+<!-- Glider.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+
+				</header>
 		<!-- /Header -->
 		{% include 'includes/alert.html' %}
 		<!-- Banner Section -->
@@ -71,6 +76,51 @@
 		</section>
 		
 		<!-- /Banner Section -->
+		<!-- banner top -->
+		{% if homepage_top_banner_ads %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{homepage_top_banner_ads.link}}">
+		<img src="{{homepage_top_banner_ads.image.url}}" />
+			</a>
+		</div>
+	   {% endif %}
+
+
+<!-- Banner Carousel -->
+<div class="glider-contain">
+    <div class="glider">
+        {% for banner in carousel_banner_ads %}
+        <div class="card aos" data-aos="fade-up">
+            <div style="margin-left:auto;display:flex;justify-content:center;text-align:center;margin-right:auto;">
+                <a href="{{ banner.link }}">
+                    {% if banner.image %}
+                    <img src="{{ banner.image.url }}" />
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="glider-prev">«</button>
+    <button class="glider-next">»</button>
+    <div role="tablist" class="dots"></div>
+</div>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,            // Show only one slide at a time
+        dots: '.dots',              // Navigation dots at the bottom
+        draggable: true,            // Allow dragging to scroll
+        scrollLock: true,           // Prevent scrolling past the last slide
+        arrows: {
+            prev: '.glider-prev',   // Previous button
+            next: '.glider-next'    // Next button
+        },
+        autoplay: 5000              // Autoplay the slides (optional)
+    });
+});
+
+			</script>
 		
 		<!-- Category Section -->
 		<section class="category-section">
@@ -137,9 +187,6 @@
 											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
 												<i class="feather-heart"></i>
 											</a>	
-											
-											
-											
 										</div>
 										
 										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
