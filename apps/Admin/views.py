@@ -1346,6 +1346,9 @@ def edit_banner_ad(request):
                 homebottombanner_image=banner_instance.image
  
             temp_status=banner_instance.status
+            temp_subcategory=None
+            if not subcategory_id and banner_instance.sub_category:
+                temp_subcategory=banner_instance.sub_category
 
             #At the very less same data will come and this is the best way to handle this 
             print('banner',banner_instance)
@@ -1373,6 +1376,9 @@ def edit_banner_ad(request):
                         # Handle the case where no pricing exists for the position
                         return None
                     print(image)
+                    if subcategory is None and temp_subcategory is not None:
+                        subcategory=temp_subcategory
+
                     banner_ad = BannerAds.objects.create(
                         title=title,
                         link=link,

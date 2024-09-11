@@ -258,7 +258,7 @@
                                             onchange="toggleSubCategory()">
                                             <option value="">Select</option>
                 {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                <option {% if banner_ad.category.id == category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category_name }}</option>
                 {% endfor %}
                                         </select>
                                     </div>
@@ -415,6 +415,10 @@
                             data.subcategories.forEach(subcategory => {
                                 const option = document.createElement('option');
                                 option.value = subcategory.id;
+
+                              if ({{banner_ad.sub_category.id}}==subcategory.id){
+                                option.selected=true
+                              }
                                 option.textContent = subcategory.category_name;
                                 subcategorySelect.appendChild(option);
                             });
@@ -446,6 +450,7 @@
             if (checkbox.checked) {
               if(checkboxId=='categorypage'){
                 toggleFieldsCategory()
+                toggleSubCategory()
               }else{
                 toggleFields(checkboxId, selectId, uploadId);
                 
