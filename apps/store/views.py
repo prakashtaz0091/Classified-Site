@@ -13,7 +13,7 @@ from apps.store.models import BookMark, Product, ProductImages
 # Create your views here.
 def service_details(request, product_slug):
     try:
-        product_instance = Product.objects.filter(slug=product_slug).first()
+        product_instance = Product.objects.filter(slug=product_slug,is_available=True,is_approved=True).first()
         product_instance.view_count += 1
         product_instance.save()
         if product_instance is None:
