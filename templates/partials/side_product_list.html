@@ -68,14 +68,18 @@
                         <i class="feather-eye"></i>{{product.view_count}}
                     </div>
                 </div>
+                {% comment %}
                 <p class="ratings">
                     <span>4.0</span> ( 50 Reviews )
                 </p>
-                <div class="amount-details">
+                {% endcomment %}
+                <div style="margin-top:2rem" class="amount-details">
                     <div class="amount">
                         <span class="validrate">AED {{product.price}}</span>
                        
+                        {% comment %}
                         <span>$450</span>
+                        {% endcomment %}
                        
                     </div>
                     <a href="{% url 'service_detail' product.slug %}">View details</a>
