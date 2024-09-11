@@ -65,6 +65,9 @@ def home(request):
                 "all_products": all_products,
                 "categories": all_categories,
                 "book_mark": bookmarked_product_ids,
+                'carousel_banner_ads':carousel_banner_ads,
+                'homepage_top_banner_ads':homepage_top_banner_ads,
+                'homepage_bottom_banner_ads':homepage_bottom_banner_ads,
             }
 
             return render(request, "home/index.html", context)

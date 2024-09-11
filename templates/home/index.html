@@ -308,6 +308,14 @@
 		
 		<!-- /Latest Ads Section -->
 		
+		{% if homepage_bottom_banner_ads %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{homepage_bottom_banner_ads.link}}">
+		<img src="{{homepage_bottom_banner_ads.image.url}}" />
+			</a>
+		</div>
+	   {% endif %}
+
 		<!-- CTA Section -->
 		<section class="cta-section">
     <div class="container">
