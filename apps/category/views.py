@@ -5,17 +5,19 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from apps.category.models import Category, Field, FieldExtra, FieldExtraContent, FieldOptions
-from apps.store.models import Product,Feature,BookMark
+from apps.store.models import BannerAds, Product,Feature,BookMark
 from django.db.models import Count
-
+import json
  
 from django.views.decorators.csrf import csrf_exempt
 
 # For subcategory
 def listing_view(request, subcategory_slug):
     try:
-        print(subcategory_slug,'car')
         sub_category = Category.objects.get(slug=subcategory_slug)
+
+        category_banner=BannerAds.objects.filter(sub_category=sub_category).order_by('-id').first()
+        print('cateogyr banner',category_banner)
         products = Product.objects.filter(subcategory=sub_category).order_by("-id")
         # For pagination
         paginator = Paginator(products, 10)  # Adjust the number for items per page
@@ -29,9 +31,21 @@ def listing_view(request, subcategory_slug):
                 ).values_list("product_id", flat=True)
         else:
                 bookmarked_product_ids = []
-        print(bookmarked_product_ids)
 
-        # Apply sorting to the items on the current page only
+        fields = Field.objects.filter(field_type__in=['select', 'select_multiple'],hint=sub_category.category_name)
+
+        # Collecting the field options for each field
+        field_data = []
+        for field in fields:
+            options = FieldOptions.objects.filter(linked_to=field)
+            field_data.append({
+                'id':field.id,
+                'field_name': field.field_name,
+                'field_type': field.field_type,
+                'options': options  # A queryset of FieldOptions objects related to this field
+
+            })
+        print(field_data)
                 
         feature=Feature.objects.all()    
 
@@ -42,7 +56,9 @@ def listing_view(request, subcategory_slug):
             'page_obj': page_obj,
             'current_page_product_count': len(page_obj.object_list),
             'features':feature,
-            'book_mark':bookmarked_product_ids
+            'field_data':field_data,
+            'book_mark':bookmarked_product_ids,
+            'category_banner':category_banner,
         }
         if request.headers.get("x-requested-with") == "FETCH":
             product_list = render_to_string(
@@ -169,17 +185,20 @@ def filter_category(request):
         print(e)
         #later redirect to 404
 
+@csrf_exempt
 def filter_sub_category(request):
     try:
-        print(request.GET)
+        print(request.POST)
+        print("hello")
 
-        sort_by = request.GET.get("sort", "default")
-        query = request.GET.get("query", "")
-        category = request.GET.get("category",None)
-        location = request.GET.get("location", "")
-        region = request.GET.get("region", "")
-        min_price = request.GET.get("min_price", None)
-        max_price = request.GET.get("max_price", None)
+        sort_by = request.POST.get("sort", "default")
+        query = request.POST.get("query", "")
+        category = request.POST.get("category",None)
+        location = request.POST.get("location", "")
+        region = request.POST.get("region", "")
+        min_price = request.POST.get("min_price", None)
+        max_price = request.POST.get("max_price", None)
+        fields_filter=request.POST.getlist('fields_filter',None)
 
         products = Product.objects.filter(subcategory=category).order_by('-id')
 
@@ -193,6 +212,22 @@ def filter_sub_category(request):
             products = products.filter(price__gte=min_price)
         if max_price:
             products = products.filter(price__lte=max_price)
+        if fields_filter:
+            filtered_products = []
+            criteria = [tuple(f.split(':')) for f in fields_filter if f!=""]
+
+            for product in products:
+                featured_data = product.featured_data  # Assuming this is a list of strings
+
+                # Check if the product meets all criteria
+                all_criteria_met = all(
+                    any(f"{field_name}:{field_value}" in item for item in featured_data)
+                    for field_name, field_value in criteria
+                )
+
+                if all_criteria_met:
+                    filtered_products.append(product)
+            products=filtered_products
 
         paginator = Paginator(products, 10)  # Show 10 products per page
         page_number = request.GET.get('page', 1)
@@ -448,7 +483,7 @@ def get_category_options(request):
                     option_data = {'value': option.field_value}
                     
                     # Check if there are FieldExtras linked to this option
-                    extras = FieldExtra.objects.filter(linked_to=option).order_by('menu_text')
+                    extras = FieldExtra.objects.filter(linked_to=option,disabled=False).order_by('menu_text')
                     if extras.exists():
                         option_data['extras'] = []
                         for extra in extras:

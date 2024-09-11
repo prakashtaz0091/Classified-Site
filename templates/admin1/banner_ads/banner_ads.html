@@ -1,0 +1,361 @@
+{% extends 'admin1/base1.html' %}
+{% load static %} 
+{% block content %}
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+      {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+            {% include 'admin1/include/sidebar.html' %}
+
+        </div>
+        <!-- /Sidebar -->
+        
+       <!-- Ensure this line is at the top of your template -->
+
+        <div class="page-wrapper page-settings">
+            <div class="content">
+                <div class="content-page-header content-page-headersplit">
+                    <h5>Customers</h5>
+                    <div class="list-btn">
+                        <ul>
+                            <li>
+                                <a class="btn-filters active" href="{% static 'admin/user-customers.html' %}"><i class="fe fe-list"></i> </a>
+                            </li>
+                            <li>
+                                <a class="btn-filters" href="javascript:void(0);"><i class="fe fe-grid"></i> </a>
+                            </li>
+                            <li>
+                                <a class="btn-filters" href="{% static 'admin/localization.html' %}"><i class="fe fe-settings"></i> </a>
+                            </li>
+                            <li>
+                                <div class="filter-sorting">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);" class="filter-sets">
+                                                <img src="{% static 'admin/assets/img/icons/filter1.svg' %}" class="me-2" alt="img">Filter
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span><img src="{% static 'admin/assets/img/icons/sort.svg' %}" class="me-2" alt="img"></span>
+                                            <div class="review-sort">
+                                                <select class="select" id="sortOptions" onchange="sortTable()">
+                                                    <option value="asc">A - Z</option>
+                                                    <option value="desc">Z - A</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary" href="{% url 'create_banner_ads'  %}"><i class="fa fa-plus me-2"></i>Create Banner Ads</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Position</th>
+                                        <th>Status</th>
+                                        <th>Payment<br /> Status</th>
+                                        <th>City</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for banner_ad in banner_ads %}
+                                    <tr>
+                                        <td>{{banner_ad.created_at}}</td>
+                                        <td class="table-namesplit">
+                                            <a href="javascript:void(0);" class="table-profileimage">
+                                                {% if banner_ad.image %}
+                                                <img src="{{banner_ad.image.url}}" class="me-2" alt="img">
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        
+                                        <td class="table-name"><span>{{banner_ad.title}}</span></td>
+
+
+                                        <td>{{banner_ad.get_position_display}}</td>
+                                        <td>{{banner_ad.status}}</td>
+                                        <td style="font-weight:600;">
+                                            ({{banner_ad.price}} AED)
+                                        </td>
+                                        <td>
+
+                                            {{banner_ad.city}}
+                                        </td>
+                                        
+                                        
+                                        <td>
+
+                                            <select id="statusSelect_{{banner_ad.id}}" style="background-color:rgba(0, 0, 0, 0.87); color:white; padding:1rem; width:200px;cursor:pointer;padding-right:2rem">
+  <option value=""  disabled >Change Status</option>
+  <option {% if banner_ad.status == 'pending' %}selected {% endif %} value="pending">Pending</option>
+  <option {% if banner_ad.status == 'rejected' %}selected {% endif %} value="rejected">Reject</option>
+  <option {% if banner_ad.status == 'approved' %}selected {% endif %} value="approved">Active</option>
+  <option {% if banner_ad.status == 'deleted' %}selected {% endif %} value="deleted">Delete</option>
+</select>
+      <script>
+
+    document.getElementById('statusSelect_{{banner_ad.id}}').addEventListener('change', function() {
+
+    const selectedValue = this.value;
+    if (selectedValue !== "") {
+      const confirmation = window.confirm(`Are you sure you want to change the status to ${this.options[this.selectedIndex].text}?`);
+      if (!confirmation) {
+        // Reset back to "Change Status" if the user cancels
+          this.value = ""
+          window.location.href=""
+      }else{
+          const url=`{% url 'change_banner_ads_status' %}?status=${selectedValue}&banner_id={{banner_ad.id}}`
+          fetch(url, {
+                method: 'GET', // or 'POST' if your view requires a POST request
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include any other headers if needed
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the JSON response data
+                console.log(data);
+                alert(data.message)
+                intialValue=selectedValue
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('There was a problem with the fetch operation:', error);
+            });
+          
+      }
+    }
+  });
+</script>
+                                            <div class="table-actions d-flex">
+                                                <a class="delete-table me-2" href="{% url 'edit_banner_ads' %}?banner_id={{banner_ad.id}}">
+                                                   <img  style="width:20px;" src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
+                                                </a>
+                                                <a class="delete-table"  href="javascript:void(0);" onclick="confirmDelete({{ banner_ad.id }})">
+                                                    <img style="width:20px" src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}                                    
+                                </tbody>
+                                <tr id="no-results" style="display: none;">
+                                    <td colspan="8" class="text-center" >No results found</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="delete-item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Room</h5>
+                <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fe fe-x"></i>
+                </button>
+            </div>
+                <div class="modal-body py-0">
+                    <div class="del-modal">
+                        <p>Are you sure you want to delete this banner Ads?</p>
+                    </div>
+                </div>
+                <div class="modal-footer pt-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <input type="hidden" id="hidden_banner_id" value="" />
+                    <button type="submit" onclick="deleteBanner()" class="btn btn-primary">Yes</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Modal -->
+        <script>
+        function confirmDelete(roomId) {
+            var form = document.getElementById('delete-room-form');
+            var hidden_banner_id=document.getElementById('hidden_banner_id')
+            hidden_banner_id.value=roomId
+
+            var deleteModal = new bootstrap.Modal(document.getElementById('delete-item'));
+            deleteModal.show();
+        }
+        function deleteBanner(){
+            var hidden_banner_id=document.getElementById('hidden_banner_id').value
+            const url="{% url 'delete_banner_ad' %}?banner_id="+hidden_banner_id
+              fetch(url, {
+                method: 'GET', // or 'POST' if your view requires a POST request
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include any other headers if needed
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the JSON response data
+                console.log(data);
+                window.location.href=""
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        }
+
+
+        </script>
+
+
+    <script>
+        document.querySelectorAll('.status-dropdown').forEach(function(dropdown) {
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                const rect = dropdownMenu.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+        
+                // Check if dropdown menu goes beyond the viewport height
+                if (rect.bottom > viewportHeight) {
+                    dropdownMenu.style.bottom = '100%';
+                    dropdownMenu.style.top = 'auto';
+                } else {
+                    dropdownMenu.style.bottom = 'auto';
+                    dropdownMenu.style.top = '100%';
+                }
+            });
+        });
+        
+        
+        
+    </script>
+
+    <script>
+
+        function searchTable() {
+            // Get the input value and convert it to lowercase
+            var input = document.getElementById("searchInput");
+            var filter = input.value.toLowerCase();
+            var table = document.querySelector(".datatable tbody");
+            var rows = table.getElementsByTagName("tr");
+            var noResultsRow = document.getElementById("no-results");  // Reference to the 'No results' row
+            var anyVisible = false;  // Flag to check if any row is visible
+        
+            // Loop through all table rows
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var shouldDisplay = false;
+        
+                // Loop through each cell in the current row
+                var cells = row.getElementsByTagName("td");
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = cells[j];
+                    if (cell) {
+                        // Check if the cell text contains the search query
+                        if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                            shouldDisplay = true;
+                            break;  // No need to check other cells if a match is found
+                        }
+                    }
+                }
+        
+                // Show or hide the row based on the search result
+                if (shouldDisplay) {
+                    row.style.display = "";
+                    anyVisible = true;  // Set the flag to true if any row is visible
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        
+            // Show or hide the 'No results found' row based on whether any row is visible
+            if (anyVisible) {
+                noResultsRow.style.display = "none";
+            } else {
+                noResultsRow.style.display = "";
+            }
+        }
+        
+    </script>
+
+    <script>
+        // JavaScript sorting function as shown above
+        function sortTable() {
+            var table = document.querySelector(".datatable tbody");
+            var rows = Array.from(table.rows);
+            var sortOption = document.getElementById("sortOptions").value;
+        
+            rows.sort(function(a, b) {
+                // Extract the text content from the .table-name span
+                var nameA = a.querySelector(".table-name span");
+                var nameB = b.querySelector(".table-name span");
+        
+                // Handle potential null values
+                nameA = nameA ? nameA.textContent.toLowerCase() : '';
+                nameB = nameB ? nameB.textContent.toLowerCase() : '';
+        
+                if (sortOption === "asc") {
+                    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+                } else if (sortOption === "desc") {
+                    return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
+                }
+            });
+        
+            // Re-append sorted rows to the table body
+            rows.forEach(function(row) {
+                table.appendChild(row);
+            });
+        }
+        
+    </script>
+    
+
+ {% endblock %}

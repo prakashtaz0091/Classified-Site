@@ -112,26 +112,11 @@ urlpatterns = [
    path('delete/field_options/<int:id>/',views.delete_field_options, name='delete_field_options'),
    path('edit/options/<int:id>/',views.edit_options, name='edit_options'),
    
+   #For banners   
+   path('banner_ads/listing/',views.list_banner_ads,name="list_banner_ads"),
+   path('banner_ads/change_status/',views.change_banner_ads_status,name="change_banner_ads_status"),
+   path('banner_ads/create/',views.create_banner_ads,name='create_banner_ads'),
+   path('banner_ads/edit/',views.edit_banner_ad,name='edit_banner_ads'),
+   path('banner_ads/delete/',views.delete_banner_ad,name='delete_banner_ad'),
    
-
-   
-    
-    
-    
-    
-    
-    
-    
-
-    
-     
-    
-    
-    
-    
-
-    
-    
-
-    
 ]

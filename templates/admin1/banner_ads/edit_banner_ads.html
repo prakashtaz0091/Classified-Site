@@ -1,56 +1,139 @@
-{% extends 'base.html' %}
+
+{% extends 'admin1/base1.html' %}
 {% load mathfilters %}
 {% load static %}
 
+{% block title %}
+<title>Create New Banner Ads</title>
+{% endblock %}
+
 {% block content %}
-	
-	<div class="main-wrapper" style='background: #F3F3F3;'>
-	
-		<!-- Header -->
-		<header class="header">
-			{% include 'includes/header.html' %}
-		</header>
-		<!-- /Header -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-		{% include 'includes/alert.html' %}
 
-		<!-- Banner Section -->
-        <section style="margin-top:40px" class="banner-section">	
-            <div class="container my-4">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <h2 class="text-center mb-3" style='display:flex;font-size: 1.4rem'>
-                            <button class="btn btn-primary" style='padding:0.5rem 1rem;margin-right:1rem;'>⬅ Go Back</button>
-                            Promote your business
-                        </h2>
-                        <form autocomplete="off" class="" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="oh p-4 card">
-                                <p class="mb-0" style='color: #7d7d7d;font-size: .875rem;font-weight: 400;line-height: 1.4;'>
-                                    Promoting your business is a must if you want to stand apart from your competitors and out to your customers, so let's get started.
-                                </p>
-                                <div class="mt-3 form-group">
-                                    <label class="form-label" for="title" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Title *</label>
-                                    <input name="title" type="text" required id="title" class="form-control" value="">
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+       {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo.svg' %}" class="img-fluid logo" alt="">
+                    </a>
+                    <a href="index.html">
+                        <img src="{% static 'admin/assets/img/logo-small.svg' %}" class="img-fluid logo-small" alt="">
+                    </a>
+                </div>
+                <div class="siderbar-toggle">
+                    <label class="switch" id="toggle_btn">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            
+            {% include 'admin1/include/sidebar.html' %}
+            
+           
+        </div>
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+              <form action="{% url 'edit_banner_ads' %}?banner_id={{banner_ad.id}}" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-12 m-auto">
+                            <div class="content-page-header">
+                                <h5>Create New Banner Ads</h5>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Enter Name (*)</label>
+                                        <input type="text" value="{{banner_ad.title}}" required class="form-control" placeholder="Add Name" name='name'>
+                                    </div>
                                 </div>
-                                <div class="mt-3 form-group">
-                                    <label class="form-label" for="link" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Link *</label>
-                                    <input name="link" type="text" required id="link" class="form-control" value="">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Link(*)</label>
+                                        <input type="text" required value={{banner_ad.link}} class="form-control" placeholder="Enter User Name" name='link'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>City(*)</label>
+                                      <select  name="city_id" id="city" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                        <option  disabled value="">Select City</option>
+                                        <option {% if banner_ad.city == 'Abu Dhabi' %} selected {% endif %} value="Abu Dhabi">Abu Dhabi</option>
+                                        <option {% if banner_ad.city == 'Ajman' %} selected {% endif %}  value="Ajman">Ajman</option>
+                                        <option {% if banner_ad.city == 'Al Ain' %} selected {% endif %}  value="Al Ain">Al Ain</option>
+                                        <option {% if banner_ad.city == 'Al Madam' %} selected {% endif %}  value="Al Madam">Al Madam</option>
+                                        <option {% if banner_ad.city == 'Ar-Rams' %} selected {% endif %}  value="Ar-Rams">Ar-Rams</option>
+                                        <option {% if banner_ad.city == 'Bateen Liwa' %} selected {% endif %}  value="Bateen Liwa">Bateen Liwa</option>
+                                        <option {% if banner_ad.city == 'Dhaid' %} selected {% endif %}   value="Dhaid">Dhaid</option>
+                                        <option {% if banner_ad.city == 'Dibba Al-Fujairah' %} selected {% endif %}   value="Dibba Al-Fujairah">Dibba Al-Fujairah</option>
+                                        <option {% if banner_ad.city == 'Dibba Al-Hisn' %} selected {% endif %}   value="Dibba Al-Hisn">Dibba Al-Hisn</option>
+                                        <option {% if banner_ad.city == 'Dubai' %} selected {% endif %}   value="Dubai">Dubai</option>
+                                        <option {% if banner_ad.city == 'Fujairah' %} selected {% endif %}   value="Fujairah">Fujairah</option>
+                                        <option {% if banner_ad.city == 'Ghayathi' %} selected {% endif %}   value="Ghayathi">Ghayathi</option>
+                                        <option {% if banner_ad.city == 'Hatta' %} selected {% endif %}   value="Hatta">Hatta</option>
+                                        <option {% if banner_ad.city == 'Jebel Ali' %} selected {% endif %}   value="Jebel Ali">Jebel Ali</option>
+                                        <option {% if banner_ad.city == 'Kalba' %} selected {% endif %}   value="Kalba">Kalba</option>
+                                        <option {% if banner_ad.city == 'Khor Fakkan' %} selected {% endif %}   value="Khor Fakkan">Khor Fakkan</option>
+                                        <option {% if banner_ad.city == 'Ras Al Khaimah' %} selected {% endif %}   value="Ras Al Khaimah">Ras Al Khaimah</option>
+                                        <option {% if banner_ad.city == 'Ruwais' %} selected {% endif %}   value="Ruwais">Ruwais</option>
+                                        <option {% if banner_ad.city == 'Sharjah' %} selected {% endif %}   value="Sharjah">Sharjah</option>
+                                        <option {% if banner_ad.city == 'Umm al-Quwain' %} selected {% endif %}   value="Umm al-Quwain">Umm al-Quwain</option>
+                                        <option {% if banner_ad.city == 'Zayed City' %} selected {% endif %}   value="Zayed City">Zayed City</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>User (*)</label>
+
+                                      <select  name="user_id" id="user" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
+                                          <option value="" disabled selected >Select User</option>
+                                          {% for user in users %}
+                                          <option {% if banner_ad.created_by.id == user.id %} selected {% endif %} value="{{user.id}}">{{user.email}}</option>
+                                                  {% endfor %}
+                                      </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Payment Method</label>
+                                        <ul class="custom-radiosbtn">
+                                            <li>
+                                                <label class="radiossets">Offline
+                                                    <input type="radio" checked="checked" name="active" value='online'>
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="radiossets">Online
+                                                    <input type="radio" name="active" value='online'>
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
 
-                                <div class="mt-3 form-group">
-                                    <label class="form-label" for="Plan" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Positions *</label>
-                                    <ul class="list-group">
-
-                                        <!-- Homepage Carousel -->
-                                        <li class="list-group-item">
-                                            <div class="row">
+                                <div style="margin-top:2rem">
+                                <li class='list-group-item'>
+                                <div class='row'>
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input type="checkbox"  id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
+                                                      <input {% if banner_ad.position == 'homepage_carousel' %} checked {% endif %}  style="transform:scale(1.2);width:20px;height:20px;"    type="checkbox"  id="homepage" class="custom-control-input" onchange="toggleFields('homepage', 'homepagePlan', 'homepageUpload')">
                                                         <label for="homepage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Carousel</label>
                                                     </div>
-                                                    <p>
+                                                    <p style='margin-left:1rem'>
                                                         {{homepage_banner_instance.description}}
                                                     </p>
                                                 </div>
@@ -63,7 +146,7 @@
                                                 </div>
     
                                                 
-                                                <div class="row pl-2 pr-2">
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
                                                     <div class="col-12" id="homepageUpload" style="display: none;">
                                                         <label class="form-label" for="homepageImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
                                                         <input type="file" name='homepage_image'  id="homepageImage">
@@ -73,14 +156,15 @@
                                         </li>
 
                                         <!-- Category Page Top Banner -->
-                                        <li class="list-group-item">
+                                        <li style="margin-top:2rem"class="list-group-item">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
+                                                        <input {% if banner_ad.position == 'category_page_top' %} checked {% endif %}  style="transform:scale(1.2);width:20px;height:20px;" type="checkbox" id="categorypage" class="custom-control-input" onchange="toggleFields('categorypage', 'categorypagePlan', 'categorypageUpload')">
                                                         <label for="categorypage" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Category page top banner</label>
                                                     </div>
-                                                    <p>{{category_page_top.description}}</p>
+                                                    <p style='margin-left:1rem'>
+                                                      {{category_page_top.description}}</p>
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="categorypagePlan" name='category_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
@@ -88,7 +172,7 @@
                                                     </select>
                                                     <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED {{category_page_top.price_per_day|mul:365}}</p>
                                                 </div>
-                                                <div class="row pl-2 pr-2">
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
                                                     <div class="col-12" id="categorypageUpload" style="display: none;">
                                                         <label class="form-label" for="categorypageImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
                                                         <input type="file" name='category_image'  id="categorypageImage">
@@ -98,14 +182,17 @@
                                         </li>
 
                                         <!-- Homepage Top Banner -->
-                                        <li class="list-group-item">
+                                      <li style="margin-top:2rem" class="list-group-item">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input type="checkbox" id="hometopbanner" class="custom-control-input" onchange="toggleFields('hometopbanner', 'hometopbannerPlan', 'hometopbannerUpload')">
+                                                        <input  {% if banner_ad.position == 'homepage_top' %} checked {% endif %}style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="hometopbanner" class="custom-control-input" onchange="toggleFields('hometopbanner', 'hometopbannerPlan', 'hometopbannerUpload')">
+
                                                         <label for="hometopbanner"  name="homepage_top_plan" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Top Banner - Promotion</label>
                                                     </div>
-                                                    <p>
+                                                    
+                                                    <p style='margin-left:1rem'>
+
                                                         {{homepage_top_instance.description}}
                                                     </p>
                                                 </div>
@@ -120,7 +207,8 @@
                                                     <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="hometopbannerPrice">{{homepage_top_instance.price_per_day|mul:10}}</span></p>
                                                 </div>
                                                 
-                                                <div class="row pl-2 pr-2">
+
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
                                                     <div class="col-12" id="hometopbannerUpload" style="display: none;">
                                                         <label class="form-label" for="hometopbannerImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
                                                         <input type="file" name="hometopbanner_image" id="hometopbannerImage">
@@ -130,14 +218,15 @@
                                         </li>
 
                                         <!-- Homepage Bottom Banner -->
-                                        <li class="list-group-item">
+                                        <li style="margin-top:2rem" class="list-group-item">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="my-1 mr-sm-2 custom-control custom-checkbox">
-                                                        <input type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
+                                                        <input {% if banner_ad.position == 'homepage_bottom' %} checked {% endif %} style="transform:scale(1.2);width:20px;height:20px;"  type="checkbox" id="homebottombanner" class="custom-control-input" onchange="toggleFields('homebottombanner', 'homebottombannerPlan', 'homebottombannerUpload')">
                                                         <label for="homebottombanner" style="padding-left: 6px; line-height: 2; font-weight: 600; color: #1d1c18;" class="custom-control-label">Homepage Bottom Banner - Promotion</label>
                                                     </div>
-                                                    <p>
+                                                    
+                                                    <p style='margin-left:1rem'>
                                                         {{homepage_bottom_instance.description}}
                                                     </p>
                                                 </div>
@@ -152,7 +241,8 @@
                                                     <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homebottombannerPrice">{{homepage_bottom_instance.price_per_day|mul:10}}</span></p>
                                                 </div>
                                                 
-                                                <div class="row pl-2 pr-2">
+
+                                                <div style="margin-top:1rem" class="row pl-2 pr-2">
                                                     <div class="col-12" id="homebottombannerUpload" style="display: none;">
                                                         <label class="form-label" for="homebottombannerImage" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>Upload Image *</label>
                                                         <input type="file" name="homebottombanner_image" id="homebottombannerImage">
@@ -160,15 +250,7 @@
                                                 </div>
                                             </div>
                                         </li>
-
-                                    </ul>
-                                    
-                                </div>
-                                
-
-
-                                <div class="row form-group">
-                                    <!-- Category Page -->
+                                    </div>
                                     <div style="display:none" id="category_field" class="col-md-6 col-sm-12">
                                         <label class="form-label" for="exampleForm.ControlSelect1">Category Page</label>
                                         <select name="category" id="exampleForm.ControlSelect1" class="form-control"  
@@ -176,7 +258,7 @@
                                             onchange="toggleSubCategory()">
                                             <option value="">Select</option>
                 {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                <option {% if banner_ad.category.id == category.id %} selected {% endif %} value="{{ category.id }}">{{ category.category_name }}</option>
                 {% endfor %}
                                         </select>
                                     </div>
@@ -186,65 +268,44 @@
                                         <label class="form-label" for="exampleForm.ControlSelect2">Sub Category</label>
                                         <select name="subcategory" id="exampleForm.ControlSelect2" class="form-control" 
                                             style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" disabled>
-                                            <option value="">All</option>
+                                            <option selected disable value="">All</option>
                                         </select>
                                     </div>
-                                </div>
-     
-                            </div>
 
-                            <div class="p-4 mt-3 card">
-                                <h4 class="bg-light p-2 mb-3">Location</h4>
-                                <div class="form-group">
-                                    <label class="form-label" for="city" style='font-size: .875rem;margin-bottom: 5px;font-weight: 600;'>City</label>
-                                    <select required name="city_id" id="city" class="form-control" style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;">
-                                        <option value="">All</option>
-                                        <option value="Abu Dhabi">Abu Dhabi</option>
-                                        <option value="Ajman">Ajman</option>
-                                        <option value="Al Ain">Al Ain</option>
-                                        <option value="Al Madam">Al Madam</option>
-                                        <option value="Ar-Rams">Ar-Rams</option>
-                                        <option value="Bateen Liwa">Bateen Liwa</option>
-                                        <option value="Dhaid">Dhaid</option>
-                                        <option value="Dibba Al-Fujairah">Dibba Al-Fujairah</option>
-                                        <option value="Dibba Al-Hisn">Dibba Al-Hisn</option>
-                                        <option value="Dubai">Dubai</option>
-                                        <option value="Fujairah">Fujairah</option>
-                                        <option value="Ghayathi">Ghayathi</option>
-                                        <option value="Hatta">Hatta</option>
-                                        <option value="Jebel Ali">Jebel Ali</option>
-                                        <option value="Kalba">Kalba</option>
-                                        <option value="Khor Fakkan">Khor Fakkan</option>
-                                        <option value="Ras Al Khaimah">Ras Al Khaimah</option>
-                                        <option value="Ruwais">Ruwais</option>
-                                        <option value="Sharjah">Sharjah</option>
-                                        <option value="Umm al-Quwain">Umm al-Quwain</option>
-                                        <option value="Zayed City">Zayed City</option>
-                                    </select>
-                                    
-                                </div>
-                            </div>
+
+                                <div class="col-lg-12">
 
                             <h6 class="pt-3">Total - AED <span id="totalAmount">0.00</span></h6>
-                            <button type="submit" class="btn-primary btn" style='margin-bottom:1rem;margin-right:4rem;'>Post</button>
-                        </form>
+                                    <div class="btn-path">
+                                        <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                                        <button type="submit" class="btn btn-submit "> Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </section>
+        </div> 
+    </div>
 
-		<!-- Footer -->
-		{% include 'includes/footer.html' %}
-	</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Choices for city select
+    const citySelect = new Choices('#city', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select City'
+    });
 
-	<!-- scrollToTop -->
-	<div class="progress-wrap active-progress">
-		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-			<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
-		</svg>
-	</div>
-	<!-- scrollToTop end -->
-
+    // Initialize Choices for user select
+    const userSelect = new Choices('#user', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select User'
+    });
+  });
+</script>
     <script>
         function toggleFields(checkboxId, selectId, uploadId) {
             const checkbox = document.getElementById(checkboxId);
@@ -354,6 +415,10 @@
                             data.subcategories.forEach(subcategory => {
                                 const option = document.createElement('option');
                                 option.value = subcategory.id;
+
+                              if ({{banner_ad.sub_category.id}}==subcategory.id){
+                                option.selected=true
+                              }
                                 option.textContent = subcategory.category_name;
                                 subcategorySelect.appendChild(option);
                             });
@@ -367,4 +432,34 @@
         }
     </script>
 
-{% endblock %}
+      <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Function to initialize checkbox states and call toggleFields
+    function initializeCheckboxStates() {
+        // Array of checkbox IDs and corresponding fields
+        const checkboxes = [
+            { checkboxId: 'homepage', selectId: 'homepagePlan', uploadId: 'homepageUpload' },
+            { checkboxId: 'hometopbanner', selectId: 'hometopbannerPlan', uploadId: 'hometopbannerUpload' },
+            { checkboxId: 'homebottombanner', selectId: 'homebottombannerPlan', uploadId: 'homebottombannerUpload' },
+            { checkboxId: 'categorypage', selectId: 'categorypagePlan', uploadId: 'categorypageUpload' },
+            // Add more checkboxes as needed
+        ];
+
+        checkboxes.forEach(({ checkboxId, selectId, uploadId }) => {
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox.checked) {
+              if(checkboxId=='categorypage'){
+                toggleFieldsCategory()
+                toggleSubCategory()
+              }else{
+                toggleFields(checkboxId, selectId, uploadId);
+                
+            }
+            }});
+    }
+
+    initializeCheckboxStates()
+    })
+      </script>
+
+ {% endblock %}

@@ -33,6 +33,14 @@ def home(request):
                 .filter(is_available=True)
                 .order_by("-created_date")
             )
+            carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
+            print('carousel banner',carousel_banner_ads)
+            #Onlyy one in top banner
+            homepage_top_banner_ads=BannerAds.objects.filter(position='homepage_top',status='approved').order_by('-id').first()
+            print(homepage_top_banner_ads,'homepage otp')
+             #Onlyy one in bottom banner
+            homepage_bottom_banner_ads=BannerAds.objects.filter(position='homepage_bottom',status='approved').order_by('-id').first()
+            print("homepagebottom",homepage_bottom_banner_ads)
             
 <<<<<<< HEAD
          
@@ -64,6 +72,9 @@ def home(request):
                 "all_products": all_products,
                 "categories": all_categories,
                 "book_mark": bookmarked_product_ids,
+                'carousel_banner_ads':carousel_banner_ads,
+                'homepage_top_banner_ads':homepage_top_banner_ads,
+                'homepage_bottom_banner_ads':homepage_bottom_banner_ads,
             }
 
             return render(request, "home/index.html", context)
@@ -741,6 +752,7 @@ def add_banner(request):
         context={'message':"Banner Ads Submitted Successfully"}
         return redirect(reverse('add_banner'))
         return render(request,'home/banner.html',context)
+
 
 
 def payment_process(request):

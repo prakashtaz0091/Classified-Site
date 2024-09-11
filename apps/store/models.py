@@ -112,6 +112,7 @@ class FeatureDataImage(models.Model):
     feature_data_name=models.CharField(max_length=255)
 
 
+#will be moved to separate file later since there are multiple views related to banner ads
 class BannerAds(models.Model):
     POSITION_CHOICES = [
         ('homepage_carousel', 'Homepage Carousel'),
@@ -123,6 +124,7 @@ class BannerAds(models.Model):
         ('pending', 'Pending'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
+        ('deleted','Deleted'),
     ]
 
     title=models.CharField(max_length=200)
@@ -135,6 +137,7 @@ class BannerAds(models.Model):
     days=models.IntegerField(blank=True,null=True)
     status=models.CharField(max_length=100,choices=STATUS_CHOICES,default="pending")
     created_by=models.ForeignKey(Account,on_delete=models.CASCADE,blank=True,null=True)
+    created_at=models.DateField(auto_now_add=True,blank=True,null=True)
     # only for category banner ads
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='banner_category',blank=True,null=True)
     sub_category=models.ForeignKey(Category,related_name='banner_subcategory',on_delete=models.CASCADE,blank=True,null=True)

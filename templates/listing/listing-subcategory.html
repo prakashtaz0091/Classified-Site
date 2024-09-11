@@ -73,6 +73,15 @@
             </div>
          </div>
          <!-- /Breadscrumb Section -->
+		{% if category_banner %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{category_banner.link}}">
+		<img src="{{category_banner.image.url}}" />
+			</a>
+		</div>
+	   {% endif %}
+
+
          <!-- Main Content Section -->
          <div class="list-content">
             <div class="container">
@@ -81,7 +90,7 @@
                      <div class="listings-sidebar">
                         <div class="card">
                            <h4><img  src="{% static 'assets/img/details-icon.svg' %}" alt="details-icon"> Filter</h4>
-                           <form id='filter-form'>
+                           <form id='filter-form' method=='POST'>
                               <div class="filter-content looking-input form-group">
                                  <input type="text" class="form-control" name='query' placeholder="What are you looking for?">
                               </div>
@@ -91,8 +100,21 @@
                                     <i class="feather-map-pin"></i>
                                  </div>
                               </div>
+
+
                               <input type="hidden" name="category" value="{{sub_category.id}}" />
+                              {% for field in field_data %}
+    <div class="filter-content form-group ">
+       <select class="form-control select region-select" name="fields_filter">
+          <option value="">All {{field.field_name}}</option>
+            {% for option in field.options %}
+            <option value="{{ field.field_name}}:{{option.field_value }}">{{ option.field_value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endfor %}
                               <div class="filter-content form-group region">
+
                                  <select class="form-control select region-select" name='region'>
                                     <option value="">Region</option>
                                     <option>Canada</option>
@@ -248,12 +270,12 @@
          const sortValue=document.getElementById('sortSelect').value
                  // Collect form values
                  const formData = new FormData(form);
-                 const queryParams = new URLSearchParams(formData).toString();
-         		console.log(queryParams)
+                console.log(formData)
                  // Make AJAX request
          		const url="{% url 'filter_sub_category' %}"
-         		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
-                     method: 'GET',
+         		fetch(`${url}?&sort=${sortValue}`, {
+                     method: 'POST',
+                   body:formData,
                      headers: {
                          'X-Requested-With': 'FETCH',
                      },
