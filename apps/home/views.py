@@ -115,10 +115,10 @@ def dashboard(request):
             user_to_view.prefix_email=user
 
         book_marks=BookMark.objects.filter(user=user_to_view)
-        total_product=Product.objects.filter(created_by=user_to_view).count()
+        total_product=Product.objects.filter(created_by=user_to_view,is_available=True,is_approved=True).count()
         reviews_list=Reviews.objects.select_related().filter(reviewed_for=user_to_view).order_by('-id')[:5]
         reviews_count=Reviews.objects.filter(reviewed_for=user_to_view).count()
-        total_views = Product.objects.filter(created_by=user_to_view).aggregate(total_views=Sum('view_count'))['total_views']
+        total_views = Product.objects.filter(created_by=user_to_view,is_available=True,is_approved=True).aggregate(total_views=Sum('view_count'))['total_views']
 
         bookmarks_count=book_marks.count()
 
@@ -475,7 +475,7 @@ def add_listing(request):
             tagline=tagline,
             location=location,
             contact_information=contact_information,
-            is_available=True,
+            is_available=False,
             created_by=request.user,
             featured_data=featured_data,
         )
