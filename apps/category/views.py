@@ -513,4 +513,15 @@ def get_category_options(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 
+def toggle_disabled(request):
+    extra_id = request.POST.get('id')
+    is_disabled = request.POST.get('disabled') == 'true'
+    
+    try:
+        extra = FieldExtra.objects.get(id=extra_id)
+        extra.disabled = is_disabled
+        extra.save()
+        return JsonResponse({'status': 'success', 'disabled': extra.disabled})
+    except FieldExtra.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Item not found'}, status=404)
 

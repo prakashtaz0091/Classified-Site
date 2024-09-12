@@ -15,7 +15,8 @@ urlpatterns = [
     path("", views.category, name="category"),
     path('subcategory/<slug:subcategory_slug>/', views.listing_view, name='listing'),
     path('all/<slug:subcategory_slug>/', views.viewall_listing_view, name='view_all'),
+
+    path('toggle-disabled/', views.toggle_disabled, name='toggle_disabled'),
     path("<slug:slug>/", views.sub_category_list, name="sub_category"),
     # path('sub_categories/<slug:slug>/',views.sub_category_list, name='sub_category'),    
-
 ]

@@ -57,18 +57,19 @@
 
 
                                         <!-- Disabled Toggle -->
+                                        
                                         <td>
-                                            <div class="active-switch">
-                                                Disabled
-                                                <label class="switch">
-                                                    <input type="checkbox" id="toggleDisabled_{{ extra.id }}" 
-                                                        onchange="toggleOption('{{ extra.id }}', 'disabled', this.checked)"
-                                                        {% if extra.disabled %}checked{% endif %} >
+    <div class="active-switch">
+        Disabled
+        <label class="switch">
+            <input type="checkbox" id="toggleDisabled_{{ extra.id }}" 
+                onchange="toggleOption('{{ extra.id }}', 'disabled', this.checked)"
+                {% if extra.disabled %}checked{% endif %} >
 
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
+            <span class="sliders round"></span>
+        </label>
+    </div>
+</td>
 
                                         <!-- Mandatory Toggle -->
                                         <td>
@@ -461,43 +462,6 @@
   
     
 
-    <script>
-        function toggleOption(optionId, toggleType, isChecked) {
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-    
-            // Configure it: POST-request to the provided URL
-            xhr.open("POST", "{% url 'toggle_option_view' %}", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // Add CSRF token for security
-    
-            // Prepare the data to send
-            var data = JSON.stringify({
-                'option_id': optionId,
-                'toggle_type': toggleType,
-                'is_checked': isChecked
-            });
-    
-            // Set up a function to handle the response data
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Optionally handle success
-                        console.log(toggleType + ' state updated successfully');
-                    } else {
-                        // Optionally handle error
-                        console.error('An error occurred');
-                    }
-                }
-            };
-    
-            // Send the request with the data
-            xhr.send(data);
-        }
-    </script>
-
-    
-
 
     <script>
         function confirmDelete(roomId,main_id) {
@@ -587,5 +551,29 @@
         
     </script>
 
-    
+   <script>
+function toggleOption(id, field, isChecked) {
+    fetch('{% url "toggle_disabled" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: new URLSearchParams({
+            'id': id,
+            'disabled': isChecked
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log(`Successfully updated: ${field} = ${data.disabled}`);
+        } else {
+            console.error(`Error: ${data.message}`);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+</script>
+ 
  {% endblock %}
