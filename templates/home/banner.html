@@ -58,10 +58,10 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="homepagePlan" name='homepage_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
-                                                        <option value="{{homepage_banner_instance.price_per_day|mul:30}}">30 days</option>
-                                                        <option value="{{homepage_banner_instance.price_per_day|mul:15}}">15 days</option>
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:30|floatformat:0}}">30 days</option>
+                                                        <option value="{{homepage_banner_instance.price_per_day|mul:15|floatformat:0}}">15 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homepagePrice">{{homepage_banner_instance.price_per_day|mul:30}}</span></p>
+                                                    <p style="color: rgb(68, 156, 109);" class="mt-1">AED <span id="homepagePrice">{{homepage_banner_instance.price_per_day|mul:30|floatformat:0}}</span></p>
                                                 </div>
     
                                                 
@@ -86,9 +86,9 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <select id="categorypagePlan" name='category_plan' class="form-control" disabled style="display: block; width: 100%; height: calc(1.4em + .8rem + 2px); padding: .4rem 1rem; font-size: .765625rem; font-weight: 600; line-height: 1.4; color: #495057; background-color: #e5e5e5; background-clip: padding-box; border: 1px solid #e5e5e5; border-radius: .1rem;" onchange="calculateTotal()">
-                                                        <option value="{{category_page_top.price_per_day|mul:365}}">365 days</option>
+                                                        <option value="{{category_page_top.price_per_day|mul:365.2|floatformat:0}}">365 days</option>
                                                     </select>
-                                                    <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED {{category_page_top.price_per_day|mul:365}}</p>
+                                                    <p style="color: rgb(68, 156, 109);" id='' class="mt-1">AED {{category_page_top.price_per_day|mul:365.2|floatformat:0}}</p>
                                                 </div>
                                                 <div class="row pl-2 pr-2">
                                                     <div class="col-12" id="categorypageUpload" style="display: none;">

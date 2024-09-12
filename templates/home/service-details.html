@@ -205,7 +205,7 @@
 			 {% for feature in featured_data %}
         <li class="feature-item">
             <span class="feature-title">{{ feature.title|capfirst }}</span>
-            <span class="feature-value">{{ feature.value }}</span>
+            <span class="feature-value">{{ feature.value|safe }}</span>
         </li>
     {% endfor %}
         </ul>
