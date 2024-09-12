@@ -191,7 +191,7 @@ def filter_sub_category(request):
         print(request.POST)
         print("hello")
 
-        sort_by = request.POST.get("sort", "default")
+        sort_by = request.GET.get("sort", "default")
         query = request.POST.get("query", "")
         category = request.POST.get("category",None)
         location = request.POST.get("location", "")
@@ -212,9 +212,11 @@ def filter_sub_category(request):
             products = products.filter(price__gte=min_price)
         if max_price:
             products = products.filter(price__lte=max_price)
+        print(products,'products till now ')
         if fields_filter:
             filtered_products = []
             criteria = [tuple(f.split(':')) for f in fields_filter if f!=""]
+            print(criteria)
 
             for product in products:
                 featured_data = product.featured_data  # Assuming this is a list of strings

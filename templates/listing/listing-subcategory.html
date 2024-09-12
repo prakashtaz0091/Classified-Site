@@ -249,15 +249,15 @@
          
          const form = document.getElementById('filter-form');
          const formData = new FormData(form);
-         const queryParams = new URLSearchParams(formData).toString();
-         
          const url="{% url 'filter_sub_category' %}"
-         fetch(`${url}?${queryParams}&sort=${sortValue}`, {
-         method: 'GET',
-         headers: {
-             'X-Requested-With': 'FETCH',
-         },
-         })
+
+            	fetch(`${url}?&sort=${sortValue}`, {
+                     method: 'POST',
+                   body:formData,
+                     headers: {
+                         'X-Requested-With': 'FETCH',
+                     },
+                 })
              .then(response=>response.json()).then(data=>{
          document.getElementById('productContainerWrapper').innerHTML=data.product_data
          document.getElementById('paginationClick').innerHTML = data.pagination_data;
