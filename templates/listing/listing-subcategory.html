@@ -10,7 +10,7 @@
       {% elif sub_category.meta_title_country %}
       <title>{{sub_category.meta_title_country}}</title>
       {% else %}
-      <title>{{sub_category.category_name}}</title>
+      <title>{{sub_category.category_name}} Listings</title>
       {% endif %}
 
 
@@ -113,6 +113,7 @@
         </select>
     </div>
 {% endfor %}
+{% comment %}
                               <div class="filter-content form-group region">
 
                                  <select class="form-control select region-select" name='region'>
@@ -120,8 +121,11 @@
                                     <option>Canada</option>
                                     <option>USA</option>
                                     <option>india</option>
+
                                  </select>
                               </div>
+                              {% endcomment %}
+                              {% comment %}
                               <div class="filter-content form-group amenities radius">
                                  <div class="slidecontainer">
                                     <div class="slider-info">
@@ -134,6 +138,7 @@
                                     </div>
                                  </div>
                               </div>
+                              {% endcomment %}
                               <div class="filter-content amenities mb-0">
                                  <h4> Price Range</h4>
                                  <div class="form-group mb-0">
@@ -142,7 +147,7 @@
                                  </div>
                                  <div class="search-btn">
                                     <button class="btn btn-primary" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                                    <button class="btn btn-reset mb-0" type="submit"> <i class="fas fa-light fa-arrow-rotate-right"></i> Reset Filters</button>
+                                    <button class="btn btn-reset mb-0" onclick="resetAllFilters()" type="submit"> <i class="fas fa-light fa-arrow-rotate-right"></i> Reset Filters</button>
                                  </div>
                               </div>
                            </form>
@@ -348,6 +353,28 @@
 				.catch(error => console.error('Error:', error));
 		}	
 </script>	
+   <script>
+function resetAllFilters() {
+    // Select the form element
+    const form = document.getElementById('filter-form');
+
+    // Reset the form fields
+    form.reset();
+
+    // If there are any hidden inputs or other fields that need manual clearing, reset them here
+    // Reset any custom select fields that might not reset automatically (like chosen, select2)
+    const selects = form.querySelectorAll('select');
+    selects.forEach(function(select) {
+        select.selectedIndex = 0;  // Reset select fields to the first option
+    });
+
+    // Reset the range value display, if applicable
+    const demoElements = document.querySelectorAll('.demo span');
+    demoElements.forEach(function(demo) {
+        demo.textContent = '50';  // Reset radius display to default
+    });
+}
+</script>
    </body>
 </html>
 

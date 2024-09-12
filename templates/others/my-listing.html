@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+<title>Listings</title>
+{% endblock %}
 {% block content %}
 
 <body>
@@ -44,9 +47,14 @@
 				<div class="dash-listingcontent dashboard-info">
 				    <div class="dash-cards card">
 					    <div class="card-header">
-						    <h4>My Listings</h4>
+							
+
+
 							{% if not user_to_view %}
+						    <h4>My Listings</h4>
 							<a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>									
+							{% else %}
+							<h4>{{user_to_view.full_name}} Listings</h4>
 							{% endif %}
 						</div>
                         <div class="card-body">
