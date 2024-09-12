@@ -37,12 +37,13 @@ def Login(request):
             return redirect("home")
         else:
             messages.error(request, "some credentials are incorrect! ")
+            return render(request, "accounts/login.html")
         
              
     else:
         
         return render(request, "accounts/login.html")
-    return render(request, "accounts/login.html")
+    
 
 
 def Register(request):
