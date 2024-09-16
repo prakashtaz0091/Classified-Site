@@ -20,9 +20,6 @@ class SEOSettings(models.Model):
 
     def __str__(self):
         return self.meta_title
-    
-    
-
 
 
 class SiteSettings(models.Model):
@@ -37,11 +34,6 @@ class SiteSettings(models.Model):
 
     def __str__(self):
         return "Site Settings"
-    
-    
-    
-    
-
 
 class Language(models.Model):
     LANGUAGE_STATUS_CHOICES = [

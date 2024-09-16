@@ -37,7 +37,7 @@ def admin_index(request):
 
 
 def admin_category(request):
-    categories=Category.objects.all().order_by('-id')
+    categories=Category.objects.filter(parent_id=None).order_by('-id')
     context={
         'categories':categories
     }
