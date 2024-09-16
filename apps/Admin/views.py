@@ -127,19 +127,18 @@ def edit_category(request, id):
     
 def sub_category(request,id):
     try:
+        parent_category=Category.objects.filter(id=id).values('category_name').first()
         category_instance=Category.objects.filter(parent_id=id)
-    
+
+        context={
+            'sub_category':category_instance,
+            'parent_category_name':parent_category,
+        }    
+        return render(request,'admin1/others/sub_category.html',context)
     except:
+        # will later redirect to 400 page
         pass
     
-    context={
-        'sub_category':category_instance
-    }    
-    
-    
-    return render(request,'admin1/others/sub_category.html',context)
-
-
 
 def add_category(request):
     return render(request,'admin1/category/add-categories.html')
