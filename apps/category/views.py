@@ -32,7 +32,7 @@ def listing_view(request, subcategory_slug):
         else:
                 bookmarked_product_ids = []
 
-        fields = Field.objects.filter(field_type__in=['select', 'select_multiple'],hint=sub_category.category_name)
+        fields = Field.objects.filter(field_type__in=['select', 'select_multiple'],linked_to=sub_category)
 
         # Collecting the field options for each field
         field_data = []
@@ -458,7 +458,7 @@ def get_category_options(request):
         
         # Get all fields related to the category
         print(category.category_name)
-        fields = Field.objects.filter(hint=category.category_name)
+        fields = Field.objects.filter(linked_to=category)
         print(fields)
         
         # Prepare the response data
