@@ -18,9 +18,10 @@
         
         <div class="page-wrapper page-settings">
             <div class="content" style='margin-top:16px;'>
-                <form action="{% url 'add_subcategory_fields' id=subcategory.id %}" method="POST">
+                <form id="fieldsForm" action="{% url 'add_subcategory_fields' id=subcategory.id %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
+                        <input id='hidden' type='hidden' value="" />
                         <div style="display:flex;items-align:center;" class="col-lg-12 ">
                             <div style="width:100%" class="form-group">
                                 <select id="fields" style="height:60px;"  required name='field' type="text" class="form-control" placeholder="Value" required>
@@ -213,17 +214,40 @@
         }
         
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('fieldsForm');
+  const hiddenValue=document.getElementById('hidden')
 
+  form.addEventListener('submit', function(event) {
+    if (hiddenValue.value.trim() === "") {
+      event.preventDefault();
+      alert('Please select a field from the input dropdown.');
+    }
+  });
+
+})
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Choices for city select
-
     // Initialize Choices for user select
-    const userSelect = new Choices('#fields', {
+  const selectElement = document.getElementById('fields');
+      const hiddenValue=document.getElementById('hidden')
+    const userSelect = new Choices(selectElement, {
       searchEnabled: true,
       placeholder: true,
-      placeholderValue: 'Select Field'
+      placeholderValue: 'Select Field',
     });
+
+    selectElement.addEventListener('change', function(event) {
+    const selectedValue = event.target.value;
+        hiddenValue.value="1"
+        console.log(hiddenValue.value)
+
+    console.log('Selected value:', selectedValue);
+
   });
+
+  })
 </script>
   {% endblock %}

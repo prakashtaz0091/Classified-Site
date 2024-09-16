@@ -124,15 +124,24 @@ def edit_category(request, id):
 
 def subcategory_fields(request,id):
     try:
+
         subcategory_instance=Category.objects.filter(id=id).first()
-        fields_list=Field.objects.all().values('field_name','admin_hint','id')
-        print(fields_list)
-        context={
-            'subcategory':subcategory_instance,
-            'fields_list':fields_list
-        }
-        return render(request,'admin1/category/add_subcategory_fields.html',context)
-        
+        if request.method=='GET':
+            fields_list=Field.objects.all().values('field_name','admin_hint','id')
+            print(fields_list)
+            context={
+                'subcategory':subcategory_instance,
+                'fields_list':fields_list
+            }
+            return render(request,'admin1/category/add_subcategory_fields.html',context)
+            
+        elif request.method=="POST":
+            data=request.POST
+            field=data.get('field')
+            field_instance=Field.objects.filter(id=field).first()
+            field_instance.linked_to=subcategory_instance
+            field_instance.save()
+            return redirect(reverse('add_subcategory_fields',kwargs={'id':id}))
     except Exception as e:
         print(e)
         return e

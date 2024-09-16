@@ -83,6 +83,7 @@ class Field(models.Model):
     # Used to determine if any select types have other fields dependent upon it
     sub_type=models.CharField(null=True,blank=True,max_length=20)
     created_at=models.DateField(auto_now_add=True)
+    linked_to=models.ForeignKey(Category,related_name='fields',blank=True,null=True,on_delete=models.CASCADE)
 
 class FieldOptions(models.Model):
     field_value=models.CharField(max_length=255)
