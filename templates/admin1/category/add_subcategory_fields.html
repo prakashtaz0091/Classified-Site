@@ -46,23 +46,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for option in options %}
+                                    {% for option in all_fields %}
                                     <tr>
                                         <td>{{forloop.counter}}</td>
                                        
-                                        <td>{{option.field_value}}</td>
+                                        <td>{{option.field_name}}</td>
                                         <td>
                                             <div class="table-actions d-flex">
-                                                <a class="delete-table me-2" href="{% url 'edit_options' option.id %}" >
-                                                   <img src="{% static 'admin/assets/img/icons/edit.svg' %}" alt="svg">
-                                                </a>
-                                                <a class="delete-table" href="javascript:void(0);" onclick="confirmDelete({{ option.id }},{{id}})">
-                                                    <img src="{% static 'admin/assets/img/icons/delete.svg' %}" alt="svg">
-                                                </a>
-                                                
+                                                {% comment %}
                                                 <a href='{% url "extra_information" option.id %}' class='btn btn-submit' style='margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;'>
-                                                    Manage extras
+                                                    Disable
                                                 </a>
+                                                {% endcomment %}
+                                                <a href="{% url 'delete_subcategory_fields' %}?category_id={{ subcategory.id }}&field_id={{ option.id }}" 
+   class="btn btn-submit" 
+   style="margin-left:18px;background-color:#e1e6fa;color: #212529;border-color: #e1e6fa;">
+   Delete
+</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -225,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Please select a field from the input dropdown.');
     }
   });
-
 })
 </script>
 <script>

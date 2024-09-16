@@ -128,10 +128,12 @@ def subcategory_fields(request,id):
         subcategory_instance=Category.objects.filter(id=id).first()
         if request.method=='GET':
             fields_list=Field.objects.all().values('field_name','admin_hint','id')
-            print(fields_list)
+            all_fields=subcategory_instance.fields.all()
+            print(all_fields)
             context={
                 'subcategory':subcategory_instance,
-                'fields_list':fields_list
+                'fields_list':fields_list,
+                'all_fields':all_fields,
             }
             return render(request,'admin1/category/add_subcategory_fields.html',context)
             
@@ -146,6 +148,23 @@ def subcategory_fields(request,id):
         print(e)
         return e
     
+def delete_subcategory_fields(request):
+    try:
+        if request.method=='GET':
+            field_id=request.GET.get('field_id')
+            subcategory_id=request.GET.get('category_id')
+            field_instance=Field.objects.filter(id=field_id).first()
+            field_instance.linked_to=None
+            field_instance.save()
+
+            print(field_id,'fieldid')
+            return redirect(reverse('add_subcategory_fields',kwargs={'id':subcategory_id}))
+            
+            
+    except Exception as e:
+        print(e)
+        return e
+ 
     
 def sub_category(request,id):
     try:
