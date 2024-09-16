@@ -122,7 +122,20 @@ def edit_category(request, id):
         }
         return render(request, 'admin1/category/edit-category.html', context)
 
-    
+def subcategory_fields(request,id):
+    try:
+        subcategory_instance=Category.objects.filter(id=id).first()
+        fields_list=Field.objects.all().values('field_name','admin_hint','id')
+        print(fields_list)
+        context={
+            'subcategory':subcategory_instance,
+            'fields_list':fields_list
+        }
+        return render(request,'admin1/category/add_subcategory_fields.html',context)
+        
+    except Exception as e:
+        print(e)
+        return e
     
     
 def sub_category(request,id):

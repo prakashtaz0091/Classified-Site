@@ -1,8 +1,11 @@
 {% extends 'admin1/base1.html' %}
 {% load static %}
+{% block title %}
+<title>Add Fields to Subcategory</title>
+{% endblock %}
 {% block content %}
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <div class="main-wrapper">
     
         <!-- Header -->
@@ -15,27 +18,18 @@
         
         <div class="page-wrapper page-settings">
             <div class="content" style='margin-top:16px;'>
-                <form action="{% url 'create_field_options' id%}" method="POST">
+                <form action="{% url 'add_subcategory_fields' id=subcategory.id %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Value* </label>
-                                <input required name='option_value' type="text" class="form-control" placeholder="Value" required>
+                        <div style="display:flex;items-align:center;" class="col-lg-12 ">
+                            <div style="width:100%" class="form-group">
+                                <select id="fields" style="height:60px;"  required name='field' type="text" class="form-control" placeholder="Value" required>
+                                          {% for field in fields_list %}
+                                          <option value="{{field.id}}">{{field.field_name}} &#10230; {{ field.admin_hint|safe }}</option>
+                                        {% endfor %}
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Order* </label>
-                                <input required name='option_order' type="number" class="form-control" placeholder="Order" required>
-                            </div>
-                        </div>
-                      
-                        <div class="col-lg-3">
-                            <div class="btn-path" style='margin-top:28px;'>                                    
-                                
-                                <button type="submit" class="btn btn-submit "> Submit</button>
-                            </div>
+                                <button style="height:60px;"type="submit" class="btn btn-submit "> Submit</button>
                         </div>
                     </div>
                 </form>
@@ -45,41 +39,17 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Value</th>
-                                        <th>Order</th>
-                                        <th>Require Input Fields</th>
+                                        <th>S.N.</th>
+                                        <th>Field</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for option in options %}
-
-
                                     <tr>
                                         <td>{{forloop.counter}}</td>
                                        
-                                          
-                                       
                                         <td>{{option.field_value}}</td>
-                                        <td>{{option.order}}</td>
-                                        
-                                       
-                                        <td>
-                                            <div class="active-switch">
-                                                <label class="switch">
-                                                    <input type="checkbox" id="toggleRequired_{{ option.id }}" 
-                                                           onchange="toggleRequired('{{ option.id }}', this.checked)" 
-                                                           {% if option.is_required %}checked{% endif %}>
-                                                    <span class="sliders round"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        
-                                       
-                                        
-
-                                  
                                         <td>
                                             <div class="table-actions d-flex">
                                                 <a class="delete-table me-2" href="{% url 'edit_options' option.id %}" >
@@ -244,4 +214,16 @@
         
     </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Choices for city select
+
+    // Initialize Choices for user select
+    const userSelect = new Choices('#fields', {
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select Field'
+    });
+  });
+</script>
   {% endblock %}
