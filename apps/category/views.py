@@ -266,7 +266,7 @@ def filter_sub_category(request):
 
 def category(request):
     try:
-        category = Category.objects.all()
+        category = Category.objects.filter(parent_id=None).order_by('-id')
         context = {"category": category}
         return render(request, "others/categories.html", context)
 

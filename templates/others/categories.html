@@ -37,7 +37,7 @@
 							<a href="{% url 'sub_category' category.slug %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
 		    				   <img src="{{category.category_image.url}}" alt="car1">
 							   <h6>{{category.category_name|slice:":16"}}</h6>
-							   <span class="ads">09 Ads</span>
+							   <span class="ads">{{category.product_count}} Ads</span>
 							   <span>{{category.descriptions|truncatechars:150 }}</span>
 							</a>								   
 					   </div>
