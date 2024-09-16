@@ -12,7 +12,7 @@ from apps.accounts.models import Account
 from apps.category.models import Category
 from apps.home.models import Reviews
 from apps.store.models import (BannerAds, BookMark, ContactInformation, DefaultBannerAdsPricing, Feature, Location,
-                               Product, ProductImages)
+                               Product, ProductImages,BannerAds)
 
 from django.db.models import F, Value
 from django.db.models.functions import Substr
@@ -629,7 +629,12 @@ def job(request):
 
 
 def banner(request):
-    return render(request,'home/banner_list.html')
+    banner_ads=BannerAds.objects.filter(created_by=request.user)
+    context={
+        'banner_ads':banner_ads
+    }
+    
+    return render(request,'home/banner_list.html',context)
 
 def add_banner(request):
     if request.method=='GET':
