@@ -72,6 +72,7 @@
 									<tr>
 									    <th class="no-sort" >Title</th>										 
 									    <th class="no-sort">Image</th>		
+									    <th class="no-sort">Position</th>		
                                         <th class="no-sort">Cost</th>								 
 									    <th>Status</th>										 							 
 									    <th class="no-sort">Action</th>										 
@@ -79,33 +80,31 @@
                                      </thead>
                                      <tbody id="productContainerWrapper">	
 										
-									{% for item in products %}
+									{% for item in banner_ads %}
                                      <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
+										<td><Span class="views-count">{{item.title}}</span></td>
+
 									     <td>
-											 {% if item.cover_image %}
-										    <div class="listingtable-img"> <a href="{% url 'service_detail' item.slug %}"><img class="img-fluid avatar-img" src="{{item.cover_image.url}}" alt=""></a></div>
+											 {% if item.image%}
+										    <div class="listingtable-img"> <a href=""><img class="img-fluid avatar-img" src="{{item.image.url}}" alt=""></a></div>
 											{% endif %}
 										 </td>
-									     <td>
-										     <h6><a href="{% url 'service_detail' item.slug %}">{{item.product_name}}</a></h6>
-											 <div class="listingtable-rate">
-												<a href="javascript:void(0)" class="cat-icon">
-													<i class="fa-regular fa-circle-stop"></i>
-													{% for category in item.category.all %}
-														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
-													{% endfor %}
-												</a> 
-												<span class="fixed-amt">AED{{ item.price }}</span>
-											</div>
-											<p>{{item.description}}</p>
-										 </td>
-									     <td><span class="status-text">Published</span></td>
-									     <td><Span class="views-count">{{item.view_count}}</span></td>
+										 <td><span class="status-text">{{item.position}}</span></td>
+										 <td><span class="status-text">{{item.price}}</span></td>
+									  
+										
+										 {% if item.status == 'approved' %}
+
+									     <td><span class="status-text">Approve</span></td>
+										 {% else %}
+										 <td><h6 class="badge-delete">Pending</h6></td>
+										 {% endif %}
+
 									     <td>
 										    <div class="action">
-        										<a href="{% url 'service_detail' item.slug %}" class="action-btn btn-view"><i class="feather-eye"></i></a>
-											    <a href="{% url 'edit_my_listing' item.id %}" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
-												<a href="{% url 'delete_my_listing' item.id %}" class="action-btn btn-trash" onclick="return confirmDelete();">
+        										<a href="" class="action-btn btn-view"><i class="feather-eye"></i></a>
+											    <a href="" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
+												<a href="" class="action-btn btn-trash" onclick="return confirmDelete();">
 													<i class="feather-trash-2"></i>
 												</a>
 																							

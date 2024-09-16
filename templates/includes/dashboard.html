@@ -64,16 +64,25 @@
             </a>
         </li>
         {% endif %}
-
+        {% if not user_to_view %}
+          
         <li>
-            {% if not user_to_view %}
             <a href="{% url 'logout' %}">
                 <i class="fas fa-light fa-circle-arrow-left"></i> <span>Logout</span>
+            </a>
+            
+        </li>
+        {% endif %}
+
+        
+        {% if not user_to_view %}
+          
         <li class="{% if request.path == '/banner/' %}active{% endif %}">
             <a href="{% url 'banner' %}">
                 <i class="fas fa-light fa-circle-arrow-left"></i> <span>Banner Ads</span>
             </a>
-            {% endif %}
+            
         </li>
+        {% endif %}
     </ul>                                
 </div>
