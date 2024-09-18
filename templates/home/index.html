@@ -76,14 +76,14 @@
 		</section>
 		
 		<!-- /Banner Section -->
-		<!-- banner top -->
+		{% comment %} <!-- banner top -->
 		{% if homepage_top_banner_ads %}
 		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
 			<a href="{{homepage_top_banner_ads.link}}">
 		<img src="{{homepage_top_banner_ads.image.url}}" />
 			</a>
 		</div>
-	   {% endif %}
+	   {% endif %} {% endcomment %}
 
 
 <!-- Banner Carousel -->
@@ -157,13 +157,13 @@
 		<!-- /Category Section -->
 		
 		<!-- Featured ADS Section -->
-		<section class="featured-section">
+		<section class="featured-section" style='padding-bottom:0px'>
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
 						<div class="section-heading">
-							<h2>Featu<span class="title-right">red</span> Ads</h2>
-							<p>Checkout these latest cool ads from our members</p>
+							<h3>Latest in Property</h3>
+							<p >Checkout these latest cool ads from our members</p>
 						</div>						
 					</div>
 					<div class="col-md-6 text-md-end aos" data-aos="fade-up">
@@ -233,9 +233,14 @@
 											</div>
 											<div class="amount-details">
 												<div class="amount">
-													<span class="validrate">AED {{product.price}}</span>
+												    <span class="validrate">${{product.price}}</span>
+												    <span>$400</span>
 												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>	
 											</div>	
+											
 										</div>	
 									</div>			 
 								</div> 
@@ -251,14 +256,14 @@
 		<!-- /Featured ADS Section -->
 
 	<!---addd the feature category-->
-	<section class="latestad-section grid-view featured-slider">
-		{% for latest_product  in latest_products|slice:":3" %}	
-		<div class="container">		
+	<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		{% for latest_product  in latest_products|slice:":4" %}	
+		<div class="container" style='margin-top:3rem;'>		
 				<div class="section-heading">
 						<div class="row align-items-center">
 							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
-									<h2>Lat<span class="title-right">est</span> Ads on {{latest_product.category.category_name|slice:":16"}}</h2>
-									<p>checkout these latest cool ads from our members {{latest_product.category.category_name|slice:":16"}}</p>
+									<h3>Latest on {{latest_product.category.category_name|slice:":30"}}</h3>
+									<p>checkout these latest cool ads from our members .</p>
 							</div>
 							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
 								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
@@ -333,7 +338,11 @@
 												<div class="amount">
 													<span class="validrate">AED{{product.price}}</span>
 												</div>
-											</div>	
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
 										</div>	
 									</div>			 
 								</div> 
@@ -356,17 +365,17 @@
 		
 		<!-- /Latest Ads Section -->
 		
-		{% if homepage_bottom_banner_ads %}
+		{% comment %} {% if homepage_bottom_banner_ads %}
 		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
 			<a href="{{homepage_bottom_banner_ads.link}}">
 		<img src="{{homepage_bottom_banner_ads.image.url}}" />
 			</a>
 		</div>
-	   {% endif %}
+	   {% endif %} {% endcomment %}
 
-		<!-- CTA Section -->
-		{% comment %}
-		<section class="cta-section">
+		
+	
+	<section class="cta-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
@@ -388,7 +397,21 @@
         </div>
     </div>
 </section>
-{% endcomment %}
+<section class='cta-section'>
+	<div class='container'>
+		<div class="col-lg-12">
+			<div class="cta-content">
+				<h3>Post Free Classifieds Ads in UAE</h3>
+				<p style='color: #7d7d7d;'>Welcome to Adjeem! We are undoubtedly one of the best free Classifieds in Dubai. Our main motive is to make selling and purchasing of goods and services convenient in Dubai through our free ads. At our platform, you can swiftly and easily post free ads, whether you are dealing with the personal items or business opportunities. For your convenience we made our website ad-free, so that you can browse and post ads with no rifts and distractions.</p>
+				<p style='color: #7d7d7d;'>Adjeem is an ideal solution for people like you, who are looking for Dubai free classifieds. Our free ads posting service facilitates you in targeting a large audience, for conveying your message to those who are interested in what you have to offer. Whether you're selling a used car, searching for a new apartment, selling a technology, or looking for a new job, Adjeem is the only way to get the desired outcomes.</p>
+				<p style='color: #7d7d7d;'>As free classifieds in Dubai, we also offer a broad range of personal ads, that help you in connecting with other users and in getting the commodities you want to acquire. We are not just free Dubai classifieds even with our user-friendly interface, you can easily navigate and find what you're looking for, whether you intend to purchase or sell. Our platform includes a variety of categories, including electronics, real estate, jobs, personal items, and a lot of other products and services.</p>
+				<p style='color: #7d7d7d;'>At Adjeem, we prioritize the safety and security which is direly needed in online transactions. Though we offer free ads service but our platform is monitored 24/7, and we take great care to ensure that all advertisements are legitimate and do not contain any fraudulent or illegal content to avoid any discomfort for the users.</p>
+			     <p style='color: #7d7d7d;'>At Adjeem, we aim at providing a memorable user-friendly experience. Whether you're looking to buy, sell, or simply browse the latest ads, our platform is the perfect solution for anyone in the Dubai and UAE area. Most importantly, we are free Dubai classifieds. So why wait? Sign up today and enjoy free Dubai Classifieds service with Adjeem!</p>
+			</div>
+		</div>
+	</div>
+	
+</section>
 	
 		<!-- /CTA Section -->
 		

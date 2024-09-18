@@ -143,6 +143,24 @@
 								
 							<fieldset>
 								<div class="sub-title">
+									<h6>Cover images</h6>
+								</div> 					
+								<div class="form-uploads mb-4">
+									<div class="form-uploads-path">
+										<img src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
+										<div class="file-browse">
+											<h6>Drag & drop image or </h6>
+											<div class="file-browse-path">
+												<input type="file" id="imageUpload" accept="image/*" name='cover_images'>
+												<a href="javascript:void(0);"> Browse</a>
+											</div>
+										</div>
+										<h5>Supported formats: JPEG, PNG</h5>
+							
+									</div>
+								</div>
+
+								<div class="sub-title">
 									<h6>Gallery</h6>
 								</div> 					
 								<div class="form-uploads mb-4">
@@ -164,7 +182,8 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="field-btns">
+										<div class="field-btns" style='display:flex;'>
+											<button class="btn btn-submit" type="button" onclick="goBack()">Go Back</button>
 											<button class="btn btn-submit next_btn" type="submit">Submit</button>
 										</div>  
 									</div>   
@@ -257,6 +276,8 @@
 			document.getElementById('descriptionInput').value = editorContent;
 		});
 		
+
+
 	</script>
 
 {% endblock %}

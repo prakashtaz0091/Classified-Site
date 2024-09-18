@@ -29,7 +29,7 @@ def home(request):
         try:
             # Fetch all categories
 
-            all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE').order_by("-id")
+            all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE')
             latest_products = []
             all_products = (
                 Product.objects.select_related()
@@ -37,13 +37,10 @@ def home(request):
                 .order_by("-created_date")
             )
             carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
-            print('carousel banner',carousel_banner_ads)
             #Onlyy one in top banner
             homepage_top_banner_ads=BannerAds.objects.filter(position='homepage_top',status='approved').order_by('-id').first()
-            print(homepage_top_banner_ads,'homepage otp')
-             #Onlyy one in bottom banner
+          
             homepage_bottom_banner_ads=BannerAds.objects.filter(position='homepage_bottom',status='approved').order_by('-id').first()
-            print("homepagebottom",homepage_bottom_banner_ads)
             
 
             # Get the latest 5 products for each category
@@ -61,10 +58,13 @@ def home(request):
                 ).values_list("product_id", flat=True)
             else:
                 bookmarked_product_ids = []
+                
+
+            
+            print(all_categories,'all categories ===========++>')
             
             
-            print(latest_products,'latest one')    
-            print(all_products  ,  'all products')    
+             
 
             context = {
                 "latest_products": latest_products,
