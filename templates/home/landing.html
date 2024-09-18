@@ -16,6 +16,7 @@
 
 {% comment %} Welcome section {% endcomment %}
 
+<div style="background-color:#f8f9fa">
 <div style="position: relative; width: 100%; height: 20rem;">
   <img style="width: 100%; height: 100%; object-fit: cover;" src="{% static 'assets/img/landing_header.jpeg' %}" alt="Landing Header">
   
@@ -59,7 +60,23 @@
 
   </div>
 </div>
+{% comment %} End header section {% endcomment %}
+{% comment %} Browse all categories section {% endcomment %}
+<div style="margin-top:10rem;background-color:#f8f9fa" class="container">
+  <h2>Browse All Categories</h2>
+  {% for category in categories %}
+            <h4>{{ category.category_name }}</h4>
+                  {% if category.subcategories.all %}
+      <ul>
+        {% for subcategory in category.subcategories.all %}
+        <a href="{% url 'sub_category' slug=subcategory.slug %}"><li style="cursor:pointer">{{ subcategory.category_name }}</li></a>
+        {% endfor %}
+      </ul>
+      {% endif %}
+  {% endfor %}
+</div>
 {% comment %} Post Free Classified Ads Section {% endcomment %}
+
 <div style="background-color:#f8f9fa">
         <div style="background-color:#f8f9fa;color:#7d7d7d;" class="container">
           <div class="row">
@@ -161,4 +178,5 @@
 
 {% comment %} End Download Section {% endcomment %}
 {% include 'includes/footer_landing.html' %}
+</div>
 {% endblock %}
