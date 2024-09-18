@@ -17,6 +17,12 @@ from apps.store.models import (BannerAds, BookMark, ContactInformation, DefaultB
 from django.db.models import F, Value
 from django.db.models.functions import Substr
 
+def landing(request):
+    try:
+        return render(request,'home/landing.html')
+    except Exception as e:
+        print(e)
+        return(e)
 
 def home(request):
     if request.method == "GET":

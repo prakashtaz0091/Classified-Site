@@ -1,0 +1,213 @@
+{% load static %}
+<style>
+/* Footer Styles */
+.footer {
+  background-color: white; /* $body-bg (gray-100) */
+  color: #7d7d7d; /* $body-color (grey7) */
+  font-family: 'Open Sans', sans-serif; /* $font-family-sans-serif */
+  font-size: 0.875rem; /* $font-size-base */
+  line-height: 1.4; /* $line-height-base */
+  padding: 1rem; /* $spacer */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* $shadow */
+}
+
+.footer a {
+  color: #7d7d7d; /* $link-color (body color) */
+  text-decoration: none; /* $link-decoration */
+}
+
+.footer a:hover {
+  color: #a22b27; /* $link-hover-color ($primary) */
+  text-decoration: none; /* $link-hover-decoration */
+}
+
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer h5,
+.footer h6 {
+  color: #1d1c18; /* $headings-color ($black) */
+  font-weight: 600; /* $headings-font-weight ($font-weight-bold) */
+  margin-bottom: 0.525rem; /* $headings-margin-bottom ($font-size-base * 0.6) */
+  line-height: 1.2; /* $headings-line-height ($line-height-sm) */
+}
+
+.footer h1 {
+  font-size: 1.75rem; /* $h1-font-size */
+}
+
+.footer h2 {
+  font-size: 1.4rem; /* $h2-font-size */
+}
+
+.footer h3 {
+  font-size: 1.225rem; /* $h3-font-size */
+}
+
+.footer h4 {
+  font-size: 1.05rem; /* $h4-font-size */
+}
+
+.footer h5 {
+  font-size: 0.875rem; /* $h5-font-size */
+}
+
+.footer h6 {
+  font-size: 0.875rem; /* $h6-font-size */
+}
+
+.footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* $spacer */
+}
+
+.footer li{
+  font-weight:600;
+  color:#7d7d7d;
+  margin-bottom:10px;
+}
+.footer  a {
+    line-height:1.4;
+      font-size:600;
+}
+
+.footer .social__holder{
+background-color: #ecebed;
+  margin-right: 10px;
+  cursor: pointer;
+
+}
+/* Footer Buttons */
+.footer .btn {
+  padding: 0.4rem 1rem; /* $btn-padding-y and $btn-padding-x */
+  font-size: 0.875rem; /* $btn-font-size */
+  border-radius: 0.2rem; /* $btn-border-radius-base */
+  font-weight: 400; /* $btn-font-weight */
+  background-color: #a22b27; /* $primary */
+  color: #fff; /* $white */
+}
+
+.footer .btn:hover {
+  background-color: #8c2521; /* $secondary */
+}
+
+/* Footer Form */
+.footer input,
+.footer textarea {
+  background-color: #e5e5e5; /* $input-bg */
+  color: #495057; /* $input-color (gray-700) */
+  padding: 0.4rem 1rem; /* $input-padding-y and $input-padding-x */
+  font-size: 0.875rem; /* $input-font-size */
+  font-weight: 600; /* $input-font-weight */
+  border: 1px solid #e5e5e5; /* $input-border-color */
+  border-radius: 0.1rem; /* $input-border-radius */
+}
+
+.footer input:focus,
+.footer textarea:focus {
+  border-color: #ced4da; /* $input-focus-border-color */
+}
+</style>
+
+
+{% comment %}Footer Section{% endcomment %}
+
+<footer class="footer pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <img
+          src="https://adjeem.com/images/logo.png"
+          alt="Adjeem Classified"
+        />
+        <p class="mt-2 text-left">
+          The UAE's first really local community and free classifieds. You
+          can simply publish free classified advertisements depending on
+          country region and explore a huge variety of free local
+          classifieds at Adjeem.com.
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <ul class="list">
+          <h4 class="mb-3">Information</h4>
+          <li>
+            <a  href="https://help.adjeem.com/about-us/" target="_blank">About</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/contact-us/" target="_blank">Contact Us</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/careers" target="_blank">We are Hiring!</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/safety/" target="_blank">Safety Tips</a>
+          </li>
+          <li>
+            <a href="#">Sitemap</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-2">
+        <ul class="list">
+          <h4 class="mb-3">Support</h4>
+          <li>
+            <a href="#" target="_blank">Business Directory</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/performance/" target="_blank">Promotions</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/" target="_blank">Help</a>
+          </li>
+          <li>
+            <a href="https://help.adjeem.com/technical-issues/" target="_blank">Technical Issues</a>
+          </li>
+          <li>
+            <a href="https://adjeem.com/blogs" target="_blank">Blogs</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h4 class="mb-3">Contact</h4>
+        <div>
+          If you have any questions or concerns, a member of the staff would
+          be delighted to assist you. Please feel free to
+          <a href="https://help.adjeem.com/contact-us/" class="text-dark">contact us by email</a>
+          , and we will respond as quickly as possible.
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="social">
+          <h4 class="mb-3">Social</h4>
+          <div class="d-flex">
+            <div  class="social__holder">
+              <a href="https://www.facebook.com/Adjeemllc" target="_blank">
+                <img src="{% static 'assets/img/fb1.svg' %}" alt="Adjeem Facebook" />
+              </a>
+            </div>
+            <div class="social__holder">
+              <a href="https://twitter.com/a_djeem" target="_blank">
+                <img src="{% static 'assets/img/tw1.svg' %}" alt="Adjeem Twitter" />
+              </a>
+            </div>
+            <div class="social__holder">
+              <a href="https://www.instagram.com/adjeem2020/" target="_blank">
+                <img src="{% static 'assets/img/in1.svg' %}" alt="Adjeem Instagram" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center fw600 py-4">
+      &copy; {{ current_year }} Adjeem.com
+    </div>
+  </div>
+</footer>
+
