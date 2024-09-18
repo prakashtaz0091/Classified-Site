@@ -7,5 +7,41 @@
 
 
 {% block content %}
+{% comment %} Download Section {% endcomment %}
+<div style="background-color:#a22b27;color:white;" class="downloads py-3 mt-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2 style="color:white;" class="white text-center">
+          Take {{ userData.country.name }}'s # 1 classified site with you
+        </h2>
+        <p style="color:white;font-size:0.8rem" class="white text-center">
+          Buy and sell new or used items wherever you go!
+        </p>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.adjeemapp"
+          title="Download Adjeem Android App"
+        >
+          <img
+            class="mr-2"
+            src="{% static 'assets/img/gplay.svg' %}"
+            alt="Download Adjeem Android App"
+          />
+        </a>
+        <a
+          href="https://apps.apple.com/app/adjeem/id1577021583"
+          title="Download Adjeem iOS App"
+        >
+          <img
+              src="{% static 'assets/img/apple1.svg' %}"
+            alt="Download Adjeem iOS App"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} End Download Section {% endcomment %}
 {% include 'includes/footer_landing.html' %}
 {% endblock %}
