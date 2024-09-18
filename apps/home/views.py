@@ -21,7 +21,8 @@ def landing(request):
     try:
         categories = Category.objects.prefetch_related('subcategories').filter(parent_id__isnull=True)
         context={
-            'categories':categories
+            'categories':categories,
+            'current_year':2024,
         }
         return render(request,'home/landing.html',context)
     except Exception as e:
