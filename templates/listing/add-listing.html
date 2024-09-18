@@ -207,7 +207,7 @@
 										<div class="col-lg-6 col-md-6 featured-img1">
 											<h6 class="media-title">Featured Image</h6>
 											<div class="media-image">
-												<img src="{% static 'assets/img/mediaimg-2.jpg' %}" alt="Featured Image">
+												<img src="{% static 'blank.jpeg' %}" alt="Featured Image">
 											</div>
 											<div class="settings-upload-btn">
 												<input type="file" accept="image/*" name="cover_image" class="hide-input image-upload" id="file">
@@ -216,29 +216,30 @@
 										</div>
 									
 									</div>
+
 									<div class="gallery-media">
 										<h6 class="media-title">Gallery</h6>
 										<div class="galleryimg-upload" id="gallery-preview">
-											<!-- Initially displayed static images with a unique class -->
+											<!-- Existing image fields -->
 											<div class="gallery-upload static-image">
-												<img src="{% static 'assets/img/gallery/gallerymedia-1.jpg' %}" class="img-fluid" alt="Gallery Image 1">
-												<a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>
+												<img id="img-1" src="{% static 'blank.jpeg' %}" class="img-fluid" alt="Gallery Image 1">
+												<a href="javascript:void(0)" class="profile-img-del" onclick="removeImage(1)"><i class="feather-trash-2"></i></a>
 											</div>
 											<div class="gallery-upload static-image">
-												<img src="{% static 'assets/img/gallery/gallerymedia-2.jpg' %}" class="img-fluid" alt="Gallery Image 2">
-												<a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>
+												<img id="img-2" src="{% static 'blank.jpeg' %}" class="img-fluid" alt="Gallery Image 2">
+												<a href="javascript:void(0)" class="profile-img-del" onclick="removeImage(2)"><i class="feather-trash-2"></i></a>
 											</div>
 											<div class="gallery-upload static-image">
-												<img src="{% static 'assets/img/gallery/gallerymedia-3.jpg' %}" class="img-fluid" alt="Gallery Image 3">
-												<a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>
+												<img id="img-3" src="{% static 'blank.jpeg' %}" class="img-fluid" alt="Gallery Image 3">
+												<a href="javascript:void(0)" class="profile-img-del" onclick="removeImage(3)"><i class="feather-trash-2"></i></a>
 											</div>
 											<div class="gallery-upload static-image">
-												<img src="{% static 'assets/img/gallery/gallerymedia-4.jpg' %}" class="img-fluid" alt="Gallery Image 4">
-												<a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>
+												<img id="img-4" src="{% static 'blank.jpeg' %}" class="img-fluid" alt="Gallery Image 4">
+												<a href="javascript:void(0)" class="profile-img-del" onclick="removeImage(4)"><i class="feather-trash-2"></i></a>
 											</div>
 											<div class="gallery-upload static-image">
-												<img src="{% static 'assets/img/gallery/gallerymedia-5.jpg' %}" class="img-fluid" alt="Gallery Image 5">
-												<a href="javascript:void(0)" class="profile-img-del"><i class="feather-trash-2"></i></a>
+												<img id="img-5" src="{% static 'blank.jpeg' %}" class="img-fluid" alt="Gallery Image 5">
+												<a href="javascript:void(0)" class="profile-img-del" onclick="removeImage(5)"><i class="feather-trash-2"></i></a>
 											</div>
 										</div>
 										<div class="settings-upload-btn">
@@ -246,6 +247,8 @@
 											<label for="gallery-upload" class="file-upload">Upload File</label>
 										</div>
 									</div>
+									
+									
 									
 									
 									
@@ -274,65 +277,52 @@
 		</svg>
 	</div>
 	<!-- scrollToTop end -->
-	    
-
-
+	
+	
 	<script>
-
 		document.getElementById('gallery-upload').addEventListener('change', function(event) {
-			const galleryPreview = document.getElementById('gallery-preview');
 			const files = event.target.files;
-		
+			const previewImages = ['img-1', 'img-2', 'img-3', 'img-4', 'img-5'];
 			
-			const staticImages = galleryPreview.querySelectorAll('.static-image');
-			staticImages.forEach(image => {
-				galleryPreview.removeChild(image);
-			});
-			const currentImages = galleryPreview.querySelectorAll('.gallery-upload').length;
-					
-			
-			if (files.length + currentImages > 5) {
-				alert('You can only upload a maximum of 5 photos.');
+			// Check if more than 5 files are uploaded
+			if (files.length > previewImages.length) {
+				alert('You can only upload up to 5 images.');
 				return;
 			}
 		
-			Array.from(files).forEach(file => {
-				const reader = new FileReader();
+			let fileIndex = 0;
 		
-				reader.onload = function(e) {
-					const imageContainer = document.createElement('div');
-					imageContainer.className = 'gallery-upload';
-					// Get the current number of images in the gallery
-		
-
-		
-					const img = document.createElement('img');
-					img.src = e.target.result;
-					img.className = 'img-fluid';
-					img.alt = 'Gallery Image';
-		
-					const removeBtn = document.createElement('a');
-					removeBtn.href = 'javascript:void(0)';
-					removeBtn.className = 'profile-img-del';
-					removeBtn.innerHTML = '<i class="feather-trash-2"></i>';
-					
-					removeBtn.addEventListener('click', function() {
-						galleryPreview.removeChild(imageContainer);
-					});
-		
-					imageContainer.appendChild(img);
-					imageContainer.appendChild(removeBtn);
-		
-					galleryPreview.appendChild(imageContainer);
-				};
-		
-				reader.readAsDataURL(file);
+			// Loop through the preview images and update them with the uploaded files
+			previewImages.forEach((imgId, index) => {
+				// If the image field is empty and there are still files to process
+				if (fileIndex < files.length) {
+					const imgElement = document.getElementById(imgId);
+					if (imgElement.src.endsWith('blank.jpeg')) { // Check if the image is the default
+						const file = files[fileIndex];
+						const reader = new FileReader();
+						
+						reader.onload = function(e) {
+							imgElement.src = e.target.result;
+						}
+						
+						reader.readAsDataURL(file);
+						fileIndex++;
+					}
+				}
 			});
 		});
+		
+		// Function to remove image and reset to default
+		function removeImage(index) {
+			const imgElement = document.getElementById('img-' + index);
+			imgElement.src = "{% static 'blank.jpeg' %}";
+		}
 		
 		
 		
 	</script>
+
+
 
 <script>
 	function loadSubcategories(checkbox) {

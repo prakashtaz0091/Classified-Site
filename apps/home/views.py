@@ -425,7 +425,7 @@ def feedback(request, hashed_user_id):
 @login_required(login_url="/account/login/")
 def add_listing(request):
     if request.method == "POST":
-        print(request.POST)
+        print(request.POST,'add listing')
         product_name = request.POST.get("product_name")
         description = request.POST.get("description")
         price = request.POST.get("price")
