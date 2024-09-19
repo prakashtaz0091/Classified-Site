@@ -51,7 +51,7 @@ def home(request):
             # Get the latest 5 products for each category
             for category in all_categories:
 
-                products = all_products.filter(category=category)[:5]
+                products = all_products.filter(category=category,is_approved=True,is_available=True)[:5]
 
                 latest_product = {"products": products, "category": category}
                 latest_products.append(latest_product)

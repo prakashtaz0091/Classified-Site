@@ -156,6 +156,101 @@
 		
 		<!-- /Category Section -->
 		
+<section class="featured-section" style='padding-bottom:0px'>
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+						<div class="section-heading">
+							<h3>Featured Ads</h3>
+							<p >Checkout these latst cool ads from our members</p>
+						</div>						
+					</div>
+					<div class="col-md-6 text-md-end aos" data-aos="fade-up">
+						<div class="owl-nav mynav2"></div>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col-md-12">						
+						<div class="owl-carousel featured-slider grid-view">
+							{% for product in all_products %}								
+							<div class="card aos" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+
+											{% if product.cover_image %}
+											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+												<i class="feather-heart"></i>
+											</a>	
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>	 {% for category in product.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}</span></a>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													{% if product.created_by.profile.profile_photo %}
+													<img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
+												</div>
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>
+													
+														{{ product.category.category_name }} 
+
+												</div>
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												<div class="location-info">
+													{% if product.location.address %}
+													<i class="feather-map-pin"></i>{{product.location.address}}
+													{% else %}
+													<i class="feather-map-pin"></i> Dubai
+
+
+													{% endif %}
+												</div>
+												<div class="location-info">
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+												    <span class="validrate">${{product.price}}</span>
+												    <span>$400</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>	
+											</div>	
+											
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+							{% endfor %}
+																
+						</div>							
+					</div>
+				</div>
+			</div>
+		</section
 		<!-- Featured ADS Section -->
 		<section class="featured-section" style='padding-bottom:0px'>
 			<div class="container">
