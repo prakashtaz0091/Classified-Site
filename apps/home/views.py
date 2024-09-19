@@ -38,8 +38,11 @@ def home(request):
             latest_products = []
             all_products = (
                 Product.objects.select_related()
-                .filter(is_available=True)
+                .filter(is_available=True,is_approved=True)
                 .order_by("-created_date")
+            )
+            featured_ads=(
+                Product.objects.filter(is_available=True,is_approved=True).order_by('?')[:6]
             )
             carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
             #Onlyy one in top banner
@@ -76,6 +79,7 @@ def home(request):
                 "all_products": all_products,
                 "categories": all_categories,
                 "book_mark": bookmarked_product_ids,
+                "featured_ads":featured_ads,
                 'carousel_banner_ads':carousel_banner_ads,
                 'homepage_top_banner_ads':homepage_top_banner_ads,
                 'homepage_bottom_banner_ads':homepage_bottom_banner_ads,
