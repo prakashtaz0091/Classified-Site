@@ -62,10 +62,11 @@
 </div>
 {% comment %} End header section {% endcomment %}
 {% comment %} Browse all categories section {% endcomment %}
-<div style="margin-top:10rem;margin-bottom:2rem;background-color:white" class="container">
+<div style="margin-top:10rem;margin-bottom:2rem;background-color:white" class=" container">
   <h2>Browse All Categories</h2>
+  <div style="max-height:500px;display:flex;flex-direction:column;" class="flex-wrap">
   {% for category in categories %}
-            <h4>{{ category.category_name }}</h4>
+  <h4 style="margin-top:20px;">{{ category.category_name }}</h4>
                   {% if category.subcategories.all %}
       <ul>
         {% for subcategory in category.subcategories.all %}
@@ -74,6 +75,11 @@
       </ul>
       {% endif %}
   {% endfor %}
+
+
+
+  </div>
+
 </div>
 {% comment %} Post Free Classified Ads Section {% endcomment %}
 
