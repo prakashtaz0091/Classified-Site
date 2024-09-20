@@ -70,6 +70,7 @@ def home(request):
 
             
             print(all_categories,'all categories ===========++>')
+            print(latest_products,'lastest products ===========++>')
             
             
              
