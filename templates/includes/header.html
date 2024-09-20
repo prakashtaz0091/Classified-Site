@@ -1,6 +1,6 @@
 
 {% load static %}
-<div class="container" style='max-width:1189px;'>
+<div class="container" style='max-width:1200px;'>
     <nav class="navbar navbar-expand-lg header-nav">
         <div class="navbar-header">
             <a id="mobile_btn" href="javascript:void(0);">
@@ -11,13 +11,13 @@
                 </span>
             </a>
             <a href="{% url 'home' %}" class="navbar-brand logo">
-                <img src="{% static 'assets/img/logo.svg' %}" class="img-fluid" alt="Logo">
+                <img src="{% static 'logo.svg' %}" class="img-fluid" alt="Logo" style='width:131px;height:35px;'>
             </a>						
         </div>
         <div class="main-menu-wrapper">
             <div class="menu-header">
                 <a href="index.html" class="menu-logo">
-                    <img src="{% static 'assets/img/logo.svg' %}" class="img-fluid" alt="Logo">
+                    <img src="{% static 'logo.svg' %}" class="img-fluid" alt="Logo" style='width:131px;height:35px;'>
                 </a>
                 <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
             </div>
@@ -177,8 +177,7 @@
                     </ul>
                 </li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="{% url 'admin_index' %}" target="_blank">Admin</a></li>
-       
+               
                 <li class="login-link">
                     <a href="{% url 'register' %}">Sign Up</a>
                 </li>
@@ -199,12 +198,39 @@
                 <a class="nav-link header-reg" href="{% url 'register' %}">Sign Up</a>
             </li>
             
+            {% if user.is_authenticated %}
+            <ul class="nav header-navbar-rht">
+                <li class="nav-item">
+                    <a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
+                </li>
+    
+    
+                <li class="nav-item dropdown has-arrow logged-item">
+                    <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if user_profile %}
+                        <img src="{{user_profile.profile_photo.url}}" alt="NO image">
+                        {% else %}
+                        <img src="{% static 'assets/img/profile-img.jpg' %}" alt="NO image">
+                        {% endif %}
+                        <span>{{user.full_name}}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile Settings</a>
+                        {% if user.is_authenticated and user.is_superadmin %}
+                        <a class="dropdown-item" href="{% url 'admin_index' %}">Admin</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>						
+            </ul>
+            </ul>
+            {% else %}
             <li class="nav-item">
-                <a class="nav-link header-login" href="{% url 'login' %}">logout</a>
+                <a class="nav-link header-login" href="{% url 'login' %}"> Sign In</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
-            </li>
+            {% endif %}
+           
         </ul>
     </nav>
 </div>
