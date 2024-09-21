@@ -47,9 +47,7 @@ def home(request):
             carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
             #Onlyy one in top banner
             homepage_top_banner_ads=BannerAds.objects.filter(position='homepage_top',status='approved').order_by('-id').first()
-          
             homepage_bottom_banner_ads=BannerAds.objects.filter(position='homepage_bottom',status='approved').order_by('-id').first()
-            
 
             # Get the latest 5 products for each category
             for category in all_categories:
@@ -66,13 +64,7 @@ def home(request):
                 ).values_list("product_id", flat=True)
             else:
                 bookmarked_product_ids = []
-                
 
-            
-            print(all_categories,'all categories ===========++>')
-            
-            
-             
 
             context = {
                 "latest_products": latest_products,
@@ -117,7 +109,6 @@ def how_it_works(request):
 
 def dashboard(request):
     try:
-
         user=request.GET.get('user',None)
         user_id=request.GET.get('id',None)
 
@@ -166,10 +157,8 @@ def dashboard(request):
 
 def my_listing(request):
     if request.method == "GET":
-
         user=request.GET.get('user',None)
         user_id=request.GET.get('id',None)
-
         user_to_view=None
         if user is None:
             user_to_view=request.user
@@ -233,14 +222,12 @@ def my_listing(request):
 def edit_my_listing(request, id):
     product = Product.objects.get(id=id)
     if request.method == "GET":
-
         features = Feature.objects.all()
         categories = Category.objects.filter(status='ACTIVE')
         product_images = ProductImages.objects.filter(product=product)
         selected_category=[]
         selected_categories = selected_category.append(product.category.id)
         selected_features = product.features.all().values_list("id", flat=True)
-
         context = {
             "product": product,
             "categories": categories,
@@ -250,11 +237,9 @@ def edit_my_listing(request, id):
             "features": features,
             "id": id,
         }
-
         return render(request, "others/edit_my_listing.html", context)
     else:
         # Update basic product details
-
         product.product_name = request.POST.get("product_name")
         product.description = request.POST.get("description")
         product.price = request.POST.get("price")
@@ -308,7 +293,6 @@ def delete_my_listing(request, id):
         product = Product.objects.get(id=id)
         product.delete()
         return redirect("my_listing")
-
     except:
         return redirect("error")
 
@@ -331,7 +315,6 @@ def book_marks(request):
             user_to_view=user_instance
             user_to_view.prefix_email=user
 
-
         book_marks = BookMark.objects.filter(user=user_to_view).order_by('-id')
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
@@ -339,9 +322,6 @@ def book_marks(request):
             ).values_list("product_id", flat=True)
         else:
             bookmarked_product_ids = []
-            
-            
-        print(bookmarked_product_ids,'id')    
 
         # paginations added
         paginator = Paginator(book_marks, 1)
@@ -389,8 +369,6 @@ def reviews(request):
             user_to_view=user_instance
             user_to_view.prefix_email=user
 
-
-
         visitor_reviews_list = (
             Reviews.objects.select_related()
             .filter(reviewed_for=user_to_view)
@@ -426,15 +404,12 @@ def feedback(request, hashed_user_id):
         context={
             'review_for':review_for.get('full_name')
         }
-        print(context)
-            
         return render(request, "home/feedback.html",context)
     except Exception as e:
         print(e)
         # will later move it to 404 page
         return e
 
-    return render(request, "others/reviews.html")
 
 
 @login_required(login_url="/account/login/")
@@ -450,10 +425,8 @@ def add_listing(request):
         selected_features = request.POST.getlist("features")
         featured_data_json=request.POST.get('form_data')
         featured_data=json.loads(featured_data_json)
-        
         data_file=request.FILES.get('data-file')
         data_file_name=request.POST.get('data-file-name')
-        print(data_file)
         # Retrieve location data
         location_name = request.POST.get("location")
         address = request.POST.get("address")
@@ -511,7 +484,6 @@ def add_listing(request):
         if cover_image:
             product.cover_image = cover_image
             product.save()
-            print("Cover image uploaded")
 
         # Handle file uploads for gallery images
         gallery_images = request.FILES.getlist("gallery_images")
@@ -543,16 +515,14 @@ def get_subcategories(request):
             for sub in subcategories
         ]
         return JsonResponse({"subcategories": subcategory_list})
-    
-    
-    
+
 def all_ads(request):
     product_list=Product.objects.filter(is_available=True,is_approved=True).order_by('-created_date')
     if request.user.is_authenticated:    
         bookmarked_product_ids = BookMark.objects.filter(user=request.user).values_list('product_id', flat=True)
     else: 
         bookmarked_product_ids = []
-    
+
     paginator = Paginator(product_list, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -565,17 +535,8 @@ def all_ads(request):
     }
     return render(request, 'listing/listing-grid.html', context)
 
-
-
-
-
 def sub_category(request):
-   print('hello its sub category')
    return render(request,'others/sub_categories.html')
-
-
-
-
 
 def search(request):
     category_slug= request.GET.get('category')
@@ -595,19 +556,16 @@ def search(request):
         products = products.filter(category__slug=category_slug)
     if location:
         products = products.filter(location__address__icontains=location)
-        
     # Pagination logic
     page = request.GET.get('page', 1)
     paginator = Paginator(products, 1)  # Show 10 products per page
     products=None
-    
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
         products = paginator.page(1)
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
-    
 
     if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
             product_data = render_to_string(

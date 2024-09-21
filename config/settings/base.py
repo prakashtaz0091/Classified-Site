@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'apps.contact.apps.ContactConfig',
     'apps.Admin.apps.AdminConfig',
     'apps.business_listing.apps.BusinessListingConfig',
+    'apps.property.apps.PropertyConfig',
     
 
 ]

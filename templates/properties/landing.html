@@ -1,0 +1,801 @@
+﻿{% extends '../base.html' %}
+{% load static %}
+
+{% block content %}
+	
+	<div class="main-wrapper">
+	
+		<!-- Header -->
+		<header class="header">
+			{% include 'includes/header.html' %}
+			<!-- Glider.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+
+<!-- Glider.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+
+				</header>
+		<!-- /Header -->
+		{% include 'includes/alert.html' %}
+		<!-- Banner Section -->
+		<section class="banner-section">	
+			<div class="banner-circle">
+				<img src="{% static 'assets/img/bannerbg.png' %}" class="img-fluid" alt="bannercircle">
+			</div>		
+			<div class="container">
+				<div class="home-banner">		
+					<div class="row align-items-center">					    
+						<div class="col-lg-7">
+							<div class="section-search aos" data-aos="fade-up">
+								<p class="explore-text"> <span>Explore top-rated attractions</span></p>
+								<img src="{% static 'assets/img/arrow-banner.png' %}" class="arrow-img" alt="arrow">
+								<h1>Let us help you <br>
+								<span>Find, Buy</span> & Own Dreams</h1>
+								<p>Country's most loved and trusted classified ad listing website. Browse thousands of items near you.</p>
+
+								<div class="search-box">
+									<form action="{% url 'search' %}" class="d-flex" > 
+									
+										<div class="search-input line">											
+											<div class="form-group">																							
+												<select class="form-control select category-select" name='category'>													
+													<option value="">Choose Category</option>
+													{% for category in categories %}
+													<option value="{{category.slug}}">{{ category.category_name|slice:":16" }}
+													</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+										
+										<div class="search-input">											
+											<div class="form-group">												
+												<div class="group-img">
+													<input type="text" class="form-control" name='location'  placeholder="Choose Location" required>
+													<i class="feather-map-pin"></i>
+												</div>
+											</div>
+										</div>
+										<div class="search-btn">
+											<button class="btn btn-primary" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-5">
+							<div class="banner-imgs">
+								<img src="{% static 'assets/img/Right-img.png' %}" class="img-fluid" alt="bannerimage">							
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<img src="{% static 'assets/img/bannerellipse.png' %}" class="img-fluid banner-elipse" alt="arrow">
+			<img src="{% static 'assets/img/banner-arrow.png' %}" class="img-fluid bannerleftarrow" alt="arrow">
+		</section>
+		
+		<!-- /Banner Section -->
+		{% comment %} <!-- banner top -->
+		{% if homepage_top_banner_ads %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{homepage_top_banner_ads.link}}">
+		<img src="{{homepage_top_banner_ads.image.url}}" />
+			</a>
+		</div>
+	   {% endif %} {% endcomment %}
+
+
+<!-- Banner Carousel -->
+{% comment %}
+<div class="glider-contain">
+    <div class="glider">
+        {% for banner in carousel_banner_ads %}
+        <div class="card aos" data-aos="fade-up">
+            <div style="margin-left:auto;display:flex;justify-content:center;text-align:center;margin-right:auto;">
+                <a href="{{ banner.link }}">
+                    {% if banner.image %}
+                    <img src="{{ banner.image.url }}" />
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="glider-prev">«</button>
+    <button class="glider-next">»</button>
+    <div role="tablist" class="dots"></div>
+</div>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,            // Show only one slide at a time
+        dots: '.dots',              // Navigation dots at the bottom
+        draggable: true,            // Allow dragging to scroll
+        scrollLock: true,           // Prevent scrolling past the last slide
+        arrows: {
+            prev: '.glider-prev',   // Previous button
+            next: '.glider-next'    // Next button
+        },
+        autoplay: 5000              // Autoplay the slides (optional)
+    });
+});
+
+			</script>
+			{% endcomment %}
+		
+		<!-- Category Section -->
+		<section class="category-section">
+			<div class="container">
+				<div class="section-heading">
+					<div class="row align-items-center">
+						<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+							<h2>Our  <span class="title-left">Cat</span>egory</h2>
+							<p>Buy and Sell Everything from Our Top Category</p>
+						</div>
+						<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+							<a href="{% url 'category' %}" class="btn btn-view">View All</a>
+						</div>		
+					</div>			     
+				</div>	
+				<div class="row">
+					{% for category in categories %}
+					<div class="col-lg-2 col-md-3 col-sm-6">
+						<a href="{% url 'sub_category' category.slug %}" class="category-links">
+							<h5>{{ category.category_name|slice:":16" }}
+							</h5>
+							<span>{{category.product_category.count}} Ads</span>
+							<img src="{{category.category_icon_image.url}}" alt="icons">
+						</a> 
+					</div>
+
+					{% endfor %}
+								</div>			   
+			</div>		
+		</section>
+		
+		<!-- /Category Section -->
+		
+<section class="featured-section" style='padding-bottom:0px'>
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+						<div class="section-heading">
+							<h3>Featured Ads</h3>
+							<p >Checkout these Featured ads from our members</p>
+						</div>						
+					</div>
+					<div class="col-md-6 text-md-end aos" data-aos="fade-up">
+						<div class="owl-nav mynav2"></div>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col-md-12">						
+						<div class="owl-carousel featured-slider grid-view">
+							{% for product in featured_ads %}								
+							<div class="card aos" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+
+											{% if product.cover_image %}
+											<img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+												<i class="feather-heart"></i>
+											</a>	
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>	 {% for category in product.category.all %}
+														{{ category.category_name }}{% if not forloop.last %}, {% endif %}
+													{% endfor %}</span></a>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												<div class="grid-author">
+													{% if product.created_by.profile.profile_photo %}
+													<img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+													{% else %}
+													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+													{% endif %}
+												</div>
+												<div class="blog-features">
+													<a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>
+													
+														{{ product.category.category_name }} 
+
+												</div>
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												<div class="location-info">
+													{% if product.location.address %}
+													<i class="feather-map-pin"></i>{{product.location.address}}
+													{% else %}
+													<i class="feather-map-pin"></i> Dubai
+
+
+													{% endif %}
+												</div>
+												<div class="location-info">
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+												    <span class="validrate">${{product.price}}</span>
+												    <span>$400</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>	
+											</div>	
+											
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+							{% endfor %}
+																
+						</div>							
+					</div>
+				</div>
+			</div>
+</section>
+		
+		<!-- /Featured ADS Section -->
+
+	<!---addd the feature category-->
+	<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		{% for latest_product  in latest_products|slice:":4" %}	
+		<div class="container" style='margin-top:3rem;'>		
+				<div class="section-heading">
+						<div class="row align-items-center">
+							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+									<h3>Latest on {{latest_product.category.category_name|slice:":30"}}</h3>
+									<p>checkout these latest cool ads from our members .</p>
+							</div>
+							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
+							</div>		
+						</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in latest_product.products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+		{% endfor %}
+</section>	
+	<!--end-->
+		
+	
+		<!-- /Popular Locations Section -->
+		
+		<!-- Latest Ads Section -->
+		
+		<!-- /Latest Ads Section -->
+		
+		{% comment %} {% if homepage_bottom_banner_ads %}
+		<div style="margin-left:auto;display:flex;justify-content:center;text:center;margin-right:auto;">
+			<a href="{{homepage_bottom_banner_ads.link}}">
+		<img src="{{homepage_bottom_banner_ads.image.url}}" />
+			</a>
+		</div>
+	   {% endif %} {% endcomment %}
+
+		
+	
+	<section class="cta-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="cta-content">
+                    <h3>Earn Cash by <span>Selling</span> <br>
+                    or Find Anything you desire</h3>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humo or randomised words which don't look even slightlys</p>
+                    <div class="cta-btn">
+                        <a href="{% url 'add_listing' %}" class="btn-primary postad-btn">Post Your Ads</a>
+                        <a href="{% url 'all_ads' %}" class="browse-btn">Browse Ads</a>							  
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="cta-img">
+                    <img src="{% static 'assets/img/cta-img.png' %}" class="img-fluid" alt="CTA">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class='cta-section'>
+	<div class='container'>
+		<div class="col-lg-12">
+			<div class="cta-content">
+				<h3>Post Free Classifieds Ads in UAE</h3>
+				<p style='color: #7d7d7d;'>Welcome to Adjeem! We are undoubtedly one of the best free Classifieds in Dubai. Our main motive is to make selling and purchasing of goods and services convenient in Dubai through our free ads. At our platform, you can swiftly and easily post free ads, whether you are dealing with the personal items or business opportunities. For your convenience we made our website ad-free, so that you can browse and post ads with no rifts and distractions.</p>
+				<p style='color: #7d7d7d;'>Adjeem is an ideal solution for people like you, who are looking for Dubai free classifieds. Our free ads posting service facilitates you in targeting a large audience, for conveying your message to those who are interested in what you have to offer. Whether you're selling a used car, searching for a new apartment, selling a technology, or looking for a new job, Adjeem is the only way to get the desired outcomes.</p>
+				<p style='color: #7d7d7d;'>As free classifieds in Dubai, we also offer a broad range of personal ads, that help you in connecting with other users and in getting the commodities you want to acquire. We are not just free Dubai classifieds even with our user-friendly interface, you can easily navigate and find what you're looking for, whether you intend to purchase or sell. Our platform includes a variety of categories, including electronics, real estate, jobs, personal items, and a lot of other products and services.</p>
+				<p style='color: #7d7d7d;'>At Adjeem, we prioritize the safety and security which is direly needed in online transactions. Though we offer free ads service but our platform is monitored 24/7, and we take great care to ensure that all advertisements are legitimate and do not contain any fraudulent or illegal content to avoid any discomfort for the users.</p>
+			     <p style='color: #7d7d7d;'>At Adjeem, we aim at providing a memorable user-friendly experience. Whether you're looking to buy, sell, or simply browse the latest ads, our platform is the perfect solution for anyone in the Dubai and UAE area. Most importantly, we are free Dubai classifieds. So why wait? Sign up today and enjoy free Dubai Classifieds service with Adjeem!</p>
+			</div>
+		</div>
+	</div>
+	
+</section>
+	
+		<!-- /CTA Section -->
+		
+		{% comment %}
+		<!-- Client Testimonilas Section -->
+		<section class="testimonials-section">    
+			<div class="row">
+				<div class="col-lg-5">			
+					<div class="testimonial-heading d-flex">
+						<h4> Client <br> Testimonials</h4>
+						<img src="{% static 'assets/img/quotes.png' %}" alt="quotes">
+					</div>
+				</div>
+				<div class="col-lg-7">			
+					<div class="rightimg"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="testimonials-slidersection">
+						<div class="owl-nav mynav1"></div>
+						<div class="owl-carousel testi-slider">
+							<div class="testimonial-info">
+								<div class="testimonialslider-heading d-flex">
+									<div class="testi-img">
+										<img src="{% static 'assets/img/testimonial-1.jpg' %}" class="img-fluid" alt="testi-img">
+									</div>
+									<div class="testi-author">
+										<h6>Dev</h6>
+										<p>Lead Intranet Technician</p>
+									</div>
+								</div>
+								<div class="testimonialslider-content">
+									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							</div>
+							<div class="testimonial-info">
+								<div class="testimonialslider-heading d-flex">
+									<div class="testi-img">										    
+										<img src="{% static 'assets/img/testimonial-2.jpg' %}" class="img-fluid" alt="testi-img">
+									</div>
+									<div class="testi-author">
+										<h6>Esther Hills</h6>
+										<p>Lead Intranet Technician</p>
+									</div>											
+								</div>
+								<div class="testimonialslider-content">
+									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							</div>
+							<div class="testimonial-info">
+								<div class="testimonialslider-heading d-flex">
+									<div class="testi-img">
+										<img src="{% static 'assets/img/testimonial-1.jpg' %}" class="img-fluid" alt="testi-img">
+									</div>
+									<div class="testi-author">
+										<h6>Dev</h6>
+										<p>Lead Intranet Technician</p>
+									</div>											
+								</div>
+								<div class="testimonialslider-content">
+									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							</div>
+							<div class="testimonial-info">
+								<div class="testimonialslider-heading d-flex">
+									<div class="testi-img">
+										<img src="{% static 'assets/img/testimonial-2.jpg' %}" class="img-fluid" alt="testi-img">
+									</div>
+									<div class="testi-author">
+										<h6>Esther Hills</h6>
+										<p>Lead Intranet Technician</p>
+									</div>											
+								</div>
+								<div class="testimonialslider-content">
+									<p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		   
+		</section>	
+		{% endcomment %}
+		<!-- /Client Testimonilas Section -->
+		
+		<!-- Partners Section -->
+		{% comment %}
+		<div class="partners-section">
+			<div class="container">
+				<p class="partners-heading">Over 5,26,000+ Sponsers being contact with us</p>	
+				<ul class="owl-carousel partnerslist d-flex">
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-1.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-2.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-3.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-4.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-5.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-6.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-1.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-2.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-3.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-4.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-5.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-6.svg' %}" alt="partners"></a></li>
+				</ul>
+			</div>
+		</div>
+		{% endcomment %}
+			
+		<!-- /Partners  Section -->
+		
+		<!-- Pricing Plan Section -->
+		
+		{% comment %}
+<section class="pricingplan-section">
+    <div class="section-heading">
+        <div class="container">				
+            <div class="row text-center">
+                <h2>Our Pricing <span>Pla</span>n</h2>
+                <p>checkout these latest cool ads from our members</p>
+            </div>									 
+        </div>	 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 d-flex col-md-6">
+                <div class="price-card flex-fill">
+                    <div class="price-head">
+                        <div class="price-level">
+                            <h6>Intro</h6>
+                        </div>
+                        <h4>$10 <span>/ month</span></h4>								
+                    </div>	
+                    <div class="price-body">
+                        <p>For most business that want to optimize web queries</p>
+                        <ul>
+                            <li class="active">Basic listing submission</li>
+                            <li class="active">One Listing</li>
+                            <li class="active">30 days Availability</li>
+                            <li class="inactive">Limited Support</li>
+                            <li class="inactive">Edit your listing</li>
+                        </ul>
+                        <div>
+                            <a href="login.html" class="btn viewdetails-btn">View details</a>
+                        </div>							
+                    </div>							
+                </div>
+            </div>
+            <div class="col-lg-3 d-flex col-md-6">
+                <div class="price-card flex-fill">
+                    <div class="price-head">
+                        <div class="price-level">
+                            <h6>Basic</h6>
+                        </div>
+                        <h4>$25 <span>/ month</span></h4>								
+                    </div>	
+                    <div class="price-body">
+                        <p>For most business that want to optimize web queries</p>
+                        <ul>
+                            <li class="active">Basic listing submission</li>
+                            <li class="active">One Listing</li>
+                            <li class="active">30 days Availability</li>
+                            <li class="inactive">Limited Support</li>
+                            <li class="inactive">Edit your listing</li>
+                        </ul>
+                        <div>
+                            <a href="login.html" class="btn viewdetails-btn">View details</a>
+                        </div>							
+                    </div>							
+                </div>	
+            </div>
+            <div class="col-lg-3 d-flex col-md-6">
+                <div class="price-card flex-fill">
+                    <div class="price-head">
+                        <div class="price-level">
+                            <h6>Popular</h6>
+                        </div>
+                        <h4>$50 <span>/ month</span></h4>									
+                    </div>	
+                    <div class="price-body">
+                        <p>For most business that want to optimize web queries</p>
+                        <ul>
+                            <li class="active">Basic listing submission</li>
+                            <li class="active">One Listing</li>
+                            <li class="active">30 days Availability</li>
+                            <li class="inactive">Limited Support</li>
+                            <li class="inactive">Edit your listing</li>
+                        </ul>
+                        <div>
+                            <a href="login.html" class="btn viewdetails-btn">View details</a>
+                        </div>							
+                    </div>							
+                </div>
+            </div>
+            <div class="col-lg-3 d-flex col-md-6">
+                <div class="price-card flex-fill">
+                    <div class="price-head">
+                        <div class="price-level">
+                            <h6>Enterprise</h6>
+                        </div>
+                        <h4>$100 <span>/ month</span></h4>									
+                    </div>	
+                    <div class="price-body">
+                        <p>For most business that want to optimize web queries</p>
+                        <ul>
+                            <li class="active">Basic listing submission</li>
+                            <li class="active">One Listing</li>
+                            <li class="active">30 days Availability</li>
+                            <li class="inactive">Limited Support</li>
+                            <li class="inactive">Edit your listing</li>
+                        </ul>
+                        <div>
+                            <a href="login.html" class="btn viewdetails-btn">View details</a>
+                        </div>							
+                    </div>							
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcomment %}
+		<!-- /Pricing Plan Section -->
+		
+		<!-- Blog Section -->
+		{% comment %}
+<section class="blog-section">
+    <div class="section-heading">
+        <div class="container">				
+            <div class="row align-items-center">
+                <div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+                    <h2>Lat<span class="title-right">est</span> Blog</h2>
+                    <p>people are giving these goods for free so check them out</p>
+                </div>
+                <div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                    <a href="blog-grid.html" class="btn  btn-view">View All</a>
+                </div>		
+            </div>	
+        </div>	
+    </div>
+    <div class="container">	 									
+        <div class="row">
+            <div class="col-lg-4 col-md-4 d-flex">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-1.jpg' %}" alt="Post Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-category">
+                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+                        </p>
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <div class="post-author-img">
+                                        <img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="Post Author">
+                                    </div>
+                                    <a href="javascript:void(0);" class="mb-0"> <span> Amara </span></a>
+                                </div>
+                            </li>
+                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 4, 2023</li>
+                        </ul>
+                        <h3 class="blog-title"><a href="blog-details.html">The Best Spa Saloons for your relaxations?</a></h3>
+                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+                        <p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 d-flex">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-2.jpg' %}" alt="Post Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-category">
+                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+                        </p>
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <div class="post-author-img">
+                                        <img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="Post Author">
+                                    </div>
+                                    <a href="javascript:void(0);" class="mb-0"><span> Darryl </span></a>
+                                </div>
+                            </li>
+                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 6, 2023</li>
+                        </ul>
+                        <h3 class="blog-title"><a href="blog-details.html">Three Powerful Tricks For Online Advertising</a></h3>
+                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+                        <p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 d-flex">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-3.jpg' %}" alt="Post Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-category">
+                            <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+                        </p>
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <div class="post-author-img">
+                                        <img src="{% static 'assets/img/profiles/avatar-13.jpg' %}" alt="Post Author">
+                                    </div>
+                                    <a href="javascript:void(0);" class="mb-0"> <span> Mary </span></a>
+                                </div>
+                            </li>
+                            <li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 10, 2023</li>
+                        </ul>
+                        <h3 class="blog-title"><a href="blog-details.html">Competitive Analysis for Enterprerneurs in 20222</a></h3>
+                        <p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+                        <p class="viewlink"><a href="blog-details.html">View Details  <i class="feather-arrow-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>									
+    </div>	 
+</section>
+{% endcomment %}
+		<!-- /Blog  Section -->
+		
+		<!-- Footer include here-->
+
+		{% include 'includes/footer.html' %}
+		
+		<!-- /Footer -->
+		
+	</div>
+
+    <!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+		</svg>
+	</div>
+	<!-- scrollToTop end -->
+	
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		document.querySelectorAll('.fav-icon').forEach(function(icon) {
+			icon.addEventListener('click', function() {
+				var itemId = this.closest('.fav-item').getAttribute('data-id');
+				var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	
+				fetch('/ad/toggle-bookmark/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRFToken': csrftoken 
+					},
+					body: JSON.stringify({ id: itemId })
+				})
+				.then(response => {
+					if (response.redirected) {
+						// If the response is redirected, navigate to the login page
+						window.location.href = response.url;
+					} else {
+						return response.json();
+					}
+				})
+				.then(data => {
+					console.log(data, 'data');
+					if (data.success) {
+						
+if (icon.classList.contains('fav')) {
+    icon.classList.remove('fav');  // Remove the 'fav' class
+    // Additional logic for when the icon is removed from favorites
+} else {
+    icon.classList.add('fav');  // Add the 'fav' class
+    // Additional logic for when the icon is added to favorites
+}						
+					} else {
+						console.error('Failed to favorite item.');
+					}
+				})
+				.catch(error => console.error('Error:', error));
+			});
+		});
+	});
+	
+</script>	
+	
+	{% endblock %}
