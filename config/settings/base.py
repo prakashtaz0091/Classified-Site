@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.business_listing.apps.BusinessListingConfig',
     'apps.property.apps.PropertyConfig',
     'apps.vechiles.apps.VechilesConfig',
+    'apps.discover.apps.DiscoverConfig',
     
 
 ]

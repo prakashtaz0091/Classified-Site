@@ -20,5 +20,6 @@ urlpatterns = [
     path('business_listing/',include('apps.business_listing.urls')),
     path('real-estate/',include('apps.property.urls')),
     path('vechiles/',include('apps.vechiles.urls')),
+    path('discover/',include('apps.discover.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
