@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'apps.Admin.apps.AdminConfig',
     'apps.business_listing.apps.BusinessListingConfig',
     'apps.property.apps.PropertyConfig',
+    'apps.vechiles.apps.VechilesConfig',
     
 
 ]
