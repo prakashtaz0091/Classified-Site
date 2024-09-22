@@ -22,7 +22,7 @@
                             <h1 class="aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Find Your Dream Home</h1>
                             <h6 class="mb-0 aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Only real estate platform with 10,000+ highly rated sellers</h6>
                             <p class="aos" data-aos="fade-up" data-aos-delay="200">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-                            <div class="banner-nine-btn-group">
+                            <div style="padding-top:5px"class="banner-nine-btn-group">
                                 <a href="categories.html" class="aos" data-aos="fade-up" data-aos-delay="300">
                                     <span>Add Listing</span>
                                 </a>
@@ -200,304 +200,207 @@
 		<!-- /Search Filter Section -->
 
         <!-- Featured Listings -->
-        <section class="featured-listing-section ">
-            <div class="footer-six-bg footer-nine-bg">
-				<img src="./assets/img/bg/feature-bg.png" alt="">
-			</div>
+<section class="latestad-section grid-view featured-slider" style='padding-top:0px;padding-bottom:0px;'>
+		<div class="container" style='margin-top:2rem;'>		
+				<div class="section-heading">
+					<div style="position:relative" class="row align-items-center">
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="text-center">
+            <h3>Featured Listings</h3>
+            <p>The most trendy accommodations available</p>
+        </div>
+    </div>
+    <div style="position:absolute;left:80%" class="">
+        <a href="#" class="btn btn-view">Explore all listings</a>
+    </div>
+</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in featured_products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+</section>
+
+<!-- Explore our categories -->
+<section class="explore-categories ">
             <div class="container">
-                <div class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                <div style="margin-top:50px" class="section-heading section-heading-nine  aos" data-aos="fade-up">
                     <div class="row align-items-center">
-                        <div class="col-lg-4 col-md-3"></div>
-                        <div class="col-lg-4 col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
-                            <h2>Featured Listings</h2>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
+                            <h2>Explore Our Categories</h2>
                             <p>The most trendy accommodations available</p>
                         </div>
-                        <div class="col-lg-4 col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-                            <a href="categories.html" class="btn  btn-view">View all Properties</a>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Catgeorries</a>
                         </div>		
                     </div>	
                   </div>
-                  <div class="row aos" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-md-12">
                         <div class="car-class-carousel">
-                            <div class="real-featured-listing owl-carousel owl-theme">
-                                <div class="feature-rent">
-                                    <div class="feature-home-img">
-										<a href="listingmap-list.html"><img src="{% static 'assets/img/featured/property-feature-1.jpg' %}" class="img-fluid" alt=""></a>
+                            <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="green-logo">
-										<img src="{% static 'assets/img/featured/feature-text-logo.png' %}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="select-favourite-room">
-                                        <div class="favourite-small-user">
-                                            <img src="./assets/img/profiles/avatar-01.jpg" class="img-fluid" alt="">
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
-                                        <i class="fa-solid fa-heart"></i>
-                                    </div>
-                                    <div class="house-location">
-                                        <span>$700/m</span>
-                                        <p><i class="feather-map-pin"></i>Sydney CBD, NSW</p>
-                                    </div>
-                                    <div class="home-img-text">
-                                        <div class="star-rated">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>2.8</span>
-                                        </div>
-                                        <h3><a href="listingmap-list.html">MS Northbound, Peachfield Road, Uk</a></h3>
-                                        <div class="top-room-details">
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/area-icon.svg' %}" class="img-fluid" alt="">Area:56000/m2</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bed-icon.svg' %}" class="img-fluid" alt="">Beds:3</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bath-icon.svg' %}" class="img-fluid" alt="">Baths:2</span>
-                                            </div>
-                                        </div>
-                                        <div class="house-type">
-                                            <span class="room-type"><i class="feather-home"></i>Apartments</span>
-                                            <span class="double-tick"><i class="fa-solid fa-check-double"></i></span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="feature-rent">
-                                    <div class="feature-home-img">
-										<a href="listingmap-list.html"><img src="{% static 'assets/img/featured/property-feature-2.jpg' %}" class="img-fluid" alt=""></a>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="green-logo">
-										<img src="{% static 'assets/img/featured/feature-text-logo.png' %}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="select-favourite-room">
-                                        <div class="favourite-small-user">
-                                            <img src="./assets/img/profiles/avatar-02.jpg" class="img-fluid" alt="">
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
-                                        <i class="fa-solid fa-heart"></i>
+                                    </a>
+                            </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="house-location">
-                                        <span>$510/m</span>
-                                        <p><i class="feather-map-pin"></i>Sydney CBD, NSW</p>
-                                    </div>
-                                    <div class="home-img-text">
-                                        <div class="star-rated">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>2.8</span>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Villas</h5>
+                                            <span>50 Listings</span> 
+                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
                                         </div>
-                                        <h3><a href="listingmap-list.html">Iris Watson, Frederick Nebraska 20620</a></h3>
-                                        <div class="top-room-details">
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/area-icon.svg' %}" class="img-fluid" alt="">Area:56000/m2</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bed-icon.svg' %}" class="img-fluid" alt="">Beds:3</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bath-icon.svg' %}" class="img-fluid" alt="">Baths:2</span>
-                                            </div>
-                                        </div>
-                                        <div class="house-type">
-                                            <span class="room-type"><i class="feather-home"></i>Condos</span>
-                                            <span class="double-tick"><i class="fa-solid fa-check-double"></i></span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="feature-rent">
-                                    <div class="feature-home-img">
-										<a href="listingmap-list.html"><img src="{% static 'assets/img/featured/property-feature-3.jpg' %}" class="img-fluid" alt=""></a>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="green-logo">
-										<img src="{% static 'assets/img/featured/feature-text-logo.png' %}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="select-favourite-room">
-                                        <div class="favourite-small-user">
-                                            <img src="./assets/img/profiles/avatar-03.jpg" class="img-fluid" alt="">
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Condos</h5>
+                                            <span>45 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
-                                        <i class="fa-solid fa-heart"></i>
-                                    </div>
-                                    <div class="house-location">
-                                        <span>$600/m</span>
-                                        <p><i class="feather-map-pin"></i>Sydney CBD, NSW</p>
-                                    </div>
-                                    <div class="home-img-text">
-                                        <div class="star-rated">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>2.8</span>
-                                        </div>
-                                        <h3><a href="listingmap-list.html">Store in Woodside Park, New York</a></h3>
-                                        <div class="top-room-details">
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/area-icon.svg' %}" class="img-fluid" alt="">Area:56000/m2</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bed-icon.svg' %}" class="img-fluid" alt="">Beds:3</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bath-icon.svg' %}" class="img-fluid" alt="">Baths:2</span>
-                                            </div>
-                                        </div>
-                                        <div class="house-type">
-                                            <span class="room-type"><i class="feather-home"></i>Apartments</span>
-                                            <span class="double-tick"><i class="fa-solid fa-check-double"></i></span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="feature-rent">
-                                    <div class="feature-home-img">
-										<a href="listingmap-list.html"><img src="{% static 'assets/img/featured/property-feature-2.jpg' %}" class="img-fluid" alt=""></a>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="green-logo">
-										<img src="{% static 'assets/img/featured/feature-text-logo.png' %}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="select-favourite-room">
-                                        <div class="favourite-small-user">
-                                            <img src="./assets/img/profiles/avatar-04.jpg" class="img-fluid" alt="">
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
-                                        <i class="fa-solid fa-heart"></i>
-                                    </div>
-                                    <div class="house-location">
-                                        <span>$510/m</span>
-                                        <p><i class="feather-map-pin"></i>Sydney CBD, NSW</p>
-                                    </div>
-                                    <div class="home-img-text">
-                                        <div class="star-rated">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>2.8</span>
-                                        </div>
-                                        <h3><a href="listingmap-list.html">Iris Watson, Frederick Nebraska 20620</a></h3>
-                                        <div class="top-room-details">
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/area-icon.svg' %}" class="img-fluid" alt="">Area:56000/m2</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bed-icon.svg' %}" class="img-fluid" alt="">Beds:3</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bath-icon.svg' %}" class="img-fluid" alt="">Baths:2</span>
-                                            </div>
-                                        </div>
-                                        <div class="house-type">
-                                            <span class="room-type"><i class="feather-home"></i>Condos</span>
-                                            <span class="double-tick"><i class="fa-solid fa-check-double"></i></span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="feature-rent">
-                                    <div class="feature-home-img">
-										<a href="listingmap-list.html"><img src="{% static 'assets/img/featured/property-feature-1.jpg' %}" class="img-fluid" alt=""></a>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
                                     </div>
-                                    <div class="green-logo">
-										<img src="{% static 'assets/img/featured/feature-text-logo.png' %}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="select-favourite-room">
-                                        <div class="favourite-small-user">
-                                            <img src="./assets/img/profiles/avatar-01.jpg" class="img-fluid" alt="">
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
-                                        <i class="fa-solid fa-heart"></i>
-                                    </div>
-                                    <div class="house-location">
-                                        <span>$700/m</span>
-                                        <p><i class="feather-map-pin"></i>Sydney CBD, NSW</p>
-                                    </div>
-                                    <div class="home-img-text">
-                                        <div class="star-rated">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <span>2.8</span>
-                                        </div>
-                                        <h3><a href="listingmap-list.html">MS Northbound, Peachfield Road, Uk</a></h3>
-                                        <div class="top-room-details">
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/area-icon.svg' %}" class="img-fluid" alt="">Area:56000/m2</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bed-icon.svg' %}" class="img-fluid" alt="">Beds:3</span>
-                                            </div>
-                                            <div class="area">
-												<span><img src="{% static 'assets/img/icons/bath-icon.svg' %}" class="img-fluid" alt="">Baths:2</span>
-                                            </div>
-                                        </div>
-                                        <div class="house-type">
-                                            <span class="room-type"><i class="feather-home"></i>Apartments</span>
-                                            <span class="double-tick"><i class="fa-solid fa-check-double"></i></span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+</section>
         <!-- /Featured Listings -->
 
         <!-- Why Choose Us -->
-        <section class="real-why-us">
-            <div class="real-why-us-floating-bg">
-                <img src="./assets/img/bg/why-us-bg.png" alt="">
-            </div>
-            <div class="container">
-                <div class="section-heading section-heading-nine  aos" data-aos="fade-up">
-                    <div class="row align-items-center">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 aos aos-init aos-animate text-center" data-aos="fade-up">
-                            <h2>Why Choose Us</h2>
-                            <p>We provide full service at every step.</p>
-                        </div>
-                        <div class="col-md-4 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-                        </div>		
-                    </div>	
-                  </div>
-                  <div class="row aos" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-						<div class="choose-set">
-							<span><img src="{% static 'assets/img/icons/why-us-1.svg' %}" alt="img"></span>
-							<h6>Trusted By Thousands</h6>
-							<p>With over 1 million+ homes for sale available on the website, Listee can match you with a house you will want to call home.</p>
-						</div>
-					</div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-						<div class="choose-set">
-							<span><img src="{% static 'assets/img/icons/why-us-2.svg' %}" alt="img"></span>
-							<h6>Wide Range Of Properties</h6>
-							<p>With over 1 million+ homes for sale available on the website, Listee can match you with a house you will want to call home.</p>
-						</div>
-					</div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-						<div class="choose-set">
-							<span><img src="{% static 'assets/img/icons/why-us-3.svg' %}" alt="img"></span>
-							<h6>Financing Made Easy</h6>
-							<p>With over 1 million+ homes for sale available on the website, Listee can match you with a house you will want to call home.</p>
-						</div>
-					</div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-						<div class="choose-set">
-							<span><img src="{% static 'assets/img/icons/why-us-4.svg' %}" alt="img"></span>
-							<h6>See Neighborhoods</h6>
-							<p>With over 1 million+ homes for sale available on the website, Listee can match you with a house you will want to call home.</p>
-						</div>
-					</div>
-                  </div>
-            </div>
-        </section>
         <!-- /Why Choose Us -->
 
         <!-- Listed Properties Management Companies -->
