@@ -343,8 +343,8 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="home-six-heading-section aos" data-aos="fade-up">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
-								<h2>Trending Search</h2>
+							<div style="margin-top:10px;" class=" home-six-title d-flex justify-content-center align-items-center">
+								<h2 >Trending Search</h2>
 								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
 							</div>
 							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
@@ -405,7 +405,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="home-six-heading-section aos" data-aos="fade-up">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
+							<div style="margin-top:20px;"class="home-six-title d-flex justify-content-center align-items-center">
 								<h2>Choose a Class</h2>
 								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
 							</div>
@@ -586,7 +586,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="home-six-heading-section">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
+							<div style="margin-top:20px;"class="home-six-title d-flex justify-content-center align-items-center">
 								<h2>Browse By Make</h2>
 								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
 							</div>
@@ -650,204 +650,106 @@
 		<!-- /Browse By Brand -->
 
 		<!-- Top Featured Cars -->
-		<section class="top-featured-car ">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="home-six-heading-section aos" data-aos="fade-up">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
-								<h2>Top Featured Cars</h2>
-								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
-							</div>
-							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
-								egestas diamlorem malesu, vitae mauris.</p>
-						</div>
-					</div>
+<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		<div class="container" style='margin-top:3rem;'>		
+				<div class="section-heading">
+					<div style="position:relative" class="row align-items-center">
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="text-center">
+            <h3>Featured Listings</h3>
+            <p>The most trendy accommodations available</p>
+        </div>
+    </div>
+    <div style="position:absolute;left:80%" class="">
+        <a href="#" class="btn btn-view">Explore all listings</a>
+    </div>
+</div>
 				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in featured_products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
 
-				<div class="row aos" data-aos="fade-up">
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-					<div class="col-lg-12">
-						<div class="car-class-carousel">
-							<div class="car-featured-slider owl-carousel owl-theme">
-								<div class="featured-car-item">
-									<div class="featured-car-item-list">
-										<a class="featurecar-img" href="categories.html">
-											<img src="{% static 'assets/img/featured/feature-car-1.jpg' %}" alt="">
-										</a>
-										<div class="featured-car-center">
-											<div class="featured-car-center-list">
-												<h5>Manufactured</h5>
-												<p>2010</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Total</h5>
-												<p>20000 KM</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Engine</h5>
-												<p>Petrol</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Car Type</h5>
-												<p>Automatic</p>
-											</div>
-										</div>
-										<div class="featured-car-bottom">
-											<h6>Coupe</h6>
-											<a href="categories.html"><h3>AG MC Ford Raptor</h3></a>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, aliquid ex commodi minima veniam</p>
-										</div>
-										<div class="featured-car-foot">
-											<a href="profile.html">
-												<div class="featured-car-foot-right">
-													<div class="property-profile feature-owner">
-														<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" class="img-fluid"  alt="">
-													</div>
-													<p>Dealer : <span>Mic Harzdeni</span></p>
-												</div>
-											</a>
-											<div class="featured-car-foot-left">
-												<span>$25000</span>
-											</div>
-										</div>
 									</div>
-								</div>
-								<div class="featured-car-item">
-									<div class="featured-car-item-list">
-										<a class="featurecar-img" href="categories.html">
-											<img src="{% static 'assets/img/featured/feature-car-2.jpg' %}" alt="">
-										</a>
-										<div class="featured-car-center">
-											<div class="featured-car-center-list">
-												<h5>Manufactured</h5>
-												<p>2000</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Total</h5>
-												<p>2040 KM</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Engine</h5>
-												<p>Desiel</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Car Type</h5>
-												<p>Manual</p>
-											</div>
-										</div>
-										<div class="featured-car-bottom">
-											<h6>Coupe</h6>
-											<a href="categories.html"><h3>Benz G-Class</h3></a>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, aliquid ex commodi minima veniam</p>
-										</div>
-										<div class="featured-car-foot">
-											<a href="profile.html">
-												<div class="featured-car-foot-right">
-													<div class="property-profile feature-owner">
-														<img src="{% static 'assets/img/profiles/avatar-04.jpg' %}" class="img-fluid"  alt="">
-													</div>
-													<p>Dealer : <span>Rebecca</span></p>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
 												</div>
-											</a>
-											<div class="featured-car-foot-left">
-												<span>$43000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="featured-car-item">
-									<div class="featured-car-item-list">
-										<a class="featurecar-img" href="categories.html">
-											<img src="{% static 'assets/img/featured/feature-car-3.jpg' %}" alt="">
-										</a>
-										<div class="featured-car-center">
-											<div class="featured-car-center-list">
-												<h5>Manufactured</h5>
-												<p>2020</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Total</h5>
-												<p>5000 KM</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Engine</h5>
-												<p>Hybrid</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Car Type</h5>
-												<p>Automatic</p>
-											</div>
-										</div>
-										<div class="featured-car-bottom">
-											<h6>Coupe</h6>
-											<a href="categories.html"><h3>Toyota Camry</h3></a>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, aliquid ex commodi minima veniam</p>
-										</div>
-										<div class="featured-car-foot">
-											<a href="profile.html">
-												<div class="featured-car-foot-right">
-													<div class="property-profile feature-owner">
-														<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" class="img-fluid"  alt="">
-													</div>
-													<p>Dealer : <span>Fernanderz</span></p>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
 												</div>
-											</a>
-											<div class="featured-car-foot-left">
-												<span>$81000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="featured-car-item">
-									<div class="featured-car-item-list">
-										<a class="featurecar-img" href="categories.html">
-											<img src="{% static 'assets/img/featured/feature-car-4.png' %}" alt="">
-										</a>
-										<div class="featured-car-center">
-											<div class="featured-car-center-list">
-												<h5>Manufactured</h5>
-												<p>2000</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Total</h5>
-												<p>2040 KM</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Engine</h5>
-												<p>Desiel</p>
-											</div>
-											<div class="featured-car-center-list">
-												<h5>Car Type</h5>
-												<p>Manual</p>
-											</div>
-										</div>
-										<div class="featured-car-bottom">
-											<h6>Coupe</h6>
-											<a href="categories.html"><h3>Benz G-Class</h3></a>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, aliquid ex commodi minima veniam</p>
-										</div>
-										<div class="featured-car-foot">
-											<a href="profile.html">
-												<div class="featured-car-foot-right">
-													<div class="property-profile feature-owner">
-														<img src="{% static 'assets/img/profiles/avatar-08.jpg' %}" class="img-fluid"  alt="">
-													</div>
-													<p>Dealer : <span>Rebecca</span></p>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
 												</div>
-											</a>
-											<div class="featured-car-foot-left">
-												<span>$43000</span>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
 											</div>
-										</div>
-									</div>
-								</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+</section
 		<!-- /Top Featured Cars -->
 
 		<!-- Car Rental Slider -->
@@ -882,6 +784,105 @@
 			</div>
 		</section>
 		<!-- /Car Rental Slider -->
+		<!-- categories section -->
+
+		<section class="explore-categories ">
+            <div class="container">
+                <div style="margin-top:50px" class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
+                            <h2>Explore Our Categories</h2>
+                            <p>The most trendy accommodations available</p>
+                        </div>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Catgeorries</a>
+                        </div>		
+                    </div>	
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="car-class-carousel">
+                            <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                            </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Villas</h5>
+                                            <span>50 Listings</span> 
+                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Condos</h5>
+                                            <span>45 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</section>
+
 
 		<!-- Service Section -->
 		<section class="car-service-section">
@@ -948,225 +949,7 @@
 		</section>
 		<!-- /Service Section -->
 
-		<!-- Our Team -->
-		<section class="our-team-car ">
-			<div class="container">
-				<div class="row aos" data-aos="fade-up" >
-					<div class="col-lg-12">
-						<div class="home-six-heading-section">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
-								<h2>Our Team</h2>
-								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
-							</div>
-							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
-								egestas diamlorem malesu, vitae mauris.</p>
-						</div>
-					</div>
-				</div>
-				<div class="car-class-carousel aos" data-aos="fade-up" data-aos-delay="200">
-					<div class="our-team-car-slider owl-carousel owl-theme">
-						<div class="our-team-block">
-							<div class="our-team-img">
-								<a href="profile.html"><img src="{% static 'assets/img/business/team-1.jpg' %}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="our-team-bottom">
-								<a href="profile.html"><h4>Joana Dewel</h4></a>
-								<p>Car Dealer</p>
-							</div>
-						</div>
-						<div class="our-team-block">
-							<div class="our-team-img">
-								<a href="profile.html"><img src="{% static 'assets/img/business/team-2.jpg' %}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="our-team-bottom">
-								<a href="profile.html"><h4>Mark Antonio</h4></a>
-								<p>Car Dealer</p>
-							</div>
-						</div>
-						<div class="our-team-block">
-							<div class="our-team-img">
-								<a href="profile.html"><img src="{% static 'assets/img/business/team-3.jpg' %}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="our-team-bottom">
-								<a href="profile.html"><h4>Alexander Rebel</h4></a>
-								<p>Car Dealer</p>
-							</div>
-						</div>
-						<div class="our-team-block">
-							<div class="our-team-img">
-								<a href="profile.html"><img src="{% static 'assets/img/business/team-4.jpg' %}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="our-team-bottom">
-								<a href="profile.html"><h4>Richerd Dewel</h4></a>
-								<p>Car Dealer</p>
-							</div>
-						</div>
-						<div class="our-team-block">
-							<div class="our-team-img">
-								<a href="profile.html"><img src="{% static 'assets/img/business/team-5.jpg' %}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="our-team-bottom">
-								<a href="profile.html"><h4>John Dew</h4></a>
-								<p>Car Dealer</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- /Our Team -->
 
-		<!-- Search By Location -->
-		<section class="car-location">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="home-six-heading-section aos" data-aos="fade-up">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
-								<h2>Search by Locations</h2>
-								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
-							</div>
-							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
-								egestas diamlorem malesu, vitae mauris.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-3">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="200">
-								<img src="{% static 'assets/img/city/car-location-1.png' %}" class="img-fluid" alt="">
-							<span>Las Vegas</span>
-						</div></a>
-					</div>
-					<div class="col-lg-5">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="400">
-								<img src="{% static 'assets/img/city/car-location-2.png' %}" class="img-fluid" alt="">
-							<span>Singapore</span>
-						</div></a>
-					</div>
-					<div class="col-lg-4">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="600">
-								<img src="{% static 'assets/img/city/car-location-3.png' %}" class="img-fluid" alt="">
-							<span>Denmark</span>
-						</div></a>
-					</div>
-					<div class="col-lg-4">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="800">
-								<img src="{% static 'assets/img/city/car-location-4.png' %}" class="img-fluid" alt="">
-							<span>France</span>
-						</div></a>
-					</div>
-					<div class="col-lg-5">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="1000">
-								<img src="{% static 'assets/img/city/car-location-5.png' %}" class="img-fluid" alt="">
-							<span>Indonesia</span>
-						</div></a>
-					</div>
-					<div class="col-lg-3">
-						<a href="service-details.html"><div class="car-location-img aos" data-aos="fade-up" data-aos-delay="1200">
-								<img src="{% static 'assets/img/city/car-location-6.png' %}" class="img-fluid" alt="">
-							<span>New York</span>
-						</div></a>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- /Search By Location -->
-
-		<!-- Clients Testimonials -->
-		<section class="car-clients ">
-			<div class="container">
-				<div class="row aos" data-aos="fade-up">
-					<div class="col-lg-12">
-						<div class="home-six-heading-section">
-							<div class="home-six-title d-flex justify-content-center align-items-center">
-								<h2>Clients Testimonials</h2>
-								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
-							</div>
-							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
-								egestas diamlorem malesu, vitae mauris.</p>
-						</div>
-					</div>
-				</div>
-				<div class="car-class-carousel aos" data-aos="fade-up" data-aos-delay="200">
-					<div class="client-testimonial-slider owl-carousel owl-theme">
-						<div class="car-client-item">
-							<div class="car-client-review">
-								<img src="{% static 'assets/img/Polygon.svg' %}" alt="">
-								<h3>Daniela Fransis</h3>
-								<h5>Customer</h5>
-								<p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua reader will be distracted by the readable content</p>
-								<div class="car-client-rating">
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-								</div>
-							</div>
-							<div class="car-client-user">
-								<img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="">
-							</div>
-						</div>
-						<div class="car-client-item">
-							<div class="car-client-review">
-								<img src="{% static 'assets/img/Polygon.svg' %}" alt="">
-								<h3>Alexander Rebel</h3>
-								<h5>Customer</h5>
-								<p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua reader will be distracted by the readable content</p>
-								<div class="car-client-rating">
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-								</div>
-							</div>
-							<div class="car-client-user">
-								<img src="{% static 'assets/img/profiles/avatar-13.jpg' %}" alt="">
-							</div>
-						</div>
-						<div class="car-client-item">
-							<div class="car-client-review">
-								<img src="{% static 'assets/img/Polygon.svg' %}" alt="">
-								<h3>Mark Antonio</h3>
-								<h5>Customer</h5>
-								<p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua reader will be distracted by the readable content</p>
-								<div class="car-client-rating">
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-								</div>
-							</div>
-							<div class="car-client-user">
-								<img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="">
-							</div>
-						</div>
-						<div class="car-client-item">
-							<div class="car-client-review">
-								<img src="{% static 'assets/img/Polygon.svg' %}" alt="">
-								<h3>Daniela Fransis</h3>
-								<h5>Customer</h5>
-								<p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua reader will be distracted by the readable content</p>
-								<div class="car-client-rating">
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-									<i class="fa-solid fa-star"></i>
-								</div>
-							</div>
-							<div class="car-client-user">
-								<img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- /Clients Testimonials -->
 
 		<!-- Blog  Section -->
 		<section class="blog-section">
@@ -1187,7 +970,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
 						    <div class="blog grid-blog">
 						     	<div class="blog-image">
-									<a href="blog-details.html"><img class="img-fluid" src="{% static 'img/blog/blog-six-1.png' %}' %}" alt="Post Image"></a>
+									<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-1.png' %}" alt="Post Image"></a>
 								</div>
 								<div class="blog-content">
 									<p class="blog-category">
@@ -1197,7 +980,7 @@
 										<li>
 											<div class="post-author">
 												<div class="post-author-img">
-													<img src="{% static 'img/profiles/avatar-14.jpg' %}' %}" alt="Post Author">
+													<img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="Post Author">
 												</div>
 												<a href="javascript:void(0);" class="mb-0"> <span> Amara </span></a>
 											</div>
@@ -1213,7 +996,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
 					        <div class="blog grid-blog">
 								<div class="blog-image">
-									<a href="blog-details.html"><img class="img-fluid" src="{% static 'img/blog/blog-six-2.png' %}' %}" alt="Post Image"></a>
+									<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-2.png' %}" alt="Post Image"></a>
 								</div>
 								<div class="blog-content">
 									<p class="blog-category">
@@ -1223,7 +1006,7 @@
 										<li>
 											<div class="post-author">
 												<div class="post-author-img">
-													<img src="{% static 'img/profiles/avatar-12.jpg' %}' %}" alt="Post Author">
+													<img src="{% static 'assets/img/profiles/avatar-12.jpg'  %}" alt="Post Author">
 												</div>
 												<a href="javascript:void(0);" class="mb-0"><span> Darryl </span></a>
 											</div>
@@ -1239,7 +1022,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
 					     <div class="blog grid-blog">
 							<div class="blog-image">
-								<a href="blog-details.html"><img class="img-fluid" src="{% static 'img/blog/blog-six-3.png' %}' %}" alt="Post Image"></a>
+								<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-3.png' %}" alt="Post Image"></a>
 							</div>
 					    	<div class="blog-content">
 								<p class="blog-category">
@@ -1249,7 +1032,7 @@
 									<li>
 										<div class="post-author">
 											<div class="post-author-img">
-												<img src="{% static 'img/profiles/avatar-13.jpg' %}' %}" alt="Post Author">
+												<img src="{% static 'assets/img/profiles/avatar-13.jpg'  %}" alt="Post Author">
 											</div>
 											<a href="javascript:void(0);" class="mb-0"> <span> Mary </span></a>
 										</div>
@@ -1281,8 +1064,8 @@
 				<div class="row align-items-center aos" data-aos="fade-up">
 					<div class="col-lg-6 col-md-12">
 						<div class="joinus-dealer-content">
-							<h3 class="aos" data-aos="fade-up" data-aos-delay="200">Become a Dealer with Listee?</h3>
-							<p class="aos" data-aos="fade-up" data-aos-delay="300">Sell your car Free with Listee and earn commision up to 70%.</p>
+							<h3 class="aos" style="margin-top:25px;margin-bottom:0" data-aos="fade-up" data-aos-delay="200">Become a Dealer with Listee?</h3>
+							<p class="aos" style="margin-top:0;padding-bottom:25px" data-aos="fade-up" data-aos-delay="300">Sell your car Free with Listee and earn commision up to 70%.</p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-12">
