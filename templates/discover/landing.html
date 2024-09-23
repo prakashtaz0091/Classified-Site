@@ -164,7 +164,7 @@
 		
 		<!-- Cities Section -->
 		<section class="feature-section">
-		    <div class="container">
+		    <div style="" class="continer">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="section-heading heading-five aos" data-aos="fade-up">
@@ -178,21 +178,52 @@
     margin-bottom: 20px; /* Adds space between elements */
     border-radius: 8px; /* Optional: rounded corners */
     background-color: #fff; /* Optional: white background */
-    padding: 15px; /* Optional: padding inside the box */
 }
 </style>
-				<div class="row">
-					<div class="featured-business-listings col-md-3">
-						<div>
+<div style="justify-content:center;" class="row">
+	{% for i in "123" %}
+	<div style="margin-left:2rem" class="featured-business-listings  col-xl-3 border p-3">
+    <div class="text-center">
+        <img src="{% static 'assets/img/tesla.png' %}" class="img-fluid" alt="Tesla Properties Logo" />
+    </div>
+    <div class="mt-4 mb-3">
+        <h5>TESLA PROPERTIES</h5>
+		<div class="d-flex">
+        <i style="margin-top:5px" class="feather-map-pin"></i>
+        <p class="" style="font-size: 12px;margin-left:4px">
+            Sheikha Noora tower . Seasons . Barsha  . Dubai . United Arab Emirates
+        </p>
+		</div>
+    </div>
+    <span class="text-muted">Listed 4 months ago</span>
+    <div style="margin-left:1rem;" class="mt-4">
+        <h5>Contact Info</h5>
+        <div>
+			<i style="font-size:30px" class="fa-solid fa-square-phone"></i>
+            <span style="margin-left:1rem;">+971 45853725</span>
+        </div>
+        <div style='margin-top:10px' class="d-flex">
+			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
+            <p class="mb-0" style="word-break: break-all;margin-left:1rem">
+				
+                teslapropertiesseowork@gmail.com
+            </p>
+        </div>
+        <div style="margin-top:10px">
+			<i style="font-size:30px" class="fa-solid fa-link"></i>
+            <span style="margin-left:0.8rem;word-break: break-all;">
+                https://teslaproperties.ae/
+            </span>
+        </div>
+	    </div>
+	<div style="margin:0;display:flex;margin-top:2rem;margin-bottom:2rem;" class="flex-wrap">
+				<button style="margin-right:0.5rem;background-color:#a22b27;color:white;border-radius:5px;margin-bottom:1rem;padding:0.5rem 1rem 0.5rem 1rem;">SEND ENQUIRY</button>
+				<button style="background-color:transparent;color:#a3a19a;border:1px solid gray;font-weight:600;border-radius:5px;margin-bottom:1rem;padding:0.5rem 1rem 0.5rem 1rem;">Get Direction</button>
 
-						</div>
-					</div>	
-					<div class="col-md-3">
-					</div>	
-					<div class="col-md-3">
-					</div>	
-					<div class="col-md-3">
-					</div>							
+		</div>
+</div>
+{% endfor %}
+
 				</div>			   
 			</div>		
 		</section>		
