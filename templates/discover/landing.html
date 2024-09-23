@@ -269,7 +269,12 @@
 						</div>	
 					</div>
 				</div>
-				<div>
+				<div style="padding:1rem" class='d-flex flex-wrap'>
+					{% for i in '12345678910100010100' %}
+					<div style="margin-bottom:1rem;margin-left:.8rem;background-color:white;border-radius:50px;padding:10px;">
+						Power Tools {{i}}
+					</div>
+					{% endfor %}
 				</div>
 			</div>		
 		</section>		
