@@ -801,6 +801,108 @@
                 </div>
             </div>
         </section>
+
+		<!-- latest sections -->
+<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		{% for latest_product  in latest_products|slice:":4" %}	
+		<div class="container" style='margin-top:3rem;'>		
+				<div class="section-heading">
+						<div class="row align-items-center">
+							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+									<h3>Latest {{latest_product.category.category_name|slice:":30"}}</h3>
+									<p>checkout these latest cool ads from our members .</p>
+							</div>
+							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
+							</div>		
+						</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in latest_product.products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+		{% endfor %}
+		</section>
         <!-- /Listed Properties Management Companies -->
 
         <!-- Perfect Holiday Cabin Section -->
@@ -907,6 +1009,63 @@
             </div>
         </section>
         <!-- /Make It Easy -->
+		<!--Categories section -->
+		<div style="margin-top:3rem;margin-bottom:4rem;justify-content:space-around" class="d-flex container">
+			<div>
+				<h5>Apartments For Rent</h5>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+			</div>
+			<div>
+				<h4>Villas for rent</h4>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+			</div>
+			<div>
+				<h5>Commercial buildings for rent</h5>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+			</div>
+			<div>
+				<h4>Rooms for rent</h4>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+			</div>
+
+		</div>
+		<!-- end category section -->
 
         <!-- Location -->
         <!-- /Location -->
@@ -916,6 +1075,7 @@
 
         <!-- Our Testimonials -->
         <!-- /Our Testimonials -->
+
 
         <!-- Join Us -->
         <section class="buy-property aos" data-aos="fade-up">
@@ -928,6 +1088,31 @@
             </div>
         </section>
         <!-- /Join Us -->
+		<!-- properties section -->
+		<section  style="margin-top:7rem;margin-bottom:6rem;" class="container">
+			<h3>Properties for Sale in Pakistan</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<br />
+		<h3>Properties for Rent in Pakistan</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<br />
+		<h3>Sell your Properties now!</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+
+
+		</section>
 
         <!-- Recent Articles -->
         <section class="property-articles ">
@@ -1014,6 +1199,7 @@
                 </div>
             </div>
         </section>
+
         <!-- /Recent Articles -->
 
         <!-- Become Agent -->
