@@ -357,7 +357,9 @@
 										incididunt ut et dolore magna aliqua.</p>
 								</div>
 							</div>
-							<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:30px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:30px" class="btn">Learn more</button>
+							<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:30px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:30px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+								Learn more</button>
 						</div>
 					</div>
 
@@ -857,6 +859,41 @@
 			</div>
 			</section>
 			<!-- start create section -->
+			<!-- Featured jobs section -->
+
+			<section class="container">
+			<div>
+				<div>
+					<h3>Featured Job Seekers</h3>
+					<p>Checkout these latest cool ads from our members</p>
+				</div>
+				<div style="display:flex;margin-top:3rem;justify-content:space-around;" class="flex-wrap">
+					{% for i in '1234' %}
+					<div class="featured" style="border-radius:30px;padding:2rem; background-color:white">
+						<img style="border-radius:50%" src="{% static 'assets/img/profile-img.jpg' %}" />
+						<p style="color:#ce211b;margin-top:1rem;font-size:1.4rem;margin-bottom:0;">
+							Emma Connor</p>
+						<p style="margin-top:20px;margin-bottom:0;">
+							Graphic Designer
+						</p>
+
+						<p style="margin-top:20px;margin-bottom:20px;">
+        <i style="margin-top:5px" class="feather-map-pin"></i>
+							New York City
+						</p>
+						<p>
+
+			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
+							info@themevessel.com
+						</p>
+							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:50px;font-size:1.2rem;margin-top:2rem;padding-right:50px" class="btn">ShortList</button>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+			</section>
+			<!-- Featured jobs section -->
 
 		<!-- classified ads section -->
 	
