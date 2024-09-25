@@ -12926,7 +12926,7 @@ section.home-six-trending-search {
 .cta-section.job-section-eight .job-role.job-one {
   position: absolute;
   left: -89px;
-  top: 84px;
+  top: 0px;
 }
 @media (max-width: 991.98px) {
   .cta-section.job-section-eight .job-role.job-one {

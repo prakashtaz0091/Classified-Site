@@ -637,7 +637,7 @@
 			&.job-one {
 				position: $__absolute;
 				left: -89px;
-				top: 84px;
+				top: 0px;
 				@include respond-below(custom991) {
 					position: relative;
 					left: 0;

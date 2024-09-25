@@ -3,7 +3,14 @@
 {% block content %}
 
 	<div class="main-wrapper">
-
+<style>
+.featured{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Adds space between elements */
+    border-radius: 8px; /* Optional: rounded corners */
+    background-color: #fff; /* Optional: white background */
+}
+</style>
 		<!-- Header -->
 		<header class="header header-eight">
 			{% include 'includes/header.html' %}
@@ -241,7 +248,33 @@
 
 		<!-- /Vaciencies Section -->
 
+<section style="margin-top:3rem" class="container ">
+			<div style="display:flex;background-color:white;align-items:ceter;justify-content:space-between" class="featured">
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-01.svg' %}" />
+				</div>
+				<div style="margin-top:10px;margin-left:10px;">
+					<p style="margin-bottom:0">Are you</p>
+					<p style="margin-top:0;font-weight:700;font-size:1.5rem;">EMPLOYEE ?</p>
+				</div>
+				<div style="width:30%;margin-top:20px;margin-left:20px;">
+					<p >Looking for applicants to fill your job openings fast? We can help.</p>
+				</div>
+				<div>
+
+				<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:10px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:10px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+					Register For Free
+				</button>
+				</div>
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-02-01.svg' %}" />
+			</div>
+			</div>
+</section>
 		<!-- Job Section -->
+
+
 		
 
 		<section class="cta-section job-section-eight">
@@ -249,7 +282,7 @@
 				<div class="row align-items-center">
 					<div class="col-lg-6 position-relative aos" data-aos="fade-up">
 						<div class="job-img">
-							<img src="{% static 'assets/img/job-img.png' %}" class="img-fluid" alt="CTA">
+							<img src="{% static 'assets/img/jobs/job searching-02.svg' %}" class="img-fluid" alt="CTA">
 						</div>
 						<div class="job-role job-one">
 							<div class="job-role-img">
@@ -734,13 +767,38 @@
 		<!-- Testimonial  Section -->
 		
 
+
+		<section style="margin-top:3rem" class="container ">
+			<div style="display:flex;background-color:white;align-items:ceter;justify-content:space-between" class="featured">
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-01.svg' %}" />
+				</div>
+				<div style="margin-top:10px;margin-left:10px;">
+					<p style="margin-bottom:0">Are you</p>
+					<p style="margin-top:0;font-weight:700;font-size:1.5rem;">EMPLOYEE ?</p>
+				</div>
+				<div style="width:30%;margin-top:20px;margin-left:20px;">
+					<p >Looking for applicants to fill your job openings fast? We can help.</p>
+				</div>
+				<div>
+
+				<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:10px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:10px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+					Register For Free
+				</button>
+				</div>
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-02-01.svg' %}" />
+			</div>
+			</div>
+		</section>
 		<!-- are u employeee section -->
 		<section class="cta-section job-section-eight">
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-lg-6 position-relative aos" data-aos="fade-up">
 						<div class="job-img">
-							<img src="{% static 'assets/img/job-img.png' %}" class="img-fluid" alt="CTA">
+							<img src="{% static 'assets/img/jobs/job searching-01.svg' %}" class="img-fluid" alt="CTA">
 						</div>
 						<div class="job-role job-one">
 							<div class="job-role-img">
