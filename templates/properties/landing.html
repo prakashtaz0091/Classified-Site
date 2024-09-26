@@ -1,0 +1,1232 @@
+{% extends 'properties/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Real Estate Landing Page</title>
+{% endblock %}
+
+{% block content %}
+<body>
+
+    <div class="main-wrapper home-nine">
+        <!-- Header -->
+        {% include 'properties/includes/header.html' %}
+        <!-- /Header -->
+
+        <!-- Banner -->
+        <section class="banner-section banner-nine">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="banner-contents">
+                            <h1 class="aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Find Your Dream Home</h1>
+                            <h6 class="mb-0 aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Only real estate platform with 10,000+ highly rated sellers</h6>
+                            <p class="aos" data-aos="fade-up" data-aos-delay="200">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                            <div style="padding-top:5px"class="banner-nine-btn-group">
+                                <a href="categories.html" class="aos" data-aos="fade-up" data-aos-delay="300">
+                                    <span>Add Listing</span>
+                                </a>
+                                <a href="categories.html" class="aos" data-aos="fade-up" data-aos-delay="300">
+                                    <span>Search Property</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Banner -->
+
+        <!-- Search Filter Section -->
+		<section class="car-search-filter realestate-search-filter  aos" data-aos="fade-up" data-aos-delay="400">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="car-filter-section">
+							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+								<li class="nav-item" role="presentation">
+								  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Buy Property</button>
+								</li>
+								<li class="nav-item" role="presentation">
+								  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Sell Property</button>
+								</li>
+							  </ul>
+							  <div class="tab-content" id="pills-tabContent">
+								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" >
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-10 datepicker-col search-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+															<div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<span><i class="feather-map-pin"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Search location of Property">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+                                                                        <span><i class="feather-calendar"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="Check-in">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<span><i class="feather-calendar"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="Check- out">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="d-flex real-estate-search real-select">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<span><i class="feather-users"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+                                                                    <select class="form-control select category-select">													
+                                                                        <option>Guest</option>
+                                                                        <option>User</option>
+                                                                        <option>Admin</option>
+                                                                        <option>Seller</option>
+                                                                        <option>Buyer</option>
+                                                                    </select>
+																</div>
+															</div>
+                                                        </div>
+                                                    </div>
+												</div>
+												<div class="col-12 col-lg-2 real-search-bar">
+													<button class="btn car-search-icon" type="submit">Search Properties</button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+								<div class="tab-pane fade show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" >
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-10 datepicker-col search-group">
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-3">
+															<div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<span><i class="feather-map-pin"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Search location of Property">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-3">
+                                                            <div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+                                                                        <span><i class="feather-calendar"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="Check-in">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-3">
+                                                            <div class="d-flex real-estate-search">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<span><i class="feather-calendar"></i></span>
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="Check- out">
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-3">
+                                                            <div class="d-flex real-estate-search real-select">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<img src="./assets/img/icons/users.svg" alt="">
+																	</div>
+																</div>
+																<div class="flex-grow-1 estate-input">
+                                                                    <select class="form-control select category-select">													
+                                                                        <option>Guest</option>
+                                                                        <option>User</option>
+                                                                        <option>Admin</option>
+                                                                        <option>Seller</option>
+                                                                        <option>Buyer</option>
+                                                                    </select>
+																</div>
+															</div>
+                                                        </div>
+                                                    </div>
+												</div>
+												<div class="col-12 col-lg-2 real-search-bar">
+													<button class="btn car-search-icon" type="submit">Search Properties</button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+							  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Search Filter Section -->
+
+        <!-- Featured Listings -->
+<section class="latestad-section grid-view featured-slider" style='padding-top:0px;padding-bottom:0px;'>
+		<div class="container" style='margin-top:2rem;'>		
+				<div class="section-heading">
+					<div style="position:relative" class="row align-items-center">
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="text-center">
+            <h3>Featured Listings</h3>
+            <p>The most trendy accommodations available</p>
+        </div>
+    </div>
+    <div style="position:absolute;left:80%" class="">
+        <a href="#" class="btn btn-view">Explore all listings</a>
+    </div>
+</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in featured_products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+</section>
+
+<!-- Explore our categories -->
+<section class="explore-categories ">
+            <div class="container">
+                <div style="margin-top:50px" class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
+                            <h2>Explore Our Categories</h2>
+                            <p>The most trendy accommodations available</p>
+                        </div>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Catgeorries</a>
+                        </div>		
+                    </div>	
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="car-class-carousel">
+                            <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                            </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Villas</h5>
+                                            <span>50 Listings</span> 
+                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Condos</h5>
+                                            <span>45 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+        <!-- /Featured Listings -->
+
+        <!-- Why Choose Us -->
+        <!-- /Why Choose Us -->
+
+        <!-- Listed Properties Management Companies -->
+        <section style="margin-top:50px;" class="section properties-managments ">
+            <div class="container">
+                <div class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
+                            <h2>Listed Properties Management Companies</h2>
+                            <p>The most trendy accommodations available</p>
+                        </div>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Companies</a>
+                        </div>		
+                    </div>	
+                  </div>
+                  <div class="row aos" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-12">
+                        <div class="car-class-carousel">
+                            <div class="property-listing-slider owl-carousel owl-theme">
+                                <div class="property-item">
+                                    <a href="categories.html"><div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>121</span>Properties</h5>
+                                                <h6>Elite Poperty</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>45</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>45</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>45</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>188</span>Properties</h5>
+                                                <h6>Private Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>66</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>87</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>22</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                <div class="property-item">
+                                    <a href="categories.html"><div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>671</span>Properties</h5>
+                                                <h6>Tangible Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>05</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>99</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>76</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>165</span>Properties</h5>
+                                                <h6>Personal Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>77</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>22</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>06</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                <div class="property-item">
+                                   <a href="#categories.html"> <div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>991</span>Properties</h5>
+                                                <h6>Public Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>87</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>32</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>64</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>101</span>Properties</h5>
+                                                <h6>Personal Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>45</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>98</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>32</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                <div class="property-item">
+                                    <a href="categories.html"><div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>876</span>Properties</h5>
+                                                <h6>Tangible Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>09</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>77</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>44</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>921</span>Properties</h5>
+                                                <h6>Public Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>90</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>76</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>51</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                <div class="property-item">
+                                    <a href="categories.html"><div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>331</span>Properties</h5>
+                                                <h6>Elite Poperty</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>49</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>88</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>41</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>555</span>Properties</h5>
+                                                <h6>Public Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>09</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>99</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>66</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                <div class="property-item">
+                                    <a href="categories.html"><div class="companies-set mb-4">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>765</span>Properties</h5>
+                                                <h6>Personal Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>79</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>44</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>45</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                    <a href="categories.html"><div class="companies-set">
+                                        <div class="companies-set-head">
+                                            <div class="companies-set-logo">
+												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+                                            </div>
+                                            <div class="companies-set-content">
+                                                <h5><span>191</span>Properties</h5>
+                                                <h6>Tangible Property</h6>
+                                            </div>
+                                        </div>
+                                        <div class="companies-set-count">
+                                            <ul>
+                                                <li>
+                                                    <h6>90</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>75</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                                <li>
+                                                    <h6>12</h6>
+                                                    <span>Listing</span>
+                                                </li>
+                                            </ul>
+                                            <div class="companies-set-btn">
+                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+		<!-- latest sections -->
+<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		{% for latest_product  in latest_products|slice:":4" %}	
+		<div class="container" style='margin-top:3rem;'>		
+				<div class="section-heading">
+						<div class="row align-items-center">
+							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+									<h3>Latest {{latest_product.category.category_name|slice:":30"}}</h3>
+									<p>checkout these latest cool ads from our members .</p>
+							</div>
+							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
+							</div>		
+						</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in latest_product.products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+		{% endfor %}
+		</section>
+        <!-- /Listed Properties Management Companies -->
+
+        <!-- Perfect Holiday Cabin Section -->
+        <!-- /Perfect Holiday Cabin Section -->
+
+        <!-- Explore Our Categories -->
+        <!-- /Explore Our Categories -->
+
+        <!-- Counter -->
+        <!-- /Counter -->
+
+        <!-- Recent Properties for Rent -->
+        <!-- /Recent Properties for Rent -->
+
+        <!-- Premium and essential services -->
+        <section class="premium-and-essential-services">
+            <div class="preminum-float-bg">
+                <img src="./assets/img/bg/premium-bg.png" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="premium-header text-center aos" data-aos="fade-up">
+                            <h2>Premium and essential services in Listee, contributing to enhancing residents' life experience</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="200">
+						<div class="listee-premium">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-1.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Add your listing</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="400">
+						<div class="listee-premium">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-2.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Easy Finance</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="600">
+						<div class="listee-premium">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-3.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Publish your listing</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="200">
+						<div class="listee-premium bottom-list-premium ">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-4.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Register for free</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="400">
+						<div class="listee-premium bottom-list-premium ">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-5.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Get reservations</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                    <div class="col-lg-4 col-sm-6 aos" data-aos="fade-up" data-aos-delay="600">
+						<div class="listee-premium bottom-list-premium ">
+							<div class="listee-premium-img">
+								<span><img src="{% static 'assets/img/icons/service-6.svg' %}" alt="img"></span>
+							</div>
+							<div class="listee-premium-content">
+								<h6>Upload beautiful images</h6>
+								<p>Lorem Ipsum is simply dummy text printing and type setting industry</p>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </section>
+        <!-- /Premium and essential services -->
+
+        <!-- Make It Easy -->
+        <section class="make-it-easy ">
+            <div class="container">
+                <h2 class="mb-0">We make it easy to find your perfect fit with over a million available rentals.</h2>
+                <p>Circumstances certain circumstances and owing.</p>
+                <a href="categories.html">Search Properties</a>
+            </div>
+        </section>
+        <!-- /Make It Easy -->
+		<!--Categories section -->
+		<div style="margin-top:3rem;margin-bottom:4rem;justify-content:space-around" class="d-flex container">
+			<div>
+				<h5>Apartments For Rent</h5>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+				<p style="margin:0">Apartments for rent in Dubai </span>
+			</div>
+			<div>
+				<h4>Villas for rent</h4>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+				<p style="margin:0"> Villas for rent in Dubai </span>
+			</div>
+			<div>
+				<h5>Commercial buildings for rent</h5>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+				<p style="margin:0">Buildings for rent in Dubai </span>
+			</div>
+			<div>
+				<h4>Rooms for rent</h4>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+				<p style="margin:0">Rooms for rent in Dubai Marina</span>
+			</div>
+
+		</div>
+		<!-- end category section -->
+
+        <!-- Location -->
+        <!-- /Location -->
+
+        <!-- Verified Owners -->
+        <!-- /Verified Owners -->
+
+        <!-- Our Testimonials -->
+        <!-- /Our Testimonials -->
+
+
+        <!-- Join Us -->
+        <section class="buy-property aos" data-aos="fade-up">
+            <div class="container">
+                <div class="buy-property-content">
+                    <h2 class="aos" data-aos="fade-up" data-aos-delay="200">Join the millions getting more from their home.</h2>
+                    <p class="aos" data-aos="fade-up" data-aos-delay="400">With Listee, you can track properties you’re interested in and use our price estimates to help you decide when to move. And get expert tips on making the most of your space.</p>
+                    <a  href="my-listing.html">List Your Space</a>
+                </div>
+            </div>
+        </section>
+        <!-- /Join Us -->
+		<!-- properties section -->
+		<section  style="margin-top:7rem;margin-bottom:6rem;" class="container">
+			<h3>Properties for Sale in Pakistan</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<br />
+		<h3>Properties for Rent in Pakistan</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+			<br />
+		<h3>Sell your Properties now!</h3>
+			<p>The government of Pakistan has introduced reforms to faciliate the country's property sphere, and has allowed it to evolve in such a way that the prevailing houseing shortage is timely met. The real estate industry of pakistan is
+				on a fast paced development path, further enabling the construction sector to flourisn as well. The properties available for sale in Pakistan are very well equipped. You can easily find affordable housing units, for people halling from  all walks of life.
+			</p>
+
+
+		</section>
+
+        <!-- Recent Articles -->
+        <section class="property-articles ">
+            <div class="container">
+                <div class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-md-9 aos aos-init aos-animate" data-aos="fade-up">
+                            <h2>Recent Articles</h2>
+                            <p>The most trendy accommodations available</p>
+                        </div>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Properties</a>
+                        </div>		
+                    </div>	
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 aos" data-aos="fade-up">
+                        <div class="car-class-carousel">
+                            <div class="owl-carousel blog-slider">	
+                                <div class="blog grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+										<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/property-blog-1.jpg' %}" alt="Post Image"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title"><a href="blog-details.html">Skills That You Can Learn In The Real Estate Market</a></h3>
+                                        <ul class="entry-meta meta-item">
+                                            <li class="date-icon"><i class="feather-calendar"></i> 7 Jan 2023</li>
+                                        </ul>							     	
+                                        <p class="blog-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                                        <div class="viewlink">
+                                            <a href="blog-details.html">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+										<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/property-blog-2.jpg' %}" alt="Post Image"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title"><a href="blog-details.html">5 Essential Steps for Buying an Investment</a></h3>
+                                        <ul class="entry-meta meta-item">
+                                            <li class="date-icon"><i class="feather-calendar"></i> 15 Jan 2023</li>
+                                        </ul>							     	
+                                        <p class="blog-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                                        <div class="viewlink">
+                                            <a href="blog-details.html">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+										<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/property-blog-3.jpg' %}" alt="Post Image"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title"><a href="blog-details.html">Bedroom Colors You’ll Never Regret</a></h3>
+                                        <ul class="entry-meta meta-item">
+                                            <li class="date-icon"><i class="feather-calendar"></i> 27 Feb 2023</li>
+                                        </ul>							     	
+                                        <p class="blog-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                                        <div class="viewlink">
+                                            <a href="blog-details.html">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog grid-blog blog-two aos" data-aos="fade-up">
+                                    <div class="blog-image">
+										<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/property-blog-1.jpg' %}" alt="Post Image"></a>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title"><a href="blog-details.html">Skills That You Can Learn In The Real Estate Market</a></h3>
+                                        <ul class="entry-meta meta-item">
+                                            <li class="date-icon"><i class="feather-calendar"></i> 28 Mar 2023</li>
+                                        </ul>							     	
+                                        <p class="blog-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                                        <div class="viewlink">
+                                            <a href="blog-details.html">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- /Recent Articles -->
+
+        <!-- Become Agent -->
+		<section class="join-us-dealer join-us-dealer-sec ">
+			<div class="join-us-dealer-bg home-nine-bg">
+				<img src="./assets/img/bg/agent-bg.png" alt="">
+			</div>
+			<div class="container">
+				<div class="row align-items-center aos" data-aos="fade-up">
+					<div class="col-lg-6 col-md-12">
+						<div class="joinus-dealer-content">
+							<h3 class="aos" data-aos="fade-up" data-aos-delay="200">Become a Real Estate Agent</h3>
+							<p class="aos" data-aos="fade-up" data-aos-delay="300">Premium and essential services in Listee, contributing to enhancing residents' life experience</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<div class="join-as-dealer-btn">
+							<a href="signup.html">View all Prroperties</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Become Agent -->
+
+		<!-- Footer -->
+		{% include 'properties/includes/footer.html' %}
+	</body>
+{% endblock %}
+

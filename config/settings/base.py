@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
     'mathfilters',
     'apps.accounts.apps.AccountsConfig',
@@ -55,6 +56,9 @@ INSTALLED_APPS = [
     'apps.contact.apps.ContactConfig',
     'apps.Admin.apps.AdminConfig',
     'apps.business_listing.apps.BusinessListingConfig',
+    'apps.property.apps.PropertyConfig',
+    'apps.vechiles.apps.VechilesConfig',
+    'apps.discover.apps.DiscoverConfig',
     
 
 ]
@@ -69,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')

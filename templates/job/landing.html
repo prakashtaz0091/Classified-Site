@@ -1,0 +1,1262 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+	<div style="background-color:#f9fafc" class="main-wrapper">
+<style>
+.featured{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Adds space between elements */
+    border-radius: 8px; /* Optional: rounded corners */
+    background-color: #fff; /* Optional: white background */
+}
+</style>
+		<!-- Header -->
+		<header class="header header-eight">
+			{% include 'includes/header.html' %}
+		</header>
+		<!-- /Header -->
+
+		<!-- Banner Section -->
+	
+
+		<section style="position:relative" class="banner-section banner-eight">
+			<div class="container">
+				<div class="home-banner">
+					<div class="row align-items-center">
+						<div class="col-lg-7">
+							<div class="section-search section-search-eight aos" data-aos="fade-up">
+								<h1> <span>Change Your World,</span> Set <br> Your Tech Career in Motion With
+									<span>Listee</span>
+								</h1>
+								<p class="paragraph">Finding a Job Shouldn’t Be a Full-time Job. 1,50,334 Jobs Listed Here! Your Dream Job is Waiting.</p>
+								<div class="search-box">
+									<form action="{% url 'search_job' %}" class="d-flex">
+										<div class="search-input line">
+											<div class="form-group">
+												<div class="group-img">
+													<input type="text" class="form-control" name='skills' placeholder="Type your skill or other">
+												</div>
+											</div>
+										</div>
+										<div class="search-input">
+											<div class="form-group">
+												<div class="group-img">
+													<input type="text" class="form-control" placeholder="Place you want?" name='location'>
+												</div>
+											</div>
+										</div>
+										<div class="search-btn">
+											<button class="btn btn-primary" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+										</div>
+									</form>
+								</div>
+								<div class="popular-search">
+									<span>Popular Searches: </span>
+		
+									<a href="javascript:void(0);">WordPress</a>
+									<a href="javascript:void(0);">HTML5</a>
+									<a href="javascript:void(0);">UI UX Designer</a>
+									<a href="javascript:void(0);">Marketing</a>
+								</div>
+							</div>
+						</div>
+						<div class=" col-lg-5"></div>
+						<div class="banner-main-img">
+							<div class="banner-imgs">
+								<img src="{% static 'assets/img/jobs/woman searching job-01.svg' %}" style="width:20rem;position:absolute;right:6rem;top:-30rem"class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="banner-imgs-2">
+								<img src="{% static 'assets/img/banner/circle-11.png' %}" class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="main-banner-left">
+								<img src="{% static 'assets/img/banner-left-bottom.png' %}" class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="main-banner-left-shadow">
+								<img src="{% static 'assets/img/banner-left-bottom-shadow.png' %}" class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="main-banner-right">
+								<img src="{% static 'assets/img/banner-right-bottom.png' %}" class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="main-banner-right-shadow">
+								<img src="{% static 'assets/img/banner-right-bottom-shadow.png' %}" class="img-fluid" alt="bannerimage">
+							</div>
+							<div class="banner-topic ">
+								<div class="topic-content one shape-1">
+									<div class="topic-img">
+										<img src="{% static 'assets/img/content-img.png' %}" class="img-fluid" alt="bannerimage">
+									</div>
+									<div class="topic-details ">
+										<h4>Finance</h4>
+										<p>3000+ Jobs Available</p>
+									</div>
+								</div>
+								<div class="topic-content two shape-2">
+									<div class="topic-img">
+										<img src="{% static 'assets/img/content-img.png' %}" class="img-fluid" alt="bannerimage">
+									</div>
+									<div class="topic-details">
+										<h4>Teacher</h4>
+										<p>2000+ Jobs Available</p>
+									</div>
+								</div>
+								<div class="topic-content three shape-2">
+									<div class="topic-details">
+										<h4>Marketing & Sales</h4>
+										<p>1500+ Jobs Available</p>
+									</div>
+									<div class="topic-img">
+										<img src="{% static 'assets/img/content-img.png' %}" class="img-fluid" alt="bannerimage">
+									</div>
+								</div>
+								<div class="topic-content four shape-1">
+									<div class="topic-details">
+										<h4>App Development</h4>
+										<p>5000+ Jobs Available</p>
+									</div>
+									<div class="topic-img">
+										<img src="{% static 'assets/img/content-img.png' %}" class="img-fluid" alt="bannerimage">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="banner-main-bg">
+				<div class="bannerleftop">
+					<img src="{% static 'assets/img/banner-top-bg.png' %}" class="img-fluid" alt="arrow">
+				</div>
+				<div class="bannerleftbottom">
+					<img src="{% static 'assets/img/banner-center-bg.png' %}" class="img-fluid" alt="arrow">
+				</div>
+				<div class="bannermiddle">
+					<img src="{% static 'assets/img/banner-middle.png' %}" class="img-fluid" alt="arrow">
+				</div>
+			</div>
+		</section>
+		<!-- /Banner Section -->
+
+		<!-- Category Section -->
+		
+
+		<section style="background-color:#f9fafc;" class="category-section category-eight ">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>Browse Jobs By Category</h2>
+							<p>Lorem Ipsum is simply dummy text of the printing</p>
+						</div>
+					</div>
+				</div>
+				<div class="category-details">
+					<div class="row">
+
+						{% for category in job_category %}
+						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 aos d-flex" data-aos="fade-up">
+							<a href='{% url "job_category_listing" category.slug %}' class="category-inner flex-fill">
+								<div class="category-img-two">
+									<img src="{{category.image.url}}" class="img-fluid" alt="no-img">
+								</div>
+								<div class="category-content">
+									<h4>{{category.name}}</h4>
+									<p>{{ category.num_jobs }}  Jobs Available</p>
+								</div>
+							</a>
+						</div>
+						{% endfor %}
+						
+					</div>
+					<div class="align-items-center justify-content-center d-flex">
+						<a href="{% url  'job_category' %}" class="category-btn">View All Category</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Category Section -->
+
+		<!-- Vaciencies Section -->
+		
+		<section class="vaciencies-section vaciencies-eight">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>Latest Job Vacancies</h2>
+							<p>Lorem Ipsum is simply dummy text of the printing</p>
+						</div>
+					</div>
+				</div>
+				<div class="vacancies-details">
+					<div class="row">
+						{% for job in job_vacancy %}
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">{{job.category.name}}</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{{job.image.url}}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">{{job.title}}</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">{{job.company_name}}</p>
+											<p><i class="fas fa-light fa-location-dot"></i>{{job.location}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>{{job.description|truncatechars:200}}</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p>
+											<i class="feather-briefcase"></i>{{job.job_type}}
+											<span class="p-rate">AED{{job.salary_min|floatformat:0}}-{{job.salary_max|floatformat:0}}K Mo..</span>
+
+											
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						
+					</div>
+					<div class="align-items-center justify-content-center d-flex aos" data-aos="fade-up">
+						<a href="{% url 'all_jobs' %}" class="category-btn">View All Jobs</a>
+					</div>
+				</div>
+
+				<div class="cat-bg-one">
+					<img src="{% static 'assets/img/cate-bg-1.png' %}" alt="no-img">
+				</div>
+				<div class="cat-bg-two">
+					<img src="{% static 'assets/img/cate-bg-2.png' %}" alt="no-img">
+				</div>
+			</div>
+		</section>
+
+		<!-- /Vaciencies Section -->
+
+		<div style="background-color:#f9fafc">
+<section style="margin-top:3rem;padding-top:2rem;padding-bottom:2rem;" class="container ">
+			<div style="display:flex;background-color:white;align-items:ceter;justify-content:space-between;padding:1rem" class="featured">
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-01.svg' %}" />
+				</div>
+				<div style="margin-top:10px;margin-left:10px;">
+					<p style="margin-bottom:0">Are you</p>
+					<p style="margin-top:0;font-weight:700;font-size:1.5rem;">EMPLOYEE ?</p>
+				</div>
+				<div style="width:30%;margin-top:20px;margin-left:20px;">
+					<p >Looking for applicants to fill your job openings fast? We can help.</p>
+				</div>
+				<div>
+
+				<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:10px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:10px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+					Register For Free
+				</button>
+				</div>
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-02-01.svg' %}" />
+			</div>
+			</div>
+</section>
+		</div>
+		<!-- Job Section -->
+
+
+		
+
+		<section style="background-color:#f9fafc" class="cta-section job-section-eight">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-6 position-relative aos" data-aos="fade-up">
+						<div class="job-img">
+							<img src="{% static 'assets/img/jobs/job searching-02.svg' %}" class="img-fluid" alt="CTA">
+						</div>
+						<div class="job-role job-one">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Total Employees Hired</p>
+								<h3><span class="counterUp">1.5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-two">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Platform downloaded</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-three">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Total Jobs</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-four">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Company satisfied rate</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 aos" data-aos="fade-up">
+						<div class="cta-content job-content">
+							<div class="section-heading heading-eight">
+								<h2>How It Works</h2>
+								<p class="vaca-para">Lorem Ipsum is simply dummy text of the printing</p>
+							</div>
+							<div class="preferred-part">
+								<div class="prefer-img">
+									<img src="{% static 'assets/img/icons/icons-2.png' %}" class="img-flui" alt="no-img">
+								</div>
+								<div class="preferred-content">
+									<h5>Search for your preferred Job</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+										incididunt ut et dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="preferred-part">
+								<div class="prefer-img">
+									<img src="{% static 'assets/img/icons/icons-9.png' %}" class="img-flid" alt="no-img">
+								</div>
+								<div class="preferred-content">
+									<h5>Search for your preferred Job</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+										incididunt ut et dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="preferred-part">
+								<div class="prefer-img">
+									<img src="{% static 'assets/img/icons/icons-11.png' %}" class="img-fuid" alt="no-img">
+								</div>
+								<div class="preferred-content">
+									<h5>Search for your preferred Job</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+										incididunt ut et dolore magna aliqua.</p>
+								</div>
+							</div>
+							<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:30px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:30px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+								Learn more</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<!-- /Job Section -->
+
+		<!-- Partners Section -->
+	
+
+		<div class="partners-section partner-section-eight">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>Our Partners</h2>
+							<p>Lorem Ipsum is simply dummy text of the printing</p>
+						</div>
+					</div>
+				</div>
+				<ul class="owl-carousel partnerslist_eight d-flex">
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-1.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-2.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-3.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-4.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-5.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-6.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-1.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-2.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-3.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-4.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-5.svg' %}" alt="partners"></a></li>
+					<li><a href="javascript:void(0);"><img class="img-fluid" src="{% static 'assets/img/partners/partners-6.svg' %}" alt="partners"></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- /Partners  Section -->
+
+		<!-- Popular Section -->
+		
+
+
+	
+
+		<section style="background-color:#f9fafc" class="vaciencies-section vaciencies-eight popular-section popular-eight">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>Most Popular Jobs</h2>
+							<p>Highlight the most popular owners</p>
+						</div>
+					</div>
+				</div>
+				<div class="vacancies-details">
+					<div class="row">
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Marketing</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-1.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">Digital Marketer</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>San Diego, CA</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p>
+											<i class="feather-briefcase"></i>Full Time
+											<span class="p-rate">$20k - $25k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Support</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-2.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">IT Support Associate</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>New York</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p>
+											<i class="feather-briefcase"></i>Full Time
+											<span class="p-rate"> <i class="feather-dollar-sign"></i>$30k - $35k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Support</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-3.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">Technical Support Engineer</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>San Diego, CA</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p>
+											<i class="feather-briefcase"></i>Full Time
+											<span class="p-rate">$40k - $45k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Sales</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-4.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">Product Sales Specialist</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>Montreal, Quebec</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p>
+											<i class="feather-briefcase"></i>Full Time
+											<span class="p-rate">$35k - $65k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Account</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-5.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">General Ledger Accountant</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>Boston</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p><i class="feather-briefcase"></i>Full Time
+											<span class="p-rate">$40k - $55k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 aos" data-aos="fade-up">
+							<div class="vacancies-box">
+								<div class="vacancies-top">
+									<span class="topic">Design</span>
+									<a href="javascript:void(0);" class="fav-icon-top">
+										<i class="fa-regular fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="vacancies-inner">
+									<div class="vaca-img">
+										<img src="{% static 'assets/img/icons/job-logomark-6.png' %}" class="img-fluid" alt="arrow">
+									</div>
+									<div class="vacancies-content">
+										<h4><a href="categories.html">Junior Graphic Designer</a></h4>
+										<div class="vaca-location">
+											<p class="light-color">Company Name</p>
+											<p><i class="fas fa-light fa-location-dot"></i>California</p>
+										</div>
+									</div>
+								</div>
+								<div class="vaca-details">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore magna aliqua.</p>
+								</div>
+								<div class="vaca-footer">
+									<div class="time">
+										<p><i class="feather-briefcase"></i>Full Time
+											<span class="p-rate">$10k - $25k</span>
+										</p>
+									</div>
+									<div class="footer-btn">
+										<a href="categories.html" class="btn-view">Apply Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="align-items-center justify-content-center d-flex aos" data-aos="fade-up">
+						<a href="categories.html" class="category-btn">View All Job</a>
+					</div>
+				</div>
+
+				<div class="pop-bg-one">
+					<img src="{% static 'assets/img/popular-bg-1.png' %}" alt="no-img">
+				</div>
+				<div class="pop-bg-two">
+					<img src="{% static 'assets/img/popular-bg-2.png' %}" alt="no-img">
+				</div>
+			</div>
+		</section>
+
+		<!-- /Popular Section -->
+
+		<!-- /Ads Section -->
+		
+
+
+
+		<!-- /Ads Section -->
+
+		<!-- Pricing Plan Section -->
+
+
+		
+		<section class="mt-3 pricing-plan"> 
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="section-heading heading-five price-head-five aos" data-aos="fade-up">
+							<h2>Our Pricing  Plan</h2>
+						</div>	
+					</div>
+				</div>
+				<div class="row">
+				    <div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Intro</h6>
+								</div>						
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="inactive">Attachment & Post Scheduling</li>
+									<li class="inactive">Set your rates</li>
+									<li class="inactive">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Basic</h6>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="inactive">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>	
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill active">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Popular</h6>
+									<span>Save $40</span>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="active">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>	
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>								
+							</div>							
+					    </div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					     <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Enterprise</h6>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="active">Exclusive Deals</li>
+									<li class="active">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>
+					</div>
+				</div>
+			</div>
+			</section>
+
+		<!-- /Pricing Plan Section -->
+
+		<!-- Testimonial  Section -->
+		
+
+
+		<section style="margin-top:3rem" class="container ">
+			<div style="display:flex;background-color:white;align-items:ceter;justify-content:space-between" class="featured">
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-01.svg' %}" />
+				</div>
+				<div style="margin-top:10px;margin-left:10px;">
+					<p style="margin-bottom:0">Are you</p>
+					<p style="margin-top:0;font-weight:700;font-size:1.5rem;">EMPLOYEE ?</p>
+				</div>
+				<div style="width:30%;margin-top:20px;margin-left:20px;">
+					<p >Looking for applicants to fill your job openings fast? We can help.</p>
+				</div>
+				<div>
+
+				<button  style="border-radius:5px;margin-top:1rem;background-color:#a22b27;color:white;font-weight:600;padding-left:10px;font-size:1.2rem;padding-top:0px;padding-bottom:0px;padding-right:10px" class="btn">
+					<img style="color:white" src="{% static 'assets/img/pricinglihover-bg.svg' %}" />
+					Register For Free
+				</button>
+				</div>
+				<div>
+					<img style="width:180px;" src="{% static 'assets/img/jobs/job-interview-02-01.svg' %}" />
+			</div>
+			</div>
+		</section>
+		<!-- are u employeee section -->
+		<section class="cta-section job-section-eight">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-6 position-relative aos" data-aos="fade-up">
+						<div class="job-img">
+							<img src="{% static 'assets/img/jobs/job searching-01.svg' %}" class="img-fluid" alt="CTA">
+						</div>
+						<div class="job-role job-one">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Total Employees Hired</p>
+								<h3><span class="counterUp">1.5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-two">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Platform downloaded</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-three">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Total Jobs</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+						<div class="job-role job-four">
+							<div class="job-role-img">
+								<img src="{% static 'assets/img/icons/job-role.png' %}" class="img-fluid" alt="CTA">
+							</div>
+							<div class="job-title">
+								<p>Company satisfied rate</p>
+								<h3><span class="counterUp">5</span>M+</h3>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 aos" data-aos="fade-up">
+						<div class="cta-content job-content">
+							<div style="margin-top:4rem;"class="section-heading heading-eight">
+								
+								<p style="color:#a22b27;font-size:1.1rem;font-weight:600">Register now and let employers find you</p>
+								<h3>Let's Start Creating your Profile</h3>
+								<p style="text-align:justify;color:#7d7d7d">A profile on Adjeem.com is an unique way to let the world know who you are
+									what you stad for and what your goals are. Make sure your profile is transparent and indicative of who you are since it will serve 
+									as your personal storyboard that allows other to discover you and imitate your activities. All Adjeem members who are logged in may see your profile
+										</p>
+
+							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:30px;font-size:1.2rem;margin-top:2rem;padding-right:30px" class="btn">Create Profile</button>
+
+							</div>
+							</div>
+														</div>
+				</div>
+			</div>
+			</section>
+			<!-- start create section -->
+			<!-- Featured jobs section -->
+
+			<section class="container">
+			<div>
+				<div>
+					<h3>Featured Job Seekers</h3>
+					<p>Checkout these latest cool ads from our members</p>
+				</div>
+				<div style="display:flex;margin-top:3rem;justify-content:space-around;" class="flex-wrap">
+					{% for i in '1234' %}
+					<div class="featured" style="border-radius:30px;padding:2rem; background-color:white">
+						<img style="border-radius:50%" src="{% static 'assets/img/profile-img.jpg' %}" />
+						<p style="color:#ce211b;margin-top:1rem;font-size:1.4rem;margin-bottom:0;">
+							Emma Connor</p>
+						<p style="margin-top:20px;margin-bottom:0;">
+							Graphic Designer
+						</p>
+
+						<p style="margin-top:20px;margin-bottom:20px;">
+        <i style="margin-top:5px" class="feather-map-pin"></i>
+							New York City
+						</p>
+						<p>
+
+			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
+							info@themevessel.com
+						</p>
+							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:50px;font-size:1.2rem;margin-top:2rem;padding-right:50px" class="btn">ShortList</button>
+					</div>
+
+					{% endfor %}
+				</div>
+				<p style="text-align:center;font-weight:700;font-size:1.2rem;margin-top:1.3rem">Explore more candidates</p>
+			</div>
+			</section>
+			<!-- Featured jobs section -->
+
+		<!-- classified ads section -->
+	
+<section class='cta-section'>
+	<div class='container'>
+		<div class="col-lg-12">
+			<div class="cta-content">
+				<h1 style="font-size;1.75rem;">Post Free Classifieds Ads in UAE</h1>
+				<p style='color: #7d7d7d;'>Welcome to Adjeem! We are undoubtedly one of the best free Classifieds in Dubai. Our main motive is to make selling and purchasing of goods and services convenient in Dubai through our free ads. At our platform, you can swiftly and easily post free ads, whether you are dealing with the personal items or business opportunities. For your convenience we made our website ad-free, so that you can browse and post ads with no rifts and distractions.</p>
+				<p style='color: #7d7d7d;'>Adjeem is an ideal solution for people like you, who are looking for Dubai free classifieds. Our free ads posting service facilitates you in targeting a large audience, for conveying your message to those who are interested in what you have to offer. Whether you're selling a used car, searching for a new apartment, selling a technology, or looking for a new job, Adjeem is the only way to get the desired outcomes.</p>
+				<p style='color: #7d7d7d;'>As free classifieds in Dubai, we also offer a broad range of personal ads, that help you in connecting with other users and in getting the commodities you want to acquire. We are not just free Dubai classifieds even with our user-friendly interface, you can easily navigate and find what you're looking for, whether you intend to purchase or sell. Our platform includes a variety of categories, including electronics, real estate, jobs, personal items, and a lot of other products and services.</p>
+				<p style='color: #7d7d7d;'>At Adjeem, we prioritize the safety and security which is direly needed in online transactions. Though we offer free ads service but our platform is monitored 24/7, and we take great care to ensure that all advertisements are legitimate and do not contain any fraudulent or illegal content to avoid any discomfort for the users.</p>
+			     <p style='color: #7d7d7d;'>At Adjeem, we aim at providing a memorable user-friendly experience. Whether you're looking to buy, sell, or simply browse the latest ads, our platform is the perfect solution for anyone in the Dubai and UAE area. Most importantly, we are free Dubai classifieds. So why wait? Sign up today and enjoy free Dubai Classifieds service with Adjeem!</p>
+			</div>
+		</div>
+	</div>
+	
+</section>
+	
+
+		<section class="testimonial-section-eight">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>What Jobholders Say’s About Us</h2>
+							<p>Highlight the most popular owners</p>
+						</div>
+					</div>
+				</div>
+				<div class="testi-carousel">
+					<div class="job-slider owl-carousel owl-theme owl-loaded owl-drag">
+						<div class="owl-stage-outer">
+							<div class="owl-stage">
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Kirsten</h4>
+											<p>Marketing Manager</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Alfred</h4>
+											<p>Graphic Designer</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-04.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Kirsten</h4>
+											<p>Marketing Manager</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item active">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Mike Torello</h4>
+											<p>Mexico</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item active">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Kirsten</h4>
+											<p>Marketing Manager</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item active">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Alfred</h4>
+											<p>Graphic Designer</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-04.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Kirsten</h4>
+											<p>Marketing Manager</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Mike Torello</h4>
+											<p>Mexico</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Kirsten</h4>
+											<p>Marketing Manager</p>
+										</div>
+									</div>
+								</div>
+								<div class="owl-item cloned">
+									<div class="testi-widget-eight aos aos-init aos-animate" data-aos="fade-up">
+										<div class="test-details">
+											<div class="icon-blk">
+												<img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="Dreamstrip Testimonials">
+											</div>
+										</div>
+										<div class="testi-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh eu aliquam consequat morbi leo. Pharetra lacus vitae nisl porttitor duis. In et velit turpis nisl vulputate in nunc, habitant eget. Dui</p>
+										</div>
+										<div class="testi-location">
+											<h4>Alfred</h4>
+											<p>Graphic Designer</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="owl-dots disabled"></div>
+					</div>
+				</div>
+				<div class="testimonial-nav">
+
+				</div>
+			</div>
+			<div class="test-bg">
+				<img src="{% static 'assets/img/test-bg.png' %}" class="img-fluid" alt="img">
+			</div>
+		</section>
+
+		<!-- /Testimonial Section -->
+
+		<!-- Blog-section start -->
+		
+		
+		<section class="blog-eight-section">
+			<div class="container">
+				<div class="section-heading heading-eight">
+					<div class="row align-items-center">
+						<div class="col-md-12 aos aos-init aos-animate text-center" data-aos="fade-up">
+							<h2>Recent News &amp; Articles</h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row align-items-center justify-content-center">
+						<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+							<div class="blog-eight grid-blog-eight flex-fill aos aos-init aos-animate" data-aos="fade-up">
+								<div class="blog-image-eight">
+									<a href="blog-details.html">
+										<img src="{% static 'assets/img/blog/news-article-1.jpg' %}" class="img-fluid" alt="Post Image">
+									</a>
+								</div>
+								<div class="blog-content-eight">
+									<p class="blog-category-eight">
+										<a href="javascript:void(0);"><span>Popular Jobs</span></a>
+										<a href="javascript:void(0);"><span>UX Designer</span></a>
+										<a href="javascript:void(0);"><span>Paris</span></a>
+									</p>
+									<h3 class="blog-title">
+										<a href="blog-details.html">Lorem Ipsum is simply dummy text of the printing industry.</a>
+									</h3>
+									<p class="blog-description-eight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lectus elementum lectus eu nisl, purus...</p>
+									<ul class="entry-meta meta-item-eight">
+										<li>
+											<div class="post-author-eight">
+												<div class="post-author-img-eight">
+													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="Post Author">
+												</div>
+												<a href="javascript:void(0);" class="mb-0"><span>John</span></a>
+											</div>
+										</li>
+										<li>
+											<div class="post-author-btn">
+												<a href="blog-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+							<div class="blog-eight grid-blog-eight flex-fill aos aos-init aos-animate" data-aos="fade-up">
+								<div class="blog-image-eight">
+									<a href="blog-details.html">
+										<img class="img-fluid" src="{% static 'assets/img/blog/news-article-2.jpg' %}" alt="Post Image">
+									</a>
+								</div>
+								<div class="blog-content-eight">
+									<p class="blog-category-eight">
+										<a href="javascript:void(0);"><span>Popular Jobs</span></a>
+										<a href="javascript:void(0);"><span>Web Designer</span></a>
+										<a href="javascript:void(0);"><span>London</span></a>
+									</p>
+									<h3 class="blog-title">
+										<a href="blog-details.html">Lorem Ipsum is simply dummy text of the printing industry.</a>
+									</h3>
+									<p class="blog-description-eight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lectus elementum lectus eu nisl, purus...</p>
+									<ul class="entry-meta meta-item-eight">
+										<li>
+											<div class="post-author-eight">
+												<div class="post-author-img-eight">
+													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="Post Author">
+												</div>
+												<a href="javascript:void(0);" class="mb-0"><span>Smith</span></a>
+											</div>
+										</li>
+										<li>
+											<div class="post-author-btn">
+												<a href="blog-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+							<div class="blog-eight grid-blog-eight flex-fill aos aos-init aos-animate" data-aos="fade-up">
+								<div class="blog-image-eight">
+									<a href="blog-details.html">
+										<img class="img-fluid" src="{% static 'assets/img/blog/news-article-3.jpg' %}" alt="Post Image">
+									</a>
+								</div>
+								<div class="blog-content-eight">
+									<p class="blog-category-eight">
+										<a href="javascript:void(0);"><span>Popular Jobs</span></a>
+										<a href="javascript:void(0);"><span>UI Designer</span></a>
+										<a href="javascript:void(0);"><span>New York</span></a>
+									</p>
+									<h3 class="blog-title">
+										<a href="blog-details.html">Lorem Ipsum is simply dummy text of the printing industry.</a>
+									</h3>
+									<p class="blog-description-eight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lectus elementum lectus eu nisl, purus...</p>
+									<ul class="entry-meta meta-item-eight">
+										<li>
+											<div class="post-author-eight">
+												<div class="post-author-img-eight">
+													<img src="{% static 'assets/img/profiles/avatar-05.jpg' %}" alt="Post Author">
+												</div>
+												<a href="javascript:void(0);" class="mb-0"><span>David</span></a>
+											</div>
+										</li>
+										<li>
+											<div class="post-author-btn">
+												<a href="blog-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="align-items-center justify-content-center d-flex aos" data-aos="fade-up">
+					<a href="blog-details.html" class="category-btn">View All Category</a>
+				</div>
+			</div>
+		</section>
+		
+
+		<!-- Blog-section end -->
+
+		<!-- /Ads-banner-section start -->
+		
+
+		<!-- /Ads-banner-section end -->
+
+		<!-- Footer -->
+		{% include 'job/includes/footer.html' %}
+		<!-- /Footer -->
+
+	</div>
+
+	<!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+			<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+				style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;">
+			</path>
+		</svg>
+	</div>
+	<!-- scrollToTop end -->
+
+	{% endblock %}

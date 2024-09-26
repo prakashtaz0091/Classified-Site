@@ -4,15 +4,18 @@ from django.db.models import Count
 
 
 
-def job(request):
-    job_category = JobCategory.objects.annotate(num_jobs=Count('job'))
-    job_vacancy=Job.objects.all()
-    context={
-        'job_category':job_category,
-        'job_vacancy':job_vacancy
-    }
-    return render(request,'home/index-8.html',context)
-
+def landing_page(request):
+    try:
+        job_category = JobCategory.objects.annotate(num_jobs=Count('job'))
+        job_vacancy=Job.objects.all()
+        context={
+            'job_category':job_category,
+            'job_vacancy':job_vacancy
+        }
+        return render(request,'job/landing.html',context)
+    except Exception as e:
+        print(e)
+        return e
 
 
 
