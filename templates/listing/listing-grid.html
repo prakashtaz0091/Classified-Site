@@ -63,9 +63,9 @@
 												<div class="blog-features">
 												   <a href="javascript:void(0)"><span> <i class="fa-regular fa-circle-stop"></i>
 												
-													{% for category in product.category.all %}
-													{{ category.category_name }}{% if not forloop.last %}, {% endif %}
-													{% endfor %}
+													
+													{{ product.category.category_name }}
+													
 											</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
