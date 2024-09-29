@@ -1,4 +1,4 @@
-{% extends 'admin1/base1.html' %}
+{% comment %} {% extends 'admin1/base1.html' %}
 {% load static %}
 {% block content %}
     <div class="main-wrapper">
@@ -323,4 +323,435 @@
         }
         
     </script>
-{% endblock %}
+{% endblock %} {% endcomment %}
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+	  <title>{{product.product_name}}</title>
+	  <meta name='description' content="{{product.product_name}}" >
+
+	<!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+	
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
+	
+	<!-- Aos CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/aos/aos.css' %}">
+	
+    <!-- Feather CSS -->
+	<link rel="stylesheet" href="{% static 'assets/css/feather.css' %}">
+		
+	<!-- Fancybox CSS -->
+	<link rel="stylesheet" href="{% static 'assets/plugins/fancybox/jquery.fancybox.min.css' %}">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	
+</head>
+
+<body>
+
+
+	<div class="main-wrapper innerpagebg">
+
+		<!-- Header -->
+		<header class="header">
+          {% include 'includes/header.html' %}
+		</header>
+		<!-- /Header -->
+		
+		<!--Galler Slider Section-->
+		<div class="bannergallery-section">
+			<div style="margin-top:85px;" class="gallery-slider d-flex">
+				{% for image in product_images %}
+				<div class="gallery-widget">
+					<a href="{{ image.image.url }}" data-fancybox="gallery1">
+						<img style="height:300px;" class="img-fluid" alt="Image" src="{{image.image.url}}">
+					</a>
+				</div>	
+				<div class="showphotos">
+					<a href="{{image.image.url}}" data-fancybox="gallery1"> Show Photos</a>
+				</div>								
+				{% endfor %}
+			</div>			
+
+            
+		</div>
+			
+		<!--/Galler Slider Section-->
+		
+		<!--Details Description  Section-->
+		<section class="details-description">
+			<div class="container">
+				<div class="about-details">
+					<div class="about-headings">
+						<div class="author-img">
+						</div>
+						<div class="authordetails">
+							<h5>{{product.product_name}}</h5>
+							<p>Listed On: {{product.created_date|date:"Y-m-d"}} ({{product.created_date|timesince}} ago)</p>
+						</div>
+					</div>
+					<div class="rate-details">
+						<h3>Price: AED {{product.price}} </h3>
+						{% comment %}
+						type like fixed and negotiable will be fixed later
+
+						<p>Fixed</p>
+						{% endcomment %}
+					</div>				  
+				</div>
+				{% include 'includes/alert_modal.html' %}
+				<div class="descriptionlinks">
+					<div class="row">
+						<div class="col-lg-9">
+							<ul>
+						<li id="submitFeedback" data-user-id="{{ product.created_by.id }}"> <a href="javascript:void(0);"><i class="fa-regular fa-comment-dots"></i>Leave a feedback</a></li>
+					<li><a href="javascript:void(0);"data-bs-toggle="modal" data-bs-target="#alertModal" ><i class="feather-flag"></i> report</a></li>
+
+<style>
+.favorited {
+
+    background-color: #c10037; /* The background color you want */
+    color: white!important; /* The color of the icon */
+    border-radius: 50%; /* Makes the background circular */
+    align-items: center;
+		display:flex;
+    justify-content: center;
+		text-align:center;
+			padding-right:5px!important;
+				padding-left:5px!important;
+    width: 28px; /* Adjust the size to fit the icon */
+    height: 28px;
+}
+
+</style>
+								<li class="fav-item" data-id="{{product.id}}" ><a href="javascript:void(0);" id="fav-icon"><i class="feather-heart {% if product.id in book_mark %}favorited{% endif %}"></i>
+										{% if product.id in book_mark %}
+										Added To Favourites
+										{% else %}
+										Add To Favourites
+										{% endif %}
+									</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</section>
+		
+		<!--/Details Description  Section-->
+		
+		<!--Details Main  Section-->
+		<div class="details-main-wrapper listing-section">	
+			<div class="container">
+				<div class="row" style='margin-top:1rem;'>
+					<div class="col-lg-8">                             					
+						<div class="card">
+							<div class="card-header">
+								<span class="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+								</span> 
+								<h4>Description</h4>
+							</div>
+							<div class="card-body">
+								<p>
+									{{product.description}}
+								</p>
+
+								
+							</div>
+						</div>					
+								
+						<!--Listing Features Section-->
+<style>
+.listing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+		color:gray;
+}
+
+.feature-item {
+    display: flex;
+		cursor:pointer;
+    justify-content: space-between;
+    padding: 10px 50px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.feature-item:hover {
+    background-color: #f1f1f1;
+    color: #666;
+}
+
+.feature-title {
+    font-weight: bold;
+}
+
+.feature-value {
+    text-align: right;
+    color: #333;
+}
+
+.card-header {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    background-color: #fff;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+</style>
+	<div class="card">
+    <div class="card-header">
+        <i class="feather-list"></i>
+        <h4>Listing Features</h4>
+    </div>
+    <div class="card-body">
+        <ul class="listing-features">
+			 {% for feature in featured_data %}
+        <li class="feature-item">
+            <span class="feature-title">{{ feature.title|capfirst }}</span>
+            <span class="feature-value">{{ feature.value|safe }}</span>
+        </li>
+    {% endfor %}
+        </ul>
+    </div>
+</div>
+								
+						<!--/Listing Features Section-->
+								
+						<!--Gallery Section-->							   
+						<div style="display:none;"class="card gallery-section">
+							<div class="card-header">
+								<img src="{% static 'assets/img/galleryicon.svg' %}" alt="gallery">
+								<h4>Gallery</h4>
+							</div>
+							<div style="display:none" class="card-body">
+								<div class="gallery-content">
+									<div class="row">
+										{% for image in product_images %}
+										<div class="col-lg-3 col-md-3 col-sm-3">
+											<div class="gallery-widget">
+												<a href="{{image.image.url}}" data-fancybox="gallery1">
+													<img class="img-fluid" alt="Image" src="{{image.image.url}}">
+												</a>
+											</div>								
+											
+										</div>
+										{% endfor %}
+									</div>								
+								</div>									
+							</div>					
+						</div>									
+						<!--/Gallery Section-->
+						
+						<!--Ratings Section-->
+						<!--/Ratings Section-->
+							
+						<!--Review Section-->
+						<!--/Review Section-->	
+								
+					</div>
+					 <style>
+        .btn-custom {
+            border: 1px solid #8b0000;
+            background-color: white;
+            color: #8b0000;
+        }
+        .btn-custom:hover {
+            background-color: #8b0000;
+            color: white;
+        }
+    </style>
+					<div class="col-lg-4 theiaStickySidebar">
+						<div class="rightsidebar">
+							<div   class="card">
+								<a style="margin-left:auto;margin-right:auto;">
+
+									{% if product.created_by.profile.profile_photo %}
+									<img src={{product.created_by.profile.profile_photo.url}} style="height:80px;width:80px;" />
+									{% else %}
+
+									<img src={% static 'images/profile.png' %} style="height:80px;width:80px;" />
+									{% endif %}
+									<a style= "margin-left:auto;margin-right:auto;margin-top:10px;" href="{% url 'dashboard' %}?user={{prefix_email}}&id={{product.created_by.id}}">{{product.created_by.full_name}}</a>
+
+                <div style="margin-top:10px;padding:0;text-align:center;" class="alert alert-light" role="alert">
+					<a href="#"  style="margin-top:20px;"class="alert-link">{{ads_count}} Ads Available</a>
+                </div>
+                <button id="show_phone_number" class="btn btn-custom mb-3">
+                    <i class="fa fa-phone"></i> Show Phone Number
+                </button>
+				<button id="phone_number" style="display:none" class="btn btn-custom mb-3">
+					<i class="fa fa-phone"></i>  {{product.created_by.phone_number}}
+                </button>
+
+
+					<script>
+						const phone_number=document.getElementById('phone_number')
+						const show_phone_number=document.getElementById('show_phone_number')
+						show_phone_number.addEventListener('click',()=>{
+							phone_number.style.display='block'
+							show_phone_number.style.display='none'
+						})
+						phone_number.addEventListener('click',()=>{
+							phone_number.style.display='none'
+							show_phone_number.style.display='block'
+						})
+					</script>
+
+	{% include 'includes/send_message_modal.html' %}
+                <button style="background-color:#8b0000" data-bs-toggle="modal" data-bs-target="#contactModal" class="btn btn-danger btn-block">SEND MESSAGE</button>
+								<ul>
+								</ul>
+							</div>
+							<div class="card">
+								<h4><img src="{% static 'assets/img/statistic-icon.svg' %}" alt="location"> Statisfic</h4>
+								<ul class="statistics-list">
+									<li><div class="statistic-details"><span class="icons"><i class="fa-regular fa-eye"></i></span>
+											Views </div><span class="text-end"> {{product.view_count}}</span></li>
+									<li><div class="statistic-details"><span class="icons"><i class="feather-heart"></i></span>
+										 Favuorites </div><span class="text-end"> 123</span></li>
+								</ul>
+							</div>
+								<div class="card">
+										<h5>Safety Tips For Buyer</h5>
+										<p><span>&#10003;</span>	<span>Meet seller at a public place</span></p>
+										<p><span>&#10003;</span>	<span>Check the item before you buy</span></p>
+										<p><span>&#10003;</span>	<span>Pay only after collecting the item</span></p>
+							</div>
+
+						</div>
+		  <button style="width:100%;color:white;background-color:#8b0000 "class="btn btn-custom mb-3">
+                    Post Ads Like This 
+                </button>
+					</div>
+				</div>
+			</div>		
+		</div>
+		
+		<!-- /Details Main Section -->
+		
+	    <!-- Footer -->
+		{% include 'includes/footer.html' %}
+		<!-- /Footer -->
+		
+	</div>
+
+    <!-- scrollToTop start -->
+	<div class="progress-wrap active-progress">
+		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+		<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+		</svg>
+	</div>
+	<!-- scrollToTop end -->
+	
+	<!-- jQuery -->
+<script src="{% static 'assets/js/jquery-3.7.0.min.js' %}"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Select2 JS -->
+<script src="{% static 'assets/plugins/select2/js/select2.min.js' %}"></script>
+
+<!-- Aos -->
+<script src="{% static 'assets/plugins/aos/aos.js' %}"></script>
+
+<!-- Feather JS -->
+<script src="{% static 'assets/js/feather.min.js' %}"></script>
+
+<!-- Back to Top JS -->
+<script src="{% static 'assets/js/backToTop.js' %}"></script>
+
+<!-- Sticky Sidebar JS -->
+<script src="{% static 'assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+<script src="{% static 'assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+
+<!-- Fancybox JS -->
+<script src="{% static 'assets/plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'assets/js/script.js' %}"></script>
+<script>
+	 function encodeId(userId) {
+    // Generate a random string and combine it with the userId
+    const randomString = Math.random().toString(36).substring(2, 15); // Random string
+    return btoa(userId + ':' + randomString); // Encode with random string
+  }
+
+    document.getElementById("submitFeedback").onclick = function() {
+      const originalUserId = this.getAttribute('data-user-id');
+      const hashedUserId = encodeId(originalUserId);
+
+      // Redirect with the hashed user ID in the URL
+		window.location.href = `/feedback/${hashedUserId}/`;
+    }
+
+		</script>
+
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('#fav-icon').forEach(function(icon) {
+        icon.addEventListener('click', function() {
+            var itemId = this.closest('.fav-item').getAttribute('data-id');
+            var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            fetch('/ad/toggle-bookmark/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken 
+                },
+                body: JSON.stringify({ id: itemId })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    // Toggle the favorited class for the icon
+                    const iconElement = this.querySelector('i');
+                    iconElement.classList.toggle('favorited');
+
+                    // Change the text based on the favorited state
+                    const linkText = iconElement.classList.contains('favorited') ? 'Added To Favourites' : 'Add To Favourites';
+                    this.innerHTML = `<i class="feather-heart ${iconElement.classList.contains('favorited') ? 'favorited' : ''}"></i> ${linkText}`;
+                } else {
+                    console.error('Failed to favorite item.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
+</body>
+</html>
