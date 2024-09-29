@@ -1,0 +1,679 @@
+﻿{% extends 'discover/base.html' %}
+{% load static %}
+{% block title %}
+<title> Discover Landing</title>
+{% endblock %}
+{% block content %}
+<body>
+	<div class="main-wrapper">
+	
+		<!-- Header -->
+		{% include 'discover/includes/header.html' %}
+		<!-- /Header -->
+		
+		<!-- Banner Section -->
+		<section class="banner-section banner-five">
+			<div class="container">
+				<div class="home-banner">		
+					<div class="row align-items-center">					    
+						<div class="col-lg-8 mx-auto">
+							<div class="section-search aos" data-aos="fade-up">
+								<h1 style="font-size:2.5rem">Connecting You to UAE'S Thriving Business World</h1>
+
+								<form style="position:relative;width:80%;margin-left:4rem" action="listing-grid-sidebar.html" class="form-block d-flex justify-center"> 
+									<input style="width:100%" placeholder="Enter Business Name,Category, Brand, Keyword"  class="search-box">
+										<div style="position:absolute;right:20px;top:6px" class="search-btn">
+											<button class="btn btn-primary" type="submit"><i class="fa fa-search m-0" aria-hidden="true"></i></button>
+										</div>
+								</div>
+
+									</form>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</section>
+		<!-- /Banner Section -->
+		
+		<!-- Category Section -->
+		<section class="category-five-section">
+		    <div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="section-heading heading-five aos" data-aos="fade-up">
+							<h2>Our Categories</h2>
+						</div>	
+					</div>
+					<div class="col-md-12">
+						<ul class="category-items text-center">
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-18.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Restaurant</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-19.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Beauty & Care</h6>
+										<p>09 Ads</p>
+									</div>
+								</div>
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-20.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Fitness</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-21.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Night Life</h6>
+										<p>09 Ads</p>
+									</div>
+								</div>
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-22.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Shopping</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-23.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Cinema</h6>
+										<p>09 Ads</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<ul class="category-items cate-row2">
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-24.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Lodging</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-25.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Outdoors</h6>
+										<p>09 Ads</p>
+									</div>
+								</div>
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-26.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Automotive</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-27.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Marketing</h6>
+										<p>09 Ads</p>
+									</div>
+								</div>
+							</li>
+							<li class="aos" data-aos="fade-up">
+								<div class="categories-box">
+									<div class="categories-info">
+										<span><img src="{% static 'assets/img/icons/category-28.svg' %}" class="img-fluid" alt="img"></span>
+										<h6>Child Care</h6>
+										<p>09 Ads</p>
+									</div> 
+								</div> 
+							</li>
+						</ul>
+					</div>		   
+				</div>		   
+			</div>		
+		</section>		
+		<!-- /Category Section -->
+		
+		<!-- Business Section -->
+		<style>
+    .navigation {
+        transition: background-color 0.3s ease; /* Smooth transition */
+			cursor:pointer;
+    }
+
+    .navigation:hover {
+        background: linear-gradient(to bottom, #ffffff, #f1e3e3); /* Gradient from white to #f1e3e3 */
+    }
+</style>
+
+		<section class="business-section">
+
+				<h3 style="text-align:center;font-weight:600;margin-bottom:3rem;font-size:2rem">Navigate UAE Business Search With Ease</h3>
+		    <div class="d-flex container">
+				<!-- -->
+				<div class="navigation" style="background-color:#fcfcfc;min-width:15rem;margin-left:1rem">
+					<div style="display:flex;justify-content:space-between;align-items:center;padding-left:1rem;padding-right:1rem">
+						<p style="color:#f70033;font-size:2rem;font-weight:600">1</p>
+						<i style="color:#f70033" class="fa-solid fa-magnifying-glass"></i>
+					</div>
+					<div class="navigation-content" style="padding-left:1rem;padding-right:1rem;margin-bottom:1.5rem;">
+						<h3>Search</h3>
+						<p>Explore and connect with vast array of local businesses accross UAE</p>
+					</div>
+				</div>
+				<!-- -->
+				<div class="navigation" style="background-color:#fcfcfc;min-width:15rem;margin-left:1rem">
+					<div style="display:flex;justify-content:space-between;align-items:center;padding-left:1rem;padding-right:1rem">
+						<p style="color:#f70033;font-size:2rem;font-weight:600">2</p>
+						<i style="color:#f70033" class="fa-solid fa-magnifying-glass"></i>
+					</div>
+					<div class="navigation-content" style="padding-left:1rem;padding-right:1rem;margin-bottom:1.5rem;">
+						<h3>Filter And Select</h3>
+						<p>Refine your search results tailored to your preferences and needs.</p>
+					</div>
+				</div>
+				<!-- -->
+				<div class="navigation" style="background-color:#fcfcfc;min-width:15rem;margin-left:1rem">
+					<div style="display:flex;justify-content:space-between;align-items:center;padding-left:1rem;padding-right:1rem">
+						<p style="color:#f70033;font-size:2rem;font-weight:600">1</p>
+						<i style="color:#f70033" class="fa-solid fa-magnifying-glass"></i>
+					</div>
+					<div class="navigation-content" style="padding-left:1rem;padding-right:1rem;margin-bottom:1.5rem;">
+						<h3>View</h3>
+						<p>Choose your preferred companies and tag them for easy reference.</p>
+					</div>
+				</div>
+				<!-- -->
+				<div class="navigation" style="background-color:#fcfcfc;min-width:15rem;margin-left:1rem">
+					<div style="display:flex;justify-content:space-between;align-items:center;padding-left:1rem;padding-right:1rem">
+						<p style="color:#f70033;font-size:2rem;font-weight:600">1</p>
+						<i style="color:#f70033" class="fa-solid fa-magnifying-glass"></i>
+					</div>
+					<div class="navigation-content" style="padding-left:1rem;padding-right:1rem;margin-bottom:1.5rem;">
+						<h3>Connect</h3>
+						<p>Simplify your workflow by sending inquiries to your shortlisted businesses, all in one go.</p>
+					</div>
+				</div>
+				<!-- -->
+
+
+
+
+			</div>		
+		</section>		
+		<!-- /Business Section -->
+		
+		<!-- Cities Section -->
+		<section class="feature-section">
+		    <div style="" class="continer">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-heading heading-five aos" data-aos="fade-up">
+							<h2>Featured Business Listings</h2>
+						</div>	
+					</div>
+				</div>
+<style>
+.featured-business-listings{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 20px; /* Adds space between elements */
+    border-radius: 8px; /* Optional: rounded corners */
+    background-color: #fff; /* Optional: white background */
+}
+</style>
+<div style="justify-content:center;" class="row">
+	{% for i in "123" %}
+	<div style="margin-left:2rem" class="featured-business-listings  col-xl-3 border p-3">
+    <div class="text-center">
+        <img src="{% static 'assets/img/tesla.png' %}" class="img-fluid" alt="Tesla Properties Logo" />
+    </div>
+    <div class="mt-4 mb-3">
+        <h5>TESLA PROPERTIES</h5>
+		<div class="d-flex">
+        <i style="margin-top:5px" class="feather-map-pin"></i>
+        <p class="" style="font-size: 12px;margin-left:4px">
+            Sheikha Noora tower . Seasons . Barsha  . Dubai . United Arab Emirates
+        </p>
+		</div>
+    </div>
+    <span class="text-muted">Listed 4 months ago</span>
+    <div style="margin-left:1rem;" class="mt-4">
+        <h5>Contact Info</h5>
+        <div>
+			<i style="font-size:30px" class="fa-solid fa-square-phone"></i>
+            <span style="margin-left:1rem;">+971 45853725</span>
+        </div>
+        <div style='margin-top:10px' class="d-flex">
+			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
+            <p class="mb-0" style="word-break: break-all;margin-left:1rem">
+				
+                teslapropertiesseowork@gmail.com
+            </p>
+        </div>
+        <div style="margin-top:10px">
+			<i style="font-size:30px" class="fa-solid fa-link"></i>
+            <span style="margin-left:0.8rem;word-break: break-all;">
+                https://teslaproperties.ae/
+            </span>
+        </div>
+	    </div>
+	<div style="margin:0;display:flex;margin-top:2rem;margin-bottom:2rem;" class="flex-wrap">
+				<button style="margin-right:0.5rem;background-color:#a22b27;color:white;border-radius:5px;margin-bottom:1rem;padding:0.5rem 1rem 0.5rem 1rem;">SEND ENQUIRY</button>
+				<button style="background-color:transparent;color:#a3a19a;border:1px solid gray;font-weight:600;border-radius:5px;margin-bottom:1rem;padding:0.5rem 1rem 0.5rem 1rem;">Get Direction</button>
+
+		</div>
+</div>
+{% endfor %}
+
+				</div>			   
+			</div>		
+		</section>		
+		<!-- /Cities Section -->
+		
+		<!-- Space Section -->
+		<section class="adventure-section">
+		    <div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-0 aos" data-aos="fade-up">
+						<div class="featuring-img">
+							<img src="{% static 'assets/img/feature.png' %}" class="img-fluid" alt="">	
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12 aos" data-aos="fade-up">
+						<div class="adventure-info">							
+							<div class="section-heading heading-five aos" data-aos="fade-up">
+								<h6>Why Choose Us</h6>
+								<h2>Its Time For New Adventures Escapes thrills & experiences</h2>
+							</div>
+							<div class="advent-info">							
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque architecto beatae vitae dicta sunt explicabo.</p>
+							</div>
+							<a href="service-details.html" class="btn btn-grey">Get Started <i class="feather-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>	   
+			</div>		
+		</section>		
+		<!-- /Space Section -->
+		
+		<!-- City Section -->
+		<!-- /Space Section -->	
+		
+		<!-- Latest Ads -->
+		<section style="background-color:white" class="business-section">
+		    <div style="background-color:#f5f5f5;border-radius:20px" class="container">
+				<div class="row pt-4">
+					<div class="col-md-12 text-center">
+						<div class="mb-4 heading-five aos" data-aos="fade-up">
+							<div style="font-size:2rem;font-weight:600">Most <span style='color:#e34448'>Popular</span> Categories</div>
+						</div>	
+					</div>
+				</div>
+				<div style="padding:1rem" class='d-flex flex-wrap'>
+					{% for i in '12345678910100010100' %}
+					<div style="margin-bottom:1rem;margin-left:.8rem;background-color:white;border-radius:50px;padding:10px;">
+						Power Tools {{i}}
+					</div>
+					{% endfor %}
+				</div>
+			</div>		
+		</section>		
+		<!-- /Business Section -->
+		
+		<!-- Pricing  Plan -->
+		<section class="mt-3 pricing-plan"> 
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="section-heading heading-five price-head-five aos" data-aos="fade-up">
+							<h2>Our Pricing  Plan</h2>
+						</div>	
+					</div>
+				</div>
+				<div class="row">
+				    <div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Intro</h6>
+								</div>						
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="inactive">Attachment & Post Scheduling</li>
+									<li class="inactive">Set your rates</li>
+									<li class="inactive">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Basic</h6>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="inactive">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>	
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					    <div class="price-card price-three price-five flex-fill active">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Popular</h6>
+									<span>Save $40</span>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="active">Exclusive Deals</li>
+									<li class="inactive">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>	
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>								
+							</div>							
+					    </div>
+					</div>
+					<div class="col-lg-3 d-flex col-md-6">
+					     <div class="price-card price-three price-five flex-fill">
+							<div class="price-head">
+								<div class="price-level">
+									<h6>Enterprise</h6>
+								</div>								
+							</div>	
+							<div class="price-body">
+								<ul>
+									<li class="active">Upload Video up to 720p Resolution</li>
+									<li class="active">Attachment & Post Scheduling</li>
+									<li class="active">Set your rates</li>
+									<li class="active">Exclusive Deals</li>
+									<li class="active">Advanced Statistics</li>
+								</ul>
+								<h4>$123 <span>/ month</span></h4>		
+								<div>
+									<a href="login.html" class="btn viewdetails-btn">Choose Plan <i class="feather-arrow-right ms-2"></i></a>
+								</div>							
+							</div>							
+					    </div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Pricing  Plan -->
+				
+		<!-- Client Testimonilas Section -->
+		<section class="testimonial-section testimonial-five-section"> 
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="section-heading heading-five aos" data-aos="fade-up">
+							<h2>Our Customer’s Says</h2>
+						</div>	
+					</div>
+				</div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="owl-carousel testi-five-slider">
+						    <div class="testimonial-info testi-four testi-five aos" data-aos="fade-up">
+								<div class="testimonialslider-content">
+									<span><i class="fa-solid fa-quote-left"></i></span>
+									<h6>It was a wonderful experience</h6>
+								    <p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							    <div class="testimonialslider-heading d-flex">
+								    <div class="testi-img">
+										<img src="{% static 'assets/img/testimonial-1.jpg' %}" class="img-fluid" alt="testi-img">
+									 </div>
+									 <div class="testi-author">
+										  <h6>Dev</h6>
+									 </div>									
+								</div>
+							</div>
+							<div class="testimonial-info testi-four testi-five aos" data-aos="fade-up">
+								<div class="testimonialslider-content">
+									<span><i class="fa-solid fa-quote-left"></i></span>
+									<h6>It was a very good experience</h6>
+								    <p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							    <div class="testimonialslider-heading d-flex">
+                                    <div class="testi-img">										    
+										<img src="{% static 'assets/img/testimonial-2.jpg' %}" class="img-fluid" alt="testi-img">
+									</div>
+									 <div class="testi-author">
+										  <h6>Esther Hills</h6>
+									 </div>											
+								</div>
+							</div>
+							<div class="testimonial-info testi-four testi-five aos" data-aos="fade-up">
+								<div class="testimonialslider-content">
+									<span><i class="fa-solid fa-quote-left"></i></span>
+									<h6>It was a good experience</h6>
+								    <p>Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas</p>
+								</div>
+							    <div class="testimonialslider-heading d-flex">
+								     <div class="testi-img">
+										 <img src="{% static 'assets/img/profiles/avatar-06.jpg' %}" class="img-fluid" alt="testi-img">
+									 </div>
+									 <div class="testi-author">
+										  <h6>Hannah Schmitt</h6>
+									 </div>											
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</section>		
+		<!-- /Client Testimonilas Section -->
+		
+		<!-- Our Latest Blog -->
+		<section class="latest-blog-five"> 
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="section-heading heading-five aos" data-aos="fade-up">
+							<h2>Our Latest Blog</h2>
+						</div>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 d-flex aos" data-aos="fade-up">
+						<div class="articles-grid w-100">
+							<div class="articles-info">
+								<div class="articles-left">
+									<a href="javascript:void(0);">
+										<div class="articles-img">
+											<img src="{% static 'assets/img/blog/blog-16.jpg' %}" class="img-fluid" alt="">
+										</div>
+									</a>
+								</div>
+								<div class="articles-right">
+									<div class="articles-content">
+										<ul class="articles-list nav">
+											<li>
+												<i class="feather-user"></i> John Doe
+											</li>
+											<li>
+												<i class="feather-calendar"></i> 13 Aug, 2023
+											</li>
+										</ul>
+										<h4>
+											<a href="javascript:void(0);">Lorem ipsum dolor amet, adipiscing ut labore </a>
+										</h4>
+										<p>Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+										<a href="javascript:void(0);" class="btn articles-read-more">Read More<i class="feather-arrow-right ms-2"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 d-flex aos" data-aos="fade-up">
+						<div class="articles-grid w-100">
+							<div class="articles-info">
+								<div class="articles-left">
+									<a href="javascript:void(0);">
+										<div class="articles-img">
+											<img src="{% static 'assets/img/blog/blog-17.jpg' %}" class="img-fluid" alt="">
+										</div>
+									</a>
+								</div>
+								<div class="articles-right">
+									<div class="articles-content">
+										<ul class="articles-list nav">
+											<li>
+												<i class="feather-user"></i> Darren Elder
+											</li>
+											<li>
+												<i class="feather-calendar"></i> 10 Sep, 2023
+											</li>
+										</ul>
+										<h4>
+											<a href="javascript:void(0);">Lorem ipsum dolor amet, adipiscing ut labore </a>
+										</h4>
+										<p>Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+										<a href="javascript:void(0);" class="btn articles-read-more">Read More<i class="feather-arrow-right ms-2"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 d-flex aos" data-aos="fade-up">
+						<div class="articles-grid w-100">
+							<div class="articles-info">
+								<div class="articles-left">
+									<a href="javascript:void(0);">
+										<div class="articles-img">
+											<img src="{% static 'assets/img/blog/blog-18.jpg' %}" class="img-fluid" alt="">
+										</div>
+									</a>
+								</div>
+								<div class="articles-right">
+									<div class="articles-content">
+										<ul class="articles-list nav">
+											<li>
+												<i class="feather-user"></i> Ruby Perrin
+											</li>
+											<li>
+												<i class="feather-calendar"></i> 30 Oct, 2023
+											</li>
+										</ul>
+										<h4>
+											<a href="javascript:void(0);">Lorem ipsum dolor amet, adipiscing ut labore </a>
+										</h4>
+										<p>Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+										<a href="javascript:void(0);" class="btn articles-read-more">Read More<i class="feather-arrow-right ms-2"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 d-flex aos" data-aos="fade-up">
+						<div class="articles-grid w-100">
+							<div class="articles-info">
+								<div class="articles-left">
+									<a href="javascript:void(0);">
+										<div class="articles-img">
+											<img src="{% static 'assets/img/blog/blog-19.jpg' %}" class="img-fluid" alt="">
+										</div>
+									</a>
+								</div>
+								<div class="articles-right">
+									<div class="articles-content">
+										<ul class="articles-list nav">
+											<li>
+												<i class="feather-user"></i> John Doe
+											</li>
+											<li>
+												<i class="feather-calendar"></i> 22 Sep 2023
+											</li>
+										</ul>
+										<h4>
+											<a href="javascript:void(0);">Lorem ipsum dolor consectetur adipiscing  </a>
+										</h4>
+										<p>Sed perspiciatis unde omnis iste voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+										<a href="javascript:void(0);" class="btn articles-read-more">Read More<i class="feather-arrow-right ms-2"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</section>	
+		<!-- Our Latest Blog -->
+		
+		<!-- Stay Tuned -->
+		<section class="stay-tuned stay-turn-five">
+			<div class="container">
+				<div class="stay-with-us">
+					<h3>Stay Tuned With Us</h3>
+					<p>Subcribe to our newletter and never miss our latest news and promotions. Our newsletter is sent once a week, every thursday.</p>
+					<form>
+						<div class="form-group">
+							<div class="group-img">
+								<i class="feather-mail"></i>
+								<input type="text" class="form-control" placeholder="Enter Email Address">
+							</div>							
+						</div>
+						<button class="btn btn-primary" type="submit"> Subscribe</button>	 						
+					</form>					
+				</div>
+			</div>
+		</section>
+		<!-- Stay Tuned -->
+		
+		<!-- Footer -->
+
+			<!-- /Footer Top -->
+						
+			<!-- Footer Bottom -->
+			{% include 'discover/includes/footer.html' %}
+
+</body>
+{% endblock %}

@@ -1,0 +1,1084 @@
+{% extends 'vechiles/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Veciles Landing</title>
+{% endblock %}
+
+{% block content %}
+<body>
+	<div class="main-wrapper home-six">
+		<!-- Header -->
+		{% include 'vechiles/includes/header.html' %}
+		<!-- /Header -->
+		
+        <!-- Banner Section -->
+		<section class="banner-section banner-six">
+            <div class="floating-bg">
+				<img src="{% static 'assets/img/car.png' %}" alt="">
+            </div>
+			<div class="floating-watermark">
+				<img src="{% static 'assets/img/bg/banner-six-bg-1.png' %}" alt="">
+				<img src="{% static 'assets/img/bg/banner-six-bg-2.png' %}" alt="">
+			</div>
+			<div class="container">
+				<div class="home-banner">		
+					<div class="row aos" data-aos="fade-up">					    
+						<div class="col-lg-6">
+                            <div class="banner-contents">
+                                <h1 class="aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Find / Sell a Car with your Favourite Listee.</h1>
+                                <p class="aos" data-aos="fade-up" data-aos-delay="200">Book better cars from local hosts Across the globe</p>
+                                <a href="categories.html">                                    
+                                    <span><i class="fa-solid fa-car"></i></span>List your car 
+                                </a>
+                            </div>
+                        </div>
+					</div>
+				</div>	
+			</div>
+		</section>
+		<!-- /Banner Section -->
+		
+		<!-- Search Filter Section -->
+		<section class="car-search-filter aos" data-aos="fade-up" data-aos-delay="400">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="car-filter-section">
+							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+								<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All Conditions</button>
+								</li>
+								<li class="nav-item" role="presentation">
+								<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">New Cars</button>
+								</li>
+								<li class="nav-item" role="presentation">
+								<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Used Cars</button>
+								</li>
+								<li class="nav-item" role="presentation">
+								<button class="nav-link" id="pills-certified-tab" data-bs-toggle="pill" data-bs-target="#pills-certified" type="button" role="tab" aria-controls="pills-certified" aria-selected="false">Certified</button>
+								</li>
+							</ul>
+							<div class="tab-content" id="pills-tabContent">
+								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" >
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-11 datepicker-col search-group">
+													<ul class="car-search-filter-nav gap-3 d-flex">
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-map-pin"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Location</span>
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-pie-chart"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Make</span>
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-refresh-ccw"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Models</span>
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-tag"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Prices</span>
+																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class="col-12 col-lg-1 car-search-btn">
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" method="post">
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-11 datepicker-col search-group">
+													<ul class="gap-3 d-flex">
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-map-pin"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Location</span>
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-pie-chart"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Make</span>
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-refresh-ccw"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Models</span>
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-tag"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Prices</span>
+																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class="col-12 col-lg-1 car-search-btn">
+													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" method="post">
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-11 datepicker-col search-group">
+													<ul class="gap-3 d-flex">
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-map-pin"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Location</span>
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-pie-chart"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Make</span>
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-refresh-ccw"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Models</span>
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-tag"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Prices</span>
+																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class="col-12 col-lg-1 car-search-btn">
+													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills-certified" role="tabpanel" aria-labelledby="pills-certified-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="listing-grid-sidebar.html" method="post">
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-11 datepicker-col search-group">
+													<ul class="gap-3 d-flex">
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-map-pin"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Location</span>
+																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-pie-chart"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Make</span>
+																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-refresh-ccw"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Models</span>
+																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-tag"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Prices</span>
+																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class="col-12 col-lg-1 car-search-btn">
+													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt="">
+													</button>										
+												</div>
+											</div>
+										</form>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Search Filter Section -->
+
+		<!-- Trending Search -->
+		<section class="home-six-trending-search ">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="home-six-heading-section aos" data-aos="fade-up">
+							<div style="margin-top:10px;" class=" home-six-title d-flex justify-content-center align-items-center">
+								<h2 >Trending Search</h2>
+								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
+							</div>
+							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
+								egestas diamlorem malesu, vitae mauris.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="trending-carousel">
+							<div class="trending-slider owl-carousel owl-theme">
+								<div class="trending-slider-item aos" data-aos="fade-up" >
+									<a href="categories.html"><img src="{% static 'assets/img/work/trending-car-1.jpg' %}" alt="">
+									<span >Used Cars price from $20,000</span></a>
+								</div>
+								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="200">
+									<a href="categories.html">
+										<img src="{% static 'assets/img/work/trending-car-2.jpg' %}" alt="">
+										<span>Low Mileage Pickup Trucks</span>
+									</a>
+								</div>
+								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="400">
+									<a href="categories.html">
+										<img src="{% static 'assets/img/work/trending-car-3.jpg' %}" alt="">
+										<span>Family Cars from $10,000</span>
+									</a>
+								</div>
+								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="600">
+									<a href="categories.html">
+										<img src="{% static 'assets/img/work/trending-car-4.jpg' %}" alt="">
+										<span>Cars price more than $5,000</span>
+									</a>
+								</div>
+								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="800">
+									<a href="categories.html">
+										<img src="{% static 'assets/img/work/trending-car-5.jpg' %}" alt="">
+										<span>Family Cars from $10,000</span>
+									</a>
+								</div>
+								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="1000">
+									<a href="categories.html">
+										<img src="{% static 'assets/img/work/trending-car-2.jpg' %}" alt="">
+										<span>Low Mileage Pickup Trucks</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- /Trending Search -->
+		
+		<!-- Choose a Class -->
+		<section class="choose-car-class-section ">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="home-six-heading-section aos" data-aos="fade-up">
+							<div style="margin-top:20px;"class="home-six-title d-flex justify-content-center align-items-center">
+								<h2>Choose a Class</h2>
+								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
+							</div>
+							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
+								egestas diamlorem malesu, vitae mauris.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-lg-12">
+						<div class="car-class-carousel">
+							<div class="car-class-slider owl-carousel owl-theme">
+								<div class="car-class-item-block aos" data-aos="fade-up">
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Suv</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-1.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Sports</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-4.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="car-class-item-block aos" data-aos="fade-up" data-aos-delay="200">
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Coupe</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-2.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Sedan</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-5.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="car-class-item-block  aos" data-aos="fade-up" data-aos-delay="400">
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Luxury</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-3.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Vip Cars</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-6.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="car-class-item-block">
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Suv</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-1.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Sports</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-4.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="car-class-item-block">
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Coupe</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-2.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+									<div class="car-class-item">
+										<a href="categories.html">
+											<div class="car-class-list">
+												<div class="car-class-title d-flex justify-content-between">
+													<h5>Sedan</h5>
+													<span>30 Cars Available</span>
+												</div>
+												<img src="{% static 'assets/img/cars-class-5.png' %}" class="img-fluid" alt="">
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Choose a Class -->
+
+		<!-- Car Testimonial -->
+		<section class="car-testimonial">
+			<div class="container">
+				<div class="row aos" data-aos="zoom-in">
+					<div class="col-lg-4 col-md-6">
+						<div class="car-testimonial-content">
+							<h3>.01</h3>
+							<h5>FIND THE CAR IN YOUR DREAM</h5>
+							<p>With the function search of listee, you can find the exactly any type of car that you want in a few minutes. Fast & Exactly !</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="car-testimonial-content">
+							<h3>.02</h3>
+							<h5>CHECK PRICE AND INFORMATION OF VEHICLE</h5>
+							<p>Check price and informations about vehicle. You can also estimate your payment with our Financial Caculator</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="car-testimonial-content">
+							<h3>.03</h3>
+							<h5>BOOK APPOINTMENTS WITH A TAP</h5>
+							<p>Easy to make an appointments with agents or dealers. Agents or dealers will call again for you in 24h</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Car Testimonial -->
+
+		<!-- Browse By Brand -->
+		<section class="browse-by-brand ">
+			<div class="car-float-bg aos" data-aos="fade-down">
+				<img src="{% static 'assets/img/brand-bg.png' %}" alt="">
+				<img src="{% static 'assets/img/brand-bg-2.png' %}" alt="">
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="home-six-heading-section">
+							<div style="margin-top:20px;"class="home-six-title d-flex justify-content-center align-items-center">
+								<h2>Browse By Make</h2>
+								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
+							</div>
+							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
+								egestas diamlorem malesu, vitae mauris.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-lg-10 col-md-12">
+						<div class="car-class-carousel">
+							<div class="car-brand-slider owl-carousel owl-theme">
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-left">
+										<img src="{% static 'assets/img/partners/brand-1.png' %}" alt="">
+										<p>Audi <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-right">
+										<img src="{% static 'assets/img/partners/brand-2.png' %}" alt="">
+										<p>KIA <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-left">
+										<img src="{% static 'assets/img/partners/brand-3.png' %}" alt="">
+										<p>Honda <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-right">
+										<img src="{% static 'assets/img/partners/brand-4.png' %}" alt="">
+										<p>Chevorlet <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-left">
+										<img src="{% static 'assets/img/partners/brand-5.png' %}" alt="">
+										<p>Nissan <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-right">
+										<img src="{% static 'assets/img/partners/brand-6.png' %}" alt="">
+										<p>Bently <span>(30)</span></p>
+									</div>
+								</a>
+								<a href="categories.html">
+									<div class="browse-by-brand-item aos" data-aos="flip-left">
+										<img src="{% static 'assets/img/partners/brand-1.png' %}" alt="">
+										<p>Audi <span>(30)</span></p>
+									</div>
+								</a>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Browse By Brand -->
+
+		<!-- Top Featured Cars -->
+<section class="latestad-section grid-view featured-slider" style='padding-top:50px;'>
+		<div class="container" style='margin-top:3rem;'>		
+				<div class="section-heading">
+					<div style="position:relative" class="row align-items-center">
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="text-center">
+            <h3>Featured Listings</h3>
+            <p>The most trendy accommodations available</p>
+        </div>
+    </div>
+    <div style="position:absolute;left:80%" class="">
+        <a href="#" class="btn btn-view">Explore all listings</a>
+    </div>
+</div>
+				</div>
+				<div class="lateestads-content">
+					<div class="row">
+						{% for product in featured_products %}
+						<div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+							<div class="card aos flex-fill" data-aos="fade-up">
+								<div class="blog-widget">
+									<div class="blog-img">
+										<a href="{% url 'service_detail' product.slug %}">
+											{% if product.cover_image %}
+											<img src="{{ product.cover_image.url }}" class="img-fluid" alt="blog-img">
+											{% endif %}
+										</a>
+										
+										<div class="fav-item" data-id="{{ product.id }}">
+											<span class="featured-text">Featured</span>
+											<a href="javascript:void(0)" class="fav-icon {% if product.id in book_mark %}fav selected{% endif %}">
+
+												<i class="feather-heart" ></i>
+											</a>	
+											
+											
+											
+										</div>
+										
+										<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+									</div>
+									<div class="bloglist-content">
+										<div class="card-body">
+											<div class="blogfeaturelink">
+												{% if product.created_by.profile.profile_photo %}
+												<div class="grid-author">
+													 <img  src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+												</div>	
+												{% else %}
+												<div class='grid-author'>
+												<img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
+												</div>
+												
+												{% endif%}
+
+												<div class="blog-features">
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												</div>																	  
+												<div class="blog-author text-end"> 
+													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
+												</div>
+											</div> 
+											<h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
+											<div class="blog-location-details">
+												{% if product.location %}
+												<div class="location-info">
+												   <i class="feather-map-pin"></i>{{product.location.address}}
+												</div>
+												{% else %}
+												<div class="location-info">
+													<i class="feather-map-pin"></i>Dubai
+												 </div>
+												{% endif %}
+												<div class="location-info">
+
+													<i class="fa-regular fa-calendar-days"></i>{{ product.created_date|date:"F j, Y" }}
+												</div>
+											</div>
+											<div class="amount-details">
+												<div class="amount">
+													<span class="validrate">AED{{product.price}}</span>
+												</div>
+												<div class="ratings">
+													<span>4.7</span> (50)
+												</div>
+											</div>
+													
+										</div>	
+									</div>			 
+								</div> 
+							</div>
+						</div>
+						{% endfor %}
+						
+						
+					</div>						
+				</div>						
+		</div>
+</section>
+		<!-- /Top Featured Cars -->
+
+		<!-- Car Rental Slider -->
+		<section class="car-rental-slider-section aos" data-aos="fade-up">
+			<div class="car-rental-carousel">
+				<div class="car-rental-slider owl-carousel owl-theme">
+					<div class="car-rental-slider-item">
+						<img src="{% static 'assets/img/car-rental-slider-img.jpg' %}" class="img-fluid" alt="">
+						<div class="container">
+							<div class="car-rental-carousel-content">
+								<h6>Limited Edition</h6>
+								<h3 class=" aos" data-aos="fade-up" data-aos-delay="200">2021 Jaguar XF facelift</h3>
+								<h5 class=" aos" data-aos="fade-up" data-aos-delay="300"><span>$400</span>/ Month</h5>
+								<p class=" aos" data-aos="fade-up" data-aos-delay="400">$0 First payment paid by jaquar up to $325.<br>taxes, title and fees extra</p>
+								<a  href="contact.html">Test Drive</a>
+							</div>
+						</div>
+					</div>
+					<div class="car-rental-slider-item">
+						<img src="{% static 'assets/img/car-rental-slider-img-2.jpg' %}" class="img-fluid" alt="">
+						<div class="container">
+							<div class="car-rental-carousel-content">
+								<h6>Limited Edition</h6>
+								<h3>2021 Audi RS7</h3>
+								<h5><span>$450</span>/ Month</h5>
+								<p>$0 First payment paid by jaquar up to $453.<br>taxes, title and fees extra</p>
+								<a href="signup.html">Test Drive</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Car Rental Slider -->
+		<!-- categories section -->
+
+		<section class="explore-categories ">
+            <div class="container">
+                <div style="margin-top:50px" class="section-heading section-heading-nine  aos" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 aos aos-init aos-animate text-center" data-aos="fade-up">
+                            <h2>Explore Our Categories</h2>
+                            <p>The most trendy accommodations available</p>
+                        </div>
+                        <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+                            <a href="categories.html" class="btn  btn-view">View all Catgeorries</a>
+                        </div>		
+                    </div>	
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="car-class-carousel">
+                            <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                            </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Villas</h5>
+                                            <span>50 Listings</span> 
+                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Condos</h5>
+                                            <span>45 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Shared Rooms</h5>
+                                            <span>40 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="best-room">
+                                    <div class="best-room-img">
+										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
+                                    </div>
+                                    <a href="listing-list-sidebar.html">
+                                        <div class="best-room-type">
+                                            <h5>Bed Room</h5>
+                                            <span>30 Listings</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</section>
+
+
+		<!-- Service Section -->
+		<section class="car-service-section">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-up">
+						<div class="car-service-container ">
+							<img src="{% static 'assets/img/icons/bx-wrench.svg' %}" alt="">
+							<h4>Auto Repair</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-down">
+						<div class="car-service-container ">
+							<img src="{% static 'assets/img/icons/bx-map-pin.svg' %}" alt="">
+							<h4>Rental Service</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-up">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-pie-chart.svg' %}" alt="">
+							<h4>Tire Change</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-up">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-planet.svg' %}" alt="">
+							<h4>Official Dealers</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-up">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-gift.svg' %}" alt="">
+							<h4>Paint Work</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-down">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-power-off.svg' %}" alt="">
+							<h4>Car Diagonostics</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6 aos" data-aos="flip-up">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-trophy.svg' %}" alt="">
+							<h4>Battery Replacements</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6  aos" data-aos="flip-down">
+						<div class="car-service-container">
+							<img src="{% static 'assets/img/icons/bx-repost.svg' %}" alt="">
+							<h4>Dry Cleaning Car</h4>
+							<p>We buy and sale barand new car and also used car of any brand</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Service Section -->
+
+
+
+		<!-- Blog  Section -->
+		<section class="blog-section">
+            <div class="container">	 	
+				<div class="row aos" data-aos="fade-up">
+					<div class="col-lg-12">
+						<div class="home-six-heading-section">
+							<div class="home-six-title d-flex justify-content-center align-items-center">
+								<h2>News & Information</h2>
+								<img src="{% static 'assets/img/icons/title.svg' %}" alt="">
+							</div>
+							<p>Rutrum ante tempus mauris facilisi, leo faucibus,
+								egestas diamlorem malesu, vitae mauris.</p>
+						</div>
+					</div>
+				</div>								
+				<div class="row aos" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+						    <div class="blog grid-blog">
+						     	<div class="blog-image">
+									<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-1.png' %}" alt="Post Image"></a>
+								</div>
+								<div class="blog-content">
+									<p class="blog-category">
+									   <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+									</p>
+									<ul class="entry-meta meta-item">
+										<li>
+											<div class="post-author">
+												<div class="post-author-img">
+													<img src="{% static 'assets/img/profiles/avatar-14.jpg' %}" alt="Post Author">
+												</div>
+												<a href="javascript:void(0);" class="mb-0"> <span> Amara </span></a>
+											</div>
+										</li>
+										<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 4, 2023</li>
+									</ul>
+							     	<h3 class="blog-title"><a href="blog-details.html">Three Powerful Tricks for Online Advertising</a></h3>
+									<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+									<p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+								</div>
+							</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+					        <div class="blog grid-blog">
+								<div class="blog-image">
+									<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-2.png' %}" alt="Post Image"></a>
+								</div>
+								<div class="blog-content">
+									<p class="blog-category">
+									   <a href="javascript:void(0);"><span>Care & Tips</span></a>
+									</p>
+									<ul class="entry-meta meta-item">
+										<li>
+											<div class="post-author">
+												<div class="post-author-img">
+													<img src="{% static 'assets/img/profiles/avatar-12.jpg'  %}" alt="Post Author">
+												</div>
+												<a href="javascript:void(0);" class="mb-0"><span> Darryl </span></a>
+											</div>
+										</li>
+										<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 6, 2023</li>
+									</ul>
+									<h3 class="blog-title"><a href="blog-details.html">Three Powerful Tricks For Online Advertising</a></h3>
+									<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+									<p class="viewlink"><a href="blog-details.html">View Details <i class="feather-arrow-right"></i></a></p>
+								</div>
+						    </div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+					     <div class="blog grid-blog">
+							<div class="blog-image">
+								<a href="blog-details.html"><img class="img-fluid" src="{% static 'assets/img/blog/blog-six-3.png' %}" alt="Post Image"></a>
+							</div>
+					    	<div class="blog-content">
+								<p class="blog-category">
+								   <a href="javascript:void(0);"><span>Health</span></a><a href="javascript:void(0);"><span>Care</span></a>
+								</p>
+								<ul class="entry-meta meta-item">
+									<li>
+										<div class="post-author">
+											<div class="post-author-img">
+												<img src="{% static 'assets/img/profiles/avatar-13.jpg'  %}" alt="Post Author">
+											</div>
+											<a href="javascript:void(0);" class="mb-0"> <span> Mary </span></a>
+										</div>
+									</li>
+									<li class="date-icon"><i class="fa-solid fa-calendar-days"></i> October 10, 2023</li>
+								</ul>
+								<h3 class="blog-title"><a href="blog-details.html">Competitive Analysis for Enterprerneurs in 20232</a></h3>
+								<p class="blog-description">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur em adipiscing elit,</p>
+								<p class="viewlink"><a href="blog-details.html">View Details  <i class="feather-arrow-right"></i></a></p>
+							</div>
+						 </div>
+					</div>
+					<div class="col-lg-12 d-flex justify-content-center align-items-center">
+						<div class="car-more-blog">
+							<a href="blog-list.html">More Blog</a>
+						</div>
+					</div>
+				</div>									
+			</div>	 
+		</section>
+		<!-- /Blog  Section -->
+
+		<!-- Join Us -->
+		<section class="join-us-dealer ">
+			<div class="join-us-dealer-bg">
+				<img src="{% static 'assets/img/become-dealer-bg.png' %}" alt="">
+			</div>
+			<div class="container">
+				<div class="row align-items-center aos" data-aos="fade-up">
+					<div class="col-lg-6 col-md-12">
+						<div class="joinus-dealer-content">
+							<h3 class="aos" style="margin-top:25px;margin-bottom:0" data-aos="fade-up" data-aos-delay="200">Become a Dealer with Listee?</h3>
+							<p class="aos" style="margin-top:0;padding-bottom:25px" data-aos="fade-up" data-aos-delay="300">Sell your car Free with Listee and earn commision up to 70%.</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<div class="join-as-dealer-btn">
+							<a href="signup.html">Create an Account <i class="feather-arrow-right ms-2"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /Join Us -->
+
+		{% include 'vechiles/includes/footer.html' %}
+		<!-- Footer -->
+	</body>
+{% endblock %}
