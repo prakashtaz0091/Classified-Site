@@ -149,73 +149,20 @@
 							</div>
 							<div class="card-body">
 							  <div class="lisiting-featues">
-							    <div class="row">
-							        <div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-										<img src="{% static 'assets/img/featured/Feature-1.svg' %}" alt="Room amenties" >
-									    </div>
-										<div class="featues-info">
-										     <h6>Room <br> amenities</h6>
+									<div class="row">
+										{% for feature in product.features.all %}
+										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
+											<div class="feature-img">
+											<img src="{{feature.image.url}}" alt="Room amenties" >
+											</div>
+											<div class="featues-info">
+												<h6>{{feature.name}} <br> amenities</h6>
+											</div>
 										</div>
+										{% endfor %}
+										
 									</div>
-									<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-2.svg' %}" alt="Bathroom amenities" >
-									    </div>
-										<div class="featues-info">
-										    <h6>Bathroom <br> amenities</h6>
-										</div>
-									</div>
-									<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-3.svg' %}" alt="Media Technology" >
-									    </div>
-										<div class="featues-info">
-										    <h6>Media & Technology <br> amenities</h6>
-										</div>
-									</div>
-									<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-4.svg' %}" alt="Food Security" >
-									    </div>
-										<div class="featues-info">
-										    <h6>Food & Security  <br> amenities</h6>
-										 </div>
-									</div>
-									<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-5.svg' %}" alt="Media Technology" >
-									    </div>
-										<div class="featues-info">
-										    <h6>Services & Extra <br> amenities</h6>
-										</div>
-									</div>
-									<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-6.svg' %}" alt="Media Technology">
-									    </div>
-										<div class="featues-info">
-										     <h6>Outdoor & View <br> amenities</h6>
-										</div>
-									</div>
-									<div class="featureslist d-flex  access-feature align-items-center col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-7.svg' %}" alt="Media Technology">
-									    </div>
-										<div class="featues-info">
-										    <h6>Accessibility <br> amenities</h6>
-										</div>
-									</div>
-									<div class="featureslist d-flex align-items-center access-feature col-lg-4 col-md-4">
-									    <div class="feature-img">
-									      <img src="{% static 'assets/img/featured/Feature-8.svg' %}" alt="Media Technology">
-									    </div>
-										<div class="featues-info">
-										    <h6>Safety & Security<br> amenities</h6>
-										</div>
-									</div>
-									</div>
-								</div>	
+								</div>
 							</div>	
                         </div>									
 						<!--/Listing Features Section-->
