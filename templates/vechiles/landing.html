@@ -28,7 +28,7 @@
                             <div class="banner-contents">
                                 <h1 class="aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Find / Sell a Car with your Favourite Listee.</h1>
                                 <p class="aos" data-aos="fade-up" data-aos-delay="200">Book better cars from local hosts Across the globe</p>
-                                <a href="categories.html">                                    
+								<a href="{% url 'add_listing' %}">                                    
                                     <span><i class="fa-solid fa-car"></i></span>List your car 
                                 </a>
                             </div>
@@ -804,6 +804,7 @@
                     <div class="col-md-12">
                         <div class="car-class-carousel">
                             <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+							{% for subcategory in subcategories %}
                                 <div class="best-room">
                                     <div class="best-room-img">
 										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
@@ -816,6 +817,7 @@
                                         </div>
                                     </a>
                                 </div>
+								{% endfor %}
                                 <div class="best-room">
                                     <div class="best-room-img">
 										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
