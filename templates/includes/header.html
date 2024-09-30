@@ -1,6 +1,8 @@
 
 {% load static %}
-<div class="container" style='max-width:1500px;'>
+<div class="container">
+{% comment %}
+<div class="container" style='max-width:1500px;'> {% endcomment %}
     <nav class="navbar navbar-expand-lg header-nav">
         <div class="navbar-header">
             <a id="mobile_btn" href="javascript:void(0);">
@@ -12,12 +14,13 @@
             </a>
             <a href="{% url 'home' %}" class="navbar-brand logo">
                 <img src="{% static 'assets/img/icons/logo.png' %}" class="img-fluid" alt="Logo">
+
             </a>						
         </div>
         <div class="main-menu-wrapper">
             <div class="menu-header">
                 <a href="index.html" class="menu-logo">
-                    <img src="{% static 'assets/img/logo.svg' %}" class="img-fluid" alt="Logo">
+                    <img src="{% static 'logo.svg' %}" class="img-fluid" alt="Logo" style='width:131px;height:35px;'>
                 </a>
                 <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
             </div>
@@ -179,6 +182,7 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="{% url 'admin_index' %}" target="_blank">Admin</a></li>
             {% if user.is_authenticated %}
+
                 <li class="login-link">
                     <a href="{% url 'logout' %}">LogOut</a>
                 </li>
@@ -211,6 +215,7 @@
                 <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
             </li>
             {% endif %}
+
         </ul>
     </nav>
 </div>

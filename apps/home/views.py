@@ -65,7 +65,6 @@ def home(request):
             else:
                 bookmarked_product_ids = []
 
-
             context = {
                 "latest_products": latest_products,
                 "all_products": all_products,

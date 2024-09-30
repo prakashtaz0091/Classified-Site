@@ -16,6 +16,7 @@ class ContactInformation(models.Model):
 
 class Feature(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    image=models.FileField(upload_to='photos/feature')
 
     def __str__(self):
         return self.name
@@ -41,7 +42,7 @@ class Product(models.Model):
     price = models.IntegerField()
     is_available = models.BooleanField(default=False)
     featured_data=models.JSONField(blank=True,null=True)
-    features = models.ManyToManyField(Feature, related_name="stores")
+    features = models.ManyToManyField(Feature, related_name="features")
     category=models.ForeignKey(Category,related_name='category_products',on_delete=models.CASCADE,blank=True,null=True)
     subcategory=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True,related_name='products')
     negotiable=models.BooleanField(default=False)

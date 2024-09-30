@@ -1,52 +1,36 @@
 
 {% load static %}
 {% for product in products %}
-<div class="card" data-index="{{ forloop.counter }}">
+
+<div class="card"   data-index="{{ forloop.counter }}">
     <div class="blog-widget">
         <div class="blog-img">
             <a href="{% url 'service_detail' product.slug %}">
                 {% if product.cover_image %}
-                <img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
+              <img src="{{product.cover_image.url}}" class="img-fluid" alt="blog-img">
                 {% endif %}
             </a>
-
-
-	<div class="fav-item" data-id="{{ product.id }}">
-											<span class="featured-text">Featured</span>
-											<a onclick="ToggleFavourites(this,{{product.id}})"  class="fav-icon">
-												<i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
-											</a>	
-										</div>
-
-                
+            <div class="fav-item" data-id="{{ product.id }}">
+                <span class="featured-text">Featured</span>
+                <a onclick="ToggleFavourites(this,{{product.id}})"  class="fav-icon">
+                    <i class="feather-heart {% if product.id in book_mark %}fav{% endif %}"></i>
+                </a>	
+            </div>	
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-												    
+													    
         </div>
         <div class="bloglist-content">
             <div class="card-body">
-                 <div class="blogfeaturelink">
+               <div class="blogfeaturelink">
                     <div class="blog-features">
-                       <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>
-                     
-                        
-                        {{ product.subcategory.category_name }}
-                        </span></a>
+                       <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>{{product.category.category_name}}</span></a>
                     </div>																	  
-                    <div class="blog-author">
-                        {% if product.created_by.profile.profile_photo %} 
-                       
+                    <div class="blog-author"> 
                         <div class="blog-author-img">
-                            <img src="{{product.created_by.profile.profile_photo.url}}" alt="author">
+                            
+                           <img src=" {{ product.created_by.profile.profile_photo.url }} " alt="author">
                         </div>
-                        {% else %}
-
-                        <div class='blog-author-img'>
-                            <img  src="{% static 'assets/img/profiles/avatar-02.jpg' %}" alt="author">
-                        </div>
-                        {% endif %}
-                       
-                        
-                      <a href="javascript:void(0);">{{product.created_by.full_name}}</a>
+                       <a href="javascript:void(0);">{{product.created_by.full_name}}</a>
                     </div>
                 </div> 
                 <h6><a href="{% url 'service_detail' product.slug %}">{{product.product_name}}</a></h6>																	 
@@ -55,32 +39,24 @@
                         {% if product.location.address %}
                         <i class="feather-map-pin"></i>{{product.location.address}}
                         {% else %}
-                        <i class="feather-map-pin"></i>Dubai  
+                        <i class="feather-map-pin"></i>Dubai
                         {% endif %}
                     </div>
-                 
                     <div class="location-info">
-                        <i class="fa-regular fa-calendar-days"></i>{{product.created_date|date}}
+                        
+                        <i class="feather-phone-call"></i> +44 6633 6526
                     </div>
-                    
-
                     <div class="location-info">
-                        <i class="feather-eye"></i>{{product.view_count}}
+                       <i class="feather-eye"></i>{{product.view_count}}
                     </div>
                 </div>
-                {% comment %}
                 <p class="ratings">
                     <span>4.0</span> ( 50 Reviews )
                 </p>
-                {% endcomment %}
-                <div style="margin-top:2rem" class="amount-details">
+                <div class="amount-details">
                     <div class="amount">
-                        <span class="validrate">AED {{product.price}}</span>
-                       
-                        {% comment %}
+                        <span class="validrate">${{product.price}}</span>
                         <span>$450</span>
-                        {% endcomment %}
-                       
                     </div>
                     <a href="{% url 'service_detail' product.slug %}">View details</a>
                 </div>	
@@ -88,5 +64,4 @@
         </div>			 
     </div> 
 </div>
-
 {% endfor %}
