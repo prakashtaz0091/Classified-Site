@@ -153,7 +153,9 @@
 										{% for feature in product.features.all %}
 										<div class="featureslist d-flex align-items-center col-lg-4 col-md-4">
 											<div class="feature-img">
+												{% if feature.image %}
 											<img src="{{feature.image.url}}" alt="Room amenties" >
+											{% endif %}
 											</div>
 											<div class="featues-info">
 												<h6>{{feature.name}} <br> amenities</h6>
@@ -442,16 +444,12 @@
 						    <div class="card">
 						     <h4><img  src="assets/img/details-icon.svg" alt="details-icon"> Details</h4>
 						     <ul>
-							    <li>Contract <span>For Rent</span></li>
-							    <li>Location <span>New York, USA</span></li>
-							    <li>Year Built <span>1988</span></li>
-							    <li>Rooms <span>3</span></li>
-							    <li>Beds <span>4</span></li>
-							    <li>Baths<span>8</span></li>
-							    <li>Gadgets <span>6</span></li>
-							    <li>Home Area <span>30sqft</span></li>
-							    <li>Lot Dimensions <span>30*30*20 ft</span></li>
-							    <li class="p-0">Lot Area <span>50 ft</span></li>
+								 			 {% for feature in featured_data %}
+        <li class="feature-item flex">
+            <span class="feature-title">{{ feature.title|capfirst }}</span>
+            <span class="feature-value" style="text-align:right">{{ feature.value|safe }}</span>
+        </li>
+    {% endfor %}
 							 </ul>
 							</div>
 							<div class="card">

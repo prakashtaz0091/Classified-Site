@@ -16,7 +16,7 @@ class ContactInformation(models.Model):
 
 class Feature(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    image=models.FileField(upload_to='photos/feature')
+    image=models.FileField(upload_to='photos/feature',blank=True,null=True)
 
     def __str__(self):
         return self.name
