@@ -1,14 +1,21 @@
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 
 from apps.category.models import Category
-from apps.store.models import BookMark, Product
+from apps.store.models import BookMark, Feature, Product
 
 #Property landing page
 def landing_page(request):
     try:
+        category=Category.objects.get(slug='vechiles')
+        sub_category_instance=Category.objects.filter(parent_id=category)
         featured_products=Product.objects.all()[:4]
         context={
-            'featured_products':featured_products
+            'subcategories':sub_category_instance,
+            'featured_products':featured_products,
+            'sub_category_instance':sub_category_instance
         }
         print(context)
         return render(request,'vechiles/landing.html',context)
@@ -22,7 +29,8 @@ def vechiles_category(request):
         location=request.GET.get('location')
         make=request.GET.get('make')
         model=request.GET.get('model')
-        prices=request.Get.get('prices')
+        prices=request.Get.get('prices_cond')
+        prices_value=request.Get.get('prices_value')
         #used or new
         condition=request.GET.get('condition')
 
@@ -30,6 +38,8 @@ def vechiles_category(request):
         category = Category.objects.get(slug='vechiles')
         if category is None:
             category=Category.objects.get(slug='vechile')
+
+
 
         products = Product.objects.filter(category=category).order_by("-id")
         print(products)
@@ -43,9 +53,7 @@ def vechiles_category(request):
         paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page",1)
         page_obj = paginator.get_page(page_number)
-        
         feature=Feature.objects.all() 
-        
         print(bookmarked_product_ids,'ids')   
 
         context = {
@@ -70,6 +78,8 @@ def vechiles_category(request):
                 "pagination_data": pagination_data,
             }
             return JsonResponse(response_data)
+
+        return render(request, "listing/listing-category.html", context)
 
     except Exception as e:
         print(e)

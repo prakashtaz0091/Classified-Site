@@ -807,77 +807,25 @@
 							{% for subcategory in subcategories %}
                                 <div class="best-room">
                                     <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+										<a href="{% url 'listing' subcategory.slug %}">
+
+											{% if subcategory.category_thumbnail_image %}
+											<img src="{{subcategory.category_thumbnail_image.url}}" class="img-fluid" alt="">
+											{% else %}
+											<img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt="">
+											{% endif %}
+
+										</a>
                                     </div>
-                                    <a href="listing-list-sidebar.html">
+									<a href="{% url 'listing' subcategory.slug %}">
                                         <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
+											<h5>{{subcategory.category_name}}</h5>
+											<span>{{subcategory.products.count}} Listings</span>
                                             <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
                                     </a>
                                 </div>
 								{% endfor %}
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                            </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Villas</h5>
-                                            <span>50 Listings</span> 
-                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Condos</h5>
-                                            <span>45 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
