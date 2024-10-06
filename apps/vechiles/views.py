@@ -11,7 +11,7 @@ def landing_page(request):
     try:
         category=Category.objects.get(slug='vechiles')
         sub_category_instance=Category.objects.filter(parent_id=category)
-        featured_products=Product.objects.all()[:4]
+        featured_products=Product.objects.filter(category=category)[:4]
         context={
             'subcategories':sub_category_instance,
             'featured_products':featured_products,
