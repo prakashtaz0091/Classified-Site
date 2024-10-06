@@ -62,7 +62,8 @@
 							<div class="tab-content" id="pills-tabContent">
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" >
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
 													<ul class="car-search-filter-nav gap-3 d-flex">
@@ -75,7 +76,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -88,7 +89,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -101,7 +102,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
@@ -114,7 +115,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
@@ -123,6 +124,7 @@
 												<div class="col-12 col-lg-1 car-search-btn">
 													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
+												
 											</div>
 										</form>	
 									</div>
@@ -142,7 +144,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="nciame" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>

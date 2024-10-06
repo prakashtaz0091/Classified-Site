@@ -26,11 +26,11 @@ def landing_page(request):
 
 def vechiles_category(request):
     try:
-        location=request.GET.get('location')
-        make=request.GET.get('make')
-        model=request.GET.get('model')
-        prices=request.Get.get('prices_cond')
-        prices_value=request.Get.get('prices_value')
+        location=request.POST.get('location')
+        make=request.POST.get('make')
+        model=request.POST.get('models')
+        prices_status=request.POST.get('price_status')
+        prices_value=request.POST.get('price')
         #used or new
         condition=request.GET.get('condition')
 
@@ -38,10 +38,10 @@ def vechiles_category(request):
         category = Category.objects.get(slug='vechiles')
         if category is None:
             category=Category.objects.get(slug='vechile')
-
-
-
         products = Product.objects.filter(category=category).order_by("-id")
+        if location:
+            products = products.filter(location__address__icontains=location)
+
         print(products)
 
         if request.user.is_authenticated:
