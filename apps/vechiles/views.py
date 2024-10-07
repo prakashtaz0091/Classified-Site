@@ -54,6 +54,15 @@ def vechiles_category(request):
                     filtered_products.append(product)
             products=filtered_products
 
+        if model_query:
+            filtered_products=[]
+            for product in products:
+                featured_data=product.featured_data
+                if (model_query.lower() in str(featured_data).lower()):
+                    filtered_products.append(product)
+            products=filtered_products
+
+
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
                 user=request.user
