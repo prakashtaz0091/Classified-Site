@@ -32,8 +32,13 @@ def vechiles_category(request):
         prices_status=request.POST.get('price_status')
         prices_value=request.POST.get('price')
         #used or new
-        condition=request.GET.get('condition')
+        condition=request.POST.get('condition')
 
+        make_query=request.GET.get('make')
+        model_query=request.GET.get('model')
+        condition_query=request.GET.get('condition')
+        price_query=request.GET.get('price')
+        make_query=request.GET.get('make')
 
         category = Category.objects.get(slug='vechiles')
         if category is None:
@@ -42,7 +47,16 @@ def vechiles_category(request):
         if location:
             products = products.filter(location__address__icontains=location)
 
-        print(products)
+        if make_query:
+            print(make_query)
+            filtered_products=[]
+            for product in products:
+                featured_data=product.featured_data
+                print(featured_data)
+                if (make_query in str(featured_data)):
+                    filtered_products.append(product)
+            print(filtered_products)
+            products=filtered_products
 
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
