@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from apps.category.models import Category
 from apps.store.models import Product
 
@@ -8,6 +7,9 @@ def landing_page(request):
     try:
         featured_products=Product.objects.all()[:4]
         all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE')
+        property_category = Category.objects.get(category_name='Real Estate')
+        subcategories = property_category.subcategories.all()
+        
         latest_products = []
         all_products = (
             Product.objects.select_related()
@@ -24,7 +26,8 @@ def landing_page(request):
 
         context={
             'featured_products':featured_products,
-            'latest_products':latest_products
+            'latest_products':latest_products,
+            'subcategories':subcategories
         }
         return render(request,'properties/landing.html',context)
 

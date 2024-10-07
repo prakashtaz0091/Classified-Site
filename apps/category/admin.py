@@ -11,6 +11,7 @@ class category_admin(admin.ModelAdmin):
     list_display = (
         "category_name",
         "slug",
+        'parent_id'
     )
 
 admin.site.register(Category, category_admin)

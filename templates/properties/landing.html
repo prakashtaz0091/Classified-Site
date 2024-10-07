@@ -422,15 +422,16 @@
                     <div class="col-lg-12">
                         <div class="car-class-carousel">
                             <div class="property-listing-slider owl-carousel owl-theme">
+								{% for property in subcategories %}
                                 <div class="property-item">
                                     <a href="categories.html"><div class="companies-set mb-4">
                                         <div class="companies-set-head">
                                             <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+												<span><img src="{{property.category_icon_image.url}}" alt="img"></span>
                                             </div>
                                             <div class="companies-set-content">
                                                 <h5><span>121</span>Properties</h5>
-                                                <h6>Elite Poperty</h6>
+                                                <h6>{{property.category_name}}</h6>
                                             </div>
                                         </div>
                                         <div class="companies-set-count">
@@ -456,11 +457,11 @@
                                     <a href="categories.html"><div class="companies-set">
                                         <div class="companies-set-head">
                                             <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
+												<span><img src="{{property.category_icon_image.url}}" alt="img"></span>
                                             </div>
                                             <div class="companies-set-content">
                                                 <h5><span>188</span>Properties</h5>
-                                                <h6>Private Property</h6>
+                                                <h6>{{property.category_name}}</h6>
                                             </div>
                                         </div>
                                         <div class="companies-set-count">
@@ -484,316 +485,8 @@
                                         </div>
                                     </div></a>
                                 </div>
-                                <div class="property-item">
-                                    <a href="categories.html"><div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>671</span>Properties</h5>
-                                                <h6>Tangible Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>05</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>99</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>76</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>165</span>Properties</h5>
-                                                <h6>Personal Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>77</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>22</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>06</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
-                                <div class="property-item">
-                                   <a href="#categories.html"> <div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>991</span>Properties</h5>
-                                                <h6>Public Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>87</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>32</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>64</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>101</span>Properties</h5>
-                                                <h6>Personal Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>45</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>98</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>32</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
-                                <div class="property-item">
-                                    <a href="categories.html"><div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>876</span>Properties</h5>
-                                                <h6>Tangible Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>09</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>77</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>44</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>921</span>Properties</h5>
-                                                <h6>Public Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>90</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>76</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>51</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
-                                <div class="property-item">
-                                    <a href="categories.html"><div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>331</span>Properties</h5>
-                                                <h6>Elite Poperty</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>49</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>88</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>41</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>555</span>Properties</h5>
-                                                <h6>Public Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>09</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>99</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>66</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
-                                <div class="property-item">
-                                    <a href="categories.html"><div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>765</span>Properties</h5>
-                                                <h6>Personal Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>79</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>44</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>45</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{% static 'assets/img/icons/property.svg' %}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>191</span>Properties</h5>
-                                                <h6>Tangible Property</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>90</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>75</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>12</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
+								{% endfor %}
+                               
                                 
                             </div>
                         </div>
