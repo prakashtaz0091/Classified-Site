@@ -50,3 +50,14 @@ def listing_list_details(request,slug):
         'product':product
     }
     return render(request,'properties/list_details.html',context)
+
+
+
+
+# from django.db.models import Count
+# def view_company(request):
+#     category = Category.objects.annotate(subcategory_count=Count('subcategories'))
+#     context={
+#         'category':category
+#     }
+#     return render(request,'others/categories.html',context)
