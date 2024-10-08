@@ -39,6 +39,15 @@ def vechiles_category(request):
         price_query=request.GET.get('price')
         mileage_query=request.GET.get('mileage')
 
+        if make:
+            make_query=make
+        if model:
+            model_query=model
+        if prices_value:
+            price_query=prices_value
+        if condition:
+            condition_query=condition
+
         category = Category.objects.get(slug='cars')
         if category is None:
             category=Category.objects.get(slug='cars')
