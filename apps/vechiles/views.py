@@ -29,7 +29,6 @@ def vechiles_category(request):
         location=request.POST.get('location')
         make=request.POST.get('make')
         model=request.POST.get('models')
-        prices_status=request.POST.get('price_status')
         prices_value=request.POST.get('price')
         #used or new
         condition=request.POST.get('condition')
@@ -42,9 +41,32 @@ def vechiles_category(request):
         category = Category.objects.get(slug='vechiles')
         if category is None:
             category=Category.objects.get(slug='vechile')
+
         products = Product.objects.filter(category=category).order_by("-id")
         if location:
             products = products.filter(location__address__icontains=location)
+
+        query = request.GET.get("query", "")
+        category = request.GET.get("category",None)
+        location = request.GET.get("location", "")
+        region = request.GET.get("region", "")
+        min_price = request.GET.get("min_price", None)
+
+        sort_by = request.GET.get("sort", "default")
+        max_price = request.GET.get("max_price", None)
+
+
+        if query!="":
+            products = products.filter(product_name__icontains=query)
+
+        if location!="":
+            products=products.filter(location__address__icontains=location)
+
+        if min_price:
+            products = products.filter(price__gte=min_price)
+        if max_price:
+            products = products.filter(price__lte=max_price)
+
 
         if make_query:
             filtered_products=[]
@@ -72,6 +94,8 @@ def vechiles_category(request):
             products=filtered_products
 
 
+     
+
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
                 user=request.user
@@ -81,6 +105,13 @@ def vechiles_category(request):
         paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page",1)
         page_obj = paginator.get_page(page_number)
+        if sort_by == "low-high":
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price)
+        elif sort_by == 'high-low':
+            page_obj.object_list = sorted(page_obj.object_list, key=lambda x: x.price, reverse=True)
+        
+
+
         feature=Feature.objects.all() 
         print(bookmarked_product_ids,'ids')   
 
