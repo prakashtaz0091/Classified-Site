@@ -67,7 +67,10 @@ def vechiles_category(request):
         if max_price:
             products = products.filter(price__lte=max_price)
 
+        if price_query:
+            products=products.filter(price__gte=price_query)
 
+        #Accessing data from fields
         if make_query:
             filtered_products=[]
             for product in products:
@@ -94,14 +97,13 @@ def vechiles_category(request):
             products=filtered_products
 
 
-     
-
         if request.user.is_authenticated:
             bookmarked_product_ids = BookMark.objects.filter(
                 user=request.user
             ).values_list("product_id", flat=True)
         else:
             bookmarked_product_ids = []
+
         paginator = Paginator(products, 10)  # Adjust the number for items per page
         page_number = request.GET.get("page",1)
         page_obj = paginator.get_page(page_number)
