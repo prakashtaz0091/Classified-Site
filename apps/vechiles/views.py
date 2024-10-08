@@ -37,7 +37,7 @@ def vechiles_category(request):
         model_query=request.GET.get('model')
         condition_query=request.GET.get('condition')
         price_query=request.GET.get('price')
-        mileage=request.GET.get('mileage')
+        mileage_query=request.GET.get('mileage')
 
         category = Category.objects.get(slug='cars')
         if category is None:
@@ -96,6 +96,15 @@ def vechiles_category(request):
                 if (model_query.lower() in str(featured_data).lower()):
                     filtered_products.append(product)
             products=filtered_products
+       
+        if mileage_query:
+            filtered_products=[]
+            for product in products:
+                featured_data=product.featured_data
+                if (mileage_query.lower() in str(featured_data).lower()):
+                    filtered_products.append(product)
+            products=filtered_products
+
 
 
         if request.user.is_authenticated:
