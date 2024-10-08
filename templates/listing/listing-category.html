@@ -267,13 +267,32 @@
              form.addEventListener('submit', function(event) {
                  event.preventDefault(); // Prevent the default form submission
          
-         	const sortValue=document.getElementById('sortSelect').value
-                 // Collect form values
+         	      const sortValue=document.getElementById('sortSelect').value
                  const formData = new FormData(form);
-                 const queryParams = new URLSearchParams(formData).toString();
+
+                const windowUrl = window.location.href;
+                console.log(window.location.href)
+                const existingParams = new URL(windowUrl).searchParams;
+                console.log(existingParams)
+
+               // Create new query parameters from formData
+               const queryParams = new URLSearchParams(formData);
+
+               // Append new parameters to the existing ones
+                existingParams.forEach((value, key) => {
+    if (!queryParams.has(key)) {
+        queryParams.set(key, value); // Add only if the key doesn't exist in new queryParams
+    }
+});
          
-                 // Make AJAX request
-         		const url="{% url 'filter_category' %}"
+
+
+         		let url="{% url 'filter_category' %}"
+               // Check if 'all' is present in the URL
+               if (!windowUrl.includes('/all/')) {
+                  url="{% url 'filter_vechiles' %}"
+               }
+                console.log("url",`${url}?${queryParams}`)
          		fetch(`${url}?${queryParams}&sort=${sortValue}`, {
                      method: 'GET',
                      headers: {
