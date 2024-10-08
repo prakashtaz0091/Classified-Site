@@ -37,12 +37,13 @@ def vechiles_category(request):
         model_query=request.GET.get('model')
         condition_query=request.GET.get('condition')
         price_query=request.GET.get('price')
+        mileage=request.GET.get('mileage')
 
-        category = Category.objects.get(slug='vechiles')
+        category = Category.objects.get(slug='cars')
         if category is None:
-            category=Category.objects.get(slug='vechile')
+            category=Category.objects.get(slug='cars')
 
-        products = Product.objects.filter(category=category).order_by("-id")
+        products = Product.objects.filter(subcategory=category).order_by("-id")
         if location:
             products = products.filter(location__address__icontains=location)
 
