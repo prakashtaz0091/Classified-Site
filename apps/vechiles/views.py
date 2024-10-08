@@ -58,18 +58,20 @@ def vechiles_category(request):
 
         query = request.GET.get("query", "")
         category = request.GET.get("category",None)
-        location = request.GET.get("location", "")
+        location_query = request.GET.get("location", "")
         region = request.GET.get("region", "")
         min_price = request.GET.get("min_price", None)
 
         sort_by = request.GET.get("sort", "default")
         max_price = request.GET.get("max_price", None)
 
+        if location:
+            location_query=location
 
         if query!="":
             products = products.filter(product_name__icontains=query)
 
-        if location!="":
+        if location_query!="":
             products=products.filter(location__address__icontains=location)
 
         if min_price:
