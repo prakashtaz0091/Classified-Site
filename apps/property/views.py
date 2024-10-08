@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from apps.category.models import Category
 from apps.store.models import Product
+from django.core.paginator import Paginator
+
 
 #Property landing page
 def landing_page(request):
     try:
-        featured_products=Product.objects.all()[:4]
-        all_categories = Category.objects.select_related().filter(parent_id=None,status='ACTIVE')
+        featured_products = Product.objects.all().order_by('-id')[:4]
+        all_categories = Category.objects.select_related().filter(parent_id="12",status='ACTIVE')
         property_category = Category.objects.get(category_name='Real Estate')
         subcategories = property_category.subcategories.all()
         
@@ -18,11 +20,10 @@ def landing_page(request):
         )
             # Get the latest 5 products for each category
         for category in all_categories:
-
-            products = all_products.filter(category=category,is_approved=True,is_available=True)[:5]
-
+            products = all_products.filter(category=category,is_approved=True,is_available=True)[:4]
             latest_product = {"products": products, "category": category}
             latest_products.append(latest_product)
+            
 
         context={
             'featured_products':featured_products,
@@ -38,14 +39,7 @@ def landing_page(request):
 
 
 
-def listing_list_sidebar(request,slug):
-    category=Category.objects.get(slug=slug)
-    products=Product.objects.filter(subcategory=category)
-    context={
-        'products':products
-    }
-  
-    return render(request,'properties/listing_list_sidebar.html',context)
+
 
 
 

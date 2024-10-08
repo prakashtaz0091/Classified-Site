@@ -257,7 +257,7 @@
 												{% endif%}
 
 												<div class="blog-features">
-												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{latest_product.category.category_name}}</span></a>
+												   <a href="javascript:void(0)"><span>  <i class="fa-regular fa-circle-stop"></i>{{product.category.category_name}}</span></a>
 												</div>																	  
 												<div class="blog-author text-end"> 
 													<span>  <i class="feather-eye"></i>{{product.view_count}}</span>
@@ -450,7 +450,7 @@
                                                 </li>
                                             </ul>
                                             <div class="companies-set-btn">
-                                                <a href="{% url 'listing_list_sidebar' property.slug %}" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                                <a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </div></a>
@@ -480,7 +480,7 @@
                                                 </li>
                                             </ul>
                                             <div class="companies-set-btn">
-                                                <a href="listing-list-sidebar.html" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+                                                <a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </div></a>
