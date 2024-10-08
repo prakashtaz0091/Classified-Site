@@ -210,7 +210,7 @@
 							<div class="card">
 							    <div class="blog-widget">
 							        <div class="blog-img">
-								        <a href="service-details.html">
+								        <a href="{% url 'listing_list_details' item.slug %}">
 											<img src="{{item.cover_image.url}}" class="img-fluid" alt="blog-img">
 										</a>
                                         <div class="fav-item">
@@ -224,7 +224,7 @@
 									    <div class="card-body">
 										    <div class="blogfeaturelink">
 											   <div class="blog-features">
-											       <a href="javascript:void(0);"><span> <i class="fa-regular fa-circle-stop"></i>{{item.category.category_name}}</span></a>
+											       <a href="{% url 'listing_list_details' item.slug %}"><span> <i class="fa-regular fa-circle-stop"></i>{{item.category.category_name}}</span></a>
                                                </div>																	  
 											  <div class="blog-author"> 
 											        <div class="blog-author-img">
@@ -233,7 +233,7 @@
 												   <a href="javascript:void(0);">{{item.created_by.full_name}}</a>
 											  </div>
 											</div> 
-                                            <h6><a href="service-details.html">{{item.product_name}}</a></h6>																	 
+                                            <h6><a href="{% url 'listing_list_details' item.slug %}">{{item.product_name}}</a></h6>																	 
 											<div class="blog-location-details">
 											    <div class="location-info">
 												    <i class="feather-map-pin"></i> Los Angeles
@@ -253,7 +253,7 @@
 											        <span class="validrate">${{item.price}}</span>
 												    <span>$450</span>
 												</div>
-												<a href="service-details.html">View details</a>
+												<a href="{% url 'listing_list_details' item.slug %}">View details</a>
 											</div>	
 										</div>	
 									</div>			 

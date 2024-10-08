@@ -46,3 +46,13 @@ def listing_list_sidebar(request,slug):
     }
   
     return render(request,'properties/listing_list_sidebar.html',context)
+
+
+
+
+def listing_list_details(request,slug):
+    product=Product.objects.get(slug=slug)
+    context={
+        'product':product
+    }
+    return render(request,'properties/list_details.html',context)
