@@ -8,10 +8,7 @@ from django.core.paginator import Paginator
 def landing_page(request):
     try:
         featured_products = Product.objects.all().order_by('-id')[:4]
-        all_categories = Category.objects.select_related().filter(parent_id="12",status='ACTIVE')
-        property_category = Category.objects.get(category_name='Real Estate')
-        subcategories = property_category.subcategories.all()
-        
+        all_categories = Category.objects.filter(parent_id=12,status='ACTIVE')        
         latest_products = []
         all_products = (
             Product.objects.select_related()
@@ -28,7 +25,7 @@ def landing_page(request):
         context={
             'featured_products':featured_products,
             'latest_products':latest_products,
-            'subcategories':subcategories
+            'subcategories':all_categories
         }
         return render(request,'properties/landing.html',context)
 

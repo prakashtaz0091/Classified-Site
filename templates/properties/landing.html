@@ -23,7 +23,7 @@
                             <h6 class="mb-0 aos" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Only real estate platform with 10,000+ highly rated sellers</h6>
                             <p class="aos" data-aos="fade-up" data-aos-delay="200">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
                             <div style="padding-top:5px"class="banner-nine-btn-group">
-                                <a href="categories.html" class="aos" data-aos="fade-up" data-aos-delay="300">
+                                <a href="{% url 'add_listing' %}" class="aos" data-aos="fade-up" data-aos-delay="300">
                                     <span>Add Listing</span>
                                 </a>
                                 <a href="categories.html" class="aos" data-aos="fade-up" data-aos-delay="300">
@@ -201,12 +201,12 @@
 
         <!-- Featured Listings -->
 <section class="latestad-section grid-view featured-slider" style='padding-top:0px;padding-bottom:0px;'>
-		<div class="container" style='margin-top:2rem;'>		
+		<div class="container" style='margin-top:0rem;'>		
 				<div class="section-heading">
 					<div style="position:relative" class="row align-items-center">
     <div class="col-md-12 d-flex justify-content-center">
         <div class="text-center">
-            <h3>Featured Listings</h3>
+            <h3 style='margin-top:1.5rem;'>Featured Listings</h3>
             <p>The most trendy accommodations available</p>
         </div>
     </div>
@@ -312,7 +312,7 @@
                             <p>The most trendy accommodations available</p>
                         </div>
                         <div class="col-md-3 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-                            <a href="categories.html" class="btn  btn-view">View all Catgeorries</a>
+                            <a href="{% url 'category' %}" class="btn  btn-view">View all Catgeories</a>
                         </div>		
                     </div>	
                   </div>
@@ -320,78 +320,22 @@
                     <div class="col-md-12">
                         <div class="car-class-carousel">
                             <div class="best-places-rent-slider owl-carousel owl-theme" data-aos="fade-right">
+                              
+                                {% for category in subcategories %}
                                 <div class="best-room">
                                     <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+										<a href="listing-list-sidebar.html"><img src="{{category.category_thumbnail_image.url}}" class="img-fluid" alt=""></a>
                                     </div>
                                     <a href="listing-list-sidebar.html">
                                         <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                            </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Villas</h5>
+                                            <h5>{{category.category_name}}</h5>
                                             <span>50 Listings</span> 
                                             <i class="fa-solid fa-arrow-right-long"></i>                                    
                                         </div>
                                     </a>
                                 </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Condos</h5>
-                                            <span>45 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
+								{% endfor %}
+                               
                             </div>
                         </div>
                     </div>
@@ -776,7 +720,7 @@
                 <div class="buy-property-content">
                     <h2 class="aos" data-aos="fade-up" data-aos-delay="200">Join the millions getting more from their home.</h2>
                     <p class="aos" data-aos="fade-up" data-aos-delay="400">With Listee, you can track properties you’re interested in and use our price estimates to help you decide when to move. And get expert tips on making the most of your space.</p>
-                    <a  href="my-listing.html">List Your Space</a>
+                    <a  href="{% url 'my_listing' %}">List Your Space</a>
                 </div>
             </div>
         </section>
