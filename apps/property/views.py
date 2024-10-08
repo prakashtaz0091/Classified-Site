@@ -35,3 +35,14 @@ def landing_page(request):
         print(e)
         # will later return to some 400 page
         return e
+
+
+
+def listing_list_sidebar(request,slug):
+    category=Category.objects.get(slug=slug)
+    products=Product.objects.filter(subcategory=category)
+    context={
+        'products':products
+    }
+  
+    return render(request,'properties/listing_list_sidebar.html',context)
