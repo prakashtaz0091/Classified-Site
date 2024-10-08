@@ -56,7 +56,7 @@
 								<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Used Cars</button>
 								</li>
 								<li class="nav-item" role="presentation">
-								<button class="nav-link" id="pills-certified-tab" data-bs-toggle="pill" data-bs-target="#pills-certified" type="button" role="tab" aria-controls="pills-certified" aria-selected="false">Certified</button>
+								<button class="nav-link" id="pills-certified-tab" data-bs-toggle="pill" data-bs-target="#pills-certified" type="button" role="tab" aria-controls="pills-certified" aria-selected="false">Registered</button>
 								</li>
 							</ul>
 							<div class="tab-content" id="pills-tabContent">
@@ -131,10 +131,12 @@
 								</div>
 								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+											<input type="hidden" name="condition" value="new" />
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
+													<ul class="car-search-filter-nav gap-3 d-flex">
 														<li>
 															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
@@ -144,7 +146,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="nciame" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -157,7 +159,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -170,7 +172,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
@@ -183,25 +185,29 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
 													</ul>
 												</div>
 												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
 											</div>
 										</form>	
+	
 									</div>
 								</div>
 								<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+
+											<input type="hidden" name="condition" value="used" />
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
+													<ul class="car-search-filter-nav gap-3 d-flex">
 														<li>
 															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
@@ -211,7 +217,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -224,7 +230,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -237,12 +243,12 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
 														<li>
-															<div class="d-flex">
+															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
 																	<div class="icon-blk rounded-circle">
 																		<i class="feather-tag"></i>
@@ -250,25 +256,30 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
 													</ul>
 												</div>
 												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
+												
 											</div>
 										</form>	
+	
 									</div>
 								</div>
 								<div class="tab-pane fade" id="pills-certified" role="tabpanel" aria-labelledby="pills-certified-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+
+											<input type="hidden" name="status" value="registered" />
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
+													<ul class="car-search-filter-nav gap-3 d-flex">
 														<li>
 															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
@@ -278,7 +289,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -291,7 +302,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -304,7 +315,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
@@ -317,18 +328,19 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
 													</ul>
 												</div>
 												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt="">
-													</button>										
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
+												
 											</div>
 										</form>	
+	
 									</div>
 								</div>
 							</div>
@@ -504,7 +516,7 @@
 						<div class="car-testimonial-content">
 							<h3>.01</h3>
 							<h5>FIND THE CAR IN YOUR DREAM</h5>
-							<p>With the function search of listee, you can find the exactly any type of car that you want in a few minutes. Fast & Exactly !</p>
+							<p>With the function search of Adjeem, you can find the exactly any type of car that you want in a few minutes. Fast & Exactly !</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-6">

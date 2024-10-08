@@ -26,12 +26,14 @@ def landing_page(request):
 
 def vechiles_category(request):
     try:
+        print(request.POST)
         location=request.POST.get('location')
         make=request.POST.get('make')
         model=request.POST.get('models')
         prices_value=request.POST.get('price')
         #used or new
         condition=request.POST.get('condition')
+        registered=request.POST.get('status')
 
         make_query=request.GET.get('make')
         model_query=request.GET.get('model')
@@ -90,6 +92,16 @@ def vechiles_category(request):
                 if (make_query.lower() in str(featured_data).lower()):
                     filtered_products.append(product)
             products=filtered_products
+
+        #Accessing data from fields
+        if registered:
+            filtered_products=[]
+            for product in products:
+                featured_data=product.featured_data
+                if (f'status:{registered.lower()}' in str(featured_data).lower()):
+                    filtered_products.append(product)
+            products=filtered_products
+
 
         if condition_query:
             filtered_products=[]
