@@ -10278,6 +10278,7 @@ a:focus {
   background: #374b5c;
   color: #ffffff;
 }
+
 @media (max-width: 991.98px) {
   .car-filter-section .car-search-btn {
     margin-top: 15px;
