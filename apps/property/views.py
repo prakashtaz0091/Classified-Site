@@ -51,6 +51,50 @@ def listing_list_details(request,slug):
 
 
 
+def search_property(request):
+    all_categories = Category.objects.filter(parent_id=12,status='ACTIVE')  
+    all_products = (
+            Product.objects.select_related()
+            .filter(is_available=True,is_approved=True)
+            .order_by("-created_date")
+        )  
+    latest_products = all_products.filter(category__in=all_categories)
+    print(latest_products,'latest produc ts')
+    property_location = request.GET.get('property', '')  
+    price = request.GET.get('price', '')  
+    category = request.GET.get('category', '') 
+    
+    print(property_location,price,category)
+    
+    if property_location:
+        latest_products = latest_products.filter(location__address__icontains=property_location)
+
+    if price:
+        price = float(price)
+        latest_products = latest_products.filter(price__lte=price)
+
+
+    if category and category != 'all':
+        latest_products = latest_products.filter(category__category_name=category)  
+        
+        
+    paginator = Paginator(latest_products, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)    
+        
+        
+    context={
+        'products':page_obj
+    }    
+    return render(request,'properties/search.html',context)
+
+
+
+
+
+
+
+
 # from django.db.models import Count
 # def view_company(request):
 #     category = Category.objects.annotate(subcategory_count=Count('subcategories'))
