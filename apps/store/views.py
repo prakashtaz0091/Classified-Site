@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.accounts.models import Account
-from apps.home.models import Reviews
+from apps.home.models import ProductReview, Reviews
 from apps.store.models import BookMark, Product, ProductImages
 
 
@@ -113,6 +113,36 @@ def add_review(request):
         Reviews.objects.create(
             review=feedback,
             rating=rating,
+            reviewed_for=reviewed_for,
+            created_by=created_by,
+        )
+        return JsonResponse({"status": True, "message": "Review Added Successfully"})
+    except Exception as e:
+        print(e)
+
+@csrf_exempt
+def add_review_for_product(request):
+    try:
+        data = json.loads(request.body)
+        print(data)
+        feedback = data.get("feedback")
+        title = data.get("title")
+        name = data.get("name")
+        email = data.get("email")
+        rating = data.get("rating", "")
+        if rating == "":
+            rating = 0
+        reviewed_for = Product.objects.filter(
+            id=(data.get('product_id'))
+        ).first()
+        created_by = Account.objects.filter(id=data.get("created_by")).first()
+
+        ProductReview.objects.create(
+            review=feedback,
+            rating=rating,
+            name=name,
+            title=title,
+            email=email,
             reviewed_for=reviewed_for,
             created_by=created_by,
         )

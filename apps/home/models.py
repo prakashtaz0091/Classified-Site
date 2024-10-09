@@ -25,7 +25,13 @@ class ProductReview(models.Model):
         Product, related_name="product_created_to", on_delete=models.CASCADE
     )
     rating = models.IntegerField()
+    title=models.TextField()
+    name=models.TextField()
+    email=models.TextField()
     review = models.TextField()
     created_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.email} - {self.name}"
 
 
