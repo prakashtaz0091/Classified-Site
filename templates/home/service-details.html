@@ -285,11 +285,11 @@
 											  <p class="ratings-score"><span>{{avg_rating}}</span>/5</p>
 											<p>OVERALL</p>
 													<div class="rating-star">
-														<i class="fa fa-star {% if avg_rating >= 1 %}filled {% endif %}"aria-hidden="true"></i>
-														<i class="fa fa-star {% if avg_rating >= 2 %}filled {% endif %}"aria-hidden="true"></i>
-														<i class="fa fa-star {% if avg_rating >= 3 %}filled {% endif %}"aria-hidden="true"></i>
-														<i class="fa fa-star {% if avg_rating >= 4 %}filled {% endif %}"aria-hidden="true"></i>
-														<i class="fa fa-star {% if avg_rating >= 5 %}filled {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 5 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 4 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 3 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 2 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 1 %}filled {% else %} fa-regular {% endif %}"aria-hidden="true"></i>
 													</div>                                        
 											<p>Based on Listing</p>
 								 		  </div>   
