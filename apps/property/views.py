@@ -5,14 +5,17 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 
 #Property landing page
-def landing_page(request):
+def landing_page(request,id):
     try:
+        print('i am landing page i am makng request ')
+        print(id)
         # Fetch featured products, limiting to the 4 most recent
         featured_products = Product.objects.all().order_by('-id')[:4]
         
         # Fetch categories and annotate them with the count of related products
-        all_categories = Category.objects.filter(parent_id=12, status='ACTIVE').annotate(product_count=Count('products'))
-
+        all_categories = Category.objects.filter(parent_id=id, status='ACTIVE').annotate(product_count=Count('products'))
+        
+        print(all_categories)
         latest_products = []
         all_products = (
             Product.objects.select_related()
@@ -32,6 +35,8 @@ def landing_page(request):
             'latest_products': latest_products,
             'subcategories': all_categories,  # This will include the annotated product count
         }
+        
+        print('hello wrold')
 
         return render(request, 'properties/landing.html', context)
 
