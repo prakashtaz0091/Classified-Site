@@ -18,7 +18,7 @@ urlpatterns = [
     path('', include('apps.contact.urls')),
     path('admins/', include('apps.Admin.urls')),
     path('business_listing/',include('apps.business_listing.urls')),
-    path('real-esate/',include('apps.property.urls')),
+    path('real-estate/',include('apps.property.urls')),
     path('vechiles/',include('apps.vechiles.urls')),
     path('discover/',include('apps.discover.urls')),
     

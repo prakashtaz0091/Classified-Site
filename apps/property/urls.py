@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
 urlpatterns=[
-    path("<int:id>/", views.landing_page, name="property_landing_page"),
+    path("", views.landing_page, name="property_landing_page"),
     path("search_property/",views.search_property,name="search_property"),
 ]

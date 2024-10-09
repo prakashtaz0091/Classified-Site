@@ -144,7 +144,7 @@
 						        {% if category.slug == "vechiles" %}
 									<a href="{% url 'vechile_landing_page' %}" class="category-links">
 								{% elif category.slug == "real-estate" %}
-								<a href="{% url 'property_landing_page' category.id %}" class="category-links">
+								<a href="{% url 'property_landing_page'  %}" class="category-links">
 								{% else %}
 									<a href="{% url 'sub_category' category.slug %}" class="category-links">
 								{% endif %}
