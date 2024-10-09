@@ -19,10 +19,10 @@ class Reviews(models.Model):
 
 class ProductReview(models.Model):
     created_by = models.ForeignKey(
-        Account, related_name="created_by", on_delete=models.CASCADE
+        Account, related_name="product_created_by", on_delete=models.CASCADE
     )
     reviewed_for = models.ForeignKey(
-        Product, related_name="created_to", on_delete=models.CASCADE
+        Product, related_name="product_created_to", on_delete=models.CASCADE
     )
     rating = models.IntegerField()
     review = models.TextField()
