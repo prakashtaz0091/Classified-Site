@@ -2,6 +2,10 @@
 {% load static %}
 {% block content %}
 
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
 
     <div class="main-wrapper">
     
@@ -18,7 +22,7 @@
                 <div class="row">
                     <div class="col-lg-7 col-sm-12 m-auto">
                         <div class="content-page-header">
-                            <h5>Add Categories</h5>
+                            <h5>Edit Category</h5>
                         </div>
                         {% comment %}
                         Meaning if there is a category name which is case for subcategory
@@ -147,25 +151,58 @@
                                 
 
 
-                                <!--description-->
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Descriptions <span class="mandatory">*</span></label>
-                                        <textarea  name='long_description' class="form-control" placeholder="Add a Descriptions.....">{{category.long_description}}</textarea>
-                                    </div>
-                                </div>
+<style>
+ .ql-editor strong{
+     font-weight:bold;
+ }
+</style>
+                        <!-- Long Description -->
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Long Description<span class="mandatory">*</span></label>
+                            <div style="height:200px;" id="long-description-container"></div>
+                            <input type="hidden" name="long_description" required id="long-description">
+                        </div>
+                    </div>
+
+                    <script>
+                    window.onload = function() {
+                        var quillLong = new Quill('#long-description-container', {
+                            theme: 'snow'
+                        });
+
+                        quillLong.on('text-change', function() {
+                            console.log(quillLong.root.innerHTML);  // Use quillLong here
+                            var content = document.querySelector('#long-description');
+                            content.value = quillLong.root.innerHTML;
+                            console.log(content.value);
+                        });
+                    };
+                    </script>
+
+                    <!-- Short Description -->
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Short Description <span class="mandatory">*</span></label>
+                            <div style="height:200px;" id="short-description-container"></div>
+                            <input type="hidden" name="short_description" required id="short-description">
+                        </div>
+                    </div>
+
+                    <script>
+                    var quillShort = new Quill('#short-description-container', {
+                        theme: 'snow'
+                    });
+
+                    quillShort.on('text-change', function() {
+                        var content = document.querySelector('#short-description');
+                        content.value = quillShort.root.innerHTML;  // Use quillShort here
+                        console.log(content.value);
+                    });
+                    </script>
+                     
 
 
-                                <!--end descriptions-->
-
-
-                                <!--short descriptions-->
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Short Descriptions <span class="mandatory">*</span></label>
-                                        <textarea  name='short_description'  class="form-control" placeholder="Add a Short Descriptions.....">{{category.short_description}}</textarea>
-                                    </div>
-                                </div>
 
 
                                 <!--short end-->

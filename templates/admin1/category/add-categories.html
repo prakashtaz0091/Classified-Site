@@ -153,50 +153,50 @@
  }
 </style>
                         <!-- Long Description -->
-<div class="col-lg-12">
-    <div class="form-group">
-        <label>Long Description<span class="mandatory">*</span></label>
-        <div style="height:200px;" id="long-description-container"></div>
-        <input type="hidden" name="long_description" required id="long-description">
-    </div>
-</div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Long Description<span class="mandatory">*</span></label>
+                            <div style="height:200px;" id="long-description-container"></div>
+                            <input type="hidden" name="long_description" required id="long-description">
+                        </div>
+                    </div>
 
-<script>
-window.onload = function() {
-    var quillLong = new Quill('#long-description-container', {
-        theme: 'snow'
-    });
+                    <script>
+                    window.onload = function() {
+                        var quillLong = new Quill('#long-description-container', {
+                            theme: 'snow'
+                        });
 
-    quillLong.on('text-change', function() {
-        console.log(quillLong.root.innerHTML);  // Use quillLong here
-        var content = document.querySelector('#long-description');
-        content.value = quillLong.root.innerHTML;
-        console.log(content.value);
-    });
-};
-</script>
+                        quillLong.on('text-change', function() {
+                            console.log(quillLong.root.innerHTML);  // Use quillLong here
+                            var content = document.querySelector('#long-description');
+                            content.value = quillLong.root.innerHTML;
+                            console.log(content.value);
+                        });
+                    };
+                    </script>
 
-<!-- Short Description -->
-<div class="col-lg-12">
-    <div class="form-group">
-        <label>Short Description <span class="mandatory">*</span></label>
-        <div style="height:200px;" id="short-description-container"></div>
-        <input type="hidden" name="short_description" required id="short-description">
-    </div>
-</div>
+                    <!-- Short Description -->
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Short Description <span class="mandatory">*</span></label>
+                            <div style="height:200px;" id="short-description-container"></div>
+                            <input type="hidden" name="short_description" required id="short-description">
+                        </div>
+                    </div>
 
-<script>
-var quillShort = new Quill('#short-description-container', {
-    theme: 'snow'
-});
+                    <script>
+                    var quillShort = new Quill('#short-description-container', {
+                        theme: 'snow'
+                    });
 
-quillShort.on('text-change', function() {
-    var content = document.querySelector('#short-description');
-    content.value = quillShort.root.innerHTML;  // Use quillShort here
-    console.log(content.value);
-});
-</script>
- 
+                    quillShort.on('text-change', function() {
+                        var content = document.querySelector('#short-description');
+                        content.value = quillShort.root.innerHTML;  // Use quillShort here
+                        console.log(content.value);
+                    });
+                    </script>
+                     
 
                                 <!--short end-->
 

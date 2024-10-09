@@ -444,7 +444,7 @@
 						    <div class="card">
 						     <h4><img  src="assets/img/details-icon.svg" alt="details-icon"> Details</h4>
 						     <ul>
-								 			 {% for feature in featured_data %}
+						 {% for feature in featured_data %}
         <li class="feature-item flex">
             <span class="feature-title">{{ feature.title|capfirst }}</span>
             <span class="feature-value" style="text-align:right">{{ feature.value|safe }}</span>
