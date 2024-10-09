@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.accounts.models import Account
-from apps.home.models import Reviews
+from apps.home.models import ProductReview, Reviews
 from apps.store.models import BookMark, Product, ProductImages
 
 
@@ -43,6 +43,8 @@ def service_details(request, product_slug):
         ads_count=Product.objects.filter(created_by=product_instance.created_by).count()
         unique_email_prefix_part=product_instance.created_by.email.split('@')[0]
         
+        reviews_list=ProductReview.objects.filter(reviewed_for=product_instance)
+        avg_rating=ProductReview.average_rating_for_product(product_instance.id)
         
         print(product_instance,'product instance display')
         context = {
@@ -51,9 +53,11 @@ def service_details(request, product_slug):
             "book_mark": bookmarked_product_ids,
             'featured_data':processed_featured_data,
             'ads_count':ads_count,
-            'prefix_email':unique_email_prefix_part
-
+            'prefix_email':unique_email_prefix_part,
+            'reviews_list':reviews_list,
+            'avg_rating':avg_rating,
         }
+
         return render(request, "home/service-details.html", context)
     except Exception as e:
         print(e)
@@ -113,6 +117,36 @@ def add_review(request):
         Reviews.objects.create(
             review=feedback,
             rating=rating,
+            reviewed_for=reviewed_for,
+            created_by=created_by,
+        )
+        return JsonResponse({"status": True, "message": "Review Added Successfully"})
+    except Exception as e:
+        print(e)
+
+@csrf_exempt
+def add_review_for_product(request):
+    try:
+        data = json.loads(request.body)
+        print(data)
+        feedback = data.get("feedback")
+        title = data.get("title")
+        name = data.get("name")
+        email = data.get("email")
+        rating = data.get("rating", "")
+        if rating == "":
+            rating = 0
+        reviewed_for = Product.objects.filter(
+            id=(data.get('product_id'))
+        ).first()
+        created_by = Account.objects.filter(id=data.get("created_by")).first()
+
+        ProductReview.objects.create(
+            review=feedback,
+            rating=rating,
+            name=name,
+            title=title,
+            email=email,
             reviewed_for=reviewed_for,
             created_by=created_by,
         )
