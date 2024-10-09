@@ -18552,7 +18552,7 @@ body table.listing-table.datatable {
   }
 }
 .details-main-wrapper .review-list li:nth-child(2) {
-  margin-left: 60px;
+  margin-left: 0px; /* was previously 60 if needed again */
 }
 @media (max-width: 767.98px) {
   .details-main-wrapper .review-list li:nth-child(2) {

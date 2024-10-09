@@ -361,28 +361,36 @@
 							    <div class="review-list">
 							        <ul class="">
 
+										{% for review in reviews_list %}
 										<li class="review-box">
 											<div class="review-profile">
 												<div class="review-img">
+													{% if review.created_by.profile.profile_photo %}
+													<img src="{{review.created_by.profile.profile_photo.url}}" class="img-fluid" alt="img">
+													{% else %}
+
 													<img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" class="img-fluid" alt="img">
+													{% endif %}
 												</div>															
 											</div>
 											<div class="review-details">
-										        <h6>Dev</h6>
+												<h6>{{review.title}}</h6>
 												<div class="rating">
                                                     <div class="rating-star">
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fa-regular fa-star rating-overall"></i>
+														<i class="fa fa-star {% if review.rating >= 5 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if review.rating >= 4 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if review.rating >= 3 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if review.rating >= 2 %}filled {% else %} fa-regular  {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 1 %}filled {% else %} fa-regular {% endif %}"aria-hidden="true"></i>
+
 													</div>							        
-													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> 4 months ago</div>
-													<div>by: Demo Test</div>
+													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> {{review.created_at|timesince}}  ago</div>
+													<div>by: {{review.name}}</div>
 												</div>		
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>																	
+												<p>{{review.review}}</p>																	
 											</div>
 										</li>
+										{% endfor %}
 										<li class="review-box feedbackbox mb-0">
 											<div class="review-details">
 											   <h6>Leave Feedback About This</h6>
