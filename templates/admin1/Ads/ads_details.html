@@ -233,10 +233,10 @@
                                 <div class="package-widget">
                                     <h5>Available Service Packages</h5>
                                     <ul>
-                                        <li>Full car wash and clean</li>
-                                        <li>Auto Electrical</li>
-                                        <li>Pre Purchase Inspection</li>
-                                        <li>Pre Purchase Inspection</li>
+                                        {% for service in product.features.all %}
+                                        <li>{{service.name}}</li>
+                            
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="package-widget pack-service">

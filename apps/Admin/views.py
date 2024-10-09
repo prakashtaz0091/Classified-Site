@@ -277,6 +277,8 @@ def extra_information(request,id):
 
 def ads(request):
     ads=Product.objects.all().order_by('-id')
+    for item in ads:
+        print(item.product_name,item.cover_image.url)
     context={
         'ads':ads
     }
