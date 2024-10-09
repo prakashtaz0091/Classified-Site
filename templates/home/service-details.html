@@ -278,7 +278,111 @@
 							</div>
 						</div>							
 						<!--/Ratings Section-->
-							
+
+    <style>
+        .feedback-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+                margin-bottom:300px!important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .feedback-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #d93025;
+        }
+        .rating-star {
+            direction: rtl; /* Right to left order for stars */
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+        .rating-star input {
+            display: none;
+        }
+        .rating-star label {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        .rating-star label:hover,
+        .rating-star label:hover ~ label,
+        .rating-star input:checked ~ label {
+            color: #ffd700; /* Gold color for hovered or selected stars */
+        }
+        .form-group {
+            margin-top: 20px;
+        }
+        .custom-card {
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .feedback-note {
+            font-size: 14px;
+            color: #6c757d;
+            text-align: center;
+            padding: 15px;
+        }
+        .leave-feedback-btn {
+            background-color: #d93025;
+            color: white;
+            font-weight: bold;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 100px;
+        }
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-modal:hover,
+        .close-modal:focus {
+            color: black;
+        }
+          .feedback-note {
+            font-size: 14px;
+            color: #6c757d;
+            text-align: center;
+            padding: 15px;
+        }
+        .custom-card {
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .custom-card .feedback-icon {
+            font-size: 48px;
+            color: #d93025;
+        }
+    </style>
 						<!--Review  Section-->
 						<div  class="card review-sec  mb-0">
 							<div class="card-header  align-items-center">
@@ -288,64 +392,7 @@
 							<div class="card-body">
 							    <div class="review-list">
 							        <ul class="">
-									    <li class="review-box ">
-											<div class="review-profile">
-												<div class="review-img">
-													<img src="{% static 'assets/img/profiles/avatar-11.jpg' %}" class="img-fluid" alt="img">
-												</div>															
-											</div>
-											<div class="review-details">
-												<h6>Joseph</h6>
-												<div class="rating">
-                                                    <div class="rating-star">
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fa-regular fa-star rating-overall"></i>
-													</div>							        
-													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> 4 months ago</div>
-													<div>by: Demo Test</div>
-												</div>	
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>																	
-													<div class="row">
-													    <div class="col-lg-3  col-md-3 col-sm-3">
-														    <div class="review-gallery">
-															   <a href="{% static 'assets/img/gallery/gallery1/gallery-6.jpg' %}" data-fancybox="gallery">
-																<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/galleryimg-1.jpg' %}">
-															  </a>
-															</div>
-														</div>
-														<div class="col-lg-3  col-md-3 col-sm-3">
-														    <div class="review-gallery">
-															   <a href="{% static 'assets/img/gallery/gallery1/gallery-5.jpg' %}" data-fancybox="gallery">
-																<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/galleryimg-2.jpg' %}">
-															  </a>
-															</div>
-														</div>
-														<div class="col-lg-3  col-md-3 col-sm-3">
-														    <div class="review-gallery">
-															   <a href="{% static 'assets/img/gallery/gallery1/gallery-8.jpg' %}" data-fancybox="gallery">
-																<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/galleryimg-3.jpg' %}">
-															  </a>
-															</div>
-														</div>
-														<div class="col-lg-3 col-md-3 col-sm-3">
-														    <div class="review-gallery">
-															   <a href="{% static 'assets/img/gallery/gallery1/gallery-9.jpg' %}" data-fancybox="gallery">
-																<img class="img-fluid" alt="Image" src="{% static 'assets/img/gallery/galleryimg-9.jpg' %}">
-															  </a>
-															</div>
-														</div>														
-													</div>
-												<div class="reply-box ">
-												    <p>Was This Review...? <a href="#" class="thumbsup"><i class="feather-thumbs-up"></i> Like </a>
-													   <a href="#" class="thumbsdown"><i class="feather-thumbs-down"></i> Dislike </a>
-													</p>
-												    <a href="#" class="replylink"><i class="feather-corner-up-left"></i> Reply</a>													
-												</div>
-											</div>							
-								        </li>
+
 										<li class="review-box">
 											<div class="review-profile">
 												<div class="review-img">
@@ -368,34 +415,6 @@
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>																	
 											</div>
 										</li>
-										<li class="review-box">
-											<div class="review-profile">
-												<div class="review-img">
-													<img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" class="img-fluid" alt="img">
-												</div>															
-											</div>
-											<div class="review-details">
-												<h6>Johnson</h6>
-												<div class="rating">
-                                                    <div class="rating-star">
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fas fa-star filled"></i>
-													   <i class="fa-regular fa-star rating-overall"></i>
-													</div>							        
-													<div><i class="fa-sharp fa-solid fa-calendar-days"></i> 4 months ago</div>
-													<div>by: Demo Test</div>
-												</div>		
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>																	
-												<div class="reply-box ">
-												    <p>Was This Review...? <a href="#" class="thumbsup"><i class="feather-thumbs-up"></i> Like </a>
-													   <a href="#" class="thumbsdown"><i class="feather-thumbs-down"></i> Dislike </a>
-													</p>
-												    <a href="#" class="replylink"><i class="feather-corner-up-left"></i> Reply</a>													
-												</div>
-											</div>
-									    </li>
 										<li class="review-box feedbackbox mb-0">
 											<div class="review-details">
 											   <h6>Leave Feedback About This</h6>
@@ -426,11 +445,22 @@
 													</div>													
 													<div class="reviewbox-rating">
 													    <p><span> Rating</span> 
-                                                            <i class="fas fa-star filled"></i>
-													     	<i class="fas fa-star filled"></i>
-															<i class="fas fa-star filled"></i>
-															<i class="fas fa-star filled"></i>
-															<i class="fas fa-star filled"></i>
+  <div class="rating-star">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">&#9733;</label>
+                    </div>
+
+                        <input type="hidden" id="star-rating" name="rating" value="">
+
+
 														</p>
 													</div>
 													<div class="submit-section">
@@ -444,6 +474,63 @@
 							</div>
 					    </div>	
                         <!--/Review Section-->	
+						  <script>
+            // Handle star rating and form submission
+            const stars = document.querySelectorAll('.rating-star input');
+            const ratingInput = document.getElementById('star-rating');
+            const form = document.getElementById('feedback-form');
+            const feedback = document.getElementById('feedback-detail');
+            const modal = document.getElementById('feedbackModal');
+            const closeModal = document.querySelector('.close-modal');
+
+            stars.forEach(star => {
+                star.addEventListener('change', () => {
+                    ratingInput.value = star.value;
+                    console.log(ratingInput.value)
+                });
+            });
+            const urlPath = window.location.pathname;
+
+            // Split the path by '/' and get the last part
+            const idValue = urlPath.split('/').filter(Boolean).pop();
+
+            form.addEventListener('submit',async function(e) {
+                e.preventDefault();  // Prevent default form submission
+                const url="{% url 'add_review' %}"
+                const data={
+                    'rating':ratingInput.value,
+                        'feedback':feedback.value,
+                    'created_by':"{{request.user.id}}",
+                    'reviewed_for':idValue
+                }
+
+                const response = await fetch(url, {
+                  method: 'POST', // or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                    // Add additional headers here if needed (e.g., authorization tokens)
+                  },
+                  body: JSON.stringify(data), // body data type must match "Content-Type" header
+                });
+                const result = await response.json(); // parses JSON response into native JavaScript objects
+                modal.style.display = 'block';  // Show the modal
+                feedback.value=""
+                this.reset()
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        </script>
+    </div>
+    
+
 							
 					</div>
 					<div class="col-lg-3 theiaStickySidebar">
