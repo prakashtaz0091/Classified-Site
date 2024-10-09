@@ -97,38 +97,41 @@
 						
 						<!--Pagination--> 
 						<div class="blog-pagination">
-						    <nav>
-							    <ul class="pagination">
-								    <li class="page-item previtem">
-										<a class="page-link" href="#"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
+							<nav>
+								<ul class="pagination">
+									<!-- Previous Page Link -->
+									<li class="page-item previtem {% if not products.has_previous %}disabled{% endif %}">
+										<a class="page-link" href="{% if products.has_previous %}?page={{ products.previous_page_number }}{% if request.GET.property %}&property={{ request.GET.property }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% else %}#{% endif %}">
+											<i class="fas fa-regular fa-arrow-left"></i> Prev
+										</a>
 									</li>
+						
+									<!-- Page Numbers -->
 									<li class="justify-content-center pagination-center"> 
 										<div class="pagelink">
-										    <ul>
-												<li class="page-item">
-													<a class="page-link" href="#">1</a>
-												</li>
-												<li class="page-item">
-													<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-												</li>
-												<li class="page-item active">
-													<a class="page-link" href="#">3</a>
-											   </li>
-											   <li class="page-item">
-													<a class="page-link" href="#">4</a>
-											   </li>
-											   <li class="page-item">
-													<a class="page-link" href="#">5</a>
-											   </li>
-									       </ul>
-									    </div>													
-									</li>													
-									<li class="page-item nextlink">
-										<a class="page-link" href="#">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+											<ul>
+												{% for num in products.paginator.page_range %}
+													<li class="page-item {% if products.number == num %}active{% endif %}">
+														<a class="page-link" href="?page={{ num }}{% if request.GET.property %}&property={{ request.GET.property }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+															{{ num }}
+														</a>
+													</li>
+												{% endfor %}
+											</ul>
+										</div>
+									</li>
+						
+									<!-- Next Page Link -->
+									<li class="page-item nextlink {% if not products.has_next %}disabled{% endif %}">
+										<a class="page-link" href="{% if products.has_next %}?page={{ products.next_page_number }}{% if request.GET.property %}&property={{ request.GET.property }}{% endif %}{% if request.GET.price %}&price={{ request.GET.price }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% else %}#{% endif %}">
+											Next <i class="fas fa-regular fa-arrow-right"></i>
+										</a>
 									</li>
 								</ul>
 							</nav>
 						</div>
+						
+						
 						<!--/Pagination-->	
 						
 					</div>						

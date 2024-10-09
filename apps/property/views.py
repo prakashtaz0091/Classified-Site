@@ -59,7 +59,6 @@ def search_property(request):
             .order_by("-created_date")
         )  
     latest_products = all_products.filter(category__in=all_categories)
-    print(latest_products,'latest produc ts')
     property_location = request.GET.get('property', '')  
     price = request.GET.get('price', '')  
     category = request.GET.get('category', '') 
@@ -84,7 +83,8 @@ def search_property(request):
         
         
     context={
-        'products':page_obj
+        'products':page_obj,
+        'page_obj':page_obj
     }    
     return render(request,'properties/search.html',context)
 
