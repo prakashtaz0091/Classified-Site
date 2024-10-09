@@ -201,84 +201,6 @@
 						</div>									
 						<!--/Gallery Section-->
 						
-						<!--Ratings Section-->
-						<div class="card ">
-							<div class="card-header  align-items-center">
-								<i class="feather-star"></i>
-								<h4>Ratings</h4>
-							</div>
-							<div class="card-body">
-						        <div class="ratings-content">											
-									<div class="row">
-									    <div class="col-lg-3">
-								          <div class="ratings-info">
-								 	        <p class="ratings-score"><span>4</span>/5</p>
-											<p>OVERALL</p>
-											<p> <i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fa-regular fa-star"></i></p>
-											<p>Based on Listing</p>
-								 		  </div>   
-										</div>
-										<div class="col-lg-9">
-										   <div class="ratings-table table-responsive">
-										     <table class="">
-										        <tr>
-											       <td class="star-ratings"><i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i></td>
-											        <td class="scrore-width"><span> </span></td>
-													<td> 0</td>														   
-												</tr>
-												<tr>
-												    <td class="star-ratings" ><i class="fas fa-star filled"></i>
-												    	<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-												    <td class="scrore-width selected"><span> </span></td>
-												    <td> 1</td>														   
-												</tr>
-												<tr>
-												    <td class="star-ratings"><i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i></td>
-												    <td class="scrore-width"><span> </span></td>
-												    <td> 0</td>														   
-												</tr>
-												<tr>
-												    <td class="star-ratings"><i class="fas fa-star filled"></i>
-													    <i class="fas fa-star filled"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-													<td class="scrore-width"><span> </span></td>
-													<td> 0</td>														   
-												</tr>
-												<tr>
-												    <td class="star-ratings"><i class="fas fa-star filled"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i>
-														<i class="fa-regular fa-star rating-color"></i></td>
-												    <td class="scrore-width"><span> </span></td>
-												    <td> 0</td>														   
-												</tr>
-											</table>
-									      </div>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>							
-						<!--/Ratings Section-->
-
     <style>
         .feedback-container {
             max-width: 800px;
@@ -346,44 +268,90 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding-top: 100px;
         }
-        .modal-content {
-            background-color: white;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .close-modal {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-modal:hover,
-        .close-modal:focus {
-            color: black;
-        }
-          .feedback-note {
-            font-size: 14px;
-            color: #6c757d;
-            text-align: center;
-            padding: 15px;
-        }
-        .custom-card {
-            text-align: center;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 15px;
-        }
-        .custom-card .feedback-icon {
-            font-size: 48px;
-            color: #d93025;
-        }
+
     </style>
-						<!--Review  Section-->
+	
+						<!--Ratings Section-->
+						<div class="card ">
+							<div class="card-header  align-items-center">
+								<i class="feather-star"></i>
+								<h4>Ratings</h4>
+							</div>
+							<div class="card-body">
+						        <div class="ratings-content">											
+									<div class="row">
+									    <div class="col-lg-3">
+								          <div class="ratings-info">
+											  <p class="ratings-score"><span>{{avg_rating}}</span>/5</p>
+											<p>OVERALL</p>
+													<div class="rating-star">
+														<i class="fa fa-star {% if avg_rating >= 1 %}filled {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 2 %}filled {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 3 %}filled {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 4 %}filled {% endif %}"aria-hidden="true"></i>
+														<i class="fa fa-star {% if avg_rating >= 5 %}filled {% endif %}"aria-hidden="true"></i>
+													</div>                                        
+											<p>Based on Listing</p>
+								 		  </div>   
+										</div>
+										<div class="col-lg-9">
+										   <div class="ratings-table table-responsive">
+										     <table class="">
+										        <tr>
+											       <td class="star-ratings"><i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i></td>
+											        <td class="scrore-width"><span> </span></td>
+													<td> 0</td>														   
+												</tr>
+												<tr>
+												    <td class="star-ratings" ><i class="fas fa-star filled"></i>
+												    	<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+												    <td class="scrore-width selected"><span> </span></td>
+												    <td> 1</td>														   
+												</tr>
+												<tr>
+												    <td class="star-ratings"><i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i></td>
+												    <td class="scrore-width"><span> </span></td>
+												    <td> 0</td>														   
+												</tr>
+												<tr>
+												    <td class="star-ratings"><i class="fas fa-star filled"></i>
+													    <i class="fas fa-star filled"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+													<td class="scrore-width"><span> </span></td>
+													<td> 0</td>														   
+												</tr>
+												<tr>
+												    <td class="star-ratings"><i class="fas fa-star filled"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i>
+														<i class="fa-regular fa-star rating-color"></i></td>
+												    <td class="scrore-width"><span> </span></td>
+												    <td> 0</td>														   
+												</tr>
+											</table>
+									      </div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>							
+						<!--/Ratings Section-->
+
+					<!--Review  Section-->
 						<div  class="card review-sec  mb-0">
 							<div class="card-header  align-items-center">
 								<i class="fa-regular fa-comment-dots"></i>
@@ -520,9 +488,6 @@
             });
 
         </script>
-    </div>
-    
-
 							
 					</div>
 					<div class="col-lg-3 theiaStickySidebar">

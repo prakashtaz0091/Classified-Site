@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Avg
 from apps.accounts.models import Account
 from apps.store.models import Product
 
@@ -34,4 +34,6 @@ class ProductReview(models.Model):
     def __str__(self):
         return f"{self.email} - {self.name}"
 
-
+    @classmethod
+    def average_rating_for_product(cls, product_id):
+        return cls.objects.filter(reviewed_for_id=product_id).aggregate(Avg('rating'))['rating__avg'] or 0

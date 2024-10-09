@@ -43,6 +43,8 @@ def service_details(request, product_slug):
         ads_count=Product.objects.filter(created_by=product_instance.created_by).count()
         unique_email_prefix_part=product_instance.created_by.email.split('@')[0]
         
+        reviews_list=ProductReview.objects.filter(reviewed_for=product_instance)
+        avg_rating=ProductReview.average_rating_for_product(product_instance.id)
         
         print(product_instance,'product instance display')
         context = {
@@ -51,9 +53,11 @@ def service_details(request, product_slug):
             "book_mark": bookmarked_product_ids,
             'featured_data':processed_featured_data,
             'ads_count':ads_count,
-            'prefix_email':unique_email_prefix_part
-
+            'prefix_email':unique_email_prefix_part,
+            'reviews_list':reviews_list,
+            'avg_rating':avg_rating,
         }
+
         return render(request, "home/service-details.html", context)
     except Exception as e:
         print(e)
