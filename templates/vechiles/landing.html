@@ -56,13 +56,14 @@
 								<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Used Cars</button>
 								</li>
 								<li class="nav-item" role="presentation">
-								<button class="nav-link" id="pills-certified-tab" data-bs-toggle="pill" data-bs-target="#pills-certified" type="button" role="tab" aria-controls="pills-certified" aria-selected="false">Certified</button>
+								<button class="nav-link" id="pills-certified-tab" data-bs-toggle="pill" data-bs-target="#pills-certified" type="button" role="tab" aria-controls="pills-certified" aria-selected="false">Registered</button>
 								</li>
 							</ul>
 							<div class="tab-content" id="pills-tabContent">
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" >
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
 													<ul class="car-search-filter-nav gap-3 d-flex">
@@ -75,7 +76,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -88,7 +89,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -101,7 +102,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
@@ -114,7 +115,78 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class=" col-12 col-lg-1 car-search-btn">
+													<button class="btn car-search-icon" type="submit">
+														<i class="feather-search"></i></button>
+												</div>
+												
+											</div>
+										</form>	
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+									<div class="search-tab-col">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+											<input type="hidden" name="condition" value="new" />
+											<div class="row align-items-center search-form">
+												<div class="col-12 col-lg-11 datepicker-col search-group">
+													<ul class="car-search-filter-nav gap-3 d-flex">
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-map-pin"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Location</span>
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-pie-chart"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Make</span>
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-refresh-ccw"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Models</span>
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="car-search-grid d-flex">
+																<div class="flex-shrink-0 d-flex align-items-center">
+																	<div class="icon-blk rounded-circle">
+																		<i class="feather-tag"></i>
+																	</div>
+																</div>
+																<div class="flex-grow-1 ms-3">
+																	<span class="label">Prices</span>
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
@@ -125,81 +197,18 @@
 												</div>
 											</div>
 										</form>	
-									</div>
-								</div>
-								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
-											<div class="row align-items-center search-form">
-												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
-														<li>
-															<div class="car-search-grid d-flex">
-																<div class="flex-shrink-0 d-flex align-items-center">
-																	<div class="icon-blk rounded-circle">
-																		<i class="feather-map-pin"></i>
-																	</div>
-																</div>
-																<div class="flex-grow-1 ms-3">
-																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="car-search-grid d-flex">
-																<div class="flex-shrink-0 d-flex align-items-center">
-																	<div class="icon-blk rounded-circle">
-																		<i class="feather-pie-chart"></i>
-																	</div>
-																</div>
-																<div class="flex-grow-1 ms-3">
-																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="car-search-grid d-flex">
-																<div class="flex-shrink-0 d-flex align-items-center">
-																	<div class="icon-blk rounded-circle">
-																		<i class="feather-refresh-ccw"></i>
-																	</div>
-																</div>
-																<div class="flex-grow-1 ms-3">
-																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="car-search-grid d-flex">
-																<div class="flex-shrink-0 d-flex align-items-center">
-																	<div class="icon-blk rounded-circle">
-																		<i class="feather-tag"></i>
-																	</div>
-																</div>
-																<div class="flex-grow-1 ms-3">
-																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
-												</div>
-											</div>
-										</form>	
+	
 									</div>
 								</div>
 								<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+
+											<input type="hidden" name="condition" value="used" />
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
+													<ul class="car-search-filter-nav gap-3 d-flex">
 														<li>
 															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
@@ -209,7 +218,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -222,7 +231,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -235,12 +244,12 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
 														<li>
-															<div class="d-flex">
+															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
 																	<div class="icon-blk rounded-circle">
 																		<i class="feather-tag"></i>
@@ -248,25 +257,30 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
 													</ul>
 												</div>
 												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt=""></button>
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
+												
 											</div>
 										</form>	
+	
 									</div>
 								</div>
 								<div class="tab-pane fade" id="pills-certified" role="tabpanel" aria-labelledby="pills-certified-tab" tabindex="0">
 									<div class="search-tab-col">
-										<form action="listing-grid-sidebar.html" method="post">
+										<form action="{% url 'filter_vechiles' %}" method="POST" >
+											{% csrf_token %}
+
+											<input type="hidden" name="status" value="registered" />
 											<div class="row align-items-center search-form">
 												<div class="col-12 col-lg-11 datepicker-col search-group">
-													<ul class="gap-3 d-flex">
+													<ul class="car-search-filter-nav gap-3 d-flex">
 														<li>
 															<div class="car-search-grid d-flex">
 																<div class="flex-shrink-0 d-flex align-items-center">
@@ -276,7 +290,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Location</span>
-																	<input type="text" name="name" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
+																	<input type="text" name="location" class="border-0 text-truncate px-0 form-control" placeholder="Newyork, USA">
 																</div>
 															</div>
 														</li>
@@ -289,7 +303,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Make</span>
-																	<input type="text" name="checkin" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="make" class="border-0 text-truncate px-0 form-control " placeholder="Enter Make">
 																</div>
 															</div>
 														</li>
@@ -302,7 +316,7 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Models</span>
-																	<input type="text" name="checkout" class="border-0 text-truncate px-0 form-control datetimepicker" placeholder="28/12/2022">
+																	<input type="text" name="models" class="border-0 text-truncate px-0 form-control " placeholder="Enter Model">
 																</div>
 															</div>
 														</li>
@@ -315,18 +329,19 @@
 																</div>
 																<div class="flex-grow-1 ms-3">
 																	<span class="label">Prices</span>
-																	<input type="text" name="mobile" class="border-0 text-truncate px-0 form-control" placeholder="Benz C class">
+																	<input type="text" name="price" class="border-0 text-truncate px-0 form-control" placeholder="Enter price">
 																</div>
 															</div>
 														</li>
 													</ul>
 												</div>
 												<div class="col-12 col-lg-1 car-search-btn">
-													<button class="btn car-search-icon"><img src="{% static 'assets/img/icons/white-search.svg' %}" alt="">
-													</button>										
+													<button class="btn car-search-icon" type="submit"><span><i class="feather-search"></i></span></button>
 												</div>
+												
 											</div>
 										</form>	
+	
 									</div>
 								</div>
 							</div>
@@ -357,37 +372,37 @@
 						<div class="trending-carousel">
 							<div class="trending-slider owl-carousel owl-theme">
 								<div class="trending-slider-item aos" data-aos="fade-up" >
-									<a href="categories.html"><img src="{% static 'assets/img/work/trending-car-1.jpg' %}" alt="">
+									<a href="{% url 'filter_vechiles' %}?condition=used&price=20000"><img src="{% static 'assets/img/work/trending-car-1.jpg' %}" alt="">
 									<span >Used Cars price from $20,000</span></a>
 								</div>
 								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="200">
-									<a href="categories.html">
+									<a href="{% url 'filter_vechiles' %}?mileage=low">
 										<img src="{% static 'assets/img/work/trending-car-2.jpg' %}" alt="">
-										<span>Low Mileage Pickup Trucks</span>
+										<span>Low Mileage Vechiles</span>
 									</a>
 								</div>
 								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="400">
-									<a href="categories.html">
+									<a href="{% url 'filter_vechiles' %}?price=10000">
 										<img src="{% static 'assets/img/work/trending-car-3.jpg' %}" alt="">
 										<span>Family Cars from $10,000</span>
 									</a>
 								</div>
 								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="600">
-									<a href="categories.html">
+									<a href="{% url 'filter_vechiles' %}?price=5000">
 										<img src="{% static 'assets/img/work/trending-car-4.jpg' %}" alt="">
 										<span>Cars price more than $5,000</span>
 									</a>
 								</div>
 								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="800">
-									<a href="categories.html">
+									<a href="{% url 'filter_vechiles' %}?condition=new">
 										<img src="{% static 'assets/img/work/trending-car-5.jpg' %}" alt="">
-										<span>Family Cars from $10,000</span>
+										<span>New Family Cars</span>
 									</a>
 								</div>
 								<div class="trending-slider-item aos" data-aos="fade-up" data-aos-delay="1000">
-									<a href="categories.html">
+									<a href="{% url 'filter_vechiles' %}?mileage=high">
 										<img src="{% static 'assets/img/work/trending-car-2.jpg' %}" alt="">
-										<span>Low Mileage Pickup Trucks</span>
+										<span>High Mileage Vechiles</span>
 									</a>
 								</div>
 							</div>
@@ -420,22 +435,20 @@
 							<div class="car-class-slider owl-carousel owl-theme">
 								<div class="car-class-item-block aos" data-aos="fade-up">
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Suv">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Suv</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-1.png' %}" class="img-fluid" alt="">
 											</div>
 										</a>
 									</div>
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Sports">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Sports</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-4.png' %}" class="img-fluid" alt="">
 											</div>
@@ -444,22 +457,20 @@
 								</div>
 								<div class="car-class-item-block aos" data-aos="fade-up" data-aos-delay="200">
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Coupe">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Coupe</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-2.png' %}" class="img-fluid" alt="">
 											</div>
 										</a>
 									</div>
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Sedan">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Sedan</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-5.png' %}" class="img-fluid" alt="">
 											</div>
@@ -468,76 +479,28 @@
 								</div>
 								<div class="car-class-item-block  aos" data-aos="fade-up" data-aos-delay="400">
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Luxury">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Luxury</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-3.png' %}" class="img-fluid" alt="">
 											</div>
 										</a>
 									</div>
 									<div class="car-class-item">
-										<a href="categories.html">
+										<a href="{% url 'filter_vechiles' %}?model=Vip Cars">
 											<div class="car-class-list">
 												<div class="car-class-title d-flex justify-content-between">
 													<h5>Vip Cars</h5>
-													<span>30 Cars Available</span>
 												</div>
 												<img src="{% static 'assets/img/cars-class-6.png' %}" class="img-fluid" alt="">
 											</div>
 										</a>
 									</div>
 								</div>
-								<div class="car-class-item-block">
-									<div class="car-class-item">
-										<a href="categories.html">
-											<div class="car-class-list">
-												<div class="car-class-title d-flex justify-content-between">
-													<h5>Suv</h5>
-													<span>30 Cars Available</span>
-												</div>
-												<img src="{% static 'assets/img/cars-class-1.png' %}" class="img-fluid" alt="">
-											</div>
-										</a>
-									</div>
-									<div class="car-class-item">
-										<a href="categories.html">
-											<div class="car-class-list">
-												<div class="car-class-title d-flex justify-content-between">
-													<h5>Sports</h5>
-													<span>30 Cars Available</span>
-												</div>
-												<img src="{% static 'assets/img/cars-class-4.png' %}" class="img-fluid" alt="">
-											</div>
-										</a>
-									</div>
-								</div>
-								<div class="car-class-item-block">
-									<div class="car-class-item">
-										<a href="categories.html">
-											<div class="car-class-list">
-												<div class="car-class-title d-flex justify-content-between">
-													<h5>Coupe</h5>
-													<span>30 Cars Available</span>
-												</div>
-												<img src="{% static 'assets/img/cars-class-2.png' %}" class="img-fluid" alt="">
-											</div>
-										</a>
-									</div>
-									<div class="car-class-item">
-										<a href="categories.html">
-											<div class="car-class-list">
-												<div class="car-class-title d-flex justify-content-between">
-													<h5>Sedan</h5>
-													<span>30 Cars Available</span>
-												</div>
-												<img src="{% static 'assets/img/cars-class-5.png' %}" class="img-fluid" alt="">
-											</div>
-										</a>
-									</div>
-								</div>
+									
+							</div>
 							</div>
 						</div>
 					</div>
@@ -554,7 +517,7 @@
 						<div class="car-testimonial-content">
 							<h3>.01</h3>
 							<h5>FIND THE CAR IN YOUR DREAM</h5>
-							<p>With the function search of listee, you can find the exactly any type of car that you want in a few minutes. Fast & Exactly !</p>
+							<p>With the function search of Adjeem, you can find the exactly any type of car that you want in a few minutes. Fast & Exactly !</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-6">
@@ -599,48 +562,43 @@
 					<div class="col-lg-10 col-md-12">
 						<div class="car-class-carousel">
 							<div class="car-brand-slider owl-carousel owl-theme">
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=Audi">
+
 									<div class="browse-by-brand-item aos" data-aos="flip-left">
 										<img src="{% static 'assets/img/partners/brand-1.png' %}" alt="">
-										<p>Audi <span>(30)</span></p>
+										<p>Audi <span></span></p>
 									</div>
 								</a>
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=KIA">
 									<div class="browse-by-brand-item aos" data-aos="flip-right">
 										<img src="{% static 'assets/img/partners/brand-2.png' %}" alt="">
-										<p>KIA <span>(30)</span></p>
+										<p>KIA <span></span></p>
 									</div>
 								</a>
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=Honda">
 									<div class="browse-by-brand-item aos" data-aos="flip-left">
 										<img src="{% static 'assets/img/partners/brand-3.png' %}" alt="">
-										<p>Honda <span>(30)</span></p>
+										<p>Honda <span></span></p>
 									</div>
 								</a>
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=Chevorlet">
 									<div class="browse-by-brand-item aos" data-aos="flip-right">
 										<img src="{% static 'assets/img/partners/brand-4.png' %}" alt="">
-										<p>Chevorlet <span>(30)</span></p>
+										<p>Chevorlet <span></span></p>
 									</div>
 								</a>
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=Nissan">
 									<div class="browse-by-brand-item aos" data-aos="flip-left">
 										<img src="{% static 'assets/img/partners/brand-5.png' %}" alt="">
-										<p>Nissan <span>(30)</span></p>
+										<p>Nissan <span></span></p>
 									</div>
 								</a>
-								<a href="categories.html">
+								<a href="{% url 'filter_vechiles' %}?make=Bently">
 									<div class="browse-by-brand-item aos" data-aos="flip-right">
 										<img src="{% static 'assets/img/partners/brand-6.png' %}" alt="">
-										<p>Bently <span>(30)</span></p>
+										<p>Bently <span><span></p>
 									</div>
 								</a>
-								<a href="categories.html">
-									<div class="browse-by-brand-item aos" data-aos="flip-left">
-										<img src="{% static 'assets/img/partners/brand-1.png' %}" alt="">
-										<p>Audi <span>(30)</span></p>
-									</div>
-								</a>	
 							</div>
 						</div>
 					</div>
@@ -661,7 +619,7 @@
         </div>
     </div>
     <div style="position:absolute;left:80%" class="">
-        <a href="#" class="btn btn-view">Explore all listings</a>
+		<a href="{% url 'sub_category' slug='vechiles' %}" class="btn btn-view">Explore all listings</a>
     </div>
 </div>
 				</div>
@@ -807,77 +765,25 @@
 							{% for subcategory in subcategories %}
                                 <div class="best-room">
                                     <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
+										<a href="{% url 'listing' subcategory.slug %}">
+
+											{% if subcategory.category_thumbnail_image %}
+											<img src="{{subcategory.category_thumbnail_image.url}}" class="img-fluid" alt="">
+											{% else %}
+											<img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt="">
+											{% endif %}
+
+										</a>
                                     </div>
-                                    <a href="listing-list-sidebar.html">
+									<a href="{% url 'listing' subcategory.slug %}">
                                         <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
+											<h5>{{subcategory.category_name}}</h5>
+											<span>{{subcategory.products.count}} Listings</span>
                                             <i class="fa-solid fa-arrow-right-long"></i>
                                         </div>
                                     </a>
                                 </div>
 								{% endfor %}
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                            </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-3.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Villas</h5>
-                                            <span>50 Listings</span> 
-                                            <i class="fa-solid fa-arrow-right-long"></i>                                    
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-4.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Condos</h5>
-                                            <span>45 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-1.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Shared Rooms</h5>
-                                            <span>40 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="best-room">
-                                    <div class="best-room-img">
-										<a href="listing-list-sidebar.html"><img src="{% static 'assets/img/featured/best-room-img-2.jpg' %}" class="img-fluid" alt=""></a>
-                                    </div>
-                                    <a href="listing-list-sidebar.html">
-                                        <div class="best-room-type">
-                                            <h5>Bed Room</h5>
-                                            <span>30 Listings</span>
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1066,8 +972,8 @@
 				<div class="row align-items-center aos" data-aos="fade-up">
 					<div class="col-lg-6 col-md-12">
 						<div class="joinus-dealer-content">
-							<h3 class="aos" style="margin-top:25px;margin-bottom:0" data-aos="fade-up" data-aos-delay="200">Become a Dealer with Listee?</h3>
-							<p class="aos" style="margin-top:0;padding-bottom:25px" data-aos="fade-up" data-aos-delay="300">Sell your car Free with Listee and earn commision up to 70%.</p>
+							<h3 class="aos" style="margin-top:25px;margin-bottom:0" data-aos="fade-up" data-aos-delay="200">Become a Dealer with Adjeem?</h3>
+							<p class="aos" style="margin-top:0;padding-bottom:25px" data-aos="fade-up" data-aos-delay="300">Sell your car Free with Adjeem and earn commision up to 70%.</p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-12">

@@ -37,6 +37,11 @@
             <div class="container">
 		        <div class="row" style='margin:10px 0 0  0'>
 
+				<div style="margin-top:20px;padding-bottom:2rem;">
+					<h3>{{title}} in UAE</h3>
+					{{category.short_description|safe}}
+				</div>
+
                 {% for sub_category in subcategories %}
 			       <div class="col-lg-3 col-md-4">
 				
@@ -55,7 +60,7 @@
 
 				<div style="margin-top:20px;padding-bottom:2rem;">
 					<h3>{{title}} in UAE</h3>
-					{{category.long_description}}
+					{{category.long_description|safe}}
 				</div>
 			</div>
 		</div>
