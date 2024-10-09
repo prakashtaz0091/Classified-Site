@@ -400,7 +400,7 @@
 													<div class="row">
 														<div class="col-lg-12 col-md-12">
 															<div class="form-group">
-																<input type="text" id="feedback-title" class="form-control" placeholder="Title">
+																<input type="text" id="feedback-title" required class="form-control" placeholder="Title">
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-12">
@@ -438,6 +438,7 @@
 
 														</p>
 													</div>
+													<p style="display:none;color:green;font-weight:600;" id="review-success">Your Review Was Successfully Submitted</p>
 													<div class="submit-section">
 														<button class="btn btn-primary submit-btn" type="submit"> Submit Review</button>
 													</div>
@@ -491,7 +492,9 @@
                   body: JSON.stringify(data), // body data type must match "Content-Type" header
                 });
                 const result = await response.json(); // parses JSON response into native JavaScript objects
+				
                 feedback.value=""
+				document.getElementById('review-success').style.display="block"
                 this.reset()
             });
 
