@@ -107,16 +107,23 @@
 							  </ul>
 						  </div>
 						  <div class="col-lg-3">
-							  <div class="callnow">
-								  <a href="contact.html"> <i class="feather-phone-call"></i>  Call Now</a>
-							  </div>
+							      <div class="callnow">
+        <a href="#" id="callnow-btn"><i class="feather-phone-call"></i>Call Now</a>
+    </div>
 						  </div>
 					 </div>
 				  </div>
 			</div>		
 		</section>
 		<!--/Details Description  Section-->
-		
+	<script>
+    document.getElementById('callnow-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents the default action of the anchor tag
+        var phoneNumber = "{{product.created_by.phone_number}}"; // Fetch the phone number from your template context
+        this.textContent = phoneNumber; // Replace "Call Now" with the phone number
+    });
+</script>
+	
 		<!--Details Main  Section-->
 		<div class="details-main-wrapper listing-section ">	
             <div class="container">
@@ -476,13 +483,13 @@
 							    <h4><img src="assets/img/statistic-icon.svg" alt="location"> Statisfic</h4>
 							    <ul class="statistics-list">
 								    <li><div class="statistic-details"><span class="icons"><i class="fa-regular fa-eye"></i></span>
-								       Views </div><span class="text-end"> 453563</span></li>
+											Views </div><span class="text-end"> {{product.view_count}}</span></li>
 									<li><div class="statistic-details"><span class="icons"><i class="feather-star"></i></span>
-									   Ratings </div><span class="text-end"> 153</span></li>
+									   Ratings </div><span class="text-end"> 4.5</span></li>
 									<li><div class="statistic-details"><span class="icons"><i class="feather-heart"></i></span>
-										 Favuorites </div><span class="text-end"> 123</span></li>
+											Favuorites </div><span class="text-end">{{product.bookmark.count}} </span></li>
 									<li class="mb-0"><div class="statistic-details"><span class="icons"><i class="feather-share-2"></i></span>
-									     Shares </div><span class="text-end"> 50</span></li>
+									     Shares </div><span class="text-end"> 5</span></li>
 								</ul>
 							</div>
 						    <div class="card">
@@ -492,8 +499,8 @@
 								     <img src="{% static 'assets/img/profiles/avatar-12.jpg' %}" alt="author">
 								   </div>
 								   <div class="sideauthor-info">
-								       <p class="authorname">Johnson</p>
-								       <p >Member since Nov 24, 2017</p>
+									   <p class="authorname">{{product.created_by.full_name}}</p>
+									   <p >Member since {{product.created_by.date_joined|date:"Y-m-d"}}</p>
 								   </div>
 								</div>
 							</div>
