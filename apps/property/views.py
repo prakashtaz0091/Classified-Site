@@ -9,10 +9,8 @@ def landing_page(request):
     try:
        
         featured_products = Product.objects.all().order_by('-id')[:4]
-        
-        all_categories = Category.objects.filter(parent_id=12, status='ACTIVE').annotate(product_count=Count('products'))
-        
-        print(all_categories)
+        category=Category.objects.get(slug='real-estate')
+        all_categories = Category.objects.filter(parent_id=category.id, status='ACTIVE').annotate(product_count=Count('products'))
         latest_products = []
         all_products = (
             Product.objects.select_related()
