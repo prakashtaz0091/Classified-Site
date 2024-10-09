@@ -351,69 +351,78 @@
                         <div class="car-class-carousel">
                             <div class="property-listing-slider owl-carousel owl-theme">
 								{% for property in subcategories %}
-                                <div class="property-item">
-                                    <a href="categories.html"><div class="companies-set mb-4">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{{property.category_icon_image.url}}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>121</span>Properties</h5>
-                                                <h6>{{property.category_name}}</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>45</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>45</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>45</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                    <a href="categories.html"><div class="companies-set">
-                                        <div class="companies-set-head">
-                                            <div class="companies-set-logo">
-												<span><img src="{{property.category_icon_image.url}}" alt="img"></span>
-                                            </div>
-                                            <div class="companies-set-content">
-                                                <h5><span>188</span>Properties</h5>
-                                                <h6>{{property.category_name}}</h6>
-                                            </div>
-                                        </div>
-                                        <div class="companies-set-count">
-                                            <ul>
-                                                <li>
-                                                    <h6>66</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>87</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                                <li>
-                                                    <h6>22</h6>
-                                                    <span>Listing</span>
-                                                </li>
-                                            </ul>
-                                            <div class="companies-set-btn">
-                                                <a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div></a>
-                                </div>
+									<div class="property-item">
+										<a href="categories.html">
+											<div class="companies-set mb-4">
+												<div class="companies-set-head">
+													<div class="companies-set-logo">
+														<span><img src="{{ property.category_icon_image.url }}" alt="img"></span>
+													</div>
+													<div class="companies-set-content">
+														<!-- Display the dynamic property count here -->
+														<h5><span>{{ property.product_count }}</span> Properties</h5>
+														<h6>{{ property.category_name }}</h6>
+													</div>
+												</div>
+												<div class="companies-set-count">
+													<ul>
+														<li>
+															<h6>{{property.product_count}}</h6>
+															<span>Listing</span>
+														</li>
+														<li>
+															<h6>{{property.product_count}}</h6>
+															<span>Listing</span>
+														</li>
+														<li>
+															<h6>{{property.product_count}}</h6>
+															<span>Listing</span>
+														</li>
+													</ul>
+													<div class="companies-set-btn">
+														<a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing
+															<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+													</div>
+												</div>
+											</div>
+										</a>
+										<a href="categories.html">
+											<div class="companies-set">
+												<div class="companies-set-head">
+													<div class="companies-set-logo">
+														<span><img src="{{ property.category_icon_image.url }}" alt="img"></span>
+													</div>
+													<div class="companies-set-content">
+														<!-- Display the dynamic property count here -->
+														<h5><span>{{ property.product_count }}</span> Properties</h5>
+														<h6>{{ property.category_name }}</h6>
+													</div>
+												</div>
+												<div class="companies-set-count">
+													<ul>
+														<li>
+															<h6>66</h6>
+															<span>Listing</span>
+														</li>
+														<li>
+															<h6>87</h6>
+															<span>Listing</span>
+														</li>
+														<li>
+															<h6>22</h6>
+															<span>Listing</span>
+														</li>
+													</ul>
+													<div class="companies-set-btn">
+														<a href="{% url 'view_all' property.slug %}" class="btn btn-linebtn">View All Listing
+															<i class="fa fa-arrow-right ms-3" aria-hidden="true"></i></a>
+													</div>
+												</div>
+											</div>
+										</a>
+									</div>
 								{% endfor %}
+
                                
                                 
                             </div>
