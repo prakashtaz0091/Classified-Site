@@ -81,10 +81,11 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Description</label>
-											<div id="editor" name='description'>{{product.description}}</div>
+											<div id="editor">{{ product.description|safe }}</div> <!-- Ensure that HTML is rendered safely -->
 											<input type="hidden" name="description" id="descriptionInput">
 										</div>
-									</div>	
+									</div>
+									
 								</div> 
 								<div class="row">									
 									<div class="col-sm-6">
@@ -369,17 +370,19 @@ function updateGalleryPreview() {
 
 	</script>
 
-	<script>
-		document.querySelector('form').addEventListener('submit', function() {
-			// Get the content of the editor div
-			var editorContent = document.getElementById('editor').innerHTML;
-			
-			// Set the content to the hidden input
-			document.getElementById('descriptionInput').value = editorContent;
-		});
-		
+	
 
-
-	</script>
+<script>
+	// Ensure the DOM is loaded before attaching event handlers
+document.addEventListener('DOMContentLoaded', function() {
+    const editor = document.getElementById('editor');
+    const descriptionInput = document.getElementById('descriptionInput');
+    
+    // Before form submission, copy the editor content to the hidden input
+    document.querySelector('form').addEventListener('submit', function() {
+        descriptionInput.value = editor.innerHTML;  // Transfer editor's HTML content to the hidden input
+    });
+});
+</script>
 
 {% endblock %}
