@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from apps.category.models import Category
+from apps.home.models import ProductReview
 from apps.store.models import Product
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -8,9 +9,15 @@ from django.db.models import Count
 def landing_page(request):
     try:
        
-        featured_products = Product.objects.all().order_by('-id')[:4]
         category=Category.objects.get(slug='real-estate')
-        all_categories = Category.objects.filter(parent_id=category.id, status='ACTIVE').annotate(product_count=Count('products'))
+
+        featured_products = Product.objects.filter(category=category).order_by('-id')[:4]
+        for product in featured_products:
+                    avg_rating=ProductReview.average_rating_for_product(product.id)
+                    product.avg_rating=avg_rating
+
+
+        all_categories = Category.objects.filter(parent_id=category, status='ACTIVE').annotate(product_count=Count('products'))
         latest_products = []
         all_products = (
             Product.objects.select_related()
@@ -21,6 +28,10 @@ def landing_page(request):
         # Get the latest 5 products for each category
         for category in all_categories:
             products = all_products.filter(category=category, is_approved=True, is_available=True)[:4]
+            for product in products:
+                    avg_rating=ProductReview.average_rating_for_product(product.id)
+                    product.avg_rating=avg_rating
+
             latest_product = {"products": products, "category": category}
             latest_products.append(latest_product)
 
@@ -66,8 +77,6 @@ def search_property(request):
     property_location = request.GET.get('property', '')  
     price = request.GET.get('price', '')  
     category = request.GET.get('category', '') 
-    
-    print(property_location,price,category)
     
     if property_location:
         latest_products = latest_products.filter(location__address__icontains=property_location)

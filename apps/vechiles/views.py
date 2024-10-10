@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 from apps.category.models import Category
+from apps.home.models import ProductReview
 from apps.store.models import BookMark, Feature, Product
 
 #Property landing page
@@ -12,6 +13,11 @@ def landing_page(request):
         category=Category.objects.get(slug='vechiles')
         sub_category_instance=Category.objects.filter(parent_id=category)
         featured_products=Product.objects.filter(category=category)[:4]
+
+        for product in featured_products:
+                    avg_rating=ProductReview.average_rating_for_product(product.id)
+                    product.avg_rating=avg_rating
+
         context={
             'subcategories':sub_category_instance,
             'featured_products':featured_products,
