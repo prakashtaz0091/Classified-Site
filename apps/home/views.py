@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.urls import reverse
 from apps.accounts.models import Account
 from apps.category.models import Category
-from apps.home.models import Reviews
+from apps.home.models import ProductReview, Reviews
 from apps.store.models import (BannerAds, BookMark, ContactInformation, DefaultBannerAdsPricing, Feature, Location,
                                Product, ProductImages,BannerAds)
 
@@ -41,9 +41,18 @@ def home(request):
                 .filter(is_available=True,is_approved=True)
                 .order_by("-created_date")
             )
+           
+
+
+       
             featured_ads=(
                 Product.objects.filter(is_available=True,is_approved=True).order_by('?')[:6]
             )
+            for product in featured_ads:
+                    avg_rating=ProductReview.average_rating_for_product(product.id)
+                    product.avg_rating=avg_rating
+
+
             carousel_banner_ads=BannerAds.objects.filter(position='homepage_carousel',status='approved')
             #Onlyy one in top banner
             homepage_top_banner_ads=BannerAds.objects.filter(position='homepage_top',status='approved').order_by('-id').first()
@@ -53,6 +62,11 @@ def home(request):
             for category in all_categories:
 
                 products = all_products.filter(category=category,is_approved=True,is_available=True)[:5]
+                for product in products:
+                    avg_rating=ProductReview.average_rating_for_product(product.id)
+                    print(avg_rating)
+                    product.avg_rating=avg_rating
+
 
                 latest_product = {"products": products, "category": category}
                 latest_products.append(latest_product)
@@ -64,7 +78,6 @@ def home(request):
                 ).values_list("product_id", flat=True)
             else:
                 bookmarked_product_ids = []
-
             context = {
                 "latest_products": latest_products,
                 "all_products": all_products,
