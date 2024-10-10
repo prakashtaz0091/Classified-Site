@@ -3,6 +3,11 @@
 {% block content %}
     <div class="main-wrapper">
     
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
         <!-- Header -->
         {% include 'admin1/include/header.html' %}
                 <!-- /Header -->
@@ -78,14 +83,38 @@
 										</div>
 									</div>	
 										
+<style>
+ .ql-editor strong{
+     font-weight:bold;
+ }
+</style>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Description</label>
-											<div id="editor">{{ product.description|safe }}</div> <!-- Ensure that HTML is rendered safely -->
-											<input type="hidden" name="description" id="descriptionInput">
+                            <div style="height:200px;" id="description-container"></div>
+                            <input type="hidden" name="description" required id="description">
+ 
 										</div>
 									</div>
 									
+                    <script>
+                    window.onload = function() {
+                        var quillLong = new Quill('#description-container', {
+                            theme: 'snow'
+                        });
+                    document.querySelector('#description').value="{{product.description|safe}}"
+                    quillLong.root.innerHTML = document.querySelector('#description').value; // Sync initial value
+
+
+                        quillLong.on('text-change', function() {
+                            var content = document.querySelector('#description');
+                            content.value = quillLong.root.innerHTML;
+                            console.log(content.value);
+                        });
+                    };
+                    </script>
+
+
 								</div> 
 								<div class="row">									
 									<div class="col-sm-6">
@@ -372,17 +401,5 @@ function updateGalleryPreview() {
 
 	
 
-<script>
-	// Ensure the DOM is loaded before attaching event handlers
-document.addEventListener('DOMContentLoaded', function() {
-    const editor = document.getElementById('editor');
-    const descriptionInput = document.getElementById('descriptionInput');
-    
-    // Before form submission, copy the editor content to the hidden input
-    document.querySelector('form').addEventListener('submit', function() {
-        descriptionInput.value = editor.innerHTML;  // Transfer editor's HTML content to the hidden input
-    });
-});
-</script>
 
 {% endblock %}
