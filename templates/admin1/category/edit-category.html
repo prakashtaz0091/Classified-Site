@@ -170,9 +170,11 @@
                         var quillLong = new Quill('#long-description-container', {
                             theme: 'snow'
                         });
+                    document.querySelector('#long-description').value="{{category.long_description|safe}}"
+                    quillLong.root.innerHTML = document.querySelector('#long-description').value; // Sync initial value
+
 
                         quillLong.on('text-change', function() {
-                            console.log(quillLong.root.innerHTML);  // Use quillLong here
                             var content = document.querySelector('#long-description');
                             content.value = quillLong.root.innerHTML;
                             console.log(content.value);
@@ -193,6 +195,11 @@
                     var quillShort = new Quill('#short-description-container', {
                         theme: 'snow'
                     });
+
+
+                    document.querySelector('#short-description').value="{{category.short_description|safe}}"
+                    quillShort.root.innerHTML = document.querySelector('#short-description').value; // Sync initial value
+
 
                     quillShort.on('text-change', function() {
                         var content = document.querySelector('#short-description');
