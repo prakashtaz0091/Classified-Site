@@ -1,5 +1,6 @@
 # Python bytecode files
 # media/
+db.sqlite3
 *.py[cod]
 __pycache__/
 *.so
