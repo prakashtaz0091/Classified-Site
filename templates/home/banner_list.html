@@ -58,8 +58,8 @@
 										<span class="sortbytitle">Sort by</span>
 										<div class="sorting-select">
 											<select class="form-control select" id="sortSelect" onchange="sortProducts(this)">
-												<option value="-created_date">Newest</option>
-												<option value="created_date">Oldest</option>
+												<option value="-created_at">Newest</option>
+												<option value="created_at">Oldest</option>
 											</select>
 											
 										</div>
@@ -203,6 +203,7 @@
 						search:searchQuery
 					},
 					success: function (data) {
+						console.log(data)
 						$('#productContainerWrapper').html(data.product_data);
 						$('#paginationClick').html(data.pagination_data)
 					}

@@ -615,9 +615,48 @@ def job(request):
 
 def banner(request):
     banner_ads=BannerAds.objects.filter(created_by=request.user)
+    sort_option = request.GET.get("sort", "-created_at")  # Default to newest
+    search_query = request.GET.get("search", "")  # Default to newest
+    print(banner_ads)
+    user=request.user
+    if search!="":
+            banner_ads = banner_ads.filter(
+            title__icontains=search_query
+        ) | banner_ads.filter(
+            position__icontains=search_query
+        )
+
+            banner_ads = banner_ads.order_by(sort_option)
+
+
+    print(banner_ads)
+    paginator = Paginator(banner_ads, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
+            banner_data = render_to_string(
+                    "partials/product_list_mylist.html",
+                    {"products": page_obj.object_list},
+                    request=request,
+                ),
+            pagination_context={
+                'page_obj':page_obj,
+                'search':search_query,
+                'sort':sort_option
+
+            }
+            pagination_data=render_to_string(
+                "partials/pagination_mylist.html",
+                pagination_context,
+                request=request
+            )
+     
     context={
-        'banner_ads':banner_ads
+        'page_obj':page_obj,
+        'banner_ads':page_obj.object_list
     }
+    print("hel")
     
     return render(request,'home/banner_list.html',context)
 
