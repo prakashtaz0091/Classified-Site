@@ -1,5 +1,5 @@
 # Python bytecode files
-media/
+# media/
 *.py[cod]
 __pycache__/
 *.so
@@ -33,8 +33,8 @@ venv.bak/
 # settings_local.py
 
 # Database
-*.sqlite3
-*.db
+# *.sqlite3
+# *.db
 
 # Static and media files (optional if generated during deployment)
 # staticfiles/
