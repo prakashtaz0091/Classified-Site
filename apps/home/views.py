@@ -636,8 +636,8 @@ def banner(request):
 
     if request.headers.get("x-requested-with") == "FETCH" or request.headers.get('x-requested-with')=="XMLHttpRequest":
             banner_data = render_to_string(
-                    "partials/product_list_mylist.html",
-                    {"products": page_obj.object_list},
+                    "partials/banner_list.html",
+                    {"banner_ads": page_obj.object_list},
                     request=request,
                 ),
             pagination_context={
@@ -651,6 +651,7 @@ def banner(request):
                 pagination_context,
                 request=request
             )
+            return JsonResponse({'product_data':banner_data,'pagination_data':pagination_data})
      
     context={
         'page_obj':page_obj,

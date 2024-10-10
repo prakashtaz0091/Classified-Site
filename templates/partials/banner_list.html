@@ -1,0 +1,35 @@
+	{% for item in banner_ads %}
+                                     <tr class="product-row" data-created="{{ item.created_date | date:'Y-m-d'}}">
+										<td><Span class="views-count">{{item.title}}</span></td>
+
+									     <td>
+											 {% if item.image%}
+										    <div class="listingtable-img"> <a href=""><img class="img-fluid avatar-img" src="{{item.image.url}}" alt=""></a></div>
+											{% endif %}
+										 </td>
+										 <td><span class="status-text">{{item.position}}</span></td>
+										 <td><span class="status-text">{{item.price}}</span></td>
+									  
+										
+										 {% if item.status == 'approved' %}
+
+									     <td><span class="status-text">Approve</span></td>
+										 {% else %}
+										 <td><h6 class="badge-delete">Pending</h6></td>
+										 {% endif %}
+
+									     <td>
+										    <div class="action">
+        										<a href="" class="action-btn btn-view"><i class="feather-eye"></i></a>
+											    <a href="" class="action-btn btn-edit"><i class="feather-edit-3"></i></a>
+												<a href="" class="action-btn btn-trash" onclick="return confirmDelete();">
+													<i class="feather-trash-2"></i>
+												</a>
+																							
+										    </div>
+										 </td>
+                                     </tr> 
+									 {% endfor %}
+									
+
+	
