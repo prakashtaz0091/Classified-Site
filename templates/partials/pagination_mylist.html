@@ -23,7 +23,7 @@
         <!-- Next Page -->
         <li class="page-item nextlink {% if not page_obj.has_next %}disabled{% endif %}">
             <a class="page-link" 
-               href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&search={{search}}&sort={sort}{% else %}#{% endif %}" 
+               href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&search={{search}}&sort={{sort}}{% else %}#{% endif %}" 
                data-page="{% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}#{% endif %}">
                 Next <i class="fas fa-arrow-right"></i>
             </a>
