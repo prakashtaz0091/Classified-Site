@@ -36,7 +36,7 @@
                     <h5>Edit Ads</h5>
                 </div>
                 <div class="row">
-					<form action='{% url 'edit_ads' id %}' method='POST'>
+					<form action='{% url 'edit_ads' id %}' method='POST' enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="col-lg-12 m-auto">
 							<!-- Service Information -->
@@ -132,6 +132,11 @@
 										</div>  
 									</div>   
 								</div>
+
+							
+
+
+								
 							</fieldset>
 							<!-- /Service Information -->
 							
@@ -140,46 +145,76 @@
 							
 						
 							
-								
+						
+							
 							<fieldset>
+								<!-- Cover Image (Already Uploaded + New Uploads) -->
 								<div class="sub-title">
 									<h6>Cover images</h6>
-								</div> 					
+								</div> 
 								<div class="form-uploads mb-4">
 									<div class="form-uploads-path">
 										<img src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
 										<div class="file-browse">
 											<h6>Drag & drop image or </h6>
 											<div class="file-browse-path">
-												<input type="file" id="imageUpload" accept="image/*" name='cover_images'>
+												<input type="file"  name='cover_image' id="coverImageUpload" accept="image/*">
 												<a href="javascript:void(0);"> Browse</a>
 											</div>
 										</div>
 										<h5>Supported formats: JPEG, PNG</h5>
-							
 									</div>
 								</div>
-
+							
+								<!-- Preview already uploaded cover image -->
+								<div class="file-preview" id="coverImagePreview">
+									<ul id="coverPreviewList">
+										{% if product.cover_image %}
+											<li>
+												<div style="position: relative; display: inline-block;">
+													<img src="{{ product.cover_image.url }}" alt="cover image" name='cover_image' style="max-width: 100px; max-height: 100px;">
+													<button type="button" onclick="removeExistingCoverImage()" style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">&times;</button>
+												</div>
+											</li>
+										{% endif %}
+									</ul>
+								</div>
+							
+								<!-- Gallery Images (Already Uploaded + New Uploads) -->
 								<div class="sub-title">
 									<h6>Gallery</h6>
-								</div> 					
+								</div> 
 								<div class="form-uploads mb-4">
 									<div class="form-uploads-path">
 										<img src="{% static 'admin/assets/img/icons/upload.svg' %}" alt="img">
 										<div class="file-browse">
 											<h6>Drag & drop image or </h6>
 											<div class="file-browse-path">
-												<input type="file" id="imageUpload" accept="image/*" name='images' multiple>
+												<input type="file" id="galleryImageUpload" accept="image/*" name='images' multiple>
 												<a href="javascript:void(0);"> Browse</a>
 											</div>
 										</div>
 										<h5>Supported formats: JPEG, PNG</h5>
-										<p id="uploadMessage">You can upload up to 8 images. Remaining: 8</p>
+										<p id="uploadMessage">You can upload up to 8 images. Remaining: </p>
 									</div>
 								</div>
-								<div class="file-preview" id="imagePreview">
-									<ul id="previewList"></ul>
+							
+								<!-- Preview already uploaded gallery images -->
+								<div class="file-preview" id="galleryImagePreview">
+									<ul id="galleryPreviewList">
+										{% comment %} {% for image in product_images %}
+										<li id="galleryImage{{ image.id }}"> <!-- Add an ID to each image wrapper -->
+											<div style="position: relative; display: inline-block;">
+												<img src="{{ image.image.url }}" alt="gallery image" style="max-width: 100px; max-height: 100px;">
+												<button type="button" onclick="removeExistingGalleryImage({{ image.id }})" style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">&times;</button>
+											</div>
+										</li>
+									{% endfor %} {% endcomment %}
+
+									</ul>
 								</div>
+							
+								<!-- Submit buttons -->
 								<div class="row">
 									<div class="col-md-12">
 										<div class="field-btns" style='display:flex;'>
@@ -205,66 +240,133 @@
 
 
 
+	
+
+
 	<script>
-		document.getElementById('imageUpload').addEventListener('change', function(event) {
-			const files = event.target.files;
-			const previewContainer = document.getElementById('previewList');
-			const maxFiles = 8;
-		
-			// Get the current number of uploaded images
-			const currentUploads = previewContainer.getElementsByTagName('li').length;
-		
-			// Check if adding the new files would exceed the max limit
-			if (currentUploads + files.length > maxFiles) {
-				alert(`You can only upload a total of ${maxFiles} images. You have already uploaded ${currentUploads}.`);
-				event.target.value = '';  // Clear the file input
-				return;
-			}
-		
-			// Update remaining count message
-			document.getElementById('uploadMessage').textContent = `You can upload up to ${maxFiles} images. Remaining: ${maxFiles - (currentUploads + files.length)}`;
-		
-			// Loop through each file and create an image element
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				const reader = new FileReader();
-		
-				reader.onload = function(e) {
-					// Create a new list item for the uploaded image
-					const li = document.createElement('li');
-		
-					// Create the image element
-					const img = document.createElement('img');
-					img.src = e.target.result;
-		
-					// Create the delete button
-					const deleteBtn = document.createElement('button');
-					deleteBtn.textContent = '×';
-					deleteBtn.classList.add('delete-btn');
-		
-					// Add event listener to remove image on click
-					deleteBtn.addEventListener('click', function() {
-						previewContainer.removeChild(li);
-		
-						// Update the remaining count message after deletion
-						const newUploads = previewContainer.getElementsByTagName('li').length;
-						document.getElementById('uploadMessage').textContent = `You can upload up to ${maxFiles} images. Remaining: ${maxFiles - newUploads}`;
-					});
-		
-					// Append the image and delete button to the list item
-					li.appendChild(deleteBtn);
-					li.appendChild(img);
-		
-					// Append the new list item to the preview container
-					previewContainer.appendChild(li);
-				}
-		
-				reader.readAsDataURL(file);  // Convert the file to a data URL to preview
-			}
-		});
-		
-		
-		
+		let galleryImages = []; // To track new gallery images
+let coverImage = null;  // To track the new cover image
+
+// Tracks the deleted existing images (for backend processing)
+let deletedCoverImage = false;
+let deletedGalleryImages = [];
+
+// Show new cover image upload preview
+document.getElementById('coverImageUpload').addEventListener('change', function() {
+    previewCoverImage(this);
+});
+
+// Show new gallery image upload preview
+document.getElementById('galleryImageUpload').addEventListener('change', function() {
+    previewGalleryImages(this);
+});
+
+// Preview newly uploaded cover image
+function previewCoverImage(input) {
+    const previewList = document.getElementById('coverPreviewList');
+    previewList.innerHTML = ''; // Clear previous image
+
+    if (input.files && input.files.length === 1) {
+        coverImage = input.files[0]; // Track the new cover image
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div style="position: relative; display: inline-block;">
+                    <img src="${e.target.result}" alt="cover image preview" style="max-width: 100px; max-height: 100px;">
+                    <button type="button" onclick="removeCoverImage()" style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">&times;</button>
+                </div>`;
+            previewList.appendChild(li);
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        alert('Only one image is allowed for the cover.');
+    }
+}
+
+// Preview newly uploaded gallery images
+function previewGalleryImages(input) {
+    const previewList = document.getElementById('galleryPreviewList');
+    const uploadMessage = document.getElementById('uploadMessage');
+    const maxImages = 8;
+    const remainingSlots = maxImages - galleryImages.length - document.querySelectorAll('#galleryPreviewList li').length;
+
+    if (input.files && input.files.length <= remainingSlots) {
+        Array.from(input.files).forEach((file, index) => {
+            galleryImages.push(file); // Track uploaded gallery images
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const li = document.createElement('li');
+                const imageIndex = galleryImages.length - 1;
+                li.innerHTML = `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="${e.target.result}" alt="gallery image preview" style="max-width: 100px; max-height: 100px;">
+                        <button type="button" onclick="removeGalleryImage(${imageIndex})" style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">&times;</button>
+                    </div>`;
+                previewList.appendChild(li);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        const newCount = maxImages - galleryImages.length - document.querySelectorAll('#galleryPreviewList li').length;
+        uploadMessage.textContent = `You can upload up to ${newCount} more image(s).`;
+    } else {
+        alert(`You can upload a maximum of ${remainingSlots} more image(s) for the gallery.`);
+    }
+}
+
+// Remove newly uploaded cover image
+function removeCoverImage() {
+    coverImage = null;
+    document.getElementById('coverPreviewList').innerHTML = ''; // Clear preview
+    document.getElementById('coverImageUpload').value = ''; // Reset input
+}
+
+// Remove newly uploaded gallery image
+function removeGalleryImage(index) {
+    galleryImages.splice(index, 1); // Remove the image from the tracked list
+    updateGalleryPreview(); // Refresh preview
+}
+
+// Remove already uploaded cover image
+function removeExistingCoverImage() {
+    deletedCoverImage = true;
+    document.getElementById('coverPreviewList').innerHTML = ''; // Clear preview
+}
+
+// Remove already uploaded gallery image
+function removeExistingGalleryImage(index) {
+    deletedGalleryImages.push(index); // Track deleted gallery images (for backend)
+    updateGalleryPreview(); // Refresh preview
+}
+
+// Refresh gallery preview after deletion
+function updateGalleryPreview() {
+    const previewList = document.getElementById('galleryPreviewList');
+    const uploadMessage = document.getElementById('uploadMessage');
+    const maxImages = 8;
+
+    previewList.innerHTML = ''; // Clear existing previews
+    galleryImages.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div style="position: relative; display: inline-block;">
+                    <img src="${e.target.result}" alt="gallery image preview" style="max-width: 100px; max-height: 100px;">
+                    <button type="button" onclick="removeGalleryImage(${index})" style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">&times;</button>
+                </div>`;
+            previewList.appendChild(li);
+        };
+        reader.readAsDataURL(file);
+    });
+
+    const newCount = maxImages - galleryImages.length - document.querySelectorAll('#galleryPreviewList li').length;
+    uploadMessage.textContent = `You can upload up to ${newCount} more image(s).`;
+}
+
 	</script>
 
 	<script>

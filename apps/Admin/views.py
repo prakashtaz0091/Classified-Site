@@ -376,6 +376,8 @@ def edit_ads(request, id):
     if request.method == "POST":
         print(request.POST,'=======+++>')
         product_name = request.POST.get('product_name')
+        cover_images=request.FILES.get('cover_image')
+        
         subcategory = request.POST.get('subcategory')
         category = request.POST.get('category')
         description = request.POST.get('description')
@@ -384,31 +386,33 @@ def edit_ads(request, id):
         images = request.FILES.getlist('images')
         category=Category.objects.get(id=category)
         subcategory=Category.objects.get(id=subcategory)
-
         # Update the product's existing fields
         product.product_name = product_name
         product.subcategory = subcategory
         product.category =category
         product.description = description
         product.price = price
+        if cover_images:
+            product.cover_image=cover_images
         product.negotiable = True if nego == 'on' else False
         
         product.save()
+        
 
-       
-        if images:
-          
+        ProductImages.objects.filter(product=product).delete()
+        if images:          
             for image in images:
                 ProductImages.objects.create(product=product, image=image)
-        
         return redirect('ads')  
 
     else:
         category = Category.objects.all().order_by('-id')
+        product_images=ProductImages.objects.filter(product=product)
         context = {
             'product': product,
             'category': category,
-            'id': id
+            'id': id,
+            'product_images':product_images
         }
         return render(request, 'admin1/Ads/edit_ads.html', context)
 
@@ -482,11 +486,9 @@ def add_user(request):
             account.is_active=active
             account.role=role
             if account.role == 'Admin' or account.role == "Super Admin":
-                print('i am in')
                 is_superadmin=True 
             
             else:
-                print('i am out')
                 is_staff=True  
             
             account.save()       
@@ -528,9 +530,7 @@ def users_edit(request, id):
     
     if request.method == 'POST':
         # Extract data from the form
-        print(request.POST)
         profile_photo = request.FILES.get('profile_photo')
-        print(profile_photo)
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -558,7 +558,6 @@ def users_edit(request, id):
 
         # Update or create UserProfile
         profile, created = UserProfile.objects.get_or_create(user=account)
-        print(profile_photo)
         if profile_photo:
             profile.profile_photo = profile_photo 
         profile.phone_number = phone_number
@@ -590,7 +589,6 @@ def customer_list(request):
 
 def add_customer(request):
     if request.method == "POST":
-        print(request.POST)
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -646,7 +644,6 @@ def customers_delete(request,id):
 def customers_edit(request,id):
     account=get_object_or_404(Account,id=id)
     if request.method=="POST":
-        print(request.POST)
         profile_photo = request.FILES.get('profile_photo', None)  
         full_name = request.POST.get('full_name')
         username = request.POST.get('username')
@@ -737,7 +734,6 @@ def account_settings(request):
             user_profile.profile_photo = request.FILES['profile_photo']
             
         user_profile.save()
-        print('saveed')
         
         return redirect('account_settings')
     
@@ -758,7 +754,6 @@ def password_settings(request):
 
 def change_password(request):
     if request.method == "POST":
-        print(request.POST,'data')
         current_password = request.POST.get('current_password')
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
@@ -835,7 +830,6 @@ def seo_edit(request,id):
 
 def add_seo(request):
     if request.method=='POST':
-        print(request.POST)
         page=request.POST.get('page')
         meta_title=request.POST.get('meta_title')
         site_description=request.POST.get('site_description')
@@ -881,7 +875,6 @@ def default_edit(request,id):
         
          # Extract image files from request.FILES
         profile_image = request.FILES.get('profle')
-        print(profile_image,'profile image')
         product_image = request.FILES.get('product')
         watermark_image = request.FILES.get('watermark')
         
@@ -1004,7 +997,6 @@ def toggle_option_view(request):
         toggle_type = data.get('toggle_type')
         is_checked = data.get('is_checked')
         
-        print('data,data',data)
 
         # Update the relevant option in the database
         try:
@@ -1099,7 +1091,6 @@ def get_category_data(request, id):
             
         }
         
-        print(data)
     except Category.DoesNotExist:
         data = {'success': False, 'error': 'Category not found'}
     
@@ -1108,7 +1099,6 @@ def get_category_data(request, id):
 @csrf_exempt
 def update_category(request):
     if request.method == 'POST':
-        print(request.POST)
         category_id = request.POST.get('category_id')
         category_name = request.POST.get('category_name')
         
@@ -1130,7 +1120,6 @@ def update_category(request):
 def delete_field_options(request, id):
     try:
         main_id = request.POST.get('main_id')
-        print(main_id)
         field_options = get_object_or_404(FieldOptions, id=id)
         field_options.delete()
         return redirect(reverse('add_options', kwargs={'id': main_id}))
@@ -1171,7 +1160,6 @@ def list_banner_ads(request):
     context={
         'banner_ads':banner_ads_instance
     }
-    print(context)
     return render(request,'admin1/banner_ads/banner_ads.html',context)
 
 #For banner listing
@@ -1205,7 +1193,6 @@ def create_banner_ads(request):
                 subcategories = Category.objects.filter(parent_id=category)
                 category_context[category] = subcategories
 
-            print(homepage_banner_instance.price_per_day)
             context={
                 'homepage_banner_instance':homepage_banner_instance,
                 'category_page_top':category_page_top,
@@ -1217,7 +1204,6 @@ def create_banner_ads(request):
             if created:
                 context['message']=created
 
-            print(context)
             return render(request,'admin1/banner_ads/add_banner_ads.html',context)
         else:
             data = request.POST
@@ -1255,19 +1241,16 @@ def create_banner_ads(request):
             def create_banner_ad(position, plan, image, title, link, category, subcategory, city, created_by):
                 if plan:
                     try:
-                        print(position)
                         pricing = DefaultBannerAdsPricing.objects.get(position=position)
                         price_per_day = pricing.price_per_day
 
                         # Calculate the number of days using price/price_per_day
                         days = float(plan) / float(price_per_day)
-                        print(float(plan))
-                        print(float(price_per_day))
+                      
 
                     except DefaultBannerAdsPricing.DoesNotExist:
                         # Handle the case where no pricing exists for the position
                         return None
-                    print(image)
                     banner_ad = BannerAds.objects.create(
                         title=title,
                         link=link,
@@ -1334,7 +1317,6 @@ def edit_banner_ad(request):
                 subcategories = Category.objects.filter(parent_id=category)
                 category_context[category] = subcategories
 
-            print(homepage_banner_instance.price_per_day)
             context={
                 'homepage_banner_instance':homepage_banner_instance,
                 'category_page_top':category_page_top,
@@ -1345,13 +1327,10 @@ def edit_banner_ad(request):
                 'banner_ad':banner_instance
             }
 
-            print(context)
             return render(request,'admin1/banner_ads/edit_banner_ads.html',context)
         else:
             data = request.POST
-            print(data)
             banner_id=request.GET.get('banner_id')
-            print("banner id",banner_id)
             title = data.get('name')
             link = data.get('link')
             category_id = data.get('category', None)
@@ -1392,7 +1371,6 @@ def edit_banner_ad(request):
                 temp_subcategory=banner_instance.sub_category
 
             #At the very less same data will come and this is the best way to handle this 
-            print('banner',banner_instance)
             banner_instance.delete()
 
             # Category and subcategory objects

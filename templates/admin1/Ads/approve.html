@@ -121,7 +121,7 @@
                                             <a href="{% url 'ads_details' ad.slug %}" class="table-profileimage">
                                                 <img src="{{ ad.cover_image.url }}" class="me-2" alt="img">
                                             </a>
-                                            <a href="javascript:void(0);" class="table-name">
+                                            <a href="{% url 'ads_details' ad.slug %}" class="table-name">
                                                 <span>{{ ad.product_name|truncatechars:30 }}</span>
                                             </a>
                                         </td>
