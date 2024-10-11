@@ -26,160 +26,26 @@
             </div>
             <ul class="main-nav">
                 <li class="has-submenu active">
-                    <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu mega-submenu">
-                        <li>
-                            <div class="megamenu-wrapper">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="single-demo active">
-                                            <div class="demo-img">
-                                                <a href="{% url 'home' %}"><img src="{% static 'assets/img/home-01.jpg' %}" class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Classified Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-02.jpg' %}" class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Wedding Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-03.jpg' %}" class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Tour Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-04.jpg' %}" class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Workspace Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-05.jpg' %}"
-                                                        class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Business Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-06.jpg' %}"
-                                                        class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Car Rentals Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-07.jpg' %}"
-                                                        class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Restaurant Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-08.jpg' %}"
-                                                        class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Job Listing Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="single-demo">
-                                            <div class="demo-img">
-                                                <a href="#"><img src="{% static 'assets/img/home-09.jpg' %}"
-                                                        class="img-fluid" alt="img"></a>
-                                            </div>
-                                            <div class="demo-info">
-                                                <a href="#">Realestate Home</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>							
-                    </ul>
+                    <a href="{% url 'home' %}">HOME </a>
                 </li>
                 <li class="has-submenu">
-                    <a href="">Listings <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">Listing Grid</a></li>
-                        <li><a href="#">Listing Grid Sidebar</a></li>
-                        <li><a href="#">Listing List Sidebar</a></li>
-                        <li><a href="#">Listing List Map</a></li>
-                        <li><a href="#">Listing Grid Map</a></li>								
-                    </ul>
+                    <a href="{% url 'vechile_landing_page' %}">VECHILE</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="">Pages <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Service Details </a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">How it Works</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">404 Error</a></li>
-                        <li><a href="#">500 Error</a></li>
-                    </ul>
+                    <a href="{% url 'property_landing_page' %}">REAL ESTATE</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="">User Pages <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                        <li><a href="{% url 'profile' %}">Profile</a></li>
-                        <li><a href="{% url 'my_listing' %}">My Listing</a></li>
-                        <li><a href="{% url 'book_marks' %}">Bookmarks</a></li>									
-                        <li><a href="{% url 'messages' %}">Messages</a></li>									
-                        <li><a href="{% url 'reviews' %}">Reviews</a></li>										
-                        <li><a href="{% url 'add_listing' %}">Add Listing</a></li>										
-                    </ul>
+                    <a href="{% url 'job_landing_page' %}">JOBS</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="">Blog <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">Blog List</a></li>
-                        <li><a href="#">Blog Grid</a></li>
-                        <li><a href="#">Blog Details</a></li>									
-                        <li><a href="#">Blog List Sidebar</a></li>									
-                        <li><a href="#">Blog Grid Sidebar</a></li>																
-                    </ul>
+                    <a href="#">BUSINESS DIRECTORY</a>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li class="has-submenu">
+                    <a href="{% url 'discover_landing_page' %}">TRAVEL AND TOURS</a>
+                </li>
+
+
+
                 <li><a href="{% url 'admin_index' %}" target="_blank">Admin</a></li>
             {% if user.is_authenticated %}
 
