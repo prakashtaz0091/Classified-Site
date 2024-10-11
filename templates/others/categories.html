@@ -34,11 +34,23 @@
 					{% for category in category %}
 			       <div class="col-lg-3 col-md-4" >
 				    	<div class="categories-content">
+						        {% if category.slug == "vechiles" %}
+							<a href="{% url 'vechile_landing_page' %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
+								{% elif category.slug == "real-estate" %}
+							<a href="{% url 'property_landing_page' %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
+								{% else %}
 							<a href="{% url 'sub_category' category.slug %}" class="text-center aos aos-init aos-animate" data-aos="fade-up">
-		    				   <img src="{{category.category_image.url}}" alt="car1">
+								{% endif %}
+
+
+		    				   <img src="{{category.category_icon_image.url}}" alt="car1">
 							   <h6>{{category.category_name|slice:":16"}}</h6>
 							   <span class="ads">{{category.product_count}} Ads</span>
-							   <span>{{category.descriptions|truncatechars:150 }}</span>
+							   {% if category.short_description %}
+							   <span>{{category.short_description|truncatechars:150 }}</span>
+							   {% else %}
+							   <span>Lorem Ipsum is just a simple way of typewriting</span>
+							   {% endif %}
 							</a>								   
 					   </div>
 				   </div>
