@@ -1,6 +1,6 @@
 
 {% load static %}
-<div class="container">
+<div style="padding-bottom:10px;" class="container">
 {% comment %}
 <div class="container" style='max-width:1500px;'> {% endcomment %}
     <nav class="navbar navbar-expand-lg header-nav">
@@ -48,12 +48,11 @@
                 <li class="has-submenu {% if request.path == '/dashboard/' %}active{% endif %}">
                     <a href="{% url 'dashboard' %}">Dashboard</a>
 								<ul style="margin-top:10px;" class="submenu">
-									<li><a href="profile.html">Profile</a></li>
-									<li><a href="my-listing.html">My Listing</a></li>
-                                    <li><a href="bookmarks.html">Bookmarks</a></li>									
-									<li><a href="reviews.html">Reviews</a></li>										
-									<li><a href="reviews.html">Banner Ads</a></li>										
-									<li><a href="add-listing.html">Add Listing</a></li>										
+                                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                                    <li><a href="{% url 'my_listing' %}">My Listing</a></li>
+                                    <li><a href="{% url 'book_marks' %}">Bookmarks</a></li>									
+                                    <li><a href="{% url 'reviews' %}">Reviews</a></li>										
+                                    <li><a href="{% url 'add_listing' %}">Add Listing</a></li>										
 								</ul>
 
                 </li>
