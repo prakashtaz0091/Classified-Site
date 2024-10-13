@@ -64,9 +64,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-5">
+						<div style="position:absolute;top:75%;right:15%" class="col-lg-5">
 							<div class="banner-imgs">
-								<img src="{% static 'assets/img/freelance.png' %}" class="img-fluid" alt="bannerimage">							
+								<img src="{% static 'assets/img/landing_baner.png' %}" class="img-fluid" alt="bannerimage">							
 							</div>
 						</div>
 					</div>
@@ -297,7 +297,7 @@
 						<div class="row align-items-center">
 							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
 									<h2>Latest in {{latest_product.category.category_name|slice:":30"}}</h2>
-									<p>checkout these latest cool ads from our members .</p>
+									<p>Checkout these latest cool ads from our members.</p>
 							</div>
 							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
 								<a href="{% url 'view_all' latest_product.category.slug %}" class="btn  btn-view">View All</a>
@@ -387,52 +387,66 @@
 		{% endfor %}
 </section>	
 
-						<section style="background-color:#f9fafc;padding-top:0;margin-top:0" class="space-section">
-		    <div class="container">
-				<div style="padding-top:0" class="space-sec">
-					<div class="row">
-						<div class="col-md-8">
-							<div class="section-heading heading-four aos" data-aos="fade-up">
-								<h2>Latest in Job Seekers</h2>
-								<p>Checkout these latest cool ads from our members.</p>
-							</div>	
-						</div>
-						<div class="col-md-4 text-md-end aos" data-aos="fade-up">
-							<div class="interset-btn">	
-								<a href="service-details.html" class="btn btn-primary more-btn">View All <i class="feather-arrow-right"></i></a>
+<section class="section-blk recommended-blk style2-blk">
+			<div class="container">
+				<div class="row">
+							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
+									<h2>Latest in Job Seekers</h2>
+									<p>Checkout these latest cool ads from our members.</p>
 							</div>
-						</div>
-					</div>
+							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
+								<a href="#" class="btn  btn-view">View All</a>
+							</div>		
+	
+					<div style="margin-top:2rem" class="col-sm-12">
+						<div class="recommended-carousel">
+							<div class="recommended-slider owl-carousel owl-theme">
+								{% for i in '1234' %}
+								<div class="recommended-widget">
+									<div class="img-blk">
+										<a href="javascript:void(0);"><img src="{% static 'assets/img/recommended/recommand-01.jpg' %}"></a>
+										<div class="top-blk">
+											<p>Adventure</p>
+										</div>
+									</div>
+									<div class="content-blk">
+										<p><a href="javascript:void(0);">Gordon Evan</a></p>
+										<div class="loc-blk">
+											<i class="feather-map-pin"></i>
+											<p>Westminster , London</p>
+										</div>
+										<div class="detail-blk mt-15">
+											<p>
+												US$15 <span>/ Per Hour</span>
+											</p>
+											<div class="detail-btm-blk">
+												<div class="rating-blk">
+													<span><i class="fa-solid fa-star"></i></span>
+													<span><i class="fa-solid fa-star"></i></span>
+													<span><i class="fa-solid fa-star"></i></span>
+													<span><i class="fa-solid fa-star"></i></span>
+													<span><i class="fa-solid fa-star"></i></span>
+												</div>
+												<small>4.9 (2,312 Reviews)</small>
+											</div>
+											<p class="my-10 exp-style">5+ Years Experience</p>
+											<div class="tags-blk">
+												<a href="javscript:;" class="tag-style">English</a>
+												<a href="javscript:;" class="tag-style">Spanish</a>
+												<a href="javscript:;" class="tag-style">Japanese</a>
+											</div>
 
-			<div  class="row">
-					{% for i in '1234' %}
-					<div style="" class="col-lg-3  col-md-6 aos aos-init aos-animate" >
-						<div class="space-wrap">
-						<img  style="margin-left:20px;margin-top:20px;border-radius:50%" src="{% static 'assets/img/profile-img.jpg' %}" />
-						<div class="space-content">
-						<p style="color:#ce211b;margin-top:1rem;font-size:1.4rem;margin-bottom:0;">
-							Emma Connor</p>
-						<p style="margin-top:20px;margin-bottom:0;">
-							Graphic Designer
-						</p>
-
-						<p style="margin-top:20px;margin-bottom:20px;">
-        				<i style="margin-top:5px" class="feather-map-pin"></i>
-							New York City
-						</p>
-						<p>
-			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
-							 info@vessel.com
-						</p>
-							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:50px;font-size:1.2rem;margin-top:2rem;padding-right:50px" class="btn">ShortList</button>
-						</div>
+							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:50px;font-size:1.2rem;margin-top:2rem;padding-right:50px" class="btn">View Candidate</button>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>	
 					</div>
-					</div>
-
-					{% endfor %}
-</div>
-		</div>
-</section>	
+				</div>
+			</div>
+			</section>
 	
 	<!--end-->
 		

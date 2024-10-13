@@ -26,27 +26,27 @@
             </div>
             <ul class="main-nav">
                 <li class="has-submenu {% if request.path == '/' %}active{% endif %}">
-                    <a href="{% url 'home' %}">HOME </a>
+                    <a href="{% url 'home' %}">Home </a>
                 </li>
                 <li class="has-submenu">
-                    <a href="{% url 'vechile_landing_page' %}">VECHILE</a>
+                    <a href="{% url 'vechile_landing_page' %}">Vehicle</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="{% url 'property_landing_page' %}">REAL ESTATE</a>
+                    <a href="{% url 'property_landing_page' %}">Real Estate</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="{% url 'job_landing_page' %}">JOBS</a>
+                    <a href="{% url 'job_landing_page' %}">Jobs</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="{% url 'discover_landing_page' %}">BUSINESS DIRECTORY</a>
+                    <a href="{% url 'discover_landing_page' %}">Business Directory</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="#">TRAVEL AND TOURS</a>
+                    <a href="#">Travel And Tours</a>
                 </li>
                 {% if user.is_authenticated %}
 
-                <li class="has-submenu {% if request.path == '/dashboard/' %}active{% endif %}">
-                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                <li style="padding-left:3rem" class="has-submenu {% if request.path == '/dashboard/' %}active{% endif %}">
+                    <a style="font-weight:700" href="{% url 'dashboard' %}">Dashboard<i class="fas fa-chevron-down"></i></a>
 								<ul style="margin-top:10px;" class="submenu">
                                     <li><a href="{% url 'profile' %}">Profile</a></li>
                                     <li><a href="{% url 'my_listing' %}">My Listing</a></li>
