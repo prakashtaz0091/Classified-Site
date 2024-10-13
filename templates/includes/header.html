@@ -19,13 +19,13 @@
         </div>
         <div class="main-menu-wrapper">
             <div class="menu-header">
-                <a href="index.html" class="menu-logo">
+                <a href="{% url 'home' %}" class="menu-logo">
                     <img src="{% static 'logo.svg' %}" class="img-fluid" alt="Logo" style='width:131px;height:35px;'>
                 </a>
                 <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
             </div>
             <ul class="main-nav">
-                <li class="has-submenu active">
+                <li class="has-submenu {% if request.path == '/' %}active{% endif %}">
                     <a href="{% url 'home' %}">HOME </a>
                 </li>
                 <li class="has-submenu">
@@ -43,6 +43,21 @@
                 <li class="has-submenu">
                     <a href="#">TRAVEL AND TOURS</a>
                 </li>
+                {% if user.is_authenticated %}
+
+                <li class="has-submenu {% if request.path == '/dashboard/' %}active{% endif %}">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+								<ul style="margin-top:10px;" class="submenu">
+									<li><a href="profile.html">Profile</a></li>
+									<li><a href="my-listing.html">My Listing</a></li>
+                                    <li><a href="bookmarks.html">Bookmarks</a></li>									
+									<li><a href="reviews.html">Reviews</a></li>										
+									<li><a href="reviews.html">Banner Ads</a></li>										
+									<li><a href="add-listing.html">Add Listing</a></li>										
+								</ul>
+
+                </li>
+                {% endif %}
 
 
             {% if user.is_authenticated %}
