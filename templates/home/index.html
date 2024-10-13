@@ -66,7 +66,7 @@
 						</div>
 						<div class="col-lg-5">
 							<div class="banner-imgs">
-								<img src="{% static 'assets/img/banner_landing.jpeg' %}" class="img-fluid" alt="bannerimage">							
+								<img src="{% static 'assets/img/freelance.png' %}" class="img-fluid" alt="bannerimage">							
 							</div>
 						</div>
 					</div>
@@ -280,7 +280,7 @@
 					<div class="col-lg-6 col-md-12 aos" data-aos="fade-up">
 						<div class="adventure-info">							
 							<div class="section-heading heading-five aos" data-aos="fade-up">
-								<h2>Find Your Dream Job in Dubai, Abu Dhabi and across the UAE or Hire the Best - all on Adjeem</h2>
+								<h2>Find Your Dream Job in Dubai,<br /> Abu Dhabi and across the UAE or Hire the Best - all on Adjeem</h2>
 							</div>
 							<div class="advent-info">							
 								<p>Unlock your dream career in Dubai, Abu Dhabi, and throughout the UAE with Adjeem. Whether you’re seeking job opportunities in Sharjah, Ajman, Ras Al Khaimah, Fujairah, or Umm Al-Quwain, we’ve got you covered. Employers can easily post jobs for free, helping you find the perfect candidate for your needs. Explore countless opportunities today!</p>
@@ -386,23 +386,30 @@
 		</div>
 		{% endfor %}
 </section>	
-	<section class="latestad-section grid-view featured-slider" style='padding-top:0px;'>
-		<div class="container" style='margin-top:0rem;'>		
-				<div class="section-heading">
-						<div class="row align-items-center">
-							<div class="col-md-6 aos aos-init aos-animate" data-aos="fade-up">
-									<h2>Latest in Job Seekers</h2>
-									<p>checkout these latest cool ads from our members .</p>
-							</div>
-							<div class="col-md-6 text-md-end aos aos-init aos-animate" data-aos="fade-up">
-								<a href="#" class="btn  btn-view">View All</a>
-							</div>		
+
+						<section style="background-color:#f9fafc;padding-top:0;margin-top:0" class="space-section">
+		    <div class="container">
+				<div style="padding-top:0" class="space-sec">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="section-heading heading-four aos" data-aos="fade-up">
+								<h2>Latest in Job Seekers</h2>
+								<p>Checkout these latest cool ads from our members.</p>
+							</div>	
 						</div>
-				</div>
-			<div style="display:flex;margin-top:3rem;justify-content:space-around;" class="flex-wrap">
+						<div class="col-md-4 text-md-end aos" data-aos="fade-up">
+							<div class="interset-btn">	
+								<a href="service-details.html" class="btn btn-primary more-btn">View All <i class="feather-arrow-right"></i></a>
+							</div>
+						</div>
+					</div>
+
+			<div  class="row">
 					{% for i in '1234' %}
-					<div class="featured" style="border-radius:30px;padding:1rem; background-color:white">
-						<img style="border-radius:50%" src="{% static 'assets/img/profile-img.jpg' %}" />
+					<div style="" class="col-lg-3  col-md-6 aos aos-init aos-animate" >
+						<div class="space-wrap">
+						<img  style="margin-left:20px;margin-top:20px;border-radius:50%" src="{% static 'assets/img/profile-img.jpg' %}" />
+						<div class="space-content">
 						<p style="color:#ce211b;margin-top:1rem;font-size:1.4rem;margin-bottom:0;">
 							Emma Connor</p>
 						<p style="margin-top:20px;margin-bottom:0;">
@@ -410,14 +417,16 @@
 						</p>
 
 						<p style="margin-top:20px;margin-bottom:20px;">
-        <i style="margin-top:5px" class="feather-map-pin"></i>
+        				<i style="margin-top:5px" class="feather-map-pin"></i>
 							New York City
 						</p>
 						<p>
 			<i style="font-size:30px;"class="fa-solid fa-envelope"></i>
-							info@themevessel.com
+							 info@vessel.com
 						</p>
 							<button  style="border-radius:10px;background-color:#ce211b;color:white;font-weight:600;padding-left:50px;font-size:1.2rem;margin-top:2rem;padding-right:50px" class="btn">ShortList</button>
+						</div>
+					</div>
 					</div>
 
 					{% endfor %}
