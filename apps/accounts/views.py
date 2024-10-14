@@ -1,3 +1,4 @@
+from django.urls import reverse
 import requests
 from django.contrib import auth, messages
 from django.contrib.auth import update_session_auth_hash
@@ -34,7 +35,7 @@ def Login(request):
             #         return redirect(nextPage)
             # except:
             messages.success(request, f"You are now login as {user.full_name}.")
-            return redirect("home")
+            return redirect(reverse('dashboard'))
         else:
             messages.error(request, "some credentials are incorrect! ")
             return render(request, "accounts/login.html")
