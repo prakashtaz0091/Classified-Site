@@ -1,8 +1,6 @@
-
 {% load static %}
-<div style="padding-bottom:10px;" class="container">
-{% comment %}
-<div class="container" style='max-width:1500px;'> {% endcomment %}
+
+<div class="container" style='max-width:1271px;'>
     <nav class="navbar navbar-expand-lg header-nav">
         <div class="navbar-header">
             <a id="mobile_btn" href="javascript:void(0);">
@@ -14,7 +12,6 @@
             </a>
             <a href="{% url 'home' %}" class="navbar-brand logo">
                 <img src="{% static 'assets/img/icons/logo.png' %}" class="img-fluid" alt="Logo">
-
             </a>						
         </div>
         <div class="main-menu-wrapper">
@@ -28,7 +25,7 @@
                 <li class="has-submenu {% if request.path == '/' %}active{% endif %}">
                     <a href="{% url 'home' %}">Home </a>
                 </li>
-                <li class="has-submenu">
+                <li class="has-submenu" >
                     <a href="{% url 'vechile_landing_page' %}">Vehicle</a>
                 </li>
                 <li class="has-submenu">
@@ -43,60 +40,45 @@
                 <li class="has-submenu">
                     <a href="#">Travel And Tours</a>
                 </li>
-                {% if user.is_authenticated %}
-
-                <li style="padding-left:3rem" class="has-submenu {% if request.path == '/dashboard/' %}active{% endif %}">
-                    <a style="font-weight:700" href="{% url 'dashboard' %}">Dashboard<i class="fas fa-chevron-down"></i></a>
-								<ul style="margin-top:10px;" class="submenu">
-                                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                                    <li><a href="{% url 'my_listing' %}">My Listing</a></li>
-                                    <li><a href="{% url 'book_marks' %}">Bookmarks</a></li>									
-                                    <li><a href="{% url 'reviews' %}">Reviews</a></li>										
-                                    <li><a href="{% url 'add_listing' %}">Add Listing</a></li>										
-								</ul>
-
-                </li>
-                {% endif %}
-
-
-            {% if user.is_authenticated %}
-                <li class="login-link">
-                    <a href="{% url 'logout' %}">LogOut</a>
-                </li>
-                {% else %}
                 <li class="login-link">
                     <a href="{% url 'register' %}">Sign Up</a>
                 </li>
-
                 <li class="login-link">
                     <a href="{% url 'login' %}">Sign In</a>
                 </li>
-
-                {% endif %}
             </ul>
         </div>
+        {% if user.is_authenticated %}
         <ul class="nav header-navbar-rht">
-            {% if not user.is_authenticated %}
-                    <li class="nav-item">
-                    <a href="{% url 'register' %}" class="header-reg btn ms-1"> Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="{% url 'login' %}" class="nav-link header-login">Sign In </a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
+                <a class="nav-link add-listing" href="{% url 'dashboard' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
             </li>
- 
-            {% else %}
-
-            <li class="nav-item">
-                <a class="nav-link header-login" href="{% url 'logout' %}">logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
-            </li>
-            {% endif %}
-
+            <li class="nav-item dropdown has-arrow logged-item">
+                <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{user_profile.profile_photo.url}}" alt="">
+                    <span>{{user.full_name}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a class="dropdown-item" href="{% url 'profile' %}">Profile Settings</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </li>						
         </ul>
+        {% else  %}
+
+
+        <ul class="nav header-navbar-rht">
+            <li class="nav-item">
+                <a class="nav-link header-reg" href="{% url 'register' %}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link header-login" href="{% url 'login' %}"> Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link add-listing" href="{% url 'dashboard' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
+            </li>
+        </ul>
+        {% endif %}
     </nav>
 </div>

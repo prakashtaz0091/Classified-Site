@@ -118,7 +118,7 @@ def how_it_works(request):
     return render(request, "company/howitworks.html")
 
 
-
+@login_required(login_url="/account/login/")
 def dashboard(request):
     try:
         user=request.GET.get('user',None)

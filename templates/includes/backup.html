@@ -251,3 +251,97 @@
 
     </nav>
 </div>
+
+
+
+{% comment %} new  {% endcomment %}
+
+{% load static %}
+<div style="padding-bottom:10px;max-width:1246px;" class="container">
+{% comment %}
+<div class="container" style='max-width:1500px;'> {% endcomment %}
+    <nav class="navbar navbar-expand-lg header-nav">
+        <div class="navbar-header">
+            <a id="mobile_btn" href="javascript:void(0);">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+            <a href="{% url 'home' %}" class="navbar-brand logo">
+                <img src="{% static 'assets/img/icons/logo.png' %}" class="img-fluid" alt="Logo">
+
+            </a>						
+        </div>
+        <div class="main-menu-wrapper">
+            <div class="menu-header">
+                <a href="{% url 'home' %}" class="menu-logo">
+                    <img src="{% static 'logo.svg' %}" class="img-fluid" alt="Logo" style='width:131px;height:35px;'>
+                </a>
+                <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
+            </div>
+            <ul class="main-nav">
+                <li class="has-submenu {% if request.path == '/' %}active{% endif %}">
+                    <a href="{% url 'home' %}">Home </a>
+                </li>
+                <li class="has-submenu">
+                    <a href="{% url 'vechile_landing_page' %}">Vehicle</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="{% url 'property_landing_page' %}">Real Estate</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="{% url 'job_landing_page' %}">Jobs</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="{% url 'discover_landing_page' %}">Business Directory</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="#">Travel And Tours</a>
+                </li>
+                
+
+
+            {% if user.is_authenticated %}
+                <li class="login-link">
+                    <a href="{% url 'logout' %}">LogOut</a>
+                </li>
+                {% else %}
+                <li class="login-link">
+                    <a href="{% url 'register' %}">Sign Up</a>
+                </li>
+
+                <li class="login-link">
+                    <a href="{% url 'login' %}">Sign In</a>
+                </li>
+
+                {% endif %}
+            </ul>
+        </div>
+        <ul class="nav header-navbar-rht">
+            {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                    <a href="{% url 'register' %}" class="header-reg btn ms-1"> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link header-login">Sign In </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
+            </li>
+ 
+            {% else %}
+
+            <li class="nav-item">
+                <a class="nav-link header-login" href="{% url 'logout' %}">logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><i class="fa-solid fa-plus"></i>Add Listing</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div> {% endcomment %} {% endcomment %} {% endcomment %}
+
