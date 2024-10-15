@@ -37,8 +37,8 @@
         {% endif %}
 
         {% if not user_to_view %}
-        <li class="{% if request.path == '/add_banner/' %}active{% endif %}">
-            <a href="{% url 'add_banner' %}">
+        <li class="{% if request.path == '/banner/' %}active{% endif %}">
+            <a href="{% url 'banner' %}">
                 <i class="fas fa-solid fa-heart"></i> <span>Banner Ads</span>
             </a>
         </li>
