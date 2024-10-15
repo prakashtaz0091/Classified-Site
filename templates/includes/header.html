@@ -25,7 +25,7 @@
                 <li class="has-submenu {% if request.path == '/' %}active{% endif %}">
                     <a href="{% url 'home' %}">Home </a>
                 </li>
-                <li class="has-submenu">
+                <li class="has-submenu" >
                     <a href="{% url 'vechile_landing_page' %}">Vehicle</a>
                 </li>
                 <li class="has-submenu">
@@ -41,17 +41,17 @@
                     <a href="#">Travel And Tours</a>
                 </li>
                 <li class="login-link">
-                    <a href="signup.html">Sign Up</a>
+                    <a href="{% url 'register' %}">Sign Up</a>
                 </li>
                 <li class="login-link">
-                    <a href="login.html">Sign In</a>
+                    <a href="{% url 'login' %}">Sign In</a>
                 </li>
             </ul>
         </div>
         {% if user.is_authenticated %}
         <ul class="nav header-navbar-rht">
             <li class="nav-item">
-                <a class="nav-link add-listing" href="add-listing.html"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
+                <a class="nav-link add-listing" href="{% url 'add_listing' %}"><span><i class="fa-solid fa-plus"></i></span>Add Listing</a>
             </li>
             <li class="nav-item dropdown has-arrow logged-item">
                 <a href="#" class="dropdown-toggle profile-userlink" data-bs-toggle="dropdown" aria-expanded="false">
