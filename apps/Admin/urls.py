@@ -121,4 +121,10 @@ urlpatterns = [
    path('banner_ads/edit/',views.edit_banner_ad,name='edit_banner_ads'),
    path('banner_ads/delete/',views.delete_banner_ad,name='delete_banner_ad'),
    
+   
+   
+   # for pages
+   
+   path('add_pages/',views.add_pages,name='add_pages') 
+   
 ]

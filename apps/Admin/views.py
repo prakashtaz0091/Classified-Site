@@ -1438,3 +1438,9 @@ def edit_banner_ad(request):
 
 
 
+
+
+# for pages 
+
+def add_pages(request):
+    return render(request,'admin1/page/add_page.html')
