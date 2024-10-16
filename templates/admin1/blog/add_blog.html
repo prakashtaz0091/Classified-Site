@@ -1,0 +1,130 @@
+{% extends 'admin1/base1.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+        {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        {% include 'admin1/include/sidebar.html' %}
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+                <form action="all-blog.html">
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-12 m-auto">
+                            <div class="content-page-header">
+                                <h5>Add Blog</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Titles</label>
+                                        <input type="text" class="form-control" placeholder="Enter Titles">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Language</label>
+                                        <select class="form-control select">
+                                            <option>Select Language</option>
+                                            <option>English</option>
+                                            <option>German</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control select">
+                                            <option>Select Blog Category</option>
+                                            <option>Category 1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Slug <span>(If you leave it empty, it will be generated automatically.)</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Service Title">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Description<span>(Meta Tag)</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Description">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Keywords<span>(Meta Tag)</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Keywords">
+                                    </div>
+                                </div>            
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Tags</label>
+                                        <input class="input-tags form-control" type="text" data-role="tagsinput"  name="tags" value="Car wash, Construction" id="tags">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-1">
+                                        <label>Blog Image</label>
+                                    </div>
+                                    <div class="form-uploads mb-4">
+                                        <div class="form-uploads-path">
+                                            <img src="assets/img/icons/upload.svg" alt="img">
+                                            <div class="file-browse">
+                                                <h6>Drag & drop image or </h6>
+                                                <div class="file-browse-path">
+                                                    <input type="file">
+                                                    <a href="javascript:void(0);"> Browse</a>
+                                                </div>
+                                            </div>
+                                            <h5>Supported formates: JPEG, PNG</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label> Descriptions</label>
+                                        <div id="editor"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <ul class="custom-radiosbtn">
+                                            <li>
+                                                <label class="radiossets">Active
+                                                    <input type="radio" checked="checked" name="radio">
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="radiossets">Inactive
+                                                    <input type="radio" name="radio">
+                                                    <span class="checkmark-radio"></span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="btn-path">
+                                        <a href="javascript:void(0);" class="btn btn-cancel me-3">Cancel</a>
+                                        <button type="submit" class="btn btn-submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+
+   {% endblock %}

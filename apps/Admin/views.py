@@ -1444,3 +1444,18 @@ def edit_banner_ad(request):
 
 def add_pages(request):
     return render(request,'admin1/page/add_page.html')
+
+
+# for blog 
+
+def add_blogs(request):
+    return render(request,'admin1/blog/add_blog.html')
+
+def all_blogs(request):
+    return render(request,'admin1/blog/all_blog.html')
+
+def blog_comment(request):
+    return render(request,'admin1/blog/comment.html')
+
+def blog_categories(request):
+    return render(request,'admin1/blog/categories.html')

@@ -1,0 +1,298 @@
+
+{% extends 'admin1/base1.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+       {% include 'admin1/include/header.html' %}
+        <!-- /Header -->
+        
+        <!-- Sidebar -->
+        {% include 'admin1/include/sidebar.html' %}
+        <!-- /Sidebar -->
+        
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="content-page-header content-page-headersplit">
+                    <h5>All Blog</h5>
+                    <div class="list-btn">
+                        <ul>
+                            <li>
+                                <a class="btn-filters active" href="all-blog.html"><i class="fe fe-list"></i> </a>
+                            </li>
+                            <li>
+                                <a class="btn-filters" href="javascript:void(0);"><i class="fe fe-grid"></i> </a>
+                            </li>
+                            <li>
+                                <a class="btn-filters" href="localization.html"><i class="fe fe-settings"></i> </a>
+                            </li>
+                            <li>
+                                <div class="filter-sorting">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0);" class="filter-sets"><img src="assets/img/icons/filter1.svg" class="me-2" alt="img">Filter</a>
+                                        </li>
+                                        <li>
+                                            <span><img src="assets/img/icons/sort.svg" class="me-2" alt="img"></span>
+                                            <div class="review-sort">
+                                                <select class="select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                    <option>Sort by A - Z</option>
+                                                    <option>Sort by Z - A</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary" href="add-blog.html"><i class="fa fa-plus me-2"></i>Add Blog </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-sets mb-4">
+                            <div class="tab-contents-sets">
+                                <ul>
+                                    <li>
+                                        <a href="all-blog.html" class="active">Active Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="inactive-blog.html">Inactive Blog</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-contents-count">
+                                <h6>Showing 8-10 of 84 results</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-04.png">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Car Wash</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-06.jpg" class="me-2" alt="img">
+                                        <span>Robert</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">28 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-01.jpg">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Construction</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 4.5</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-01.jpg" class="me-2" alt="img">
+                                        <span>John</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">28 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-03.jpg">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Electrical</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 4.0</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-07.jpg" class="me-2" alt="img">
+                                        <span>James</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">28 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-05.jpg">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Cleaning</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 4.0</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-01.jpg" class="me-2" alt="img">
+                                        <span>Phill</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">12 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                       <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-07.jpg">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Interior</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 4.0</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-05.jpg" class="me-2" alt="img">
+                                        <span>Pricilla</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">23 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="blog grid-blog">
+                            <div class="blog-image">
+                                <a href="view-service.html">
+                                    <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-11.jpg">
+                                </a>
+                                <div class="fav-item">
+                                    <div class="item-info">
+                                        <a href="categories.html"><span>Carpentry</span></a>
+                                    </div>
+                                    <span class="serv-rating"><i class="fa-solid fa-star"></i> 5.0</span>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-widget-image">
+                                    <a href="javascript:void(0);" class="table-profileimage">
+                                        <img src="assets/img/customer/user-03.jpg" class="me-2" alt="img">
+                                        <span>Sharon</span>
+                                    </a>
+                                    <h6><img src="assets/img/icons/calendar.svg" alt="img">14 Sep 2022</h6>
+                                </div>
+                                <h3 class="title">
+                                    <a href="view-service.html">How To Find The Right Painting Service For 
+                                        Your Home?</a>
+                                </h3>
+                                <p>Sed perspiciatis unde omnis natus error laudantium, totam rem aperiam...</p>
+                                <div class="blog-info">
+                                    <div class="action-search">
+                                        <a href="edit-blog.html" class="serv-edit"><i class="fe fe-edit"></i> Edit</a>
+                                        <a href="javascript:void(0);"><i class="fe fe-trash-2"></i> Delete</a>
+                                    </div>
+                                    <span><i class="fe fe-alert-circle"></i> Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <!-- jQuery -->
+ {% endblock %}

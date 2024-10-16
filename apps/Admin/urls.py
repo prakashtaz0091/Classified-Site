@@ -125,6 +125,12 @@ urlpatterns = [
    
    # for pages
    
-   path('add_pages/',views.add_pages,name='add_pages') 
+   path('add_pages/',views.add_pages,name='add_pages') ,
+   
+   # for blog
+   path('all_blogs/',views.all_blogs,name='all_blogs') ,
+   path('add_blogs/',views.add_blogs,name='add_blogs') ,
+   path('blog_categories/',views.blog_categories,name='blog_categories') ,
+   path('blog_comment/',views.blog_comment,name='blog_comment') ,
    
 ]
