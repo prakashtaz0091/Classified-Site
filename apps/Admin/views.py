@@ -1445,6 +1445,8 @@ def edit_banner_ad(request):
 def add_pages(request):
     return render(request,'admin1/page/add_page.html')
 
+def page_list(request):
+    return render(request,'admin1/page/page_list.html')
 
 # for blog 
 
