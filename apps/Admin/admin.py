@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SEOSettings,SiteSettings,Language
+from .models import SEOSettings,SiteSettings,Language,BlogPost,Tag
 
 
 class SEOSettingsAdmin(admin.ModelAdmin):
@@ -20,3 +20,7 @@ class LanguageAdmin(admin.ModelAdmin):
     list_display = ('name', 'code', 'order', 'status')
     list_filter = ('status',)
     search_fields = ('name', 'code')    
+    
+    
+admin.site.register(BlogPost)    
+admin.site.register(Tag)    

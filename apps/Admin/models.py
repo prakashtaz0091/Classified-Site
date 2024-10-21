@@ -1,5 +1,5 @@
 from django.db import models
-
+from apps.accounts.models import Account
 
 class SEOSettings(models.Model):
     PAGE_CHOICES = [
@@ -55,4 +55,31 @@ class Language(models.Model):
         verbose_name_plural = 'Languages'
     
     
+    
+# for blog
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    
+class BlogPost(models.Model):
+    STATUS_CHOICES = (
+        ('active', 'Active'),
+        ('inactive', 'Inactive'),
+    )
+    
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)
+    created_at = models.DateField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag, related_name='blog_posts')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='inactive')
+
+    def __str__(self):
+        return self.title
+   
     

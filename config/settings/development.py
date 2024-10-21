@@ -74,6 +74,14 @@ DATABASES = {
     }
 }
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 
@@ -109,3 +117,4 @@ EMAIL_HOST_PASSWORD='qozv drew svkw ufgx'
 # Static and Media files
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
+

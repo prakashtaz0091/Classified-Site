@@ -14,8 +14,9 @@ from apps.home.models import ProductReview, Reviews
 from apps.store.models import (BannerAds, BookMark, ContactInformation, DefaultBannerAdsPricing, Feature, Location,
                                Product, ProductImages,BannerAds)
 
-from django.db.models import F, Value
+from django.db.models import F, Value, Q
 from django.db.models.functions import Substr
+from apps.message.models import Message
 
 def landing(request):
     try:
@@ -365,7 +366,30 @@ def book_marks(request):
         # will do more things like 404 page later
 
 def messages(request):
-    return render(request, "others/messages.html")
+    sender =  request.user
+    # receivers = Account.objects.filter(is_active=True).exclude(id=sender.id)
+    receivers = Account.objects.exclude(id=sender.id)
+
+    #first messages to show
+    receiver = receivers.first()
+    # print("sender",sender,"receiver",receiver)
+    if receiver:
+        #latest 10 messages
+        # Retrieve latest 10 messages in both directions (sender to receiver and receiver to sender)
+                messages = Message.objects.filter(
+                    Q(sender=sender, receiver=receiver) | Q(sender=receiver, receiver=sender)
+                ).order_by('timestamp')[:10]   
+    else:
+        messages = None
+ 
+    context = {
+        "sender": sender,
+        "receivers": receivers,
+        "messages": messages,
+    }
+
+    # print(messages, "********************")
+    return render(request, "others/messages.html", context)
 
 
 def reviews(request):
