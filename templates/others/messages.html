@@ -66,9 +66,9 @@
                       </a>
                       <!-- Repeat similar structure for other chat items -->
                     </div> {% endcomment %}
-                    {% for receiver in receivers %}
-                      <div class="chat-scroll">
-                        <a href="javascript:void(0);" class="media d-flex active">
+                    <div class="chat-scroll">
+                      {% for receiver in receivers %}
+                        <a href="javascript:void(0);" class="media d-flex {% if receiver == receivers.0 %}active{% endif %}" data-receiver="{{ receiver.username }}">
                           <div class="media-img-wrap flex-shrink-0">
                             <div class="avatar avatar-online">
                               <img src="{{ receiver.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
@@ -77,140 +77,39 @@
                           <div class="media-body flex-grow-1">
                             <div>
                               <div class="user-name">{{ receiver.full_name }}</div>
-                              <div class="user-last-chat">Hey, How are you?</div>
+                              <div class="user-last-chat">Admin</div>
                             </div>
-                            <div>
-                              <div class="last-chat-time block">2 min</div>
-                              <div class="badge badge-success rounded-pill">15</div>
-                            </div>
+                            {% comment %} <div>
+                              <div class="last-chat-time block"></div>
+                              <div class="badge badge-success rounded-pill"></div>
+                            </div> {% endcomment %}
                           </div>
                         </a>
                         <!-- Repeat similar structure for other chat items -->
-                      </div>
-                    {% endfor %}
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-lg-8">
-                <div class="chat-cont-right">
-                  <div class="chat-header">
+                <div class="chat-cont-right" id="chat-cont-right">
+                  <div class="chat-header" id="chat-header">
                     <a id="back_user_list" href="javascript:void(0)" class="back-user-list"><i class="fa-solid fa-chevron-left"></i></a>
                     <div class="media d-flex align-items-center">
                       <div class="media-img-wrap flex-shrink-0">
                         <div class="avatar avatar-online">
-                          <img src="{{ receivers.0.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
+                          <img src="" alt="User Image" class="avatar-img rounded-circle" />
                         </div>
                       </div>
                       <div class="media-body flex-grow-1">
-                        <div class="user-name">{{ receivers.0.full_name }}</div>
+                        <div class="user-name"></div>
                       </div>
                     </div>
                   </div>
                   <div class="chat-body">
                     <div class="chat-scroll" id="chat-scroll">
-                      <ul class="list-unstyled" id="message-list">
-                        {% for message in messages %}
-                          {% if message.receiver == receivers.0 %}
-                            <li class="media d-flex sent">
-                              <div class="media-body flex-grow-1">
-                                <div class="msg-box d-flex justify-content-end">
-                                  <div class="rounded">
-                                    <p>{{ message.message }}</p>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>{{ message.timestamp }}</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                {% comment %} <div class="msg-box">
-                                  <div>
-                                    <p>OK, my name is Limingqiang. I like singing, playing basketball and so on.</p>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>9:45 AM</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                <div class="msg-box">
-                                  <div>
-                                    <div class="chat-msg-attachments">
-                                      <div class="chat-attachment">
-                                        <img src="{% static 'assets/img/chat-attachment.jpg' %}" alt="Attachment" />
-                                        <a href="javascript:void(0)" class="chat-attach-download"><i class="feather-download"></i></a>
-                                      </div>
-                                    </div>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>8:41 AM</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div> {% endcomment %}
-                              </div>
-                            </li>
-                          {% else %}
-                            <li class="media d-flex received">
-                              <div class="avatar flex-shrink-0">
-                                <img src="{{ message.receiver.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
-                              </div>
-                              <div class="media-body flex-grow-1">
-                                <div class="msg-box">
-                                  <div>
-                                    <p>{{ message.message }}</p>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>{{ message.timestamp }}</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                {% comment %} <div class="msg-box">
-                                  <div>
-                                    <p>Are you there? That time!</p>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>8:40 AM</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                <div class="msg-box">
-                                  <div>
-                                    <div class="chat-msg-attachments">
-                                      <div class="chat-attachment">
-                                        <img src="{% static 'assets/img/chat-attachment.jpg' %}" alt="Attachment" />
-                                        <a href="javascript:void(0)" class="chat-attach-download"><i class="feather-download"></i></a>
-                                      </div>
-                                      <div class="chat-attachment">
-                                        <img src="{% static 'assets/img/chat-attachment.jpg' %}" alt="Attachment" />
-                                        <a href="javascript:void(0)" class="chat-attach-download"><i class="feather-download"></i></a>
-                                      </div>
-                                    </div>
-                                    <ul class="chat-msg-info">
-                                      <li>
-                                        <div class="chat-time">
-                                          <span>8:41 AM</span>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div> {% endcomment %}
-                              </div>
-                            </li>
-                          {% endif %}
-                        {% endfor %}
+                      <ul class="list-unstyled" id ="message-list">
+                        
                       </ul>
                     </div>
                   </div>
@@ -249,84 +148,152 @@
   </body>
 
   <script>
-    document.onload = function () {
-      scrollToEnd()
+    const chatContRight = document.querySelector('#chat-cont-right')
+    const chatContRightOriginalContent = chatContRight.innerHTML
+    const chatContRightOriginalHeight = chatContRight.offsetHeight
+    
+    function emptyChatContRightBox() {
+      //a message shown when the chat content right box is empty
+      chatContRight.style.height = `500px`
+      chatContRight.innerHTML = `
+        <div style="height: inherit; width: 100%; background-color: #374B5C; color: white; letter-spacing: 1px; font-size: 20px; fontweight: bolder;" class="d-flex align-items-center justify-content-center">Please select person to chat</div>
+      `
     }
-    const username = '{{ sender.username }}' // Current logged-in user
-    const receiver = '{{ receivers.0.username }}' // The receiver user (context)
-    
-    const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + receiver + '/')
-    
-    chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data)
-      const message = data.message
-      const timestamp = data.timestamp
-      const sender = data.sender
-    
-      appendToMessageList(message, sender, timestamp)
-      scrollToEnd()
-    }
-    
-    function scrollToEnd() {
-      const messageList = document.querySelector('#chat-scroll')
-      messageList.scrollTop = messageList.scrollHeight
+    function loadingChatContRightBox() {
+      //a message shown when the chat content right box is empty
+      chatContRight.style.height = `500px`
+      chatContRight.innerHTML = `
+            <div style="height: inherit; width: 100%; background-color: #374B5C; color: white; letter-spacing: 1px; font-size: 20px; fontweight: bolder;" class="d-flex align-items-center justify-content-center">Loading Chats ...</div>
+          `
     }
     
-    function appendToMessageList(message, sender, timestamp) {
-      // Append message to the chat window
-      //document.querySelector('#message-list').innerHTML += `<div>${sender}: ${message}</div>`
-      if (username === sender) {
-        document.querySelector('#message-list').innerHTML += `<li class="media d-flex sent">
-                                                                  <div class="media-body flex-grow-1">
-                                                                    <div class="msg-box d-flex justify-content-end">
-                                                                      <div class="rounded">
-                                                                        <p>${message}</p>
-                                                                        <ul class="chat-msg-info">
-                                                                          <li>
-                                                                            <div class="chat-time">
-                                                                              <span>${timestamp}</span>
-                                                                            </div>
-                                                                          </li>
-                                                                        </ul>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                                </li>`
-      } else {
-        document.querySelector('#message-list').innerHTML += `<li class="media d-flex">
-                                                                  <div class="media-body flex-grow-1">
-                                                                    <div class="msg-box d-flex">
-                                                                      <div>
-                                                                        <p>${message}</p>
-                                                                        <ul class="chat-msg-info">
-                                                                          <li>
-                                                                            <div class="chat-time">
-                                                                              <span>${timestamp}</span>
-                                                                            </div>
-                                                                          </li>
-                                                                        </ul>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                                </li>`
-      }
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+      emptyChatContRightBox() //always set the chat content right box to empty while the page loads at initials
+      let chatSocket = null
+      const chatAbleUsersList = document.querySelector('.chat-scroll').querySelectorAll('a')
+      chatAbleUsersList.forEach(function (chatAbleUser) {
+        chatAbleUser.addEventListener('click', function () {
+          loadingChatContRightBox()
     
-    chatSocket.onclose = function (e) {
-      console.error('Chat socket closed unexpectedly', e)
-    }
+          //wait for 1 sec
+          setTimeout(function () {
+            chatContRight.style.height = `${chatContRightOriginalHeight}px`
+            chatContRight.innerHTML = chatContRightOriginalContent
     
-    document.querySelector('#send-button').onclick = function (e) {
-      const messageInputDom = document.querySelector('#message-input')
-      const message = messageInputDom.value
+            //set sender and receiver
+            const sender = '{{ sender.username }}' // Current logged-in user
+            const receiver = chatAbleUser.dataset.receiver // The receiver user (context)
+            //start socket connection
+            if (chatSocket != null) {
+              chatSocket.close()
+            }
+            chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + receiver + '/')
     
-      chatSocket.send(
-        JSON.stringify({
-          message: message
+            chatSocket.onmessage = function (e) {
+              const data = JSON.parse(e.data)
+    
+              console.log(e.data)
+              //appendToMessageList(data)
+              if (data.type == 'chat_info') {
+                setChatContRightBoxHeader(data.receiver_profile_photo, data.receiver)
+                //store receiver profile photo url in local storage
+                localStorage.setItem('receiver_profile_photo', window.location.origin+data.receiver_profile_photo)
+    
+                loadOldMessagesToUI(data.old_messages, sender, receiver)
+              } else if (data.type == 'chat_message') {
+                console.log('chat message')
+              }
+              scrollToEnd()
+            }
+    
+            chatSocket.onclose = function (e) {
+              console.error('Chat socket closed unexpectedly', e)
+            }
+    
+            document.querySelector('#send-button').onclick = function (e) {
+              const messageInputDom = document.querySelector('#message-input')
+              const message = messageInputDom.value
+    
+              chatSocket.send(
+                JSON.stringify({
+                  message: message
+                })
+              )
+    
+              messageInputDom.value = ''
+            }
+          }, 1000)
+          function scrollToEnd() {
+            const messageList = document.querySelector('#chat-scroll')
+            messageList.scrollTop = messageList.scrollHeight
+          }
+    
+          function setChatContRightBoxHeader(imageUrl, name) {
+            const chatHeader = document.querySelector('#chat-header')
+            const chatHeaderProfileImage = chatHeader.querySelector('.avatar img')
+            const baseUrl = window.location.origin
+            chatHeaderProfileImage.src = baseUrl + imageUrl
+            chatHeader.querySelector('.user-name').innerHTML = name
+          }
+    
+          function loadOldMessagesToUI(messages, sender, receiver) {
+            let messagesListDOM = document.querySelector('#message-list')
+            for (let i = 0; i < messages.length; i++) {
+              loadAMessageToUI(messagesListDOM,messages[i], sender, receiver)
+            }
+            
+          }
+          
+          function loadAMessageToUI(messagesListDOM, messageObject, sender, receiver) {
+            const messageSender = messageObject.sender
+            const messageReceiver = messageObject.receiver
+            const message = messageObject.message
+            const timestamp = messageObject.timestamp
+            const receivers_profile_photo_url = localStorage.getItem('receiver_profile_photo')
+
+            if (sender === messageSender) {
+              messagesListDOM.innerHTML += `<li class="media d-flex sent">
+                                                                                                                                                                                                              <div class="media-body flex-grow-1">
+                                                                                                                                                                                                                <div class="msg-box d-flex justify-content-end">
+                                                                                                                                                                                                                  <div class="rounded">
+                                                                                                                                                                                                                    <p>${message}</p>
+                                                                                                                                                                                                                    <ul class="chat-msg-info">
+                                                                                                                                                                                                                      <li>
+                                                                                                                                                                                                                        <div class="chat-time">
+                                                                                                                                                                                                                          <span>${timestamp}</span>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                      </li>
+                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                              </div>
+                                                                                                                                                                                                            </li>`
+            } else {
+              
+              messagesListDOM.innerHTML += `<li class="media d-flex received">
+                                          <div class="avatar flex-shrink-0">
+                                            <img src="${receivers_profile_photo_url}" alt="User Image" class="avatar-img rounded-circle" />
+                                          </div>
+                                          <div class="media-body flex-grow-1">
+                                            <div class="msg-box">
+                                              <div>
+                                                <p>${message}</p>
+                                                <ul class="chat-msg-info">
+                                                  <li>
+                                                    <div class="chat-time">
+                                                      <span>${timestamp}</span>
+                                                    </div>
+                                                  </li>
+                                                </ul>
+                                              </div>
+                                            </div>
+                                            
+                                          </div>
+                                        </li>`
+            }
+          }
         })
-      )
-    
-      messageInputDom.value = ''
-    }
+      })
+    })
   </script>
 {% endblock %}

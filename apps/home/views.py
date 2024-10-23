@@ -365,31 +365,57 @@ def book_marks(request):
         print(e)
         # will do more things like 404 page later
 
+# def messages(request):
+#     sender =  request.user
+#     # receivers = Account.objects.filter(is_active=True).exclude(id=sender.id)
+#     if sender.is_admin:
+#         # receivers = Account.objects.exclude(id=sender.id).exclude(username=None)
+#         receivers = Account.objects.filter(email = 'nonadmin@yahoo.com')
+#     else:
+#         receivers = Account.objects.filter(is_admin=True).exclude(id=sender.id).exclude(username=None)
+
+#     #first messages to show
+#     receiver = receivers.first()
+#     # print("sender",sender,"receiver",receiver)
+#     if receiver:
+#         #latest 10 messages
+#         # Retrieve latest 10 messages in both directions (sender to receiver and receiver to sender)
+#                 messages = Message.objects.filter(
+#                     Q(sender=sender, receiver=receiver) | Q(sender=receiver, receiver=sender)
+#                 ).order_by('timestamp')[:10]   
+#     else:
+#         messages = None
+ 
+#     context = {
+#         "sender": sender,
+#         "receivers": receivers,
+#         "messages": messages,
+#     }
+
+#     # print(messages, "********************")
+#     return render(request, "others/messages.html", context)
+
+
+
 def messages(request):
     sender =  request.user
     # receivers = Account.objects.filter(is_active=True).exclude(id=sender.id)
-    receivers = Account.objects.exclude(id=sender.id)
-
-    #first messages to show
-    receiver = receivers.first()
-    # print("sender",sender,"receiver",receiver)
-    if receiver:
-        #latest 10 messages
-        # Retrieve latest 10 messages in both directions (sender to receiver and receiver to sender)
-                messages = Message.objects.filter(
-                    Q(sender=sender, receiver=receiver) | Q(sender=receiver, receiver=sender)
-                ).order_by('timestamp')[:10]   
+    if sender.is_admin:
+        # receivers = Account.objects.exclude(id=sender.id).exclude(username=None)
+        receivers = Account.objects.filter(email = 'nonadmin@yahoo.com')
     else:
-        messages = None
+        receivers = Account.objects.filter(is_admin=True).exclude(id=sender.id).exclude(username=None)
+
+    
  
     context = {
         "sender": sender,
         "receivers": receivers,
-        "messages": messages,
     }
 
     # print(messages, "********************")
     return render(request, "others/messages.html", context)
+
 
 
 def reviews(request):
