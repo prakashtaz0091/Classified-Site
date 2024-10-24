@@ -9,3 +9,14 @@ class Message(models.Model):
 
     def __str__(self):
         return f"Message from {self.sender} to {self.receiver}"
+    
+
+
+
+class MessageFile(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="files")
+    file = models.FileField(upload_to='message_files/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"File attached to message {self.chat_message.id} on {self.uploaded_at}"

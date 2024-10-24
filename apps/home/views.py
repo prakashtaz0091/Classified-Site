@@ -401,8 +401,8 @@ def messages(request):
     sender =  request.user
     # receivers = Account.objects.filter(is_active=True).exclude(id=sender.id)
     if sender.is_admin:
-        # receivers = Account.objects.exclude(id=sender.id).exclude(username=None)
-        receivers = Account.objects.filter(email = 'nonadmin@yahoo.com')
+        # print("yes")
+        receivers = Account.objects.exclude(id=sender.id).exclude(username=None)
     else:
         receivers = Account.objects.filter(is_admin=True).exclude(id=sender.id).exclude(username=None)
 

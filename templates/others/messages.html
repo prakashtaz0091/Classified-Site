@@ -34,7 +34,7 @@
         <div class="container">
           {% include 'includes/dashboard.html' %}
           <div class="profile-content">
-            <div class="row dashboard-info chat-window">
+            <div class="row dashboard-info chat-window" >
               <div class="col-lg-4">
                 <div class="chat-cont-left">
                   <form class="chat-search">
@@ -68,16 +68,22 @@
                     </div> {% endcomment %}
                     <div class="chat-scroll">
                       {% for receiver in receivers %}
-                        <a href="javascript:void(0);" class="media d-flex {% if receiver == receivers.0 %}active{% endif %}" data-receiver="{{ receiver.username }}">
+                        <a href="javascript:void(0);" class="media d-flex " data-receiver="{{ receiver.username }}"  data-receiver-fullname="{{ receiver.full_name }}">
                           <div class="media-img-wrap flex-shrink-0">
                             <div class="avatar avatar-online">
-                              <img src="{{ receiver.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
+                              <img src="{{ receiver.profile.profile_photo.url }}" data-imageUrl = "{{ receiver.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
                             </div>
                           </div>
                           <div class="media-body flex-grow-1">
                             <div>
                               <div class="user-name">{{ receiver.full_name }}</div>
-                              <div class="user-last-chat">Admin</div>
+                              <div class="user-last-chat">
+                                {% if receiver.is_admin %}
+                                  Admin
+                                  {% else %}
+                                  Standard User
+                                {% endif %}
+                              </div>
                             </div>
                             {% comment %} <div>
                               <div class="last-chat-time block"></div>
@@ -119,7 +125,8 @@
                         <input type="text" class="input-msg-send form-control" id="message-input" placeholder="Type something" />
                         <div class="btn-file btn">
                           <i class="fa fa-paperclip"></i>
-                          <input type="file" />
+                          <input type="file" id="file-input" multiple />
+
                         </div>
                       </div>
                       <button id="send-button" type="button" class="btn msg-send-btn"><i class="fas fa-paper-plane"></i></button>
@@ -173,16 +180,26 @@
       const chatAbleUsersList = document.querySelector('.chat-scroll').querySelectorAll('a')
       chatAbleUsersList.forEach(function (chatAbleUser) {
         chatAbleUser.addEventListener('click', function () {
+
+          //set chatAbleUserUI as active
+          chatAbleUsersList.forEach(function (chatAbleUserUI) {
+            chatAbleUserUI.classList.remove('active')
+          })
+          chatAbleUser.classList.add('active')
+
           loadingChatContRightBox()
     
           //wait for 1 sec
           setTimeout(function () {
-            chatContRight.style.height = `${chatContRightOriginalHeight}px`
+            chatContRight.style.height = `fit-content`
             chatContRight.innerHTML = chatContRightOriginalContent
     
             //set sender and receiver
             const sender = '{{ sender.username }}' // Current logged-in user
             const receiver = chatAbleUser.dataset.receiver // The receiver user (context)
+            const receiverFullName = chatAbleUser.getAttribute('data-receiver-fullname');
+            const receiverImageUrl = chatAbleUser.querySelector('img').src
+
             //start socket connection
             if (chatSocket != null) {
               chatSocket.close()
@@ -194,14 +211,22 @@
     
               console.log(e.data)
               //appendToMessageList(data)
+              let messagesListDOM = document.querySelector('#message-list')
+
               if (data.type == 'chat_info') {
-                setChatContRightBoxHeader(data.receiver_profile_photo, data.receiver)
-                //store receiver profile photo url in local storage
-                localStorage.setItem('receiver_profile_photo', window.location.origin+data.receiver_profile_photo)
+                setChatContRightBoxHeader(receiverImageUrl,receiverFullName)
     
-                loadOldMessagesToUI(data.old_messages, sender, receiver)
+                loadOldMessagesToUI(messagesListDOM, data.old_messages, sender, receiver, receiverImageUrl)
               } else if (data.type == 'chat_message') {
                 console.log('chat message')
+                message = {
+                  'sender': data.sender,
+                  'receiver': data.receiver,
+                  'message': data.message,
+                  'timestamp': data.timestamp
+                }
+                loadAMessageToUI(messagesListDOM, message, sender, receiver, receiverImageUrl)
+
               }
               scrollToEnd()
             }
@@ -231,25 +256,25 @@
           function setChatContRightBoxHeader(imageUrl, name) {
             const chatHeader = document.querySelector('#chat-header')
             const chatHeaderProfileImage = chatHeader.querySelector('.avatar img')
-            const baseUrl = window.location.origin
-            chatHeaderProfileImage.src = baseUrl + imageUrl
+           
+            chatHeaderProfileImage.src = imageUrl
             chatHeader.querySelector('.user-name').innerHTML = name
           }
     
-          function loadOldMessagesToUI(messages, sender, receiver) {
-            let messagesListDOM = document.querySelector('#message-list')
+          function loadOldMessagesToUI(messagesListDOM, messages, sender, receiver, receiverImageUrl) {
+            messagesListDOM.innerHTML = ''
             for (let i = 0; i < messages.length; i++) {
-              loadAMessageToUI(messagesListDOM,messages[i], sender, receiver)
+              loadAMessageToUI(messagesListDOM,messages[i], sender, receiver, receiverImageUrl)
             }
             
           }
           
-          function loadAMessageToUI(messagesListDOM, messageObject, sender, receiver) {
+          function loadAMessageToUI(messagesListDOM, messageObject, sender, receiver, receiverImageUrl) {
             const messageSender = messageObject.sender
             const messageReceiver = messageObject.receiver
             const message = messageObject.message
             const timestamp = messageObject.timestamp
-            const receivers_profile_photo_url = localStorage.getItem('receiver_profile_photo')
+            
 
             if (sender === messageSender) {
               messagesListDOM.innerHTML += `<li class="media d-flex sent">
@@ -272,7 +297,7 @@
               
               messagesListDOM.innerHTML += `<li class="media d-flex received">
                                           <div class="avatar flex-shrink-0">
-                                            <img src="${receivers_profile_photo_url}" alt="User Image" class="avatar-img rounded-circle" />
+                                            <img src="${receiverImageUrl}" alt="User Image" class="avatar-img rounded-circle" />
                                           </div>
                                           <div class="media-body flex-grow-1">
                                             <div class="msg-box">

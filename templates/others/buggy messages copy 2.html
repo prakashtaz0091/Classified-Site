@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <body>
+    <div class="main-wrapper innerpagebg">
+      <!-- Header -->
+      <header class="header">
+        {% include 'includes/header.html' %}
+      </header>
+      <!-- /Header -->
+
+      <!-- Breadscrumb Section -->
+      <div class="breadcrumb-bar">
+        <div class="container">
+          <div class="row align-items-center text-center">
+            <div class="col-md-12 col-12">
+              <h2 class="breadcrumb-title">Messages</h2>
+              <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Messages</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Breadscrumb Section -->
+
+      <!-- Profile Content -->
+      <div class="dashboard-content">
+        <div class="container">
+          {% include 'includes/dashboard.html' %}
+          <div class="profile-content">
+            <div class="row dashboard-info chat-window" >
+              <div class="col-lg-4">
+                <div class="chat-cont-left">
+                  <form class="chat-search">
+                    <div class="form-group">
+                      <div class="group-img">
+                        <img src="{% static 'assets/img/chatsearch.svg' %}" alt="" />
+                        <input type="text" class="form-control" placeholder="Search" />
+                      </div>
+                    </div>
+                  </form>
+                  <div class="chat-users-list">
+                    {% comment %} <div class="chat-scroll">
+                      <a href="javascript:void(0);" class="media d-flex active">
+                        <div class="media-img-wrap flex-shrink-0">
+                          <div class="avatar avatar-online">
+                            <img src="{% static 'assets/img/profiles/avatar-03.jpg' %}" alt="User Image" class="avatar-img rounded-circle" />
+                          </div>
+                        </div>
+                        <div class="media-body flex-grow-1">
+                          <div>
+                            <div class="user-name">Marvin Downey</div>
+                            <div class="user-last-chat">Hey, How are you?</div>
+                          </div>
+                          <div>
+                            <div class="last-chat-time block">2 min</div>
+                            <div class="badge badge-success rounded-pill">15</div>
+                          </div>
+                        </div>
+                      </a>
+                      <!-- Repeat similar structure for other chat items -->
+                    </div> {% endcomment %}
+                    <div class="chat-scroll">
+                      {% for receiver in receivers %}
+                        <a href="javascript:void(0);" class="media d-flex {% if receiver == receivers.0 %}active{% endif %}" data-receiver="{{ receiver.username }}"  data-receiver-fullname="{{ receiver.full_name }}">
+                          <div class="media-img-wrap flex-shrink-0">
+                            <div class="avatar avatar-online">
+                              <img src="{{ receiver.profile.profile_photo.url }}" data-imageUrl = "{{ receiver.profile.profile_photo.url }}" alt="User Image" class="avatar-img rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="media-body flex-grow-1">
+                            <div>
+                              <div class="user-name">{{ receiver.full_name }}</div>
+                              <div class="user-last-chat">
+                                {% if receiver.is_admin %}
+                                  Admin
+                                  {% else %}
+                                  Standard User
+                                {% endif %}
+                              </div>
+                            </div>
+                            {% comment %} <div>
+                              <div class="last-chat-time block"></div>
+                              <div class="badge badge-success rounded-pill"></div>
+                            </div> {% endcomment %}
+                          </div>
+                        </a>
+                        <!-- Repeat similar structure for other chat items -->
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="chat-cont-right" id="chat-cont-right">
+                  <div class="chat-header" id="chat-header">
+                    <a id="back_user_list" href="javascript:void(0)" class="back-user-list"><i class="fa-solid fa-chevron-left"></i></a>
+                    <div class="media d-flex align-items-center">
+                      <div class="media-img-wrap flex-shrink-0">
+                        <div class="avatar avatar-online">
+                          <img src="" alt="User Image" class="avatar-img rounded-circle" />
+                        </div>
+                      </div>
+                      <div class="media-body flex-grow-1">
+                        <div class="user-name"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat-body">
+                    <div class="chat-scroll" id="chat-scroll">
+                      <ul class="list-unstyled" id ="message-list">
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="chat-footer">
+                    <div class="input-group">
+                      <div class="attach-btn">
+                        <input type="text" class="input-msg-send form-control" id="message-input" placeholder="Type something" />
+                        <div class="btn-file btn">
+                          <i class="fa fa-paperclip"></i>
+                          <input type="file" id="file-input" multiple />
+
+                        </div>
+                      </div>
+                      <button id="send-button" type="button" class="btn msg-send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Profile Content -->
+
+      <!-- Footer -->
+      {% include 'includes/footer.html' %}
+      <!-- /Footer -->
+    </div>
+
+    <!-- scrollToTop start -->
+    <div class="progress-wrap active-progress">
+      <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+      </svg>
+    </div>
+    <!-- scrollToTop end -->
+  </body>
+
+  <script>
+    const chatContRight = document.querySelector('#chat-cont-right')
+    const chatContRightOriginalContent = chatContRight.innerHTML
+    const chatContRightOriginalHeight = chatContRight.offsetHeight
+    
+    function emptyChatContRightBox() {
+      //a message shown when the chat content right box is empty
+      chatContRight.style.height = `500px`
+      chatContRight.innerHTML = `
+        <div style="height: inherit; width: 100%; background-color: #374B5C; color: white; letter-spacing: 1px; font-size: 20px; fontweight: bolder;" class="d-flex align-items-center justify-content-center">Please select person to chat</div>
+      `
+    }
+    function loadingChatContRightBox() {
+      //a message shown when the chat content right box is empty
+      chatContRight.style.height = `500px`
+      chatContRight.innerHTML = `
+            <div style="height: inherit; width: 100%; background-color: #374B5C; color: white; letter-spacing: 1px; font-size: 20px; fontweight: bolder;" class="d-flex align-items-center justify-content-center">Loading Chats ...</div>
+          `
+    }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      emptyChatContRightBox() //always set the chat content right box to empty while the page loads at initials
+      let chatSocket = null
+      const chatAbleUsersList = document.querySelector('.chat-scroll').querySelectorAll('a')
+      chatAbleUsersList.forEach(function (chatAbleUser) {
+        chatAbleUser.addEventListener('click', function () {
+          loadingChatContRightBox()
+    
+          //wait for 1 sec
+          setTimeout(function () {
+            chatContRight.style.height = `fit-content`
+            chatContRight.innerHTML = chatContRightOriginalContent
+    
+            //set sender and receiver
+            const sender = '{{ sender.username }}' // Current logged-in user
+            const receiver = chatAbleUser.dataset.receiver // The receiver user (context)
+            const receiverFullName = chatAbleUser.getAttribute('data-receiver-fullname');
+            const receiverImageUrl = chatAbleUser.querySelector('img').src
+
+            //start socket connection
+            if (chatSocket != null) {
+              chatSocket.close()
+            }
+            chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + receiver + '/')
+    
+            chatSocket.onmessage = function (e) {
+              const data = JSON.parse(e.data)
+    
+              console.log(e.data)
+              //appendToMessageList(data)
+              let messagesListDOM = document.querySelector('#message-list')
+
+              if (data.type == 'chat_info') {
+                setChatContRightBoxHeader(receiverImageUrl,receiverFullName)
+    
+                loadOldMessagesToUI(messagesListDOM, data.old_messages, sender, receiver, receiverImageUrl)
+              } else if (data.type == 'chat_message') {
+                console.log('chat message')
+                message = {
+                  'sender': data.sender,
+                  'receiver': data.receiver,
+                  'message': data.message,
+                  'timestamp': data.timestamp,
+                  'files': data.files  // Added to handle attached files
+                }
+                loadAMessageToUI(messagesListDOM, message, sender, receiver, receiverImageUrl)
+
+              }
+              scrollToEnd()
+            }
+    
+            chatSocket.onclose = function (e) {
+              console.error('Chat socket closed unexpectedly', e)
+            }
+
+
+
+             // File input handling (Added for file attachments)
+            const fileInputDom = document.querySelector('#file-input');
+            document.querySelector('#send-button').onclick = async function (e) {
+              const messageInputDom = document.querySelector('#message-input')
+              const message = messageInputDom.value
+              const files = fileInputDom.files;  // Added for file attachments
+              
+              try {
+                const filesData = await getFilesData(files);  // Convert files to base64 (Added for file attachments)
+                
+                // Send the message and file data through the WebSocket
+                chatSocket.send(
+                  JSON.stringify({
+                    message: message,
+                    files: filesData  // Added to send files along with message
+                  })
+                );
+            
+                // Clear the input fields after sending
+                messageInputDom.value = '';
+                document.querySelector('#file-input').value = '';  // Clear file input after sending
+            
+              } catch (error) {
+                console.error('Error handling file attachments:', error);
+              }
+            }
+          }, 1000)
+          function scrollToEnd() {
+            const messageList = document.querySelector('#chat-scroll')
+            messageList.scrollTop = messageList.scrollHeight
+          }
+    
+          function setChatContRightBoxHeader(imageUrl, name) {
+            const chatHeader = document.querySelector('#chat-header')
+            const chatHeaderProfileImage = chatHeader.querySelector('.avatar img')
+           
+            chatHeaderProfileImage.src = imageUrl
+            chatHeader.querySelector('.user-name').innerHTML = name
+          }
+    
+          function loadOldMessagesToUI(messagesListDOM, messages, sender, receiver, receiverImageUrl) {
+            for (let i = 0; i < messages.length; i++) {
+              loadAMessageToUI(messagesListDOM,messages[i], sender, receiver, receiverImageUrl)
+            }
+            
+          }
+          
+          function loadAMessageToUI(messagesListDOM, messageObject, sender, receiver, receiverImageUrl) {
+            const messageSender = messageObject.sender
+            const messageReceiver = messageObject.receiver
+            const message = messageObject.message
+            const timestamp = messageObject.timestamp
+            const files = messageObject.files;  // Added for handling attached files
+
+            
+            if (sender === messageSender) {
+              messagesListDOM.innerHTML += `<li class="media d-flex sent">
+                <div class="media-body flex-grow-1">
+                  <div class="msg-box d-flex justify-content-end">
+                    <div class="rounded">
+                      <p>${message}</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>${timestamp}</span>
+                          </div>
+                        </li>
+                      </ul>
+                      ${displayAttachedFiles(files)}  <!-- Added for displaying attached files -->
+                    </div>
+                  </div>
+                </div>
+              </li>`
+            } else {
+              
+              messagesListDOM.innerHTML += `<li class="media d-flex received">
+                <div class="avatar flex-shrink-0">
+                  <img src="${receiverImageUrl}" alt="User Image" class="avatar-img rounded-circle" />
+                </div>
+                <div class="media-body flex-grow-1">
+                  <div class="msg-box">
+                    <div>
+                      <p>${message}</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>${timestamp}</span>
+                          </div>
+                        </li>
+                      </ul>
+                      ${displayAttachedFiles(files)}  <!-- Added for displaying attached files -->
+                    </div>
+                  </div>
+                  
+                </div>
+              </li>`
+            }
+          }
+
+           // Helper function to display attached files (Added)
+          function displayAttachedFiles(files) {
+            if (!files || files.length === 0) return '';  // No files to display
+            let fileLinks = '<ul class="file-list">';
+            files.forEach(file => {
+              fileLinks += `<li><a href="data:application/octet-stream;base64,${file.content}" download="${file.name}">${file.name}</a></li>`;
+            });
+            fileLinks += '</ul>';
+            return fileLinks;
+          }
+
+          // Helper function to convert selected files to base64 (Added)
+          function getFilesData(files) {
+            const filePromises = [];
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              filePromises.push(
+                new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    resolve({
+                      name: file.name,
+                      content: event.target.result.split(',')[1]  // Extract base64 content
+                    });
+                  };
+                  reader.onerror = (error) => reject(error);
+                  reader.readAsDataURL(file);  // Convert file to base64
+                })
+              );
+            }
+            return Promise.all(filePromises);  // Return array of file data
+
+           
+          }
+        })
+      })
+    })
+  </script>
+{% endblock %}
