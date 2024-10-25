@@ -19,4 +19,4 @@ class MessageFile(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"File attached to message {self.chat_message.id} on {self.uploaded_at}"
+        return f"File attached to message {self.message.id} on {self.uploaded_at}"

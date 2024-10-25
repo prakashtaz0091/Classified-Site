@@ -145,7 +145,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # If there are files, save them
         for file_data in files_data:
-            file_name = f"message_files/{file_data['name']}"
+            file_name = f"{file_data['name']}"
             file_content = ContentFile(base64.b64decode(file_data['content']))
             file_path = default_storage.save(file_name, file_content)
 

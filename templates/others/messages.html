@@ -140,6 +140,14 @@
       </div>
       <!-- /Profile Content -->
 
+      <!-- Image display modal -->
+      <div id="imageModal" class="custom-modal">
+        <span class="custom-modal-close">&times;</span>
+        <img class="custom-modal-content" id="fullImage">
+      </div>
+      
+      <!-- Image display modal -->
+
       <!-- Footer -->
       {% include 'includes/footer.html' %}
       <!-- /Footer -->
@@ -179,7 +187,7 @@
       let chatSocket = null
       const chatAbleUsersList = document.querySelector('.chat-scroll').querySelectorAll('a')
       chatAbleUsersList.forEach(function (chatAbleUser) {
-        chatAbleUser.addEventListener('click', function () {
+        chatAbleUser.addEventListener('click',  function () {
 
           //set chatAbleUserUI as active
           chatAbleUsersList.forEach(function (chatAbleUserUI) {
@@ -218,14 +226,14 @@
     
                 loadOldMessagesToUI(messagesListDOM, data.old_messages, sender, receiver, receiverImageUrl)
               } else if (data.type == 'chat_message') {
-                console.log('chat message')
-                message = {
+                console.log('chat message', data)
+                /*message = {
                   'sender': data.sender,
                   'receiver': data.receiver,
                   'message': data.message,
                   'timestamp': data.timestamp
-                }
-                loadAMessageToUI(messagesListDOM, message, sender, receiver, receiverImageUrl)
+                }*/
+                loadAMessageToUI(messagesListDOM, data, sender, receiver, receiverImageUrl)
 
               }
               scrollToEnd()
@@ -235,17 +243,32 @@
               console.error('Chat socket closed unexpectedly', e)
             }
     
-            document.querySelector('#send-button').onclick = function (e) {
+            // File input handling (Added for file attachments)
+            const fileInputDom = document.querySelector('#file-input');
+            document.querySelector('#send-button').onclick = async function (e) {
               const messageInputDom = document.querySelector('#message-input')
               const message = messageInputDom.value
     
-              chatSocket.send(
-                JSON.stringify({
-                  message: message
-                })
-              )
-    
-              messageInputDom.value = ''
+              const files = fileInputDom.files;  // Added for file attachments
+              
+              try {
+                const filesData = await getFilesData(files);  // Convert files to base64 (Added for file attachments)
+                
+                // Send the message and file data through the WebSocket
+                chatSocket.send(
+                  JSON.stringify({
+                    message: message,
+                    files: filesData  // Added to send files along with message
+                  })
+                );
+            
+                // Clear the input fields after sending
+                messageInputDom.value = '';
+                document.querySelector('#file-input').value = '';  // Clear file input after sending
+              }
+              catch (error) {
+                console.error('Error handling file attachments:', error);
+              }
             }
           }, 1000)
           function scrollToEnd() {
@@ -274,8 +297,8 @@
             const messageReceiver = messageObject.receiver
             const message = messageObject.message
             const timestamp = messageObject.timestamp
-            
-
+            const files = messageObject.files;  // Added for handling attached files
+            console.log(messageSender, messageReceiver,message, files)
             if (sender === messageSender) {
               messagesListDOM.innerHTML += `<li class="media d-flex sent">
                                                                                                                                                                                                               <div class="media-body flex-grow-1">
@@ -283,6 +306,10 @@
                                                                                                                                                                                                                   <div class="rounded">
                                                                                                                                                                                                                     <p>${message}</p>
                                                                                                                                                                                                                     <ul class="chat-msg-info">
+                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                              ${displayAttachedFiles(files)}  <!-- Added for displaying attached files -->
+
+                                                                                                                                                                                                                     
                                                                                                                                                                                                                       <li>
                                                                                                                                                                                                                         <div class="chat-time">
                                                                                                                                                                                                                           <span>${timestamp}</span>
@@ -304,6 +331,10 @@
                                               <div>
                                                 <p>${message}</p>
                                                 <ul class="chat-msg-info">
+                                                 
+                                                                                                                                                                                                                                              ${displayAttachedFiles(files)}  <!-- Added for displaying attached files -->
+
+                                                                                                                                                                                                                    
                                                   <li>
                                                     <div class="chat-time">
                                                       <span>${timestamp}</span>
@@ -316,9 +347,82 @@
                                           </div>
                                         </li>`
             }
+            
           }
+          
+
         })
       })
+
+
+      
+
+
     })
+    function displayAttachedFiles(files) {
+      if (!files || files.length === 0) return '';  // No files to display
+      let fileLinks = '<ul class="file-list">';
+      files.forEach(file => {
+        const fileURL =  `${window.location.protocol}//${window.location.host}${file.url}`;
+        
+        // Check file extension to determine if it's an image
+        const fileExtension = file.url.split('.').pop().toLowerCase();
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+        
+        if (imageExtensions.includes(fileExtension)) {
+            
+           
+          fileLinks += `<li style="margin-bottom:10px" >
+            <a href="${fileURL}" target="_blank" style="cursor:pointer;">
+            <img src="${fileURL}" alt="Image description" height="200" class="thumbnail" />
+            </a>
+          </li>`;
+
+        } else {
+            // Display as download link
+          fileLinks += `<li style="margin-bottom:10px; border: 1px dashed black; padding: 5px; border-radius: 5px; display:flex; align-items:center;"  >
+            ${file.name}
+            
+            <a href="${fileURL}" download="${file.name}" title="Download ${file.name}"  style=" margin:3px 5px; padding:5px; background-color:gray; border-radius:3px; display:flex; align-items:center; justify-content:center; width:25px;">
+              <img src="{% static 'assets/icons/download.png' %}" height="20"/>
+            </a>
+            <a href="${fileURL}" target="_blank" title="View ${file.name}"  style=" margin:3px 5px; padding:5px; background-color:gray; border-radius:3px; display:flex; align-items:center; justify-content:center; width:25px;">
+              <img src="{% static 'assets/icons/view.png' %}" height="20"/>
+            </a>
+          </li>`;
+          
+        }
+      });
+      fileLinks += '</ul>';
+      return fileLinks;
+    }
+
+    
+    // Helper function to convert selected files to base64 (Added)
+    function getFilesData(files) {
+      const filePromises = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        filePromises.push(
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              resolve({
+                name: file.name,
+                content: event.target.result.split(',')[1]  // Extract base64 content
+              });
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);  // Convert file to base64
+          })
+        );
+      }
+      return Promise.all(filePromises);  // Return array of file data
+
+    
+    }
+
+
+   
   </script>
 {% endblock %}
